@@ -241,7 +241,17 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
 <div id="tab-stake" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-stake"></div>
 <div id="tab-sched" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-sched"></div>
 <div id="tab-budget" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-budget"></div>
-<div id="tab-success" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-success"></div>
+<div id="tab-success" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-success">
+<section class="card" id="kpicard">
+  <h2>Project KPIs dashboard</h2>
+  <p class="small" id="kpictx"></p>
+  <p class="sub" id="kpisub"></p>
+  <div class="kgrid" id="kgrid"></div>
+  <div class="ms" id="milestones" aria-label="Milestones"></div>
+  <div class="evm hidden" id="evm"></div>
+</section>
+<div id="success-brief"></div>
+</div>
 <div id="tab-whatif" class="tabpanel" role="tabpanel" aria-labelledby="tabbtn-whatif">
 <div class="controls" role="region" aria-label="Scenario controls">
   <div class="row">
@@ -266,13 +276,6 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
 <section class="kpis" id="kpis" aria-live="polite"></section>
 
 
-<section class="card" id="kpicard">
-  <h2>Project KPIs</h2>
-  <p class="sub" id="kpisub"></p>
-  <div class="kgrid" id="kgrid"></div>
-  <div class="ms" id="milestones" aria-label="Milestones"></div>
-  <div class="evm hidden" id="evm"></div>
-</section>
 <section class="card r2 hidden" id="r2card">
   <h2>Round 2: week 14 review (<span id="r2date"></span>)</h2>
   <p class="sub" id="r2brief"></p>
@@ -1041,7 +1044,7 @@ if (typeof module !== 'undefined') module.exports = cpm;
   // ---------- static text ----------
   function staticText() {
     $('lede').innerHTML = 'Your group is the risk team for the <b>' + esc(P.name) + '</b>. ' + esc(P.scope) +
-      ' Works start on ' + dateOf(0) + ' and are planned to take ' + P.baseWeeks + ' weeks. Read the <b>Project brief</b> tab first. The risk register on the <b>Risk what-if</b> tab has already been assessed. ' +
+      ' Works start on ' + dateOf(0) + ' and are planned to take ' + P.baseWeeks + ' weeks. Start with the <b>Overview</b> tab. The risk register on the <b>Risk what-if</b> tab has already been assessed. ' +
       'Run what-if scenarios to treat the High and Medium risks. Look for secondary and residual risks, and find the mix of responses that best balances probability and financial impact against the budget and the deadline.';
     $('targets').innerHTML =
       '<span>Authorised budget <b>' + mm(P.budget * 1000) + '</b> (base estimate ' + mm(P.baseCost * 1000) + ' + management reserve ' + mm(P.reserve * 1000) + ')</span>' +
@@ -1086,7 +1089,12 @@ if (typeof module !== 'undefined') module.exports = cpm;
       '<span>Chance of meeting <b>both</b> targets <b>' + pct(cur.pBoth) + '</b></span>' +
       '<span>Residual risk exposure (total EMV) <b>' + km(cur.residualEmv) + '</b> (' + refLabel + ': ' + km(ref.residualEmv) + ')</span>' +
       '<span>Secondary risks introduced <b>' + cur.nSecondary + '</b></span>' +
-      (cur.optWeeks + (cur.chgWeeks || 0) ? '<span>Time added to the plan <b>' + (cur.optWeeks + (cur.chgWeeks || 0)) + ' wk</b></span>' : '') + '</div></div>';
+      (cur.optWeeks + (cur.chgWeeks || 0) ? '<span>Time added to the plan <b>' + (cur.optWeeks + (cur.chgWeeks || 0)) + ' wk</b></span>' : '') + '</div>' +
+      '<div class="statline" style="margin:8px 0 0">' +
+      '<span>CPI <b>' + cur.kpi.cpi.toFixed(2) + '</b></span><span>SPI(t) <b>' + cur.kpi.spi.toFixed(2) + '</b></span>' +
+      '<span>First-time acceptance <b>' + pct(cur.kpi.acceptance) + '</b></span><span>Satisfaction <b>' + cur.kpi.satisfaction.toFixed(1) + '</b></span>' +
+      '<span>Benefits realisation <b>' + pct(cur.kpi.benefitsRealised) + '</b></span>' +
+      '<span><a href="#" data-goto="success">Full Project KPIs dashboard' + (state.round === 2 ? ' and week-' + R2.week + ' earned value' : '') + ' on the Success tab →</a></span></div></div>';
     $('kpis').innerHTML = h;
   }
 
@@ -1143,6 +1151,7 @@ if (typeof module !== 'undefined') module.exports = cpm;
           d: 'Expected benefit ÷ planned benefit. Lower-performing roofs or ventilation (S2c, S6b) and late opening reduce it.' }
       ] }
     ];
+    $('kpictx').innerHTML = 'Live for your current scenario on the <a href="#" data-goto="whatif">Risk what-if</a> tab: <b>' + (state.round === 2 ? 'Round 2, week-' + R2.week + ' review' : 'Round 1, plan') + '</b> · ' + esc(state.station) + ' · ' + esc($('basis').selectedOptions[0] ? $('basis').selectedOptions[0].text : state.basis) + '. Change the responses there and these figures update.';
     $('kpisub').innerHTML = (state.round === 2 ? 'Forecast at completion after your week-14 decisions (issues, change requests and recovery), with the week-' + R2.week + ' earned-value status below. Approved changes re-baseline the planned benefit and the number of buildings.' : 'Forecast at completion for your scenario (expected values from the simulation).') +
       ' Grey figures show the ' + refLabel + ' case. Status: ✓ on track, ! watch, ✕ off track. Open "Definition" for how each KPI is calculated.';
     $('kgrid').innerHTML = groups.map(function (g) {
@@ -1163,7 +1172,7 @@ if (typeof module !== 'undefined') module.exports = cpm;
       var row = function (a, b, c) { return '<tr><td>' + a + '</td><td class="num"><b>' + b + '</b></td><td class="meta">' + c + '</td></tr>'; };
       el.innerHTML = '<h3>Week ' + ev.week + ' earned-value status</h3><div class="tablewrap"><table>' +
         '<thead><tr><th>Measure</th><th class="num">Value</th><th>Meaning</th></tr></thead><tbody>' +
-        row('Planned value (PV)', km(ev.PV), 'Budgeted cost of the work scheduled by week ' + ev.week + ' in the time-phased CBS (Project brief tab), plus mitigation already bought') +
+        row('Planned value (PV)', km(ev.PV), 'Budgeted cost of the work scheduled by week ' + ev.week + ' in the time-phased CBS (Budget & cashflow tab), plus mitigation already bought') +
         row('Earned value (EV)', km(ev.EV), 'Budgeted cost of the work actually done (' + pct(ev.percentComplete) + ' of the works complete)') +
         row('Actual cost (AC)', km(ev.AC), 'What has been spent so far') +
         row('Schedule variance (SV = EV − PV)', sgnK(ev.SV), ev.SV < 0 ? 'Behind schedule' : 'Ahead of schedule') +
@@ -1746,7 +1755,7 @@ if (typeof module !== 'undefined') module.exports = cpm;
     }
     out.success = '<section class="card"><h2>Success criteria: outputs and outcomes</h2><p class="sub"><b>Output success</b> (project success) asks whether we delivered what we said, on time, on budget and to quality. <b>Outcome success</b> (benefits) asks whether it made the difference it was for. A project can succeed on outputs and still fail on outcomes.</p>' +
       '<h3>Output success criteria</h3>' + sc(B.success.outputs) + '<h3 style="margin-top:16px">Outcome success criteria</h3>' + sc(B.success.outcomes) + '</section>';
-    ['overview', 'stake', 'sched', 'budget', 'success'].forEach(function (k) { $('tab-' + k).innerHTML = out[k]; });
+    ['overview', 'stake', 'sched', 'budget', 'success'].forEach(function (k) { $(k === 'success' ? 'success-brief' : 'tab-' + k).innerHTML = out[k]; });
     bindTips($('tab-sched'));
     // cashflow chart and monthly table
     var cf = cashflow(cur);
@@ -1762,6 +1771,11 @@ if (typeof module !== 'undefined') module.exports = cpm;
       order.map(function (k) { var r = months[k]; return '<tr><td>' + k + '</td><td class="num">' + km(r.p) + '</td><td class="num">' + km(r.f) + '</td><td class="num">' + km(r.pc) + '</td><td class="num">' + km(r.fc) + '</td><td class="num">' + (r.fc - r.pc > 0 ? '+' : '') + km(r.fc - r.pc) + '</td></tr>'; }).join('') +
       '<tr class="tot"><td>Total</td><td class="num">' + km(cf.planned[cf.horizon]) + '</td><td class="num">' + km(cf.forecast[cf.horizon]) + '</td><td></td><td></td><td class="num">+' + km(cf.forecast[cf.horizon] - cf.planned[cf.horizon]) + '</td></tr></tbody></table>';
   }
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest && e.target.closest('[data-goto]');
+    if (!g) return;
+    e.preventDefault(); showTab(g.getAttribute('data-goto')); window.scrollTo({ top: 0 });
+  });
   function showTab(name) {
     if (TABS.indexOf(name) < 0) name = 'overview';
     TABS.forEach(function (n) {
@@ -1859,7 +1873,7 @@ if (typeof module !== 'undefined') module.exports = cpm;
       'In week 6 the membrane supplier went into administration, so <b>R2 occurred</b>. ' + effect +
       ' Listed-building consent was granted and the structural surveys are complete, so <b>R4 and R6 are closed</b>. Half of the roofs have been stripped without finding asbestos, and about half of the materials are bought, so <b>R3 and R7 carry only the exposure still ahead</b>. ' +
       (ho ? 'Summer 2027 so far: <b>' + ho.hot + ' hot days</b> to ' + fmtDay(ho.to) + (ho.real ? ' (observed, ' + esc(state.station) + ')' : ' (an illustrative figure until the real 2027 data reach the feed)') + '; about ' + pct(ho.fracLeft) + ' of a typical season\'s hot days are still to come, and the heat forecast now uses both. ' : '') +
-      '<b>Two issues that were not on the risk register have arisen, and two change requests have been raised.</b> Your Round 1 responses are committed. Record a decision for each item in the logs below, check who has the authority to take it, and choose any recovery actions.';
+      '(Full earned-value table: <a href="#" data-goto="success">Success tab</a>.) <b>Two issues that were not on the risk register have arisen, and two change requests have been raised.</b> Your Round 1 responses are committed. Record a decision for each item in the logs below, check who has the authority to take it, and choose any recovery actions.';
     $('tolnote').innerHTML = '<b>Tolerances.</b> ' + esc(R2.tolerance.note) + ' An issue is something that has already happened; unlike a risk, its probability is 100%. Until you choose an action, the first option applies.';
     function sel(it) {
       var v = state.r2[it.id] || '';
