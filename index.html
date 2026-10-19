@@ -54,7 +54,8 @@ h3{font-size:15px;margin:0 0 6px;font-weight:620}
 .seg{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
 .seg button{border:0;background:transparent;color:var(--ink-2);padding:7px 12px;font:inherit;font-size:14px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
-label.inline{font-size:13px;color:var(--ink-2);display:inline-flex;gap:6px;align-items:center}
+label.inline{font-size:13px;color:var(--ink-2);display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap;max-width:100%}
+label.inline select{min-width:0;max-width:100%}
 select,input[type=text],input[type=number]{font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--axis);border-radius:6px;padding:6px 8px;max-width:100%}
 button.btn{font:inherit;font-size:14px;border:1px solid var(--axis);background:var(--surface);color:var(--ink);border-radius:8px;padding:7px 12px;cursor:pointer}
 button.btn.primary{background:var(--s1);border-color:var(--s1);color:#fff}
@@ -127,6 +128,30 @@ details{margin-bottom:8px}
 footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
 .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:8px 14px;border-radius:8px;font-size:13px;display:none;z-index:30}
 @media (max-width:600px){h1{font-size:23px}.tile .val{font-size:24px}.controls{position:static}}
+
+/* project KPIs */
+.kgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:980px){.kgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.kgrid{grid-template-columns:1fr}}
+.kgroup{border:1px solid var(--border);border-radius:10px;padding:12px 14px;background:var(--surface)}
+.kgroup h3{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2);margin:0 0 8px}
+.krow{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:7px 0;border-top:1px solid var(--grid)}
+.krow:first-of-type{border-top:0}
+.krow .kn{font-size:13.5px}
+.krow .kv{font-size:18px;font-weight:620;text-align:right;font-variant-numeric:tabular-nums}
+.krow .kt{font-size:12px;color:var(--muted)}
+.krow .ks{text-align:right}
+.status.amber{color:#8a5a00} .status.amber .dot{background:var(--warn);color:#3a2a00}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .status.amber{color:var(--warn)}}
+:root[data-theme="dark"] .status.amber{color:var(--warn)}
+.krow details{grid-column:1/-1}
+.krow summary{font-size:12px;color:var(--muted);font-weight:400}
+.krow details p{font-size:12px;color:var(--ink-2);margin:4px 0 0}
+.evm{margin-top:14px}
+.ms{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+@media (max-width:700px){.ms{grid-template-columns:repeat(2,1fr)}}
+.ms>div{border:1px solid var(--border);border-radius:8px;padding:8px;font-size:12.5px;background:var(--surface)}
+.ms b{display:block;font-size:16px}
 @media print{.controls{position:static}}
 </style>
 </head>
@@ -146,11 +171,14 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
       <button id="btn-r1" aria-pressed="true">Round 1 · Plan</button>
       <button id="btn-r2" aria-pressed="false">Round 2 · Week 10 update</button>
     </div>
+    <label class="inline">Weather station
+      <select id="station" aria-label="Weather station for the heat forecast"></select>
+    </label>
     <label class="inline">Heat forecast basis
       <select id="basis">
-        <option value="trend">Trend 1979–2023, projected to 2027</option>
-        <option value="recent">Last 10 summers (2014–2023)</option>
-        <option value="all">All summers 1979–2023</option>
+        <option value="trend">Trend since 1979, projected to 2027</option>
+        <option value="recent">Last 10 summers</option>
+        <option value="all">All summers since 1979</option>
       </select>
     </label>
     <button class="btn" id="reset">Reset responses</button>
@@ -159,6 +187,14 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
 
 <section class="kpis" id="kpis" aria-live="polite"></section>
 
+
+<section class="card" id="kpicard">
+  <h2>Project KPIs</h2>
+  <p class="sub" id="kpisub"></p>
+  <div class="kgrid" id="kgrid"></div>
+  <div class="ms" id="milestones" aria-label="Milestones"></div>
+  <div class="evm hidden" id="evm"></div>
+</section>
 <section class="card r2 hidden" id="r2card">
   <h2>Round 2: week 10 update</h2>
   <p class="sub" id="r2brief"></p>
@@ -208,11 +244,19 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
 </section>
 
 <section class="card">
-  <h2>Heat hazard forecast from real Heathrow summers</h2>
-  <p class="sub">Roof work stops on days when the maximum temperature reaches <span class="v-thr"></span>°C (HEATWISE site heat policy, illustrative). The programme allows <span class="v-allow"></span> such days. Bars show the observed count each May–September at London Heathrow. The 2027 forecast is the spread of outcomes the simulation draws from, using the basis selected above.</p>
+  <h2>Heat hazard forecast from real London summers</h2>
+  <p class="sub">Roof work stops on days when the maximum temperature reaches <span class="v-thr"></span>°C (HEATWISE site heat policy, illustrative). The programme allows <span class="v-allow"></span> such days: <span class="v-allownote"></span> Bars show the observed count each May–September at <b class="v-station"></b>, from Met Office records up to <span class="v-latest"></span>. The 2027 forecast shows the range of outcomes the simulation draws from, using the station and basis selected above.</p>
   <div class="legend"><span><span class="key sw" style="background:var(--s1)"></span>Days ≥<span class="v-thr"></span>°C (observed)</span><span><span class="key" style="background:var(--s2)"></span>Linear trend</span><span><span class="key" style="background:var(--ink-2);height:1px"></span>Allowance (<span class="v-allow"></span> days)</span><span><span class="key sw" style="background:var(--ink-2)"></span>2027 forecast: median and 10–90% range</span></div>
   <div id="heatchart" class="chart"></div>
   <div class="statline" id="heat-stats"></div>
+</section>
+
+<section class="card">
+  <h2>Summer <span class="v-ly"></span> at <span class="v-station"></span>: the latest observed season</h2>
+  <p class="sub">Daily maximum temperature, May–September. Each column is one day; days at or above the stop-work threshold are highlighted. This is the summer the project team has just lived through, a year before the build.</p>
+  <div class="legend"><span><span class="key sw" style="background:var(--s2)"></span>Day ≥<span class="v-thr"></span>°C (roof work would stop)</span><span><span class="key sw" style="background:var(--base)"></span>Below threshold</span></div>
+  <div id="summer" class="chart"></div>
+  <div class="statline" id="summer-stats"></div>
 </section>
 
 <section class="card">
@@ -246,9 +290,9 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
       <p>Challenge these simplifications in your recommendation. Which risks are likely to be correlated? Which are not on the critical path? What would including them do to your confidence?</p>
     </div></details>
   <details><summary>Heat forecast</summary>
-    <div class="small"><p>Hot days are counted from ECA&amp;D daily maximum temperatures at London Heathrow, 1 May–30 September, 1979–2023, using valid observations only. <b>Trend:</b> an ordinary least-squares line through the annual counts, projected to 2027, with the 45 historical residuals added back to describe year-to-year variability. <b>Last 10 summers</b> and <b>All summers</b> resample the observed counts. Each hot day that falls during roof works costs £<span class="v-hcost"></span>k in standby and loses <span class="v-hwk"></span> week once the allowance is used up. Round 2 applies a hotter-than-normal seasonal outlook (×<span class="v-shift"></span>).</p></div></details>
+    <div class="small"><p>Hot days are counted from daily maximum temperatures, 1 May–30 September each year since 1979, using valid observations only. Years with fewer than 120 valid days are left out. <b>Trend:</b> an ordinary least-squares line through the annual counts, projected to 2027, with each year's residual added back to describe year-to-year variability. <b>Last 10 summers</b> and <b>All summers</b> resample the observed counts. The data refresh weekly from the open-data pipeline in this site's repository. Each hot day that falls during roof works costs £<span class="v-hcost"></span>k in standby and loses <span class="v-hwk"></span> week once the allowance is used up. Round 2 applies a hotter-than-normal seasonal outlook (×<span class="v-shift"></span>).</p></div></details>
   <details><summary>Sources and licence</summary>
-    <div class="small"><p>Observations: European Climate Assessment &amp; Dataset (ECA&amp;D), station London Heathrow (STAID 1860). Klein Tank, A.M.G. et al. (2002) <i>Int. J. Climatol.</i>, 22, 1441–1453. <a href="https://www.ecad.eu">www.ecad.eu</a>. Project costs, probabilities, options and secondary risks are illustrative teaching assumptions, not estimates for any real programme.</p><p>The page runs entirely in your browser and sends no data anywhere.</p></div></details>
+    <div class="small"><p>Daily observations: Met Office National Climate Information Centre series for Heathrow, Wisley, Rothamsted and Hampstead, as published in the European Climate Assessment &amp; Dataset blended data (ECA&amp;D; Klein Tank, A.M.G. et al. (2002) <i>Int. J. Climatol.</i>, 22, 1441–1453; <a href="https://www.ecad.eu">www.ecad.eu</a>). Recent days are completed from Met Office synoptic reports. Cross-check: Met Office historic station data for Heathrow (monthly, © Crown copyright, Open Government Licence). Data, pipeline and quality notes: <a href="https://github.com/SBegUCL/heatwise/tree/main/data">github.com/SBegUCL/heatwise/data</a>. Project costs, probabilities, options and secondary risks are illustrative teaching assumptions, not estimates for any real programme.</p><p>The page runs entirely in your browser and sends no data anywhere.</p></div></details>
 </section>
 </div>
 <footer class="wrap">HEATWISE is a fictional teaching scenario. SPCE0019 Project Simulation, UCL Centre for Systems Engineering.</footer>
@@ -256,8 +300,8 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-var MODEL = {"project": {"name": "HEATWISE Delivery Project", "scope": "Retrofit 20 London public buildings (schools, care homes, libraries) with cool roofs, external shading and ventilation, and open them as community cooling centres.", "start": "2027-04-05", "baseCost": 8.6, "reserve": 1.2, "budget": 9.8, "baseWeeks": 22, "deadlineWeeks": 27, "prelimsPerWeek": 35, "heatAllowanceDays": 3, "heatCostPerDay": 40, "heatWeeksPerDay": 0.25, "heatThreshold": 30, "targetBudgetConf": 0.7, "targetTimeConf": 0.6, "buildings": 20}, "risks": [{"id": "R1", "cat": "Weather", "owner": "Construction manager", "heat": true, "desc": "Hot days (≥30°C) stop roof work beyond the 3 weather days allowed in the programme", "p": null, "cost": null, "delay": null}, {"id": "R2", "cat": "Supply chain", "owner": "Procurement lead", "desc": "Cool-roof membrane supplier misses delivery dates", "p": 0.45, "cost": [150, 350, 700], "delay": [1, 3, 6]}, {"id": "R3", "cat": "Technical / H&S", "owner": "Principal designer", "desc": "Asbestos found in older school roofs once work starts", "p": 0.4, "cost": [200, 450, 900], "delay": [1, 2, 5]}, {"id": "R4", "cat": "Regulatory", "owner": "Planning lead", "desc": "Listed-building consent delayed at heritage sites", "p": 0.3, "cost": [50, 120, 250], "delay": [1, 3, 6]}, {"id": "R5", "cat": "Resource", "owner": "Commercial manager", "desc": "Roofing subcontractor over-committed across London", "p": 0.3, "cost": [100, 220, 450], "delay": [0.5, 1.5, 4]}, {"id": "R6", "cat": "Technical", "owner": "Structural engineer", "desc": "Roofs cannot carry new ventilation plant without strengthening", "p": 0.2, "cost": [150, 300, 650], "delay": [1, 2, 4]}, {"id": "R7", "cat": "Commercial", "owner": "Cost manager", "desc": "Material price inflation above the estimate's allowance", "p": 0.5, "cost": [100, 250, 500], "delay": [0, 0, 0]}, {"id": "R8", "cat": "Stakeholder", "owner": "Engagement lead", "desc": "Residents object to cooling-centre opening hours", "p": 0.2, "cost": [10, 30, 70], "delay": [0, 0.5, 1]}], "options": {"R1": [{"id": "R1a", "type": "Reduce", "name": "Early and night shifts on hot days", "cost": 110, "weeks": 0, "heatLoss": 0.4, "note": "Work 05:00–11:00 and after dark; each hot day loses 40% of a shift instead of a full shift.", "sec": {"id": "S1a", "desc": "Night-working noise complaints halt work at residential sites", "p": 0.3, "cost": [20, 50, 100], "delay": [0, 0.5, 1.5]}}, {"id": "R1b", "type": "Avoid", "name": "Re-sequence: roofs in spring, interiors in July–August", "cost": 40, "weeks": 0.5, "heatExposure": 0.45, "note": "Only 45% of hot days now fall during roof works; re-sequencing adds half a week.", "sec": {"id": "S1b", "desc": "Roof works squeezed into wetter spring weeks: rain delays", "p": 0.35, "cost": [40, 80, 160], "delay": [0.5, 1.5, 3]}}, {"id": "R1c", "type": "Transfer", "name": "Parametric weather insurance", "cost": 90, "weeks": 0, "insure": 0.7, "note": "Pays 70% of heat-stoppage costs. Does not recover lost time.", "sec": {"id": "S1c", "desc": "Insurer disputes the claim (station reading vs site reading)", "p": 0.2, "cost": [20, 40, 80], "delay": [0, 0, 0]}}], "R2": [{"id": "R2a", "type": "Avoid", "name": "Buy all membrane up front and store it", "cost": 120, "weeks": 0, "pMul": 0.2, "note": "Delivery risk mostly removed; storage and capital cost.", "sec": {"id": "S2a", "desc": "Stored membrane damaged or stolen at depot", "p": 0.15, "cost": [60, 120, 250], "delay": [0.5, 1, 3]}}, {"id": "R2b", "type": "Reduce", "name": "Qualify a second supplier", "cost": 80, "weeks": 0, "pMul": 0.55, "impMul": 0.6, "note": "Fewer and shorter delays.", "sec": {"id": "S2b", "desc": "Two products on one roof: warranty and compatibility dispute", "p": 0.2, "cost": [40, 90, 200], "delay": [0.5, 1, 2]}}, {"id": "R2c", "type": "Reduce", "name": "Specify cool-roof paint where roofs allow", "cost": 30, "weeks": 0, "impMul": 0.5, "note": "Halves dependence on membrane; paint is lower performing.", "sec": {"id": "S2c", "desc": "Painted roofs fail the thermal performance test at handover", "p": 0.3, "cost": [60, 140, 300], "delay": [0.5, 1, 2]}}], "R3": [{"id": "R3a", "type": "Reduce", "name": "Intrusive asbestos surveys before start", "cost": 90, "weeks": 1, "pMul": 0.25, "impMul": 0.8, "note": "Finds most asbestos in advance; surveys add a week.", "sec": {"id": "S3a", "desc": "Survey openings cause roof leaks in occupied buildings", "p": 0.1, "cost": [20, 50, 120], "delay": [0, 0.5, 1]}}, {"id": "R3b", "type": "Reduce", "name": "Licensed removal contractor on standby", "cost": 60, "weeks": 0, "costMul": 0.75, "delayMul": 0.4, "note": "Same chance of finding asbestos; much faster response.", "sec": null}], "R4": [{"id": "R4a", "type": "Reduce", "name": "Pre-application meetings with conservation officers", "cost": 40, "weeks": 0.5, "pMul": 0.4, "note": "Consent far more likely first time; engagement adds half a week.", "sec": {"id": "S4a", "desc": "Officers require design changes at heritage sites", "p": 0.35, "cost": [50, 100, 200], "delay": [0.5, 1, 2]}}, {"id": "R4b", "type": "Avoid", "name": "Swap the 3 heritage sites for non-listed buildings", "cost": 60, "weeks": 1, "pMul": 0, "note": "Removes the consent risk; replacement sites need new surveys and designs.", "sec": {"id": "S4b", "desc": "Replacement sites draw objections and need fresh surveys", "p": 0.35, "cost": [30, 60, 150], "delay": [0.5, 1.5, 3]}}], "R5": [{"id": "R5a", "type": "Reduce", "name": "Appoint a second roofing contractor", "cost": 50, "weeks": 0, "pMul": 0.4, "note": "Spreads the work across two firms.", "sec": {"id": "S5a", "desc": "Interface problems between two contractors", "p": 0.25, "cost": [30, 60, 130], "delay": [0.5, 1, 2]}}, {"id": "R5b", "type": "Reduce", "name": "On-time completion bonus", "cost": 140, "weeks": 0, "pMul": 0.3, "impMul": 0.7, "note": "Contractor prioritises HEATWISE crews.", "sec": {"id": "S5b", "desc": "Rushed work: defects and snagging at handover", "p": 0.25, "cost": [40, 90, 180], "delay": [0, 1, 2]}}], "R6": [{"id": "R6a", "type": "Reduce", "name": "Structural surveys of all roofs at design stage", "cost": 80, "weeks": 0.5, "pMul": 0.35, "note": "Strengthening is designed in where needed.", "sec": null}, {"id": "R6b", "type": "Avoid", "name": "Lightweight design: no rooftop plant", "cost": 50, "weeks": 0, "pMul": 0.1, "note": "Ventilation units go inside instead.", "sec": {"id": "S6b", "desc": "Indoor units under-perform: cooling centres miss comfort target", "p": 0.25, "cost": [30, 70, 150], "delay": [0, 0.5, 1]}}], "R7": [{"id": "R7a", "type": "Transfer", "name": "Fixed-price contract", "cost": 240, "weeks": 0, "costMul": 0.15, "note": "Contractor carries inflation risk for a premium.", "sec": {"id": "S7a", "desc": "Contractor becomes insolvent under the fixed price", "p": 0.06, "cost": [300, 700, 1400], "delay": [4, 8, 14]}}, {"id": "R7b", "type": "Reduce", "name": "Forward-buy steel and insulation", "cost": 50, "weeks": 0, "costMul": 0.6, "note": "Locks in today's prices for the main materials.", "sec": {"id": "S7b", "desc": "Forward-bought materials don't match final design", "p": 0.15, "cost": [20, 50, 120], "delay": [0, 0.5, 1]}}], "R8": [{"id": "R8a", "type": "Reduce", "name": "Co-design opening hours with residents", "cost": 25, "weeks": 0, "pMul": 0.4, "note": "Community workshops before opening.", "sec": null}]}, "round2": {"week": 10, "spent": 4.1, "occurred": "R2", "r2Delay": 5, "r2Cost": 380, "heatShift": 1.35, "recovery": [{"id": "X1", "name": "Weekend working", "detail": "Recover up to 4 weeks of delay at £55k per week committed.", "costPerWeek": 55, "max": 4}, {"id": "X2", "name": "Overlap trades on site (fast-track)", "detail": "Recover up to 2 weeks at no direct cost.", "cost": 0, "recover": 2, "sec": {"id": "SX2", "desc": "Fast-tracking causes rework", "p": 0.35, "cost": [50, 120, 250], "delay": [0.5, 1, 2]}}, {"id": "X3", "name": "Ask the sponsor for £0.4m client contingency", "detail": "Raises the authorised budget to £10.2m.", "budgetAdd": 0.4, "sec": {"id": "SX3", "desc": "Sponsor attaches conditions: extra assurance reviews", "p": 0.5, "cost": [10, 20, 40], "delay": [0, 0.5, 1]}}, {"id": "X4", "name": "Start early and night shifts now", "detail": "Late adoption of R1a: same effect, £130k with a late-booking premium. Only if R1a was not chosen in Round 1.", "cost": 130, "sec": {"id": "S1a", "desc": "Night-working noise complaints halt work at residential sites", "p": 0.3, "cost": [20, 50, 100], "delay": [0, 0.5, 1.5]}}], "closed": ["R4", "R6"], "r2Mul": {"R2a": 0, "R2b": 0.6, "R2c": 0.5}}};
-var HEAT = {"years": [1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023], "hot": [0, 0, 0, 0, 9, 3, 0, 3, 0, 0, 6, 9, 0, 1, 0, 6, 16, 6, 3, 1, 3, 2, 6, 2, 9, 2, 6, 15, 0, 0, 3, 2, 2, 3, 6, 1, 3, 5, 7, 18, 8, 10, 6, 11, 10], "valid": [150, 147, 148, 146, 148, 146, 147, 146, 144, 148, 143, 143, 145, 149, 144, 146, 149, 147, 147, 149, 145, 143, 144, 149, 148, 146, 153, 153, 153, 153, 151, 147, 147, 149, 146, 149, 146, 145, 145, 143, 149, 145, 145, 146, 149], "maxTx": [29.9, 29, 28.8, 29.3, 32.8, 31.7, 29.8, 30.6, 29.2, 29.1, 34.2, 36.5, 29.7, 30.2, 28.4, 33.1, 34.3, 31.8, 31.5, 31.2, 32.7, 31.4, 31.9, 32.5, 37.9, 30.5, 32.6, 35.5, 29, 29.5, 30.9, 31.2, 31.2, 30.5, 34.1, 30.3, 36.7, 33.2, 34.5, 35, 37.9, 37.8, 32.2, 40.2, 33]};
+var MODEL = {"project": {"name": "HEATWISE Delivery Project", "scope": "Retrofit 20 London public buildings (schools, care homes, libraries) with cool roofs, external shading and ventilation, and open them as community cooling centres.", "start": "2027-04-05", "baseCost": 8.6, "reserve": 1.2, "budget": 9.8, "baseWeeks": 22, "deadlineWeeks": 27, "prelimsPerWeek": 35, "heatAllowanceDays": 5, "heatCostPerDay": 40, "heatWeeksPerDay": 0.25, "heatThreshold": 30, "targetBudgetConf": 0.7, "targetTimeConf": 0.6, "buildings": 20, "plannedBenefit": 13500, "benefitNote": "Whole-life (10-year) benefit: avoided heat-related harm, energy savings and learning days kept. Illustrative.", "satBase": 7.5, "satLatePerWeek": 0.25, "benefitLatePerWeek": 0.01, "utilPlanned": 0.9, "snagsBase": 6, "snagsPerFail": 12, "milestones": [{"id": "M1", "name": "Designs and surveys complete", "week": 4}, {"id": "M2", "name": "Materials on site", "week": 7}, {"id": "M3", "name": "Half of roofs complete", "week": 13}, {"id": "M4", "name": "All roofs complete", "week": 19}, {"id": "M5", "name": "Handover; cooling centres open", "week": 22}], "evm": {"week": 10, "slipWeeks": 0.8, "costOverrun": 0.05}, "reworkBase": 0.012, "failBase": 1, "heatAllowanceNote": "The 1991–2020 average at Heathrow is 5.5 days, rounded down.", "heatStation": "Heathrow"}, "risks": [{"id": "R1", "cat": "Weather", "owner": "Construction manager", "heat": true, "desc": "Hot days (≥30°C) stop roof work beyond the 5 weather days allowed in the programme", "p": null, "cost": null, "delay": null, "at": 14}, {"id": "R2", "cat": "Supply chain", "owner": "Procurement lead", "desc": "Cool-roof membrane supplier misses delivery dates", "p": 0.45, "cost": [150, 350, 700], "delay": [1, 3, 6], "at": 6}, {"id": "R3", "cat": "Technical / H&S", "owner": "Principal designer", "desc": "Asbestos found in older school roofs once work starts", "p": 0.4, "cost": [200, 450, 900], "delay": [1, 2, 5], "at": 8}, {"id": "R4", "cat": "Regulatory", "owner": "Planning lead", "desc": "Listed-building consent delayed at heritage sites", "p": 0.3, "cost": [50, 120, 250], "delay": [1, 3, 6], "at": 2}, {"id": "R5", "cat": "Resource", "owner": "Commercial manager", "desc": "Roofing subcontractor over-committed across London", "p": 0.3, "cost": [100, 220, 450], "delay": [0.5, 1.5, 4], "at": 10}, {"id": "R6", "cat": "Technical", "owner": "Structural engineer", "desc": "Roofs cannot carry new ventilation plant without strengthening", "p": 0.2, "cost": [150, 300, 650], "delay": [1, 2, 4], "at": 3}, {"id": "R7", "cat": "Commercial", "owner": "Cost manager", "desc": "Material price inflation above the estimate's allowance", "p": 0.5, "cost": [100, 250, 500], "delay": [0, 0, 0], "at": 12}, {"id": "R8", "cat": "Stakeholder", "owner": "Engagement lead", "desc": "Residents object to cooling-centre opening hours", "p": 0.2, "cost": [10, 30, 70], "delay": [0, 0.5, 1], "at": 21, "sat": -1.5}], "options": {"R1": [{"id": "R1a", "type": "Reduce", "name": "Early and night shifts on hot days", "cost": 110, "weeks": 0, "heatLoss": 0.4, "note": "Work 05:00–11:00 and after dark; each hot day loses 40% of a shift instead of a full shift.", "sec": {"id": "S1a", "desc": "Night-working noise complaints halt work at residential sites", "p": 0.3, "cost": [20, 50, 100], "delay": [0, 0.5, 1.5], "at": 14, "sat": -1.0}}, {"id": "R1b", "type": "Avoid", "name": "Re-sequence: roofs in spring, interiors in July–August", "cost": 40, "weeks": 0.5, "heatExposure": 0.45, "note": "Only 45% of hot days now fall during roof works; re-sequencing adds half a week.", "sec": {"id": "S1b", "desc": "Roof works squeezed into wetter spring weeks: rain delays", "p": 0.35, "cost": [40, 80, 160], "delay": [0.5, 1.5, 3], "at": 6}}, {"id": "R1c", "type": "Transfer", "name": "Parametric weather insurance", "cost": 90, "weeks": 0, "insure": 0.7, "note": "Pays 70% of heat-stoppage costs. Does not recover lost time.", "sec": {"id": "S1c", "desc": "Insurer disputes the claim (station reading vs site reading)", "p": 0.2, "cost": [20, 40, 80], "delay": [0, 0, 0], "at": 22}}], "R2": [{"id": "R2a", "type": "Avoid", "name": "Buy all membrane up front and store it", "cost": 120, "weeks": 0, "pMul": 0.2, "note": "Delivery risk mostly removed; storage and capital cost.", "sec": {"id": "S2a", "desc": "Stored membrane damaged or stolen at depot", "p": 0.15, "cost": [60, 120, 250], "delay": [0.5, 1, 3], "at": 6}}, {"id": "R2b", "type": "Reduce", "name": "Qualify a second supplier", "cost": 80, "weeks": 0, "pMul": 0.55, "impMul": 0.6, "note": "Fewer and shorter delays.", "sec": {"id": "S2b", "desc": "Two products on one roof: warranty and compatibility dispute", "p": 0.2, "cost": [40, 90, 200], "delay": [0.5, 1, 2], "at": 12, "rework": true, "bldg": 3}}, {"id": "R2c", "type": "Reduce", "name": "Specify cool-roof paint where roofs allow", "cost": 30, "weeks": 0, "impMul": 0.5, "note": "Halves dependence on membrane; paint is lower performing.", "sec": {"id": "S2c", "desc": "Painted roofs fail the thermal performance test at handover", "p": 0.3, "cost": [60, 140, 300], "delay": [0.5, 1, 2], "at": 22, "rework": true, "bldg": 6, "ben": -0.05}}], "R3": [{"id": "R3a", "type": "Reduce", "name": "Intrusive asbestos surveys before start", "cost": 90, "weeks": 1, "pMul": 0.25, "impMul": 0.8, "note": "Finds most asbestos in advance; surveys add a week.", "sec": {"id": "S3a", "desc": "Survey openings cause roof leaks in occupied buildings", "p": 0.1, "cost": [20, 50, 120], "delay": [0, 0.5, 1], "at": 4, "rework": true, "bldg": 2, "sat": -0.5}}, {"id": "R3b", "type": "Reduce", "name": "Licensed removal contractor on standby", "cost": 60, "weeks": 0, "costMul": 0.75, "delayMul": 0.4, "note": "Same chance of finding asbestos; much faster response.", "sec": null}], "R4": [{"id": "R4a", "type": "Reduce", "name": "Pre-application meetings with conservation officers", "cost": 40, "weeks": 0.5, "pMul": 0.4, "note": "Consent far more likely first time; engagement adds half a week.", "sec": {"id": "S4a", "desc": "Officers require design changes at heritage sites", "p": 0.35, "cost": [50, 100, 200], "delay": [0.5, 1, 2], "at": 2}}, {"id": "R4b", "type": "Avoid", "name": "Swap the 3 heritage sites for non-listed buildings", "cost": 60, "weeks": 1, "pMul": 0, "note": "Removes the consent risk; replacement sites need new surveys and designs.", "sec": {"id": "S4b", "desc": "Replacement sites draw objections and need fresh surveys", "p": 0.35, "cost": [30, 60, 150], "delay": [0.5, 1.5, 3], "at": 3, "sat": -0.6}}], "R5": [{"id": "R5a", "type": "Reduce", "name": "Appoint a second roofing contractor", "cost": 50, "weeks": 0, "pMul": 0.4, "note": "Spreads the work across two firms.", "sec": {"id": "S5a", "desc": "Interface problems between two contractors", "p": 0.25, "cost": [30, 60, 130], "delay": [0.5, 1, 2], "at": 10, "rework": true, "bldg": 2}}, {"id": "R5b", "type": "Reduce", "name": "On-time completion bonus", "cost": 140, "weeks": 0, "pMul": 0.3, "impMul": 0.7, "note": "Contractor prioritises HEATWISE crews.", "sec": {"id": "S5b", "desc": "Rushed work: defects and snagging at handover", "p": 0.25, "cost": [40, 90, 180], "delay": [0, 1, 2], "at": 22, "rework": true, "bldg": 5}}], "R6": [{"id": "R6a", "type": "Reduce", "name": "Structural surveys of all roofs at design stage", "cost": 80, "weeks": 0.5, "pMul": 0.35, "note": "Strengthening is designed in where needed.", "sec": null}, {"id": "R6b", "type": "Avoid", "name": "Lightweight design: no rooftop plant", "cost": 50, "weeks": 0, "pMul": 0.1, "note": "Ventilation units go inside instead.", "sec": {"id": "S6b", "desc": "Indoor units under-perform: cooling centres miss comfort target", "p": 0.25, "cost": [30, 70, 150], "delay": [0, 0.5, 1], "at": 22, "ben": -0.08, "bldg": 4}}], "R7": [{"id": "R7a", "type": "Transfer", "name": "Fixed-price contract", "cost": 240, "weeks": 0, "costMul": 0.15, "note": "Contractor carries inflation risk for a premium.", "sec": {"id": "S7a", "desc": "Contractor becomes insolvent under the fixed price", "p": 0.06, "cost": [300, 700, 1400], "delay": [4, 8, 14], "at": 12}}, {"id": "R7b", "type": "Reduce", "name": "Forward-buy steel and insulation", "cost": 50, "weeks": 0, "costMul": 0.6, "note": "Locks in today's prices for the main materials.", "sec": {"id": "S7b", "desc": "Forward-bought materials don't match final design", "p": 0.15, "cost": [20, 50, 120], "delay": [0, 0.5, 1], "at": 8}}], "R8": [{"id": "R8a", "type": "Reduce", "name": "Co-design opening hours with residents", "cost": 25, "weeks": 0, "pMul": 0.4, "note": "Community workshops before opening.", "sec": null, "satBonus": 0.5}]}, "round2": {"week": 10, "spent": 4.1, "occurred": "R2", "r2Delay": 5, "r2Cost": 380, "heatShift": 1.35, "recovery": [{"id": "X1", "name": "Weekend working", "detail": "Recover up to 4 weeks of delay at £55k per week committed.", "costPerWeek": 55, "max": 4}, {"id": "X2", "name": "Overlap trades on site (fast-track)", "detail": "Recover up to 2 weeks at no direct cost.", "cost": 0, "recover": 2, "sec": {"id": "SX2", "desc": "Fast-tracking causes rework", "p": 0.35, "cost": [50, 120, 250], "delay": [0.5, 1, 2], "at": 14, "rework": true, "bldg": 4}}, {"id": "X3", "name": "Ask the sponsor for £0.4m client contingency", "detail": "Raises the authorised budget to £10.2m.", "budgetAdd": 0.4, "sec": {"id": "SX3", "desc": "Sponsor attaches conditions: extra assurance reviews", "p": 0.5, "cost": [10, 20, 40], "delay": [0, 0.5, 1], "at": 12}}, {"id": "X4", "name": "Start early and night shifts now", "detail": "Late adoption of R1a: same effect, £130k with a late-booking premium. Only if R1a was not chosen in Round 1.", "cost": 130, "sec": {"id": "S1a", "desc": "Night-working noise complaints halt work at residential sites", "p": 0.3, "cost": [20, 50, 100], "delay": [0, 0.5, 1.5], "at": 14, "sat": -1.0}}], "closed": ["R4", "R6"], "r2Mul": {"R2a": 0, "R2b": 0.6, "R2c": 0.5}}};
+var SUMMARY = {"generated_utc":"2026-10-19T19:21:41+00:00","thresholds":[28,30,32],"season":"May-September","source":"ECA&D blended daily maximum temperature, series supplied by the Met Office National Climate Information Centre","stations":{"Rothamsted":{"area":"Hertfordshire, 37 km NW of central London","annual":[{"year":1979,"valid":148,"maxTx":28.0,"hot":{"28":1,"30":0,"32":0}},{"year":1980,"valid":148,"maxTx":27.3,"hot":{"28":0,"30":0,"32":0}},{"year":1981,"valid":147,"maxTx":27.4,"hot":{"28":0,"30":0,"32":0}},{"year":1982,"valid":147,"maxTx":27.7,"hot":{"28":0,"30":0,"32":0}},{"year":1983,"valid":144,"maxTx":30.8,"hot":{"28":11,"30":2,"32":0}},{"year":1984,"valid":143,"maxTx":29.5,"hot":{"28":3,"30":0,"32":0}},{"year":1985,"valid":149,"maxTx":26.5,"hot":{"28":0,"30":0,"32":0}},{"year":1986,"valid":146,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1987,"valid":148,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1988,"valid":146,"maxTx":27.4,"hot":{"28":0,"30":0,"32":0}},{"year":1989,"valid":145,"maxTx":31.7,"hot":{"28":6,"30":2,"32":0}},{"year":1990,"valid":148,"maxTx":33.8,"hot":{"28":9,"30":5,"32":1}},{"year":1991,"valid":145,"maxTx":27.7,"hot":{"28":0,"30":0,"32":0}},{"year":1992,"valid":148,"maxTx":27.2,"hot":{"28":0,"30":0,"32":0}},{"year":1993,"valid":142,"maxTx":26.7,"hot":{"28":0,"30":0,"32":0}},{"year":1994,"valid":144,"maxTx":30.6,"hot":{"28":5,"30":2,"32":0}},{"year":1995,"valid":147,"maxTx":31.7,"hot":{"28":18,"30":7,"32":0}},{"year":1996,"valid":148,"maxTx":30.4,"hot":{"28":6,"30":1,"32":0}},{"year":1997,"valid":146,"maxTx":30.3,"hot":{"28":9,"30":1,"32":0}},{"year":1998,"valid":145,"maxTx":28.9,"hot":{"28":2,"30":0,"32":0}},{"year":1999,"valid":147,"maxTx":30.0,"hot":{"28":3,"30":1,"32":0}},{"year":2000,"valid":144,"maxTx":29.7,"hot":{"28":2,"30":0,"32":0}},{"year":2001,"valid":147,"maxTx":29.5,"hot":{"28":5,"30":0,"32":0}},{"year":2002,"valid":146,"maxTx":30.0,"hot":{"28":3,"30":1,"32":0}},{"year":2003,"valid":150,"maxTx":36.0,"hot":{"28":12,"30":5,"32":4}},{"year":2004,"valid":144,"maxTx":29.3,"hot":{"28":3,"30":0,"32":0}},{"year":2005,"valid":138,"maxTx":30.8,"hot":{"28":7,"30":2,"32":0}},{"year":2006,"valid":147,"maxTx":33.8,"hot":{"28":15,"30":5,"32":1}},{"year":2007,"valid":138,"maxTx":27.7,"hot":{"28":0,"30":0,"32":0}},{"year":2008,"valid":144,"maxTx":27.2,"hot":{"28":0,"30":0,"32":0}},{"year":2009,"valid":147,"maxTx":27.9,"hot":{"28":0,"30":0,"32":0}},{"year":2010,"valid":141,"maxTx":29.1,"hot":{"28":1,"30":0,"32":0}},{"year":2011,"valid":139,"maxTx":29.3,"hot":{"28":1,"30":0,"32":0}},{"year":2012,"valid":144,"maxTx":29.8,"hot":{"28":4,"30":0,"32":0}},{"year":2013,"valid":141,"maxTx":31.5,"hot":{"28":5,"30":2,"32":0}},{"year":2014,"valid":146,"maxTx":30.1,"hot":{"28":1,"30":1,"32":0}},{"year":2015,"valid":145,"maxTx":33.7,"hot":{"28":3,"30":1,"32":1}},{"year":2016,"valid":144,"maxTx":31.5,"hot":{"28":7,"30":3,"32":0}},{"year":2017,"valid":145,"maxTx":31.5,"hot":{"28":5,"30":3,"32":0}},{"year":2018,"valid":144,"maxTx":32.6,"hot":{"28":16,"30":5,"32":1}},{"year":2019,"valid":149,"maxTx":36.6,"hot":{"28":8,"30":7,"32":2}},{"year":2020,"valid":143,"maxTx":34.5,"hot":{"28":10,"30":6,"32":5}},{"year":2021,"valid":150,"maxTx":29.3,"hot":{"28":4,"30":0,"32":0}},{"year":2022,"valid":145,"maxTx":38.5,"hot":{"28":12,"30":8,"32":4}},{"year":2023,"valid":149,"maxTx":30.9,"hot":{"28":11,"30":2,"32":0}},{"year":2024,"valid":146,"maxTx":31.9,"hot":{"28":4,"30":1,"32":0}},{"year":2025,"valid":145,"maxTx":31.7,"hot":{"28":12,"30":5,"32":0}},{"year":2026,"valid":147,"maxTx":35.5,"hot":{"28":27,"30":19,"32":9}}],"latestYear":2026,"latestSummer":[["2026-05-01",21.4],["2026-05-02",18.0],["2026-05-04",15.7],["2026-05-06",14.9],["2026-05-07",17.2],["2026-05-08",20.4],["2026-05-09",12.8],["2026-05-10",11.8],["2026-05-11",14.3],["2026-05-12",12.4],["2026-05-13",12.9],["2026-05-14",14.0],["2026-05-15",12.9],["2026-05-16",16.1],["2026-05-17",13.7],["2026-05-18",16.8],["2026-05-19",20.1],["2026-05-20",22.3],["2026-05-21",26.9],["2026-05-22",26.5],["2026-05-23",29.7],["2026-05-24",32.0],["2026-05-25",32.5],["2026-05-26",26.1],["2026-05-27",30.1],["2026-05-28",23.2],["2026-05-29",27.9],["2026-05-30",21.3],["2026-05-31",21.8],["2026-06-01",20.7],["2026-06-02",19.4],["2026-06-03",19.0],["2026-06-04",17.5],["2026-06-05",16.4],["2026-06-06",18.4],["2026-06-07",17.2],["2026-06-08",17.5],["2026-06-09",16.5],["2026-06-10",16.2],["2026-06-11",20.9],["2026-06-12",19.9],["2026-06-13",19.4],["2026-06-14",20.7],["2026-06-15",24.7],["2026-06-16",23.0],["2026-06-17",24.4],["2026-06-18",28.2],["2026-06-19",25.3],["2026-06-20",27.2],["2026-06-21",28.2],["2026-06-22",32.6],["2026-06-23",32.2],["2026-06-24",31.9],["2026-06-25",34.3],["2026-06-26",30.1],["2026-06-27",24.5],["2026-06-28",22.3],["2026-06-29",23.9],["2026-06-30",25.1],["2026-07-01",24.1],["2026-07-02",25.8],["2026-07-03",27.2],["2026-07-04",27.2],["2026-07-05",31.1],["2026-07-06",30.1],["2026-07-07",31.6],["2026-07-08",33.1],["2026-07-09",31.3],["2026-07-10",28.8],["2026-07-11",29.0],["2026-07-12",26.5],["2026-07-13",26.3],["2026-07-14",27.3],["2026-07-15",28.0],["2026-07-16",26.5],["2026-07-17",21.2],["2026-07-18",21.2],["2026-07-19",25.0],["2026-07-20",22.7],["2026-07-21",25.4],["2026-07-22",26.1],["2026-07-23",27.5],["2026-07-24",27.3],["2026-07-25",25.7],["2026-07-26",25.3],["2026-07-27",28.8],["2026-07-28",33.1],["2026-07-29",27.3],["2026-07-30",24.3],["2026-07-31",24.8],["2026-08-01",26.8],["2026-08-02",31.1],["2026-08-03",28.4],["2026-08-04",24.6],["2026-08-05",22.3],["2026-08-06",24.7],["2026-08-07",27.1],["2026-08-08",30.3],["2026-08-09",24.9],["2026-08-10",25.2],["2026-08-11",31.8],["2026-08-12",35.5],["2026-08-13",32.6],["2026-08-15",25.1],["2026-08-16",26.3],["2026-08-17",23.5],["2026-08-18",24.6],["2026-08-19",23.6],["2026-08-20",20.9],["2026-08-21",21.3],["2026-08-22",23.5],["2026-08-23",22.7],["2026-08-24",25.2],["2026-08-25",25.7],["2026-08-26",23.1],["2026-08-27",22.6],["2026-08-28",19.2],["2026-08-29",22.9],["2026-08-30",22.3],["2026-08-31",22.5],["2026-09-01",20.7],["2026-09-02",25.4],["2026-09-04",22.0],["2026-09-05",26.9],["2026-09-06",24.2],["2026-09-08",19.1],["2026-09-09",19.7],["2026-09-10",20.4],["2026-09-11",23.0],["2026-09-12",22.1],["2026-09-13",24.6],["2026-09-14",22.0],["2026-09-15",19.7],["2026-09-16",20.2],["2026-09-17",19.3],["2026-09-18",23.5],["2026-09-19",19.6],["2026-09-20",22.7],["2026-09-21",23.7],["2026-09-22",22.5],["2026-09-23",20.8],["2026-09-24",22.7],["2026-09-25",20.9],["2026-09-26",22.1],["2026-09-27",19.1],["2026-09-28",25.0],["2026-09-29",23.9]]},"Hampstead":{"area":"North London (closed 2016)","annual":[{"year":1979,"valid":147,"maxTx":29.6,"hot":{"28":1,"30":0,"32":0}},{"year":1980,"valid":147,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1981,"valid":145,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1982,"valid":145,"maxTx":28.0,"hot":{"28":1,"30":0,"32":0}},{"year":1983,"valid":147,"maxTx":32.1,"hot":{"28":9,"30":4,"32":1}},{"year":1984,"valid":140,"maxTx":30.2,"hot":{"28":5,"30":1,"32":0}},{"year":1985,"valid":144,"maxTx":26.7,"hot":{"28":0,"30":0,"32":0}},{"year":1986,"valid":148,"maxTx":28.1,"hot":{"28":1,"30":0,"32":0}},{"year":1987,"valid":148,"maxTx":27.9,"hot":{"28":0,"30":0,"32":0}},{"year":1988,"valid":149,"maxTx":26.8,"hot":{"28":0,"30":0,"32":0}},{"year":1989,"valid":141,"maxTx":31.8,"hot":{"28":8,"30":2,"32":0}},{"year":1990,"valid":142,"maxTx":34.6,"hot":{"28":9,"30":5,"32":2}},{"year":1991,"valid":146,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1992,"valid":148,"maxTx":28.0,"hot":{"28":1,"30":0,"32":0}},{"year":1993,"valid":140,"maxTx":27.1,"hot":{"28":0,"30":0,"32":0}},{"year":1994,"valid":146,"maxTx":31.3,"hot":{"28":7,"30":2,"32":0}},{"year":1995,"valid":146,"maxTx":33.4,"hot":{"28":20,"30":9,"32":2}},{"year":1996,"valid":148,"maxTx":30.8,"hot":{"28":6,"30":4,"32":0}},{"year":1997,"valid":146,"maxTx":29.9,"hot":{"28":8,"30":0,"32":0}},{"year":1998,"valid":146,"maxTx":28.9,"hot":{"28":4,"30":0,"32":0}},{"year":1999,"valid":146,"maxTx":30.1,"hot":{"28":7,"30":1,"32":0}},{"year":2000,"valid":148,"maxTx":30.5,"hot":{"28":2,"30":1,"32":0}},{"year":2001,"valid":144,"maxTx":30.8,"hot":{"28":8,"30":2,"32":0}},{"year":2002,"valid":148,"maxTx":30.8,"hot":{"28":4,"30":2,"32":0}},{"year":2003,"valid":149,"maxTx":37.4,"hot":{"28":15,"30":9,"32":4}},{"year":2004,"valid":144,"maxTx":30.8,"hot":{"28":8,"30":2,"32":0}},{"year":2005,"valid":153,"maxTx":31.8,"hot":{"28":11,"30":4,"32":0}},{"year":2006,"valid":153,"maxTx":34.4,"hot":{"28":21,"30":10,"32":2}},{"year":2007,"valid":153,"maxTx":28.9,"hot":{"28":1,"30":0,"32":0}},{"year":2008,"valid":153,"maxTx":28.3,"hot":{"28":2,"30":0,"32":0}},{"year":2009,"valid":149,"maxTx":28.4,"hot":{"28":1,"30":0,"32":0}},{"year":2010,"valid":148,"maxTx":29.9,"hot":{"28":4,"30":0,"32":0}},{"year":2011,"valid":147,"maxTx":30.9,"hot":{"28":5,"30":1,"32":0}},{"year":2012,"valid":145,"maxTx":29.6,"hot":{"28":4,"30":0,"32":0}},{"year":2013,"valid":147,"maxTx":33.0,"hot":{"28":11,"30":5,"32":2}},{"year":2014,"valid":150,"maxTx":30.5,"hot":{"28":3,"30":1,"32":0}},{"year":2015,"valid":147,"maxTx":34.2,"hot":{"28":3,"30":1,"32":1}},{"year":2016,"valid":75,"maxTx":26.4,"hot":{"28":0,"30":0,"32":0}},{"year":2017,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2018,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2019,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2020,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2021,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2022,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2023,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2024,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2025,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2026,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}}],"latestYear":2016,"latestSummer":[["2016-05-01",17.1],["2016-05-02",14.9],["2016-05-03",17.8],["2016-05-04",20.0],["2016-05-05",22.0],["2016-05-06",23.9],["2016-05-07",26.1],["2016-05-08",24.3],["2016-05-10",18.1],["2016-05-11",23.4],["2016-05-12",16.9],["2016-05-13",13.7],["2016-05-14",17.0],["2016-05-15",17.8],["2016-05-16",17.6],["2016-05-17",14.0],["2016-05-18",17.6],["2016-05-19",18.6],["2016-05-20",17.0],["2016-05-21",18.9],["2016-05-22",19.7],["2016-05-23",16.3],["2016-05-24",15.0],["2016-05-25",20.1],["2016-05-26",20.8],["2016-05-27",19.5],["2016-05-28",18.7],["2016-05-29",16.2],["2016-05-31",12.3],["2016-06-01",12.0],["2016-06-02",13.3],["2016-06-03",18.1],["2016-06-04",23.1],["2016-06-05",23.4],["2016-06-06",24.5],["2016-06-07",24.5],["2016-06-08",21.3],["2016-06-09",24.0],["2016-06-10",21.4],["2016-06-11",19.8],["2016-06-12",18.2],["2016-06-13",17.1],["2016-06-14",19.0],["2016-06-15",19.6],["2016-06-16",20.0],["2016-06-17",17.2],["2016-06-18",20.1],["2016-06-19",21.3],["2016-06-20",20.4],["2016-06-21",20.8],["2016-06-22",21.2],["2016-06-23",21.4],["2016-06-24",20.3],["2016-06-25",20.6],["2016-06-26",21.3],["2016-06-27",20.2],["2016-06-28",16.5],["2016-06-29",20.1],["2016-06-30",18.1],["2016-07-01",19.6],["2016-07-02",20.7],["2016-07-03",21.2],["2016-07-04",20.6],["2016-07-05",21.7],["2016-07-06",22.6],["2016-07-07",22.5],["2016-07-08",22.6],["2016-07-09",21.6],["2016-07-10",20.6],["2016-07-11",18.3],["2016-07-12",18.8],["2016-07-13",20.4],["2016-07-14",18.8],["2016-07-15",25.5],["2016-07-16",26.4]]},"Heathrow":{"area":"West London (airport)","annual":[{"year":1979,"valid":150,"maxTx":29.9,"hot":{"28":1,"30":0,"32":0}},{"year":1980,"valid":147,"maxTx":29.0,"hot":{"28":1,"30":0,"32":0}},{"year":1981,"valid":148,"maxTx":28.8,"hot":{"28":1,"30":0,"32":0}},{"year":1982,"valid":153,"maxTx":29.3,"hot":{"28":5,"30":0,"32":0}},{"year":1983,"valid":153,"maxTx":32.8,"hot":{"28":19,"30":9,"32":2}},{"year":1984,"valid":153,"maxTx":31.7,"hot":{"28":10,"30":4,"32":0}},{"year":1985,"valid":153,"maxTx":29.9,"hot":{"28":3,"30":0,"32":0}},{"year":1986,"valid":153,"maxTx":30.6,"hot":{"28":8,"30":3,"32":0}},{"year":1987,"valid":153,"maxTx":29.2,"hot":{"28":5,"30":0,"32":0}},{"year":1988,"valid":153,"maxTx":29.1,"hot":{"28":1,"30":0,"32":0}},{"year":1989,"valid":152,"maxTx":34.2,"hot":{"28":19,"30":7,"32":2}},{"year":1990,"valid":150,"maxTx":36.5,"hot":{"28":15,"30":12,"32":7}},{"year":1991,"valid":153,"maxTx":29.7,"hot":{"28":3,"30":0,"32":0}},{"year":1992,"valid":153,"maxTx":30.2,"hot":{"28":4,"30":1,"32":0}},{"year":1993,"valid":153,"maxTx":28.4,"hot":{"28":3,"30":0,"32":0}},{"year":1994,"valid":153,"maxTx":33.1,"hot":{"28":13,"30":8,"32":3}},{"year":1995,"valid":153,"maxTx":34.3,"hot":{"28":28,"30":17,"32":7}},{"year":1996,"valid":153,"maxTx":31.9,"hot":{"28":13,"30":7,"32":0}},{"year":1997,"valid":153,"maxTx":31.5,"hot":{"28":10,"30":3,"32":0}},{"year":1998,"valid":153,"maxTx":31.2,"hot":{"28":5,"30":1,"32":0}},{"year":1999,"valid":153,"maxTx":32.7,"hot":{"28":10,"30":4,"32":2}},{"year":2000,"valid":153,"maxTx":31.5,"hot":{"28":3,"30":3,"32":0}},{"year":2001,"valid":153,"maxTx":31.9,"hot":{"28":15,"30":8,"32":0}},{"year":2002,"valid":153,"maxTx":32.5,"hot":{"28":4,"30":2,"32":1}},{"year":2003,"valid":153,"maxTx":37.9,"hot":{"28":19,"30":10,"32":7}},{"year":2004,"valid":153,"maxTx":30.6,"hot":{"28":9,"30":3,"32":0}},{"year":2005,"valid":153,"maxTx":32.6,"hot":{"28":13,"30":6,"32":1}},{"year":2006,"valid":153,"maxTx":35.5,"hot":{"28":23,"30":15,"32":6}},{"year":2007,"valid":153,"maxTx":29.0,"hot":{"28":1,"30":0,"32":0}},{"year":2008,"valid":153,"maxTx":29.5,"hot":{"28":3,"30":0,"32":0}},{"year":2009,"valid":153,"maxTx":30.9,"hot":{"28":7,"30":3,"32":0}},{"year":2010,"valid":153,"maxTx":31.2,"hot":{"28":11,"30":2,"32":0}},{"year":2011,"valid":153,"maxTx":31.2,"hot":{"28":10,"30":4,"32":0}},{"year":2012,"valid":153,"maxTx":30.5,"hot":{"28":6,"30":3,"32":0}},{"year":2013,"valid":153,"maxTx":34.1,"hot":{"28":16,"30":6,"32":2}},{"year":2014,"valid":153,"maxTx":30.3,"hot":{"28":6,"30":1,"32":0}},{"year":2015,"valid":153,"maxTx":36.7,"hot":{"28":5,"30":5,"32":3}},{"year":2016,"valid":153,"maxTx":33.2,"hot":{"28":11,"30":6,"32":3}},{"year":2017,"valid":152,"maxTx":34.5,"hot":{"28":9,"30":7,"32":3}},{"year":2018,"valid":151,"maxTx":35.0,"hot":{"28":32,"30":19,"32":5}},{"year":2019,"valid":153,"maxTx":38.0,"hot":{"28":9,"30":9,"32":8}},{"year":2020,"valid":153,"maxTx":37.8,"hot":{"28":19,"30":12,"32":10}},{"year":2021,"valid":145,"maxTx":32.2,"hot":{"28":12,"30":6,"32":1}},{"year":2022,"valid":146,"maxTx":40.2,"hot":{"28":22,"30":11,"32":7}},{"year":2023,"valid":149,"maxTx":33.0,"hot":{"28":17,"30":10,"32":2}},{"year":2024,"valid":145,"maxTx":33.0,"hot":{"28":14,"30":5,"32":2}},{"year":2025,"valid":147,"maxTx":33.9,"hot":{"28":21,"30":14,"32":6}},{"year":2026,"valid":150,"maxTx":37.7,"hot":{"28":48,"30":31,"32":18}}],"latestYear":2026,"latestSummer":[["2026-05-01",23.1],["2026-05-02",19.6],["2026-05-03",16.2],["2026-05-04",16.7],["2026-05-05",14.6],["2026-05-06",17.6],["2026-05-07",19.3],["2026-05-08",22.1],["2026-05-10",13.4],["2026-05-11",17.0],["2026-05-12",13.0],["2026-05-13",14.7],["2026-05-14",15.0],["2026-05-15",16.1],["2026-05-16",18.6],["2026-05-17",16.5],["2026-05-18",19.1],["2026-05-19",21.8],["2026-05-20",24.6],["2026-05-21",28.4],["2026-05-22",29.7],["2026-05-23",32.1],["2026-05-24",34.4],["2026-05-25",35.0],["2026-05-26",28.6],["2026-05-27",32.0],["2026-05-28",26.1],["2026-05-29",30.1],["2026-05-30",24.0],["2026-05-31",24.2],["2026-06-01",20.9],["2026-06-02",20.8],["2026-06-03",20.5],["2026-06-04",18.9],["2026-06-05",17.3],["2026-06-06",19.0],["2026-06-07",17.5],["2026-06-08",20.6],["2026-06-09",19.3],["2026-06-10",17.3],["2026-06-11",22.9],["2026-06-12",22.4],["2026-06-13",21.3],["2026-06-14",23.3],["2026-06-15",27.1],["2026-06-16",26.6],["2026-06-17",25.7],["2026-06-18",30.3],["2026-06-19",26.4],["2026-06-20",31.8],["2026-06-21",30.0],["2026-06-22",34.3],["2026-06-23",35.3],["2026-06-24",33.1],["2026-06-25",36.4],["2026-06-26",31.7],["2026-06-27",27.2],["2026-06-28",24.7],["2026-06-29",25.6],["2026-06-30",27.6],["2026-07-01",26.4],["2026-07-02",27.5],["2026-07-03",29.1],["2026-07-04",30.3],["2026-07-05",33.3],["2026-07-06",32.0],["2026-07-07",33.7],["2026-07-08",34.9],["2026-07-09",31.1],["2026-07-10",31.0],["2026-07-11",31.5],["2026-07-12",28.6],["2026-07-13",30.4],["2026-07-14",29.6],["2026-07-15",30.3],["2026-07-16",29.6],["2026-07-17",23.5],["2026-07-18",23.8],["2026-07-19",26.6],["2026-07-20",24.7],["2026-07-21",27.9],["2026-07-22",28.0],["2026-07-23",29.2],["2026-07-24",29.8],["2026-07-25",27.1],["2026-07-26",28.0],["2026-07-27",30.7],["2026-07-28",35.0],["2026-07-29",29.3],["2026-07-30",26.8],["2026-07-31",26.7],["2026-08-01",28.8],["2026-08-02",33.2],["2026-08-03",31.5],["2026-08-04",26.1],["2026-08-05",23.2],["2026-08-06",26.7],["2026-08-07",28.8],["2026-08-08",32.3],["2026-08-09",27.4],["2026-08-10",27.1],["2026-08-11",34.0],["2026-08-12",37.7],["2026-08-13",34.7],["2026-08-14",28.0],["2026-08-15",27.5],["2026-08-16",29.0],["2026-08-17",26.1],["2026-08-18",26.3],["2026-08-19",24.6],["2026-08-20",21.8],["2026-08-21",23.2],["2026-08-22",25.7],["2026-08-23",24.0],["2026-08-24",26.6],["2026-08-25",27.5],["2026-08-26",26.2],["2026-08-27",26.1],["2026-08-28",21.4],["2026-08-29",24.6],["2026-08-30",25.0],["2026-08-31",25.0],["2026-09-01",21.6],["2026-09-02",27.8],["2026-09-04",23.9],["2026-09-05",28.2],["2026-09-06",25.3],["2026-09-08",19.0],["2026-09-09",21.4],["2026-09-10",22.4],["2026-09-11",24.3],["2026-09-12",24.2],["2026-09-13",26.6],["2026-09-14",24.3],["2026-09-15",21.9],["2026-09-16",22.6],["2026-09-17",21.5],["2026-09-18",23.7],["2026-09-19",21.5],["2026-09-20",24.7],["2026-09-21",26.9],["2026-09-22",24.7],["2026-09-23",22.4],["2026-09-24",25.1],["2026-09-25",22.6],["2026-09-26",22.5],["2026-09-27",20.6],["2026-09-28",27.7],["2026-09-29",24.9],["2026-09-30",25.1]]},"Wisley":{"area":"Surrey, 33 km SW of central London","annual":[{"year":1979,"valid":147,"maxTx":30.0,"hot":{"28":1,"30":1,"32":0}},{"year":1980,"valid":143,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1981,"valid":143,"maxTx":28.5,"hot":{"28":1,"30":0,"32":0}},{"year":1982,"valid":137,"maxTx":28.1,"hot":{"28":2,"30":0,"32":0}},{"year":1983,"valid":144,"maxTx":32.1,"hot":{"28":16,"30":8,"32":1}},{"year":1984,"valid":145,"maxTx":29.9,"hot":{"28":6,"30":0,"32":0}},{"year":1985,"valid":143,"maxTx":28.6,"hot":{"28":1,"30":0,"32":0}},{"year":1986,"valid":146,"maxTx":29.6,"hot":{"28":5,"30":0,"32":0}},{"year":1987,"valid":143,"maxTx":29.2,"hot":{"28":4,"30":0,"32":0}},{"year":1988,"valid":141,"maxTx":29.0,"hot":{"28":1,"30":0,"32":0}},{"year":1989,"valid":145,"maxTx":33.8,"hot":{"28":9,"30":4,"32":1}},{"year":1990,"valid":144,"maxTx":35.4,"hot":{"28":10,"30":7,"32":5}},{"year":1991,"valid":146,"maxTx":28.8,"hot":{"28":2,"30":0,"32":0}},{"year":1992,"valid":148,"maxTx":29.7,"hot":{"28":3,"30":0,"32":0}},{"year":1993,"valid":142,"maxTx":27.3,"hot":{"28":0,"30":0,"32":0}},{"year":1994,"valid":139,"maxTx":31.4,"hot":{"28":9,"30":4,"32":0}},{"year":1995,"valid":147,"maxTx":32.5,"hot":{"28":23,"30":11,"32":1}},{"year":1996,"valid":145,"maxTx":31.1,"hot":{"28":8,"30":3,"32":0}},{"year":1997,"valid":142,"maxTx":30.2,"hot":{"28":10,"30":1,"32":0}},{"year":1998,"valid":135,"maxTx":30.6,"hot":{"28":3,"30":1,"32":0}},{"year":1999,"valid":145,"maxTx":31.7,"hot":{"28":8,"30":3,"32":0}},{"year":2000,"valid":143,"maxTx":29.6,"hot":{"28":4,"30":0,"32":0}},{"year":2001,"valid":146,"maxTx":32.0,"hot":{"28":11,"30":5,"32":1}},{"year":2002,"valid":150,"maxTx":31.8,"hot":{"28":4,"30":1,"32":0}},{"year":2003,"valid":115,"maxTx":37.8,"hot":{"28":19,"30":12,"32":8}},{"year":2004,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2005,"valid":143,"maxTx":31.0,"hot":{"28":14,"30":5,"32":0}},{"year":2006,"valid":137,"maxTx":36.5,"hot":{"28":18,"30":13,"32":4}},{"year":2007,"valid":103,"maxTx":27.9,"hot":{"28":0,"30":0,"32":0}},{"year":2008,"valid":147,"maxTx":29.4,"hot":{"28":2,"30":0,"32":0}},{"year":2009,"valid":120,"maxTx":31.8,"hot":{"28":5,"30":4,"32":0}},{"year":2010,"valid":145,"maxTx":30.7,"hot":{"28":9,"30":2,"32":0}},{"year":2011,"valid":143,"maxTx":31.1,"hot":{"28":4,"30":1,"32":0}},{"year":2012,"valid":145,"maxTx":30.3,"hot":{"28":5,"30":1,"32":0}},{"year":2013,"valid":143,"maxTx":33.1,"hot":{"28":14,"30":6,"32":2}},{"year":2014,"valid":147,"maxTx":28.8,"hot":{"28":5,"30":0,"32":0}},{"year":2015,"valid":146,"maxTx":34.9,"hot":{"28":3,"30":1,"32":1}},{"year":2016,"valid":148,"maxTx":32.0,"hot":{"28":8,"30":3,"32":1}},{"year":2017,"valid":146,"maxTx":33.3,"hot":{"28":9,"30":5,"32":1}},{"year":2018,"valid":147,"maxTx":35.1,"hot":{"28":29,"30":16,"32":6}},{"year":2019,"valid":151,"maxTx":36.7,"hot":{"28":8,"30":7,"32":5}},{"year":2020,"valid":149,"maxTx":36.2,"hot":{"28":16,"30":10,"32":7}},{"year":2021,"valid":150,"maxTx":31.2,"hot":{"28":10,"30":3,"32":0}},{"year":2022,"valid":148,"maxTx":39.3,"hot":{"28":21,"30":10,"32":7}},{"year":2023,"valid":150,"maxTx":33.1,"hot":{"28":18,"30":8,"32":2}},{"year":2024,"valid":148,"maxTx":33.5,"hot":{"28":14,"30":5,"32":1}},{"year":2025,"valid":148,"maxTx":33.9,"hot":{"28":20,"30":13,"32":5}},{"year":2026,"valid":149,"maxTx":37.4,"hot":{"28":44,"30":24,"32":16}}],"latestYear":2026,"latestSummer":[["2026-05-01",22.5],["2026-05-02",18.9],["2026-05-03",17.9],["2026-05-04",16.7],["2026-05-05",15.2],["2026-05-06",17.5],["2026-05-07",19.0],["2026-05-08",21.4],["2026-05-09",14.1],["2026-05-10",12.8],["2026-05-11",17.1],["2026-05-12",14.2],["2026-05-13",14.4],["2026-05-14",14.4],["2026-05-15",15.6],["2026-05-16",17.6],["2026-05-17",15.0],["2026-05-18",17.9],["2026-05-19",19.6],["2026-05-20",23.8],["2026-05-21",27.0],["2026-05-22",29.4],["2026-05-23",31.6],["2026-05-24",33.3],["2026-05-25",33.8],["2026-05-26",27.8],["2026-05-27",31.3],["2026-05-28",25.3],["2026-05-29",29.9],["2026-05-30",24.0],["2026-05-31",23.7],["2026-06-01",18.5],["2026-06-02",19.3],["2026-06-03",19.4],["2026-06-04",18.9],["2026-06-05",17.3],["2026-06-06",18.9],["2026-06-07",17.3],["2026-06-08",18.7],["2026-06-09",18.2],["2026-06-10",17.4],["2026-06-11",22.9],["2026-06-12",22.1],["2026-06-13",21.8],["2026-06-14",22.7],["2026-06-15",26.6],["2026-06-16",24.4],["2026-06-17",25.1],["2026-06-18",29.3],["2026-06-19",25.2],["2026-06-20",31.7],["2026-06-21",28.8],["2026-06-22",34.6],["2026-06-23",36.0],["2026-06-24",34.3],["2026-06-25",35.5],["2026-06-26",31.9],["2026-06-27",26.4],["2026-06-28",24.6],["2026-06-29",25.4],["2026-06-30",27.6],["2026-07-01",26.5],["2026-07-02",27.5],["2026-07-03",28.7],["2026-07-04",29.7],["2026-07-05",32.6],["2026-07-06",32.2],["2026-07-07",33.8],["2026-07-08",35.5],["2026-07-09",31.2],["2026-07-10",29.9],["2026-07-11",30.3],["2026-07-12",28.1],["2026-07-13",29.9],["2026-07-14",28.8],["2026-07-15",29.8],["2026-07-16",29.5],["2026-07-17",24.3],["2026-07-18",23.7],["2026-07-19",26.0],["2026-07-20",24.1],["2026-07-21",27.7],["2026-07-22",27.7],["2026-07-23",29.4],["2026-07-24",29.7],["2026-07-25",26.5],["2026-07-26",27.8],["2026-07-27",30.0],["2026-07-28",34.9],["2026-07-29",28.9],["2026-07-30",25.9],["2026-07-31",26.9],["2026-08-01",29.6],["2026-08-02",33.5],["2026-08-03",30.8],["2026-08-04",25.4],["2026-08-05",23.6],["2026-08-06",26.9],["2026-08-07",28.7],["2026-08-08",32.7],["2026-08-09",27.4],["2026-08-10",27.8],["2026-08-11",34.3],["2026-08-12",37.4],["2026-08-13",34.7],["2026-08-14",28.7],["2026-08-15",27.4],["2026-08-16",28.8],["2026-08-17",25.9],["2026-08-18",25.2],["2026-08-19",23.9],["2026-08-20",21.1],["2026-08-21",23.1],["2026-08-22",25.3],["2026-08-23",23.9],["2026-08-24",26.1],["2026-08-25",28.6],["2026-08-27",25.3],["2026-08-28",20.9],["2026-08-29",22.7],["2026-08-30",25.0],["2026-08-31",24.1],["2026-09-01",21.1],["2026-09-02",26.6],["2026-09-04",23.9],["2026-09-05",27.9],["2026-09-06",24.8],["2026-09-08",19.0],["2026-09-09",20.9],["2026-09-10",22.4],["2026-09-11",24.3],["2026-09-12",23.0],["2026-09-13",24.5],["2026-09-14",23.5],["2026-09-15",20.6],["2026-09-16",21.3],["2026-09-17",20.5],["2026-09-18",22.2],["2026-09-19",20.8],["2026-09-20",24.2],["2026-09-21",26.4],["2026-09-22",24.6],["2026-09-23",22.3],["2026-09-24",23.6],["2026-09-25",21.9],["2026-09-26",22.6],["2026-09-27",20.5],["2026-09-28",27.2],["2026-09-29",24.2]]}},"metofficeHeathrowLatest":[[2026,1,"8.4","Y"],[2026,2,"10.7","Y"],[2026,3,"13.5","Y"],[2026,4,"17.8","Y"],[2026,5,"21.9","Y"],[2026,6,"25.1","Y"],[2026,7,"29.3","Y"],[2026,8,"27.5","Y"],[2026,9,"23.6","Y"]]};
 </script>
 <script>
 /* HEATWISE risk engine: pure functions, no DOM. Shared by the page and the test harness. */
@@ -355,10 +399,28 @@ var Engine = (function () {
     }
     minWeeks = P.baseWeeks + optWeeks;
     for (var i = 0; i < n; i++) { cost[i] = P.baseCost * 1000 + mitSpend + recoverySpend; weeks[i] = minWeeks; }
+    // KPI accumulators (per run)
+    var MS = P.milestones || [];
+    var msDelay = MS.map(function () { return new Float64Array(n); });
+    var rework = new Float64Array(n), fails = new Float64Array(n), sat = new Float64Array(n), ben = new Float64Array(n);
+    var satBonus = 0;
+    M.risks.forEach(function (r) { var o = chosen[r.id]; if (o && o.satBonus) satBonus += o.satBonus; });
 
-    function addLine(id, parent, desc, p, cArr, dArr, status) {
-      var mc = 0, md = 0, occ = 0;
-      for (var i = 0; i < n; i++) { mc += cArr[i]; md += dArr[i]; if (cArr[i] > 0 || dArr[i] > 0) occ++; cost[i] += cArr[i]; weeks[i] += dArr[i]; }
+    function addLine(id, parent, desc, p, cArr, dArr, status, meta) {
+      var mc = 0, md = 0, occ = 0, at = meta && meta.at != null ? meta.at : 0;
+      for (var i = 0; i < n; i++) {
+        mc += cArr[i]; md += dArr[i]; cost[i] += cArr[i]; weeks[i] += dArr[i];
+        if (cArr[i] > 0 || dArr[i] > 0) {
+          occ++;
+          if (meta) {
+            if (meta.rework) rework[i] += cArr[i];
+            if (meta.bldg) fails[i] += meta.bldg;
+            if (meta.sat) sat[i] += meta.sat;
+            if (meta.ben) ben[i] += meta.ben;
+          }
+          for (var m = 0; m < MS.length; m++) if (at <= MS[m].week) msDelay[m][i] += dArr[i];
+        }
+      }
       mc /= n; md /= n;
       var pr = p != null ? p : occ / n;
       var condC = occ ? mc * n / occ : 0, condD = occ ? md * n / occ : 0;
@@ -373,7 +435,7 @@ var Engine = (function () {
         var u = rng(), v = rng();
         if (u < s.p) { c[i] = tri(s.cost, v); d[i] = tri(s.delay, v); }
       }
-      addLine(s.id, parent, s.desc, s.p, c, d, 'secondary');
+      addLine(s.id, parent, s.desc, s.p, c, d, 'secondary', s);
     }
 
     M.risks.forEach(function (r) {
@@ -396,14 +458,14 @@ var Engine = (function () {
           c[i] = lost * P.heatCostPerDay * (1 - insure);
           d[i] = lost * P.heatWeeksPerDay;
         }
-        addLine(r.id, null, r.desc, null, c, d);
+        addLine(r.id, null, r.desc, null, c, d, null, r);
         if (o && o.sec) secondary(o.sec, o.id);
         return;
       }
       if (round2 && r.id === R2.occurred) {
         var mul = o && R2.r2Mul[o.id] != null ? R2.r2Mul[o.id] : 1;
         for (i = 0; i < n; i++) { c[i] = R2.r2Cost * mul; d[i] = R2.r2Delay * mul; }
-        addLine(r.id, null, r.desc, mul > 0 ? 1 : 0, c, d, 'occurred');
+        addLine(r.id, null, r.desc, mul > 0 ? 1 : 0, c, d, 'occurred', { at: R2.week });
         if (o && o.sec) secondary(o.sec, o.id);
         return;
       }
@@ -416,7 +478,7 @@ var Engine = (function () {
         u = rng(); v = rng();
         if (u < p) { c[i] = tri(r.cost, v) * im * cm; d[i] = tri(r.delay, v) * im * dm; }
       }
-      addLine(r.id, null, r.desc, p, c, d);
+      addLine(r.id, null, r.desc, p, c, d, null, r);
       if (o && o.sec) secondary(o.sec, o.id);
     });
 
@@ -428,8 +490,54 @@ var Engine = (function () {
 
     // Recovery (Round 2) can only claw back delay, never go below the planned duration.
     for (i = 0; i < n; i++) {
-      if (recoverWeeks) weeks[i] = Math.max(minWeeks, weeks[i] - recoverWeeks);
+      if (recoverWeeks) {
+        weeks[i] = Math.max(minWeeks, weeks[i] - recoverWeeks);
+        for (var m2 = 0; m2 < MS.length; m2++) if (MS[m2].week > R2.week) msDelay[m2][i] = Math.max(0, msDelay[m2][i] - recoverWeeks);
+      }
       cost[i] += Math.max(weeks[i] - P.baseWeeks, 0) * P.prelimsPerWeek;
+    }
+
+    // ---------- KPIs ----------
+    var BAC = P.baseCost * 1000 + mitSpend + recoverySpend;   // performance measurement baseline (excludes reserve)
+    var planDur = minWeeks;
+    var kSum = { rework: 0, fails: 0, sat: 0, ben: 0, util: 0, roi: 0, satOk: 0, late: 0 };
+    var msOn = MS.map(function () { return 0; });
+    var floatW = Math.max(0, P.deadlineWeeks - minWeeks);
+    var msTol = MS.map(function (ms) { return floatW * ms.week / P.baseWeeks; });
+    for (i = 0; i < n; i++) {
+      var late = Math.max(0, weeks[i] - P.deadlineWeeks);
+      var f = Math.min(P.buildings, fails[i] + (P.failBase || 0));
+      var s = Math.max(0, Math.min(10, P.satBase + satBonus + sat[i] - P.satLatePerWeek * late));
+      var b = P.plannedBenefit * Math.max(0, 1 + ben[i] - P.benefitLatePerWeek * late);
+      kSum.rework += rework[i]; kSum.fails += f; kSum.sat += s; if (s >= 7) kSum.satOk++;
+      kSum.ben += b; kSum.roi += (b - cost[i]) / cost[i];
+      kSum.util += P.utilPlanned * planDur / weeks[i];
+      for (var m3 = 0; m3 < MS.length; m3++) if (msDelay[m3][i] <= msTol[m3] + 1e-9) msOn[m3]++;
+    }
+    var meanCost = 0, meanWeeks = 0;
+    for (i = 0; i < n; i++) { meanCost += cost[i]; meanWeeks += weeks[i]; }
+    meanCost /= n; meanWeeks /= n;
+    var kpi = {
+      BAC: BAC, EAC: meanCost, planDur: planDur, forecastDur: meanWeeks,
+      cpi: BAC / meanCost, vac: BAC - meanCost, budgetVar: budget - meanCost,
+      spi: planDur / meanWeeks, svWeeks: planDur - meanWeeks,
+      milestones: MS.map(function (ms, k) { return { id: ms.id, name: ms.name, week: ms.week + optWeeks, due: ms.week + optWeeks + msTol[k], pOnTime: msOn[k] / n }; }),
+      msRate: msOn.reduce(function (a, v) { return a + v; }, 0) / (n * Math.max(1, MS.length)),
+      reworkRate: (P.reworkBase || 0) + kSum.rework / n / (P.baseCost * 1000),
+      acceptance: 1 - kSum.fails / n / P.buildings,
+      snags: P.snagsBase + P.snagsPerFail * kSum.fails / n / P.buildings,
+      utilisation: kSum.util / n,
+      satisfaction: kSum.sat / n, pSatOk: kSum.satOk / n,
+      benefit: kSum.ben / n, benefitsRealised: kSum.ben / n / P.plannedBenefit,
+      roi: kSum.roi / n, plannedRoi: (P.plannedBenefit - BAC) / BAC
+    };
+    if (round2 && P.evm) {
+      var E = P.evm, wk = E.week, prog = Math.max(0, wk - E.slipWeeks) / planDur;
+      var pv = P.baseCost * 1000 * Math.min(1, wk / planDur) + mitSpend;
+      var ev = P.baseCost * 1000 * prog + mitSpend;
+      var ac = P.baseCost * 1000 * prog * (1 + E.costOverrun) + mitSpend;
+      kpi.evm = { week: wk, PV: pv, EV: ev, AC: ac, SPI: ev / pv, CPI: ev / ac, SV: ev - pv, CV: ev - ac,
+        EAC_cpi: (P.baseCost * 1000 + mitSpend) / (ev / ac), percentComplete: prog, BAC0: P.baseCost * 1000 + mitSpend };
     }
 
     var inB = 0, inT = 0, both = 0, sc = 0, sw = 0;
@@ -447,7 +555,7 @@ var Engine = (function () {
       costMean: sc / n, costP50: quantile(cs, 0.5), costP80: quantile(cs, 0.8),
       weeksMean: sw / n, weeksP50: quantile(ws, 0.5), weeksP80: quantile(ws, 0.8),
       pBudget: inB / n, pTime: inT / n, pBoth: both / n,
-      residualEmv: resEmv, nSecondary: nSec, lines: lines, heat: hm
+      residualEmv: resEmv, nSecondary: nSec, lines: lines, heat: hm, kpi: kpi
     };
   }
 
@@ -461,11 +569,19 @@ var Engine = (function () {
 })();
 if (typeof module !== 'undefined') module.exports = Engine;
 
+// Build the engine's H object for one station from london_summary.json
+function stationH(S, name, thr) {
+  var st = S.stations[name], yrs = [], hot = [], valid = [], maxTx = [];
+  st.annual.forEach(function (a) { if (a.valid >= 120) { yrs.push(a.year); hot.push(a.hot[String(thr)]); valid.push(a.valid); maxTx.push(a.maxTx); } });
+  return { years: yrs, hot: hot, valid: valid, maxTx: maxTx, station: name, latestYear: st.latestYear };
+}
+if (typeof module !== 'undefined') module.exports = stationH;
+
 </script>
 <script>
 (function () {
   'use strict';
-  var M = MODEL, H = HEAT, P = M.project, R2 = M.round2;
+  var M = MODEL, S = SUMMARY, P = M.project, R2 = M.round2, H;
   var N = 4000;
   var OPT = Engine.optionIndex(M);
   var KEY = 'heatwise.v2.';
@@ -473,6 +589,10 @@ if (typeof module !== 'undefined') module.exports = Engine;
   function store(k, v) { try { localStorage.setItem(KEY + k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
 
   var state = load('state', null) || { sel: {}, basis: 'trend', round: 1, r2: { X1: 0, X2: false, X3: false, X4: false } };
+  if (!state.station) state.station = P.heatStation || 'Heathrow';
+  function stationList() { return Object.keys(S.stations).filter(function (k) { return S.stations[k].latestYear >= S.stations[P.heatStation || 'Heathrow'].latestYear - 1; }); }
+  function setH() { if (!S.stations[state.station] || stationList().indexOf(state.station) < 0) state.station = P.heatStation || 'Heathrow'; H = stationH(S, state.station, P.heatThreshold); }
+  setH();
   if (!state.r2) state.r2 = { X1: 0, X2: false, X3: false, X4: false };
   var scenarios = load('scenarios', []);
   var cache = {};
@@ -494,7 +614,7 @@ if (typeof module !== 'undefined') module.exports = Engine;
   function scoreOf(l) { var L = Engine.lScore(l.p), I = Engine.iScore(l.impact); return { L: L, I: I, S: L * I, pr: Engine.priority(L * I) }; }
 
   function sim(st) {
-    var k = JSON.stringify([st.sel, st.basis, st.round, st.round === 2 ? st.r2 : 0]);
+    var k = JSON.stringify([st.sel, st.basis, st.round, st.round === 2 ? st.r2 : 0, state.station, S.generated_utc]);
     if (!cache[k]) cache[k] = Engine.simulate(M, H, st, N);
     return cache[k];
   }
@@ -520,6 +640,8 @@ if (typeof module !== 'undefined') module.exports = Engine;
     document.querySelectorAll('.v-hcost').forEach(function (e) { e.textContent = P.heatCostPerDay; });
     document.querySelectorAll('.v-hwk').forEach(function (e) { e.textContent = P.heatWeeksPerDay; });
     document.querySelectorAll('.v-shift').forEach(function (e) { e.textContent = R2.heatShift; });
+    document.querySelectorAll('.v-allownote').forEach(function (e) { e.textContent = P.heatAllowanceNote || ''; });
+    stationText();
   }
 
   // ---------- KPIs ----------
@@ -548,6 +670,92 @@ if (typeof module !== 'undefined') module.exports = Engine;
       '<span>Secondary risks introduced <b>' + cur.nSecondary + '</b></span>' +
       (cur.optWeeks ? '<span>Time added by responses <b>' + cur.optWeeks + ' wk</b></span>' : '') + '</div></div>';
     $('kpis').innerHTML = h;
+  }
+
+
+  // ---------- project KPIs ----------
+  function rag(v, g, am, higher) {
+    var ok = higher ? v >= g : v <= g, warn = higher ? v >= am : v <= am;
+    return ok ? 'ok' : warn ? 'amber' : 'no';
+  }
+  function ragBadge(s) {
+    var m = { ok: ['✓', 'On track'], amber: ['!', 'Watch'], no: ['✕', 'Off track'] }[s];
+    return '<span class="status ' + s + '"><span class="dot" aria-hidden="true">' + m[0] + '</span>' + m[1] + '</span>';
+  }
+  function sgnK(v) { return (v < 0 ? '−' : '+') + '£' + Math.abs(Math.round(v)).toLocaleString('en-GB') + 'k'; }
+  function renderProjectKpis(cur, ref, refLabel) {
+    var K = cur.kpi, R = ref.kpi, B = cur.budget;
+    var groups = [
+      { t: 'Schedule', k: [
+        { n: 'Schedule performance index, SPI(t)', v: K.spi.toFixed(2), r: R.spi.toFixed(2), s: rag(K.spi, 0.95, 0.90, true), tg: 'Target ≥ 0.95',
+          d: 'Planned duration ÷ forecast duration (earned-schedule form, at completion). Below 1 means the project is forecast to take longer than planned. Planned duration includes any weeks your responses add before the start.' },
+        { n: 'Schedule variance', v: (K.svWeeks >= 0 ? '+' : '−') + Math.abs(K.svWeeks).toFixed(1) + ' wk', r: (R.svWeeks >= 0 ? '+' : '−') + Math.abs(R.svWeeks).toFixed(1) + ' wk', s: rag(K.svWeeks, -1, -(P.deadlineWeeks - P.baseWeeks), true), tg: 'Target ≥ −1 wk',
+          d: 'Planned duration − forecast duration (expected value). Negative = behind plan. The deadline allows ' + (P.deadlineWeeks - P.baseWeeks) + ' weeks of float.' },
+        { n: 'On-time milestone rate', v: pct(K.msRate), r: pct(R.msRate), s: rag(K.msRate, 0.8, 0.6, true), tg: 'Target ≥ 80%',
+          d: 'Average chance that each of the five milestones below is met. Each milestone date carries a pro-rata share of the float.' }
+      ] },
+      { t: 'Cost', k: [
+        { n: 'Cost performance index, CPI', v: K.cpi.toFixed(2), r: R.cpi.toFixed(2), s: rag(K.cpi, 0.95, 0.90, true), tg: 'Target ≥ 0.95',
+          d: 'Budget at completion (BAC: base estimate + mitigation, excluding reserve) ÷ estimate at completion (EAC: expected final cost). Below 1 means overspend against the baseline.' },
+        { n: 'Cost variance at completion', v: sgnK(K.vac), r: sgnK(R.vac), s: rag(K.vac / K.BAC, -0.02, -0.08, true), tg: 'Target ≥ −2% of BAC',
+          d: 'BAC − EAC. Negative = forecast overspend against the baseline. Management reserve is there to absorb this.' },
+        { n: 'Budget variance', v: sgnK(K.budgetVar), r: sgnK(R.budgetVar), s: rag(K.budgetVar / B, 0, -0.02, true), tg: 'Target ≥ £0',
+          d: 'Authorised budget (including reserve) − EAC. Negative = forecast to exceed the authorised budget.' }
+      ] },
+      { t: 'Scope and quality', k: [
+        { n: 'Rework rate', v: (K.reworkRate * 100).toFixed(1) + '%', r: (R.reworkRate * 100).toFixed(1) + '%', s: rag(K.reworkRate, 0.015, 0.025, false), tg: 'Target ≤ 1.5%',
+          d: 'Expected cost of redoing work ÷ base estimate. Includes a 1.2% background level, plus the secondary risks that cause defects or rework (e.g. S2c, S5b, SX2).' },
+        { n: 'First-time acceptance', v: pct(K.acceptance), r: pct(R.acceptance), s: rag(K.acceptance, 0.9, 0.8, true), tg: 'Target ≥ 90%',
+          d: 'Share of the ' + P.buildings + ' buildings accepted at handover without remedial work.' },
+        { n: 'Defect density', v: K.snags.toFixed(1) + ' per building', r: R.snags.toFixed(1), s: rag(K.snags, 7.5, 9, false), tg: 'Target ≤ 7.5',
+          d: 'Expected snag items per building at handover (illustrative: ' + P.snagsBase + ' background, plus ' + P.snagsPerFail + ' for each building that fails acceptance).' }
+      ] },
+      { t: 'Resources', k: [
+        { n: 'Crew utilisation', v: pct(K.utilisation), r: pct(R.utilisation), s: rag(K.utilisation, 0.8, 0.7, true), tg: 'Target ≥ 80% (planned ' + pct(P.utilPlanned) + ')',
+          d: 'Share of paid crew time spent on productive work. Waiting for materials, consent or cooler days lowers it.' }
+      ] },
+      { t: 'Stakeholders', k: [
+        { n: 'Stakeholder satisfaction', v: K.satisfaction.toFixed(1) + ' / 10', r: R.satisfaction.toFixed(1), s: rag(K.satisfaction, 7, 6, true), tg: 'Target ≥ 7.0',
+          d: 'Expected survey score from schools, care homes and residents (illustrative). It falls with objections, night-work complaints and late opening, and rises with co-design (R8a).' }
+      ] },
+      { t: 'Value and benefits', k: [
+        { n: 'Return on investment', v: pct(K.roi), r: pct(R.roi), s: rag(K.roi, 0.35, 0.2, true), tg: 'Planned ' + pct(K.plannedRoi),
+          d: '(Benefits realised − final cost) ÷ final cost. Whole-life benefit planned at ' + mm(P.plannedBenefit) + ' (illustrative): avoided heat harm, energy savings, learning days kept.' },
+        { n: 'Benefits realisation', v: pct(K.benefitsRealised), r: pct(R.benefitsRealised), s: rag(K.benefitsRealised, 0.97, 0.93, true), tg: 'Target ≥ 97%',
+          d: 'Expected benefit ÷ planned benefit. Lower-performing roofs or ventilation (S2c, S6b) and late opening reduce it.' }
+      ] }
+    ];
+    $('kpisub').innerHTML = (state.round === 2 ? 'Forecast at completion after your recovery decisions, with the week-10 earned-value status below.' : 'Forecast at completion for your scenario (expected values from the simulation).') +
+      ' Grey figures show the ' + refLabel + ' case. Status: ✓ on track, ! watch, ✕ off track. Open "Definition" for how each KPI is calculated.';
+    $('kgrid').innerHTML = groups.map(function (g) {
+      return '<div class="kgroup"><h3>' + g.t + '</h3>' + g.k.map(function (k) {
+        return '<div class="krow"><div class="kn">' + k.n + '<div class="kt">' + k.tg + ' · ' + refLabel + ': ' + k.r + '</div></div>' +
+          '<div><div class="kv">' + k.v + '</div><div class="ks">' + ragBadge(k.s) + '</div></div>' +
+          '<details><summary>Definition</summary><p>' + k.d + '</p></details></div>';
+      }).join('') + '</div>';
+    }).join('');
+    $('milestones').innerHTML = K.milestones.map(function (m) {
+      var s = rag(m.pOnTime, 0.8, 0.6, true);
+      var past = state.round === 2 && m.due <= R2.week;
+      return '<div><span class="meta">' + m.id + ' · due wk ' + m.due.toFixed(1) + '</span><b>' + pct(m.pOnTime) + '</b>' + esc(m.name) + (past ? '<div class="meta">Due before week ' + R2.week + '</div>' : '') + '<div>' + ragBadge(s) + '</div></div>';
+    }).join('');
+    var ev = K.evm, el = $('evm');
+    el.classList.toggle('hidden', !ev);
+    if (ev) {
+      var row = function (a, b, c) { return '<tr><td>' + a + '</td><td class="num"><b>' + b + '</b></td><td class="meta">' + c + '</td></tr>'; };
+      el.innerHTML = '<h3>Week ' + ev.week + ' earned-value status</h3><div class="tablewrap"><table>' +
+        '<thead><tr><th>Measure</th><th class="num">Value</th><th>Meaning</th></tr></thead><tbody>' +
+        row('Planned value (PV)', km(ev.PV), 'Budgeted cost of the work scheduled by week ' + ev.week + ', including mitigation already bought') +
+        row('Earned value (EV)', km(ev.EV), 'Budgeted cost of the work actually done (' + pct(ev.percentComplete) + ' of the works complete)') +
+        row('Actual cost (AC)', km(ev.AC), 'What has been spent so far') +
+        row('Schedule variance (SV = EV − PV)', sgnK(ev.SV), ev.SV < 0 ? 'Behind schedule' : 'Ahead of schedule') +
+        row('Cost variance (CV = EV − AC)', sgnK(ev.CV), ev.CV < 0 ? 'Over cost for the work done' : 'Under cost') +
+        row('SPI = EV ÷ PV', ev.SPI.toFixed(2), ragBadge(rag(ev.SPI, 0.95, 0.9, true))) +
+        row('CPI = EV ÷ AC', ev.CPI.toFixed(2), ragBadge(rag(ev.CPI, 0.95, 0.9, true))) +
+        row('EAC by CPI method (BAC ÷ CPI)', mm(ev.EAC_cpi), 'Assumes the rest of the project performs like the first ' + ev.week + ' weeks') +
+        row('EAC from the risk simulation', mm(cur.costMean), 'Includes the risk that has just occurred and the risks still ahead') +
+        '</tbody></table></div><p class="small">Why do the two EACs differ? Earned value looks back at performance so far (a lagging indicator). The risk forecast looks ahead at what could still happen (a leading indicator). Which would you take to the board?</p>';
+    }
   }
 
   // ---------- register ----------
@@ -722,7 +930,7 @@ if (typeof module !== 'undefined') module.exports = Engine;
     var mean = sims.reduce(function (a, b) { return a + b; }, 0) / sims.length;
     var pOver = sims.filter(function (v) { return v > P.heatAllowanceDays; }).length / sims.length;
     var W = Math.max(300, $('heatchart').clientWidth || 1100), Hh = 260, m = { l: 36, r: 16, t: 14, b: 30 }, w = W - m.l - m.r, h = Hh - m.t - m.b;
-    var y0 = 1979, y1 = 2028, ymax = Math.max(20, Math.ceil(q90 / 5) * 5, Math.max.apply(null, H.hot));
+    var y0 = H.years[0], y1 = 2028, ymax = Math.max(20, Math.ceil(q90 / 5) * 5, Math.max.apply(null, H.hot));
     var band = w / (y1 - y0 + 1), bw = Math.min(14, band * 0.7);
     var X = function (y) { return m.l + (y - y0 + 0.5) * band; }, Y = function (v) { return m.t + (1 - v / ymax) * h; };
     var s = svgEl(W, Hh);
@@ -730,7 +938,7 @@ if (typeof module !== 'undefined') module.exports = Engine;
     s += '<line x1="' + m.l + '" x2="' + (m.l + w) + '" y1="' + Y(P.heatAllowanceDays) + '" y2="' + Y(P.heatAllowanceDays) + '" stroke="var(--ink-2)"/>';
     H.years.forEach(function (yr, i) {
       var v = H.hot[i], x = X(yr) - bw / 2, top = Y(v), bh = Y(0) - top;
-      var t = '<b>' + yr + '</b><br>' + v + ' day' + (v === 1 ? '' : 's') + ' ≥' + P.heatThreshold + '°C<br>Hottest day ' + H.maxTx[i].toFixed(1) + '°C<br>' + H.valid[i] + ' of 153 days with valid data';
+      var t = '<b>' + yr + '</b><br>' + v + ' day' + (v === 1 ? '' : 's') + ' ≥' + P.heatThreshold + '°C<br>Hottest day ' + H.maxTx[i].toFixed(1) + '°C<br>' + H.valid[i] + ' of 153 days with valid data' + (yr === H.latestYear ? '<br><i>Latest observed summer</i>' : '');
       s += '<g data-tip="' + esc(t) + '"><rect x="' + (X(yr) - band / 2) + '" y="' + m.t + '" width="' + band + '" height="' + h + '" fill="transparent"/>';
       if (v > 0) s += '<path d="M' + x + ',' + Y(0) + 'v-' + Math.max(0, bh - 3) + 'a3,3 0 0 1 3,-3h' + (bw - 6) + 'a3,3 0 0 1 3,3v' + Math.max(0, bh - 3) + 'z" fill="var(--s1)"/>';
       s += '</g>';
@@ -755,16 +963,62 @@ if (typeof module !== 'undefined') module.exports = Engine;
       '<span>R1 residual EMV with your response <b>' + km(r1 ? r1.emv : 0) + '</b></span>';
   }
 
+
+  function stationText() {
+    var st = S.stations[state.station];
+    document.querySelectorAll('.v-station').forEach(function (e) { e.textContent = state.station; });
+    document.querySelectorAll('.v-ly').forEach(function (e) { e.textContent = st.latestYear; });
+    var last = st.latestSummer.length ? st.latestSummer[st.latestSummer.length - 1][0] : '';
+    document.querySelectorAll('.v-latest').forEach(function (e) { e.textContent = last ? new Date(last + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }) : ''; });
+  }
+  function renderSummer() {
+    var st = S.stations[state.station], d = st.latestSummer, el = $('summer');
+    var W = Math.max(300, el.clientWidth || 1100), Hh = 230, m = { l: 36, r: 12, t: 14, b: 30 }, w = W - m.l - m.r, h = Hh - m.t - m.b;
+    var lo = 10, hi = Math.max(38, Math.ceil(Math.max.apply(null, d.map(function (x) { return x[1]; })) + 1));
+    var t0 = Date.parse(d[0][0] + 'T00:00:00Z'), t1 = Date.parse(d[d.length - 1][0] + 'T00:00:00Z');
+    var nDays = Math.round((t1 - t0) / 864e5) + 1, band = w / nDays, bw = Math.max(1, Math.min(6, band - 1));
+    var X = function (ds) { return m.l + (Math.round((Date.parse(ds + 'T00:00:00Z') - t0) / 864e5) + 0.5) * band; }, Y = function (v) { return m.t + (1 - (v - lo) / (hi - lo)) * h; };
+    var s = svgEl(W, Hh);
+    [15, 20, 25, 30, 35].forEach(function (v) { if (v <= hi) s += '<line x1="' + m.l + '" x2="' + (m.l + w) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="var(--grid)"/><text x="' + (m.l - 6) + '" y="' + (Y(v) + 4) + '" text-anchor="end">' + v + '°</text>'; });
+    var hot = 0, max = d[0], run = 0, best = 0;
+    d.forEach(function (x) {
+      var isHot = x[1] >= P.heatThreshold; if (isHot) { hot++; run++; best = Math.max(best, run); } else run = 0;
+      if (x[1] > max[1]) max = x;
+      var dd = new Date(x[0] + 'T12:00:00Z').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' });
+      s += '<g data-tip="' + esc('<b>' + dd + '</b><br>Maximum ' + x[1].toFixed(1) + '°C' + (isHot ? '<br>Roof work would stop' : '')) + '"><rect x="' + (X(x[0]) - band / 2) + '" y="' + m.t + '" width="' + band + '" height="' + h + '" fill="transparent"/>' +
+        '<rect x="' + (X(x[0]) - bw / 2) + '" y="' + Y(x[1]) + '" width="' + bw + '" height="' + Math.max(0, Y(lo) - Y(x[1])) + '" rx="1" fill="' + (isHot ? 'var(--s2)' : 'var(--base)') + '"/></g>';
+    });
+    s += '<line x1="' + m.l + '" x2="' + (m.l + w) + '" y1="' + Y(P.heatThreshold) + '" y2="' + Y(P.heatThreshold) + '" stroke="var(--ink-2)"/>';
+    ['05', '06', '07', '08', '09'].forEach(function (mo) {
+      var ds = st.latestYear + '-' + mo + '-01'; if (Date.parse(ds) < t0) return;
+      s += '<text x="' + X(ds) + '" y="' + (Hh - 10) + '">' + new Date(ds + 'T12:00:00Z').toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' }) + '</text>';
+    });
+    s += '</svg>';
+    el.innerHTML = s; bindTips(el);
+    var mx = new Date(max[0] + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', timeZone: 'UTC' });
+    var norm = H.hot.slice(0), yrs = H.years, n9120 = [];
+    yrs.forEach(function (y, i) { if (y >= 1991 && y <= 2020) n9120.push(norm[i]); });
+    var avg = n9120.length ? n9120.reduce(function (a, b) { return a + b; }, 0) / n9120.length : 0;
+    var rank = H.hot.filter(function (v) { return v > hot; }).length + 1;
+    var moTxt = '';
+    if (state.station === 'Heathrow' && S.metofficeHeathrowLatest) {
+      moTxt = '<span>Met Office monthly mean maximum, Heathrow: <b>' + S.metofficeHeathrowLatest.filter(function (r) { return r[1] >= 6 && r[1] <= 8; }).map(function (r) { return ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'][r[1]] + ' ' + r[2] + '°C'; }).join(', ') + '</b></span>';
+    }
+    $('summer-stats').innerHTML = '<span>Days ≥' + P.heatThreshold + '°C <b>' + hot + '</b> (1991–2020 average ' + avg.toFixed(1) + '; rank ' + rank + ' of ' + H.hot.length + ' summers since ' + yrs[0] + ')</span>' +
+      '<span>Longest run <b>' + best + ' days</b></span><span>Hottest day <b>' + max[1].toFixed(1) + '°C</b> on ' + mx + '</span>' + moTxt;
+  }
+
   // ---------- scenarios ----------
   function respText(sel) { return M.risks.map(function (r) { return sel[r.id] || '–'; }); }
   function snapshot(cur) {
     var nextId = 'S' + String(scenarios.length + 1).padStart(2, '0');
     return {
-      id: nextId, group: $('group').value.trim(), name: $('scname').value.trim() || 'Untitled', round: state.round, basis: state.basis,
+      id: nextId, group: $('group').value.trim(), name: $('scname').value.trim() || 'Untitled', round: state.round, basis: state.basis, station: state.station,
       sel: Object.assign({}, state.sel), r2: state.round === 2 ? Object.assign({}, state.r2) : null,
       mit: cur.mitSpend + cur.recoverySpend, cost: cur.costMean, p80: cur.costP80, pB: cur.pBudget, wk: cur.weeksMean, wkP80: cur.weeksP80,
       pT: cur.pTime, both: cur.pBoth, emv: cur.residualEmv, nsec: cur.nSecondary, budget: cur.budget,
-      meets: cur.pBudget >= P.targetBudgetConf && cur.pTime >= P.targetTimeConf
+      meets: cur.pBudget >= P.targetBudgetConf && cur.pTime >= P.targetTimeConf,
+      cpi: cur.kpi.cpi, spi: cur.kpi.spi, sat: cur.kpi.satisfaction, roi: cur.kpi.roi, acc: cur.kpi.acceptance
     };
   }
   function dominated(s) {
@@ -782,9 +1036,18 @@ if (typeof module !== 'undefined') module.exports = Engine;
     $('sctable').querySelectorAll('[data-load]').forEach(function (b) {
       b.addEventListener('click', function () {
         var s = scenarios[+b.dataset.load];
-        state.sel = Object.assign({}, s.sel); state.basis = s.basis; state.round = s.round;
+        state.sel = Object.assign({}, s.sel); state.basis = s.basis; state.round = s.round; if (s.station) { state.station = s.station; $('station').value = s.station; setH(); stationText(); }
         if (s.r2) state.r2 = Object.assign({}, s.r2);
-        $('basis').value = state.basis; update(); toast('Loaded ' + s.id);
+        $('station').innerHTML = stationList().map(function (k) { return '<option value="' + esc(k) + '">' + esc(k) + ' · ' + esc(S.stations[k].area.split(',')[0].replace(' (airport)', '')) + '</option>'; }).join('');
+  $('station').value = state.station;
+  $('station').addEventListener('change', function () { state.station = this.value; setH(); stationText(); update(); });
+  // Refresh from the weekly data pipeline when the page is served from GitHub Pages.
+  if (window.fetch && location.protocol.indexOf('http') === 0) {
+    fetch('data/london_summary.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      if (j && j.stations && j.generated_utc && j.generated_utc > S.generated_utc && j.stations[P.heatStation || 'Heathrow']) { S = j; cache = {}; setH(); stationText(); update(); }
+    }).catch(function () { /* keep embedded data */ });
+  }
+  $('basis').value = state.basis; update(); toast('Loaded ' + s.id);
       });
     });
     // scatter
@@ -814,14 +1077,14 @@ if (typeof module !== 'undefined') module.exports = Engine;
     $('scatter').innerHTML = '<div class="legend"><span><span class="key sw" style="background:var(--s1);border-radius:50%"></span>Round 1</span><span><span class="key sw" style="background:var(--s2);border-radius:50%"></span>Round 2</span><span>◯ ring = not beaten on both</span></div>' + s;
     bindTips($('scatter'));
   }
-  var COLS = ['ID', 'Group', 'Scenario', 'Round', 'Heat basis'].concat(M.risks.map(function (r) { return r.id + ' response'; }))
-    .concat(['Weekend weeks (X1)', 'Fast-track (X2)', 'Sponsor contingency (X3)', 'Late night shifts (X4)', 'Mitigation spend £k', 'Expected cost £m', 'P80 cost £m', 'Budget £m', 'Confidence within budget', 'Expected finish week', 'P80 finish week', 'Confidence on time', 'Confidence both', 'Residual EMV £k', 'Secondary risks', 'Meets board targets']);
+  var COLS = ['ID', 'Group', 'Scenario', 'Round', 'Heat basis', 'Station'].concat(M.risks.map(function (r) { return r.id + ' response'; }))
+    .concat(['Weekend weeks (X1)', 'Fast-track (X2)', 'Sponsor contingency (X3)', 'Late night shifts (X4)', 'Mitigation spend £k', 'Expected cost £m', 'P80 cost £m', 'Budget £m', 'Confidence within budget', 'Expected finish week', 'P80 finish week', 'Confidence on time', 'Confidence both', 'Residual EMV £k', 'Secondary risks', 'Meets board targets', 'CPI forecast', 'SPI forecast', 'First-time acceptance', 'Stakeholder satisfaction', 'ROI forecast']);
   function rowOf(s) {
     var r2 = s.r2 || {};
-    return [s.id, s.group, s.name, s.round, s.basis].concat(respText(s.sel)).concat([
+    return [s.id, s.group, s.name, s.round, s.basis, s.station || 'Heathrow'].concat(respText(s.sel)).concat([
       s.round === 2 ? (r2.X1 || 0) : '', s.round === 2 ? (r2.X2 ? 'Y' : 'N') : '', s.round === 2 ? (r2.X3 ? 'Y' : 'N') : '', s.round === 2 ? (r2.X4 ? 'Y' : 'N') : '',
       Math.round(s.mit), (s.cost / 1000).toFixed(3), (s.p80 / 1000).toFixed(3), (s.budget / 1000).toFixed(2), s.pB.toFixed(3), s.wk.toFixed(2), s.wkP80.toFixed(2), s.pT.toFixed(3), s.both.toFixed(3),
-      Math.round(s.emv), s.nsec, s.meets ? 'Y' : 'N']);
+      Math.round(s.emv), s.nsec, s.meets ? 'Y' : 'N', s.cpi != null ? s.cpi.toFixed(3) : '', s.spi != null ? s.spi.toFixed(3) : '', s.acc != null ? s.acc.toFixed(3) : '', s.sat != null ? s.sat.toFixed(2) : '', s.roi != null ? s.roi.toFixed(3) : '']);
   }
 
   // ---------- Round 2 ----------
@@ -833,7 +1096,7 @@ if (typeof module !== 'undefined') module.exports = Engine;
     var o = state.sel.R2, mul = o && R2.r2Mul[o] != null ? R2.r2Mul[o] : 1;
     var effect = mul === 0 ? 'Because you bought all the membrane up front (R2a), the failure has <b>no direct impact</b>. Your stored stock is now critical, though: S2a still applies.'
       : 'With your Round 1 response (' + (o ? o : 'Accept') + '), this costs <b>' + km(R2.r2Cost * mul) + '</b> and adds <b>' + (R2.r2Delay * mul).toFixed(1) + ' weeks</b>.';
-    $('r2brief').innerHTML = '<b>Week ' + R2.week + ' (' + dateOf(R2.week) + '). ' + mm(R2.spent * 1000) + ' spent.</b> The membrane supplier has gone into administration, so <b>R2 has occurred</b>. ' + effect +
+    var acNow = sim(state).kpi.evm; $('r2brief').innerHTML = '<b>Week ' + R2.week + ' (' + dateOf(R2.week) + '). ' + (acNow ? mm(acNow.AC) : mm(R2.spent * 1000)) + ' spent; works ' + (acNow ? pct(acNow.percentComplete) : '') + ' complete.</b> The membrane supplier has gone into administration, so <b>R2 has occurred</b>. ' + effect +
       ' Listed-building consent has been granted and the structural surveys are complete, so <b>R4 and R6 are closed</b>. The Met Office seasonal outlook favours a hotter-than-normal summer, and the hot-day forecast is scaled ×' + R2.heatShift + '. ' +
       'Your Round 1 responses are committed. Decide which recovery actions to take, and record the new secondary risks they create.';
     var X = R2.recovery, r2 = state.r2, hadR1a = state.sel.R1 === 'R1a';
@@ -858,6 +1121,7 @@ if (typeof module !== 'undefined') module.exports = Engine;
     else { ref = inh; refLabel = 'no mitigation'; }
     if (!skipLevers) renderRound2();
     renderKpis(cur, ref, refLabel);
+    renderProjectKpis(cur, ref, refLabel);
     renderRegister(inh, cur);
     renderHeatmap($('hm-in'), inh.lines, false);
     renderHeatmap($('hm-res'), cur.lines, true);
@@ -867,11 +1131,21 @@ if (typeof module !== 'undefined') module.exports = Engine;
     $('cost-stats').innerHTML = '<span>P50 <b>' + mm(cur.costP50) + '</b></span><span>P80 <b>' + mm(cur.costP80) + '</b></span>' + (cur.budget >= cur.costP80 ? '<span>Reserve left at P80 <b>' + km(cur.budget - cur.costP80) + '</b></span>' : '<span>Over budget at P80 by <b>' + km(cur.costP80 - cur.budget) + '</b></span>');
     $('time-stats').innerHTML = '<span>P50 <b>' + wk(cur.weeksP50) + '</b></span><span>P80 <b>' + wk(cur.weeksP80) + '</b></span>' + (P.deadlineWeeks >= cur.weeksP80 ? '<span>Float left at P80 <b>' + (P.deadlineWeeks - cur.weeksP80).toFixed(1) + ' wk</b></span>' : '<span>Late at P80 by <b>' + (cur.weeksP80 - P.deadlineWeeks).toFixed(1) + ' wk</b></span>');
     renderHeat(cur);
+    renderSummer();
     renderScenarios();
     $('reset').disabled = state.round === 2;
   }
 
   // ---------- events ----------
+  $('station').innerHTML = stationList().map(function (k) { return '<option value="' + esc(k) + '">' + esc(k) + ' · ' + esc(S.stations[k].area.split(',')[0].replace(' (airport)', '')) + '</option>'; }).join('');
+  $('station').value = state.station;
+  $('station').addEventListener('change', function () { state.station = this.value; setH(); stationText(); update(); });
+  // Refresh from the weekly data pipeline when the page is served from GitHub Pages.
+  if (window.fetch && location.protocol.indexOf('http') === 0) {
+    fetch('data/london_summary.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      if (j && j.stations && j.generated_utc && j.generated_utc > S.generated_utc && j.stations[P.heatStation || 'Heathrow']) { S = j; cache = {}; setH(); stationText(); update(); }
+    }).catch(function () { /* keep embedded data */ });
+  }
   $('basis').value = state.basis;
   $('basis').addEventListener('change', function () { state.basis = this.value; update(); });
   $('btn-r1').addEventListener('click', function () { state.round = 1; update(); });

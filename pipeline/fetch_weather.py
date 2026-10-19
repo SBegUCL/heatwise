@@ -289,44 +289,59 @@ def ecad():
 
 
 # ---------------------------------------------------------------- Summaries used by the dashboard
+ECAD_LABEL = {'HEATHROW': ('Heathrow', 'West London (airport)'), 'HAMPSTEAD': ('Hampstead', 'North London (closed 2016)'),
+              'WISLEY': ('Wisley', 'Surrey, 33 km SW of central London'), 'ROTHAMSTED': ('Rothamsted', 'Hertfordshire, 37 km NW of central London')}
+
+
+def annual_counts(daily, years, thr):
+    ann = []
+    for y in years:
+        vals = daily.get(y, [])
+        ann.append({'year': y, 'valid': len(vals), 'maxTx': round(max(v[1] for v in vals), 1) if vals else None,
+                    'hot': {str(t): sum(1 for v in vals if v[1] >= t) for t in thr}})
+    return ann
+
+
 def summarise(rows):
+    """Dashboard summary built from the ECA&D (Met Office-supplied) series; Meteostat kept separately."""
     thr = (28, 30, 32)
-    years = range(FIRST_YEAR, NOW.year + 1)
-    summ = {}
+    years = list(range(FIRST_YEAR, NOW.year + 1))
+    out = {'generated_utc': REPORT['generated_utc'], 'thresholds': thr, 'season': 'May-September',
+           'source': 'ECA&D blended daily maximum temperature, series supplied by the Met Office National Climate Information Centre',
+           'stations': {}}
+    try:
+        e = list(csv.DictReader(open(os.path.join(OUT, 'ecad_london_tx.csv'))))
+    except FileNotFoundError:
+        e = []
+    by = {}
+    for r in e:
+        y, m = int(r['date'][:4]), int(r['date'][5:7])
+        if 5 <= m <= 9:
+            by.setdefault(r['station'], {}).setdefault(y, []).append((r['date'], float(r['tx_c'])))
+    for name, daily in by.items():
+        label, area = ECAD_LABEL.get(name, (name.title(), ''))
+        latest = max(daily)
+        out['stations'][label] = {'area': area, 'annual': annual_counts(daily, years, thr), 'latestYear': latest,
+                                  'latestSummer': [[d, v] for d, v in sorted(daily[latest])]}
+    # Met Office monthly values for the latest year (official cross-check)
+    try:
+        mo = list(csv.DictReader(open(os.path.join(OUT, 'metoffice_heathrow_monthly.csv'))))
+        ly = max(int(r['year']) for r in mo)
+        out['metofficeHeathrowLatest'] = [[int(r['year']), int(r['month']), r['tmax_mean_c'], r['provisional']] for r in mo if int(r['year']) == ly]
+    except Exception as ex:
+        REPORT['notes'].append('monthly summary failed: %s' % ex)
+    with open(os.path.join(OUT, 'london_summary.json'), 'w') as f:
+        json.dump(out, f, separators=(',', ':'))
+    # Meteostat summary (airport and SYNOP stations; see data-quality notes in data/README.md)
+    ms = {}
     for sid, sname in STATIONS.items():
         d = {}
         for s_id, _, date, tmax, tmin, src in rows:
-            if s_id != sid:
-                continue
-            y, m = int(date[:4]), int(date[5:7])
-            if 5 <= m <= 9:
-                d.setdefault(y, []).append((date, float(tmax), src))
-        ann = []
-        for y in years:
-            vals = d.get(y, [])
-            ann.append({'year': y, 'days': len(vals), 'maxTx': round(max(v[1] for v in vals), 1) if vals else None,
-                        'hot': {str(t): sum(1 for v in vals if v[1] >= t) for t in thr}})
-        latest = max(d) if d else None
-        summer = sorted(d.get(latest, [])) if latest else []
-        summ[sid] = {'name': sname, 'annual': ann, 'latestYear': latest,
-                     'latestSummer': [[v[0], v[1]] for v in summer]}
-    # Cross-check: Heathrow daily-derived monthly mean maximum against the Met Office's official monthly value.
-    check = []
-    try:
-        mo = {(int(r['year']), int(r['month'])): r for r in csv.DictReader(open(os.path.join(OUT, 'metoffice_heathrow_monthly.csv')))}
-        hd = {}
-        for s_id, _, date, tmax, tmin, src in rows:
-            if s_id == '03772':
-                hd.setdefault((int(date[:4]), int(date[5:7])), []).append(float(tmax))
-        for (y, m), vals in sorted(hd.items()):
-            if 5 <= m <= 9 and (y, m) in mo and mo[(y, m)]['tmax_mean_c'] and len(vals) >= 25:
-                check.append([y, m, float(mo[(y, m)]['tmax_mean_c']), round(sum(vals) / len(vals), 2), len(vals)])
-    except Exception as e:
-        REPORT['notes'].append('cross-check failed: %s' % e)
-    with open(os.path.join(OUT, 'london_summary.json'), 'w') as f:
-        json.dump({'generated_utc': REPORT['generated_utc'], 'thresholds': thr, 'stations': summ,
-                   'heathrowCheck': {'columns': ['year', 'month', 'metoffice_tmax_mean', 'daily_derived_mean', 'days'], 'rows': check}},
-                  f, separators=(',', ':'))
+            if s_id == sid and 5 <= int(date[5:7]) <= 9:
+                d.setdefault(int(date[:4]), []).append((date, float(tmax)))
+        ms[sname] = {'annual': annual_counts(d, years, thr)}
+    with open(os.path.join(OUT, 'london_summary_meteostat.json'), 'w') as f:
+        json.dump({'generated_utc': REPORT['generated_utc'], 'stations': ms}, f, separators=(',', ':'))
 
 
 if __name__ == '__main__':
@@ -338,9 +353,12 @@ if __name__ == '__main__':
     rows = []
     try:
         rows = meteostat()
-        summarise(rows)
     except Exception as e:
         REPORT['notes'].append('meteostat failed: %s' % e)
+    try:
+        summarise(rows)
+    except Exception as e:
+        REPORT['notes'].append('summary failed: %s' % e)
     with open(os.path.join(OUT, 'fetch_report.json'), 'w') as f:
         json.dump(REPORT, f, indent=1)
     print(json.dumps(REPORT, indent=1)[:6000])
