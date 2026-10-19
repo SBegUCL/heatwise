@@ -70,6 +70,9 @@ button.btn:disabled{opacity:.5;cursor:not-allowed}
 .tile .lab{font-size:13px;color:var(--ink-2)}
 .tile .val{font-size:30px;font-weight:620;line-height:1.15;margin:4px 0 2px}
 .tile .note{font-size:12.5px;color:var(--muted)}
+abbr.term{text-decoration:underline dotted;text-underline-offset:2px;cursor:help}
+.explain{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px 22px;font-size:13.5px;color:var(--ink-2)}
+.explain b{color:var(--ink)}
 .status{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600}
 .status .dot{width:14px;height:14px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;font-size:10px;line-height:1}
 .status.ok{color:var(--good-ink)} .status.ok .dot{background:var(--good)}
@@ -301,6 +304,17 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
   </div>
 </section>
 
+<section class="card" id="pexplain">
+  <h2>Reading the forecasts: P50, P80 and expected values</h2>
+  <p class="sub">Each forecast comes from running the project <span class="v-n"></span> times with the risks falling differently each time. Percentiles summarise that spread.</p>
+  <div class="explain">
+    <p><b>P50 (the median)</b> is the value that half of the simulated runs come in at or below. It is a 50:50 estimate: the project is as likely to finish after its P50 week as before it.</p>
+    <p><b>P80</b> is the value that 80% of runs come in at or below. It is a cautious estimate, often used to set contingency and to make commitments to a sponsor.</p>
+    <p><b>Expected (mean)</b> is the average of all runs, and is what the Expected final cost tile and the EMV figures report. A few very costly runs pull it above the P50.</p>
+    <p><b>Reading the S-curves.</b> Go across from 50% or 80% to your curve, then down to the axis; the dashed guides mark these points. The board's targets are percentiles too: a 60% chance of finishing by week 27 means your P60 finish must be no later than week 27.</p>
+  </div>
+</section>
+
 <section class="card">
   <h2>Heat hazard forecast from real London summers</h2>
   <p class="sub">Roof work stops on days when the maximum temperature reaches <span class="v-thr"></span>°C (HEATWISE site heat policy, illustrative). The programme allows <span class="v-allow"></span> such days: <span class="v-allownote"></span> Bars show the observed count each May–September at <b class="v-station"></b>, from Met Office records up to <span class="v-latest"></span>. The 2027 forecast shows the range of outcomes the simulation draws from, using the station and basis selected above.</p>
@@ -310,7 +324,7 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
 </section>
 
 <section class="card">
-  <h2>Summer <span class="v-ly"></span> at <span class="v-station"></span>: the latest observed season</h2>
+  <h2>Summer <span class="v-ly"></span> at <span class="v-station"></span>: <span class="v-lytag">the latest observed season</span></h2>
   <p class="sub">Daily maximum temperature, May–September. Each column is one day; days at or above the stop-work threshold are highlighted. This is the summer the project team has just lived through, a year before the build.</p>
   <div class="legend"><span><span class="key sw" style="background:var(--s2)"></span>Day ≥<span class="v-thr"></span>°C (roof work would stop)</span><span><span class="key sw" style="background:var(--base)"></span>Below threshold</span></div>
   <div id="summer" class="chart"></div>
@@ -650,7 +664,16 @@ if (typeof module !== 'undefined') module.exports = Engine;
 function stationH(S, name, thr) {
   var st = S.stations[name], yrs = [], hot = [], valid = [], maxTx = [];
   st.annual.forEach(function (a) { if (a.valid >= 120) { yrs.push(a.year); hot.push(a.hot[String(thr)]); valid.push(a.valid); maxTx.push(a.maxTx); } });
-  return { years: yrs, hot: hot, valid: valid, maxTx: maxTx, station: name, latestYear: st.latestYear };
+  // latestYear = last COMPLETE summer (used for history and comparisons); obsYear = latest year with any data,
+  // which during May–September is a season still under way.
+  var partial = yrs.indexOf(st.latestYear) < 0;
+  var soFar = null;
+  if (partial) {
+    var n = 0, last = '';
+    (st.latestSummer || []).forEach(function (x) { if (x[1] >= thr) n++; last = x[0]; });
+    soFar = { year: st.latestYear, hot: n, to: last };
+  }
+  return { years: yrs, hot: hot, valid: valid, maxTx: maxTx, station: name, latestYear: yrs[yrs.length - 1], obsYear: st.latestYear, partial: partial, soFar: soFar };
 }
 if (typeof module !== 'undefined') module.exports = stationH;
 
@@ -745,7 +768,7 @@ if (typeof module !== 'undefined') module.exports = cpm;
 
     // ---------- Slide 1: the recommendation ----------
     var s1 = slide('Our recommendation: ' + d.chosen.name,
-      'Slide 1 of 3: the decision. Lead with what you recommend and what it achieves against the board\'s risk appetite. All figures come from the HEATWISE dashboard (Monte Carlo, 4,000 runs) for scenario ' + d.chosen.id + ', generated ' + d.generated + '. Replace every purple [Edit: …] prompt with your own words.');
+      'Slide 1 of 3: the decision. Lead with what you recommend and what it achieves against the board\'s risk appetite. All figures come from the HEATWISE dashboard (Monte Carlo, 4,000 runs) for scenario ' + d.chosen.id + ', generated ' + d.generated + '. Replace every purple [Edit: …] prompt with your own words. Percentiles: P50 (the median) is the value half of the simulated runs come in at or below, a 50:50 estimate; P80 is the value 80% of runs come in at or below, a cautious estimate used to set contingency; the expected cost is the mean of all runs.');
     text(s1, [
       { text: (d.group || '[Edit: group name]') + '  ·  ', options: { bold: true } },
       d.members ? { text: d.members, options: {} } : edit('group members'),
@@ -765,8 +788,10 @@ if (typeof module !== 'undefined') module.exports = cpm;
     stat(s1, gx + gw + 0.25, 1.55 + gh + 0.22, gw, gh, 'Likely finish (P50)', 'Week ' + S.weeksP50.toFixed(1), S.finishDate + ' · P80 week ' + S.weeksP80.toFixed(1));
     text(s1, [
       { text: 'Basis: ', options: { bold: true } },
-      { text: 'heat forecast from ' + d.heat.station + ' (' + d.heat.basisLabel + '): ' + d.heat.f50 + ' hot days expected in 2027 (10–90%: ' + d.heat.f10 + '–' + d.heat.f90 + ') against an allowance of ' + d.heat.allowance + '. Summer ' + d.heat.latestYear + ' had ' + d.heat.latestHot + '.', options: {} }
+      { text: 'heat forecast from ' + d.heat.station + ' (' + d.heat.basisLabel + '): ' + d.heat.f50 + ' hot days expected in 2027 (10–90%: ' + d.heat.f10 + '–' + d.heat.f90 + ') against an allowance of ' + d.heat.allowance + '. Summer ' + d.heat.latestYear + ' had ' + d.heat.latestHot + '.' + (d.heat.soFar ? ' Summer ' + d.heat.soFar.year + ' so far: ' + d.heat.soFar.hot + ' (observed to ' + d.heat.soFar.to.split('-').reverse().join('/') + ').' : ''), options: {} }
     ], { x: gx, y: 1.55 + 2 * (gh + 0.22), w: W - MX - gx, h: 1.05, size: 12, fill: C.pp });
+    text(s1, 'P50 = median: half of the 4,000 simulated runs come in at or below it. P80 = 80% of runs do (a cautious estimate). Expected = mean of all runs.',
+      { x: gx, y: 1.55 + 2 * (gh + 0.22) + 1.12, w: W - MX - gx, h: 0.42, size: 9, color: C.grey, margin: 0 });
 
     // ---------- Slide 2: how we optimised ----------
     var s2 = slide('How we optimised: responses and trade-offs',
@@ -876,6 +901,11 @@ if (typeof module !== 'undefined') module.exports = cpm;
   function $(id) { return document.getElementById(id); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function pct(x) { return Math.round(x * 100) + '%'; }
+  var TERMS = {
+    P50: 'P50 (median): half of the simulated runs come in at or below this value. A 50:50 estimate.',
+    P80: 'P80: 80% of the simulated runs come in at or below this value. A cautious estimate, often used to set contingency.'
+  };
+  function term(k) { return '<abbr class="term" tabindex="0" title="' + TERMS[k] + '">' + k + '</abbr>'; }
   function km(x) { return (x < 0 ? '−' : '') + '£' + Math.abs(Math.round(x)).toLocaleString('en-GB') + 'k'; }
   function mm(xk) { return '£' + (xk / 1000).toFixed(2) + 'm'; }
   function wk(x) { return 'week ' + (Math.round(x * 10) / 10).toFixed(1); }
@@ -937,9 +967,9 @@ if (typeof module !== 'undefined') module.exports = cpm;
     h += '<div class="tile"><div class="lab">Chance of finishing by week ' + P.deadlineWeeks + '</div><div class="val">' + pct(cur.pTime) + '</div>' +
       statusBadge(cur.pTime >= P.targetTimeConf) + '<div class="note">Target ' + pct(P.targetTimeConf) + ' · deadline ' + dateOf(P.deadlineWeeks) + '</div>' + deltaTxt(cur.pTime, ref.pTime, refLabel) + '</div>';
     h += '<div class="tile"><div class="lab">Expected final cost</div><div class="val">' + mm(cur.costMean) + '</div>' +
-      '<div class="note">P80 ' + mm(cur.costP80) + '</div><div class="note">Mitigation spend ' + km(cur.mitSpend + cur.recoverySpend) + '</div></div>';
-    h += '<div class="tile"><div class="lab">Likely finish (P50)</div><div class="val">' + wk(cur.weeksP50) + '</div>' +
-      '<div class="note">' + dateOf(cur.weeksP50) + '</div><div class="note">P80 ' + wk(cur.weeksP80) + ' (' + dateOf(cur.weeksP80) + ')</div></div>';
+      '<div class="note">' + term('P80') + ' ' + mm(cur.costP80) + '</div><div class="note">Mitigation spend ' + km(cur.mitSpend + cur.recoverySpend) + '</div></div>';
+    h += '<div class="tile"><div class="lab">Likely finish (' + term('P50') + ')</div><div class="val">' + wk(cur.weeksP50) + '</div>' +
+      '<div class="note">' + dateOf(cur.weeksP50) + '</div><div class="note">' + term('P80') + ' ' + wk(cur.weeksP80) + ' (' + dateOf(cur.weeksP80) + ')</div></div>';
     h += '<div class="tile" style="grid-column:1/-1"><div class="statline" style="margin:0">' +
       '<span>Chance of meeting <b>both</b> targets <b>' + pct(cur.pBoth) + '</b></span>' +
       '<span>Residual risk exposure (total EMV) <b>' + km(cur.residualEmv) + '</b> (' + refLabel + ': ' + km(ref.residualEmv) + ')</span>' +
@@ -1159,6 +1189,12 @@ if (typeof module !== 'undefined') module.exports = cpm;
     var pl = pAt(a, limit);
     s += '<line x1="' + X(limit) + '" x2="' + X(limit) + '" y1="' + m.t + '" y2="' + (m.t + h) + '" stroke="var(--ink-2)" stroke-width="1"/>';
     s += '<text class="lbl" x="' + (X(limit) + 5) + '" y="' + (m.t + 10) + '">' + limitLabel + '</text>';
+    [0.5, 0.8].forEach(function (q) {
+      var gx = X(Math.min(hi, Engine.quantile(a, q))), gy = Y(q);
+      s += '<path d="M' + m.l + ',' + gy + 'H' + gx + 'V' + (m.t + h) + '" fill="none" stroke="var(--ink-2)" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>';
+      var near = Math.abs(gx - X(limit)) < 34;
+      s += '<text class="lbl" x="' + (near ? gx - 5 : gx + 5) + '" y="' + (gy + 13) + '" text-anchor="' + (near ? 'end' : 'start') + '" style="fill:var(--ink-2)">P' + Math.round(q * 100) + '</text>';
+    });
     s += '<path d="' + path(b) + '" fill="none" stroke="var(--base)" stroke-width="2" stroke-linejoin="round"/>';
     s += '<path d="' + path(a) + '" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round"/>';
     s += '<circle cx="' + X(limit) + '" cy="' + Y(pl) + '" r="5" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"/>';
@@ -1244,6 +1280,8 @@ if (typeof module !== 'undefined') module.exports = cpm;
     var st = S.stations[state.station];
     document.querySelectorAll('.v-station').forEach(function (e) { e.textContent = state.station; });
     document.querySelectorAll('.v-ly').forEach(function (e) { e.textContent = st.latestYear; });
+    var partialSeason = st.annual.some(function (a) { return a.year === st.latestYear && a.valid < 120; });
+    document.querySelectorAll('.v-lytag').forEach(function (e) { e.textContent = partialSeason ? 'the season so far' : 'the latest observed season'; });
     var last = st.latestSummer.length ? st.latestSummer[st.latestSummer.length - 1][0] : '';
     document.querySelectorAll('.v-latest').forEach(function (e) { e.textContent = last ? new Date(last + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }) : ''; });
   }
@@ -1280,7 +1318,10 @@ if (typeof module !== 'undefined') module.exports = cpm;
     if (state.station === 'Heathrow' && S.metofficeHeathrowLatest) {
       moTxt = '<span>Met Office monthly mean maximum, Heathrow: <b>' + S.metofficeHeathrowLatest.filter(function (r) { return r[1] >= 6 && r[1] <= 8; }).map(function (r) { return ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'][r[1]] + ' ' + r[2] + '°C'; }).join(', ') + '</b></span>';
     }
-    $('summer-stats').innerHTML = '<span>Days ≥' + P.heatThreshold + '°C <b>' + hot + '</b> (1991–2020 average ' + avg.toFixed(1) + '; rank ' + rank + ' of ' + H.hot.length + ' summers since ' + yrs[0] + ')</span>' +
+    var partialSeason = H.years.indexOf(st.latestYear) < 0;
+    $('summer-stats').innerHTML = (partialSeason
+      ? '<span>Days ≥' + P.heatThreshold + '°C so far <b>' + hot + '</b> (season still under way; full-summer 1991–2020 average ' + avg.toFixed(1) + '; summer ' + H.latestYear + ' had ' + H.hot[H.hot.length - 1] + ')</span>'
+      : '<span>Days ≥' + P.heatThreshold + '°C <b>' + hot + '</b> (1991–2020 average ' + avg.toFixed(1) + '; rank ' + rank + ' of ' + H.hot.length + ' summers since ' + yrs[0] + ')</span>') +
       '<span>Longest run <b>' + best + ' days</b></span><span>Hottest day <b>' + max[1].toFixed(1) + '°C</b> on ' + mx + '</span>' + moTxt;
   }
 
@@ -1542,7 +1583,7 @@ if (typeof module !== 'undefined') module.exports = cpm;
           return '<div class="l2"><span class="rid">' + c.id + '</span><span>' + esc(c.name) + '<div class="meta">Weeks ' + c.start + '–' + c.end + (c.ms ? ' · ' + c.ms : '') + (c.risks ? ' · risks: ' + esc(c.risks) : '') + '</div></span><span class="meta">' + km(c.cost) + '</span></div>';
         }).join('') + '</div>';
       }).join('') + '</div></section>';
-    h += '<section class="card"><h2>Gantt chart</h2><p class="sub">Planned baseline: ' + P.baseWeeks + ' weeks from ' + dateOf(0) + '. <span style="color:var(--s2);font-weight:600">Orange</span> bars are on the critical path; <span style="color:var(--s1);font-weight:600">blue</span> bars have float (the black whisker shows how far they can slip without moving the finish); grey bars run throughout. Vertical lines show the deadline and your scenario\'s likely (P50) finish, ' + wk(cur.weeksP50) + '.' +
+    h += '<section class="card"><h2>Gantt chart</h2><p class="sub">Planned baseline: ' + P.baseWeeks + ' weeks from ' + dateOf(0) + '. <span style="color:var(--s2);font-weight:600">Orange</span> bars are on the critical path; <span style="color:var(--s1);font-weight:600">blue</span> bars have float (the black whisker shows how far they can slip without moving the finish); grey bars run throughout. Vertical lines show the deadline and your scenario\'s likely (' + term('P50') + ') finish, ' + wk(cur.weeksP50) + ': half of the simulated runs finish by then.' +
       (cur.optWeeks ? ' Your responses add ' + cur.optWeeks + ' week(s) before the roof works; the bars show the original baseline.' : '') + '</p>' +
       '<div class="legend"><span><span class="key sw" style="background:var(--s2)"></span>Critical path</span><span><span class="key sw" style="background:var(--s1)"></span>Has float</span><span><span class="key sw" style="background:var(--base)"></span>Level of effort</span><span><span class="key" style="background:var(--ink-2)"></span>Float</span><span>◆ Milestone</span></div>' +
       '<div class="tablewrap" style="border:0">' + renderGantt(cur) + '</div></section>';
@@ -1640,15 +1681,6 @@ if (typeof module !== 'undefined') module.exports = cpm;
         var s = scenarios[+b.dataset.load];
         state.sel = Object.assign({}, s.sel); state.basis = s.basis; state.round = s.round; if (s.station) { state.station = s.station; $('station').value = s.station; setH(); stationText(); }
         if (s.r2) state.r2 = Object.assign({}, s.r2);
-        $('station').innerHTML = stationList().map(function (k) { return '<option value="' + esc(k) + '">' + esc(k) + ' · ' + esc(S.stations[k].area.split(',')[0].replace(' (airport)', '')) + '</option>'; }).join('');
-  $('station').value = state.station;
-  $('station').addEventListener('change', function () { state.station = this.value; setH(); stationText(); update(); });
-  // Refresh from the weekly data pipeline when the page is served from GitHub Pages.
-  if (window.fetch && location.protocol.indexOf('http') === 0) {
-    fetch('data/london_summary.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
-      if (j && j.stations && j.generated_utc && j.generated_utc > S.generated_utc && j.stations[P.heatStation || 'Heathrow']) { S = j; cache = {}; setH(); stationText(); update(); }
-    }).catch(function () { /* keep embedded data */ });
-  }
   $('basis').value = state.basis; update(); toast('Loaded ' + s.id);
       });
     });
@@ -1730,8 +1762,8 @@ if (typeof module !== 'undefined') module.exports = cpm;
     renderTornado(cur);
     renderCdf($('cdf-cost'), cur, ref, 'cost', cur.budget, function (v, full) { return full ? mm(v) : '£' + (v / 1000).toFixed(1) + 'm'; }, 'Final cost', 'Budget ' + mm(cur.budget));
     renderCdf($('cdf-time'), cur, ref, 'weeks', P.deadlineWeeks, function (v, full) { return full ? wk(v) + ' (' + dateOf(v) + ')' : Math.round(v); }, 'Completion week', 'Deadline wk ' + P.deadlineWeeks);
-    $('cost-stats').innerHTML = '<span>P50 <b>' + mm(cur.costP50) + '</b></span><span>P80 <b>' + mm(cur.costP80) + '</b></span>' + (cur.budget >= cur.costP80 ? '<span>Reserve left at P80 <b>' + km(cur.budget - cur.costP80) + '</b></span>' : '<span>Over budget at P80 by <b>' + km(cur.costP80 - cur.budget) + '</b></span>');
-    $('time-stats').innerHTML = '<span>P50 <b>' + wk(cur.weeksP50) + '</b></span><span>P80 <b>' + wk(cur.weeksP80) + '</b></span>' + (P.deadlineWeeks >= cur.weeksP80 ? '<span>Float left at P80 <b>' + (P.deadlineWeeks - cur.weeksP80).toFixed(1) + ' wk</b></span>' : '<span>Late at P80 by <b>' + (cur.weeksP80 - P.deadlineWeeks).toFixed(1) + ' wk</b></span>');
+    $('cost-stats').innerHTML = '<span>' + term('P50') + ' <b>' + mm(cur.costP50) + '</b></span><span>' + term('P80') + ' <b>' + mm(cur.costP80) + '</b></span>' + (cur.budget >= cur.costP80 ? '<span>Reserve left at P80 <b>' + km(cur.budget - cur.costP80) + '</b></span>' : '<span>Over budget at P80 by <b>' + km(cur.costP80 - cur.budget) + '</b></span>');
+    $('time-stats').innerHTML = '<span>' + term('P50') + ' <b>' + wk(cur.weeksP50) + '</b></span><span>' + term('P80') + ' <b>' + wk(cur.weeksP80) + '</b></span>' + (P.deadlineWeeks >= cur.weeksP80 ? '<span>Float left at P80 <b>' + (P.deadlineWeeks - cur.weeksP80).toFixed(1) + ' wk</b></span>' : '<span>Late at P80 by <b>' + (cur.weeksP80 - P.deadlineWeeks).toFixed(1) + ' wk</b></span>');
     renderHeat(cur);
     renderSummer();
     renderScenarios();
@@ -1837,7 +1869,7 @@ if (typeof module !== 'undefined') module.exports = cpm;
         ref: { pB: inh.pBudget, pT: inh.pTime, pBoth: inh.pBoth } },
       register: register, secondaries: secs, residualTop: top, kpis: kpis, scenarios: savedList, recovery: recovery,
       heat: { station: st.station, basisLabel: basisLabel, f10: Math.round(Engine.quantile(pool, 0.1)), f50: Math.round(Engine.quantile(pool, 0.5)), f90: Math.round(Engine.quantile(pool, 0.9)),
-        allowance: P.heatAllowanceDays, latestYear: Hs.latestYear, latestHot: Hs.hot[Hs.years.indexOf(Hs.latestYear)], normal: norm.reduce(function (a, b) { return a + b; }, 0) / Math.max(1, norm.length) }
+        allowance: P.heatAllowanceDays, latestYear: Hs.latestYear, latestHot: Hs.hot[Hs.years.indexOf(Hs.latestYear)], soFar: Hs.soFar, normal: norm.reduce(function (a, b) { return a + b; }, 0) / Math.max(1, norm.length) }
     };
   }
   function loadScript(src) {
