@@ -86,10 +86,13 @@ def metoffice_station(name='heathrow'):
 
 # ---------------------------------------------------------------- Met Office regional series
 def metoffice_region():
-    urls = ['https://www.metoffice.gov.uk/pub/data/weather/uk/climate/datasets/Tmax/date/England_SE_and_central_S.txt',
-            'https://www.metoffice.gov.uk/pub/data/weather/uk/climate/datasets/Tmax/ranked/England_SE_and_central_S.txt']
+    base = 'https://www.metoffice.gov.uk/pub/data/weather/uk/climate/datasets/Tmax/date/'
+    urls = [base + n + '.txt' for n in ('England_SE_and_central_S', 'England_SE_and_Central_S', 'England_SE_and_central_south',
+                                        'England_SE_and_Central_South', 'England_SE')]
+    tried = []
     for url in urls:
         r = get(url)
+        tried.append([url, r.status_code])
         if r.status_code == 200 and 'jan' in r.text.lower():
             open(os.path.join(OUT, 'metoffice_region_SE_tmax.txt'), 'w').write(r.text)
             rows = []
@@ -103,7 +106,7 @@ def metoffice_region():
                 w.writerows(rows)
             REPORT['sources']['metoffice_region_SE_tmax'] = {'url': url, 'status': 200, 'rows': len(rows), 'last_year': rows[-1][0] if rows else None}
             return
-    REPORT['sources']['metoffice_region_SE_tmax'] = {'url': urls[0], 'status': r.status_code}
+    REPORT['sources']['metoffice_region_SE_tmax'] = {'status': 'not found', 'tried': tried}
 
 
 # ---------------------------------------------------------------- Meteostat daily
@@ -134,7 +137,7 @@ def meteostat():
                 src = row.get('tmax_source', '') or row.get('source', '')
                 if tmax in ('', None):
                     continue
-                if src and src.lower() in MODEL_SOURCES:
+                if src and any(t in MODEL_SOURCES for t in src.lower().split()):
                     st['model_rows_dropped'] += 1
                     continue
                 st['sources'][src or 'unspecified'] = st['sources'].get(src or 'unspecified', 0) + 1
@@ -231,8 +234,23 @@ def summarise(rows):
         summer = sorted(d.get(latest, [])) if latest else []
         summ[sid] = {'name': sname, 'annual': ann, 'latestYear': latest,
                      'latestSummer': [[v[0], v[1]] for v in summer]}
+    # Cross-check: Heathrow daily-derived monthly mean maximum against the Met Office's official monthly value.
+    check = []
+    try:
+        mo = {(int(r['year']), int(r['month'])): r for r in csv.DictReader(open(os.path.join(OUT, 'metoffice_heathrow_monthly.csv')))}
+        hd = {}
+        for s_id, _, date, tmax, tmin, src in rows:
+            if s_id == '03772':
+                hd.setdefault((int(date[:4]), int(date[5:7])), []).append(float(tmax))
+        for (y, m), vals in sorted(hd.items()):
+            if 5 <= m <= 9 and (y, m) in mo and mo[(y, m)]['tmax_mean_c'] and len(vals) >= 25:
+                check.append([y, m, float(mo[(y, m)]['tmax_mean_c']), round(sum(vals) / len(vals), 2), len(vals)])
+    except Exception as e:
+        REPORT['notes'].append('cross-check failed: %s' % e)
     with open(os.path.join(OUT, 'london_summary.json'), 'w') as f:
-        json.dump({'generated_utc': REPORT['generated_utc'], 'thresholds': thr, 'stations': summ}, f, separators=(',', ':'))
+        json.dump({'generated_utc': REPORT['generated_utc'], 'thresholds': thr, 'stations': summ,
+                   'heathrowCheck': {'columns': ['year', 'month', 'metoffice_tmax_mean', 'daily_derived_mean', 'days'], 'rows': check}},
+                  f, separators=(',', ':'))
 
 
 if __name__ == '__main__':
