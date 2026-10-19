@@ -2,7 +2,7 @@
 
 A what-if risk analysis exercise for SPCE0019 Project Simulation (UCL Centre for Systems Engineering).
 
-Open the live page: https://sbegucl.github.io/heatwise/
+Open the live page: https://uclse.github.io/heatwise/
 
 ## What students see
 
