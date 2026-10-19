@@ -8103,7 +8103,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2019-11-04,11.9,4.5,isd_lite
 03672,Northolt,2019-11-05,11.9,5.3,isd_lite
 03672,Northolt,2019-11-06,9.5,2.5,isd_lite
-03672,Northolt,2019-11-07,10.3,1.8,isd_lite metar dwd_mosmix
 03672,Northolt,2019-11-08,8.1,-1.7,isd_lite
 03672,Northolt,2019-11-09,7.5,-1.2,isd_lite
 03672,Northolt,2019-11-10,10.1,3.7,isd_lite
@@ -8168,7 +8167,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2020-01-08,12.5,9.5,isd_lite
 03672,Northolt,2020-01-09,13.4,6.0,isd_lite
 03672,Northolt,2020-01-10,7.9,4.6,isd_lite
-03672,Northolt,2020-01-11,11.2,5.8,isd_lite dwd_mosmix
 03672,Northolt,2020-01-12,11.3,5.1,isd_lite
 03672,Northolt,2020-01-13,10.0,4.5,isd_lite metar
 03672,Northolt,2020-01-14,12.9,6.9,isd_lite
@@ -8712,7 +8710,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2021-07-05,20.5,13.8,isd_lite
 03672,Northolt,2021-07-06,19.5,13.1,isd_lite
 03672,Northolt,2021-07-07,20.4,13.2,isd_lite
-03672,Northolt,2021-07-08,21.4,13.7,isd_lite metar dwd_mosmix
 03672,Northolt,2021-07-09,23.8,14.9,isd_lite
 03672,Northolt,2021-07-10,18.4,13.0,isd_lite metar
 03672,Northolt,2021-07-11,22.0,10.1,isd_lite
@@ -9182,7 +9179,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2022-10-18,18.8,4.5,isd_lite metar
 03672,Northolt,2022-10-19,17.2,11.2,isd_lite
 03672,Northolt,2022-10-20,16.3,8.0,isd_lite
-03672,Northolt,2022-10-21,17.7,8.0,isd_lite metar dwd_mosmix
 03672,Northolt,2022-10-22,19.1,12.0,isd_lite
 03672,Northolt,2022-10-23,19.2,12.6,isd_lite
 03672,Northolt,2022-10-24,18.1,12.0,isd_lite
@@ -9208,7 +9204,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2022-11-13,15.1,7.0,isd_lite
 03672,Northolt,2022-11-14,14.1,6.4,isd_lite
 03672,Northolt,2022-11-15,14.6,8.0,isd_lite
-03672,Northolt,2022-11-16,12.4,8.0,isd_lite dwd_mosmix metar
 03672,Northolt,2022-11-17,11.7,8.6,isd_lite
 03672,Northolt,2022-11-18,11.8,7.3,isd_lite
 03672,Northolt,2022-11-19,10.2,3.8,isd_lite
@@ -9603,7 +9598,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2023-12-13,8.3,5.5,isd_lite
 03672,Northolt,2023-12-14,8.0,2.0,isd_lite
 03672,Northolt,2023-12-15,8.9,3.1,isd_lite
-03672,Northolt,2023-12-16,11.2,7.8,isd_lite dwd_mosmix metar
 03672,Northolt,2023-12-17,11.5,9.2,isd_lite
 03672,Northolt,2023-12-18,12.5,9.4,isd_lite
 03672,Northolt,2023-12-19,12.5,4.4,isd_lite
@@ -9683,9 +9677,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2024-03-02,8.6,2.3,isd_lite
 03672,Northolt,2024-03-03,9.7,-2.0,isd_lite
 03672,Northolt,2024-03-04,11.7,-2.1,isd_lite
-03672,Northolt,2024-03-05,11.0,3.0,metar isd_lite dwd_mosmix
-03672,Northolt,2024-03-06,12.0,2.9,metar dwd_mosmix
-03672,Northolt,2024-03-07,11.3,4.6,isd_lite dwd_mosmix metar
 03672,Northolt,2024-03-08,10.1,4.4,isd_lite
 03672,Northolt,2024-03-09,13.2,6.7,isd_lite
 03672,Northolt,2024-03-10,9.4,7.8,isd_lite
@@ -9705,7 +9696,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2024-03-24,12.5,5.3,isd_lite
 03672,Northolt,2024-03-25,12.1,4.5,isd_lite
 03672,Northolt,2024-03-26,14.4,6.0,isd_lite metar
-03672,Northolt,2024-03-27,10.4,4.7,isd_lite metar dwd_mosmix
 03672,Northolt,2024-03-28,11.0,4.0,metar
 03672,Northolt,2024-03-29,15.0,7.0,metar
 03672,Northolt,2024-03-30,16.0,2.0,metar
@@ -10089,8 +10079,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2025-04-12,23.2,4.7,isd_lite
 03672,Northolt,2025-04-13,16.2,9.1,isd_lite
 03672,Northolt,2025-04-14,15.3,3.6,isd_lite
-03672,Northolt,2025-04-15,16.0,9.7,isd_lite metar dwd_mosmix
-03672,Northolt,2025-04-16,15.4,7.8,isd_lite dwd_mosmix metar
 03672,Northolt,2025-04-17,17.2,1.7,isd_lite
 03672,Northolt,2025-04-18,16.4,6.6,isd_lite
 03672,Northolt,2025-04-19,16.3,8.7,isd_lite
@@ -10259,7 +10247,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2025-09-29,19.0,4.0,metar
 03672,Northolt,2025-09-30,21.0,5.0,metar
 03672,Northolt,2025-10-01,18.0,7.0,metar
-03672,Northolt,2025-10-02,19.0,9.0,metar dwd_mosmix
 03672,Northolt,2025-10-03,18.0,14.0,metar
 03672,Northolt,2025-10-04,17.0,11.0,metar
 03672,Northolt,2025-10-05,17.0,10.0,metar
@@ -10321,7 +10308,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2025-11-30,9.0,1.0,metar
 03672,Northolt,2025-12-01,12.0,7.0,metar
 03672,Northolt,2025-12-02,12.0,6.0,metar
-03672,Northolt,2025-12-03,11.0,0.0,metar dwd_mosmix
 03672,Northolt,2025-12-04,8.0,2.0,metar
 03672,Northolt,2025-12-05,10.0,-3.0,metar
 03672,Northolt,2025-12-06,12.0,9.0,metar
@@ -10347,7 +10333,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2025-12-26,6.0,3.0,metar
 03672,Northolt,2025-12-27,7.0,2.0,metar
 03672,Northolt,2025-12-28,7.0,5.0,metar
-03672,Northolt,2025-12-29,6.0,5.0,metar dwd_mosmix
 03672,Northolt,2025-12-30,6.0,0.0,metar
 03672,Northolt,2025-12-31,3.0,-3.0,metar
 03672,Northolt,2026-01-01,6.0,-1.0,metar
@@ -10390,8 +10375,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2026-02-07,11.0,6.0,metar
 03672,Northolt,2026-02-08,11.0,5.0,metar
 03672,Northolt,2026-02-09,11.0,6.0,metar
-03672,Northolt,2026-02-10,11.4,8.0,dwd_mosmix metar
-03672,Northolt,2026-02-12,9.1,7.0,dwd_mosmix metar
 03672,Northolt,2026-02-13,9.0,3.0,metar
 03672,Northolt,2026-02-14,6.0,-1.0,metar
 03672,Northolt,2026-02-15,9.0,3.0,metar
@@ -10443,7 +10426,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2026-04-02,13.0,5.0,metar
 03672,Northolt,2026-04-03,16.0,8.0,metar
 03672,Northolt,2026-04-04,15.0,7.0,metar
-03672,Northolt,2026-04-05,14.0,6.0,metar dwd_mosmix
 03672,Northolt,2026-04-06,17.0,0.0,metar
 03672,Northolt,2026-04-07,21.0,4.0,metar
 03672,Northolt,2026-04-08,26.0,6.0,metar
@@ -10453,8 +10435,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2026-04-12,15.0,5.0,metar
 03672,Northolt,2026-04-13,13.0,1.0,metar
 03672,Northolt,2026-04-14,18.0,1.0,metar
-03672,Northolt,2026-04-15,15.3,10.7,metar dwd_mosmix
-03672,Northolt,2026-04-16,18.0,9.6,metar dwd_mosmix
 03672,Northolt,2026-04-17,18.0,11.0,metar
 03672,Northolt,2026-04-18,17.0,7.0,metar
 03672,Northolt,2026-04-19,15.0,5.0,metar
@@ -10465,17 +10445,10 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2026-04-24,20.0,4.0,metar
 03672,Northolt,2026-04-25,22.0,1.0,metar
 03672,Northolt,2026-04-26,19.0,4.0,metar
-03672,Northolt,2026-04-27,20.1,6.0,metar dwd_mosmix
 03672,Northolt,2026-04-28,17.0,9.0,metar
-03672,Northolt,2026-04-29,17.4,7.3,dwd_mosmix metar
-03672,Northolt,2026-04-30,21.1,10.0,metar dwd_mosmix
-03672,Northolt,2026-05-01,25.0,7.0,metar dwd_mosmix
-03672,Northolt,2026-05-02,19.0,9.3,dwd_mosmix metar
-03672,Northolt,2026-05-03,19.0,12.0,metar dwd_mosmix
 03672,Northolt,2026-05-04,15.0,12.0,metar
 03672,Northolt,2026-05-05,16.0,10.0,metar
 03672,Northolt,2026-05-06,14.0,8.0,metar
-03672,Northolt,2026-05-07,17.0,6.0,metar dwd_mosmix
 03672,Northolt,2026-05-08,18.0,5.0,metar
 03672,Northolt,2026-05-09,21.0,6.0,metar
 03672,Northolt,2026-05-10,13.0,7.0,metar
@@ -10505,7 +10478,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2026-06-03,19.0,12.0,metar
 03672,Northolt,2026-06-04,20.0,14.0,metar
 03672,Northolt,2026-06-05,17.0,11.0,metar
-03672,Northolt,2026-06-06,16.0,13.0,metar dwd_mosmix
 03672,Northolt,2026-06-07,18.0,10.0,metar
 03672,Northolt,2026-06-08,16.0,11.0,metar
 03672,Northolt,2026-06-09,18.0,8.0,metar
@@ -10513,7 +10485,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2026-06-11,17.0,8.0,metar
 03672,Northolt,2026-06-12,22.0,14.0,metar
 03672,Northolt,2026-06-13,21.0,12.0,metar
-03672,Northolt,2026-06-14,19.0,10.0,metar dwd_mosmix
 03672,Northolt,2026-06-15,22.0,13.0,metar
 03672,Northolt,2026-06-16,26.0,15.0,metar
 03672,Northolt,2026-06-17,24.0,17.0,metar
@@ -10566,7 +10537,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2026-08-03,32.0,17.0,metar
 03672,Northolt,2026-08-04,30.0,16.0,metar
 03672,Northolt,2026-08-05,25.0,17.0,metar
-03672,Northolt,2026-08-06,22.0,11.0,metar dwd_mosmix
 03672,Northolt,2026-08-07,26.0,9.0,metar
 03672,Northolt,2026-08-08,28.0,11.0,metar
 03672,Northolt,2026-08-09,31.0,12.0,metar
@@ -10594,7 +10564,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2026-08-31,22.0,14.0,metar
 03672,Northolt,2026-09-01,23.0,11.0,metar
 03672,Northolt,2026-09-02,20.0,16.0,metar
-03672,Northolt,2026-09-03,26.0,18.4,metar dwd_mosmix
 03672,Northolt,2026-09-04,21.0,14.0,metar
 03672,Northolt,2026-09-05,23.0,12.0,metar
 03672,Northolt,2026-09-06,28.0,13.0,metar
@@ -10634,7 +10603,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03672,Northolt,2026-10-10,16.0,9.0,metar
 03672,Northolt,2026-10-11,16.0,8.0,metar
 03672,Northolt,2026-10-12,18.0,10.0,metar
-03672,Northolt,2026-10-13,19.6,12.2,dwd_mosmix metar
 03772,London Heathrow,1979-01-01,-3.0,-7.0,ghcnd
 03772,London Heathrow,1979-01-02,2.0,-6.0,ghcnd
 03772,London Heathrow,1979-01-03,2.0,-7.0,isd_lite
@@ -27208,7 +27176,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03772,London Heathrow,2025-03-09,17.9,7.7,isd_lite
 03772,London Heathrow,2025-03-10,12.7,7.5,isd_lite
 03772,London Heathrow,2025-03-11,8.5,5.2,isd_lite
-03772,London Heathrow,2025-03-12,9.4,3.5,isd_lite dwd_mosmix
 03772,London Heathrow,2025-03-13,8.7,1.7,isd_lite
 03772,London Heathrow,2025-03-14,9.0,-1.1,ghcnd
 03772,London Heathrow,2025-03-15,8.9,1.2,isd_lite
@@ -27543,8 +27510,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03772,London Heathrow,2026-02-07,10.9,5.6,dwd_poi
 03772,London Heathrow,2026-02-08,10.7,4.5,dwd_poi
 03772,London Heathrow,2026-02-09,10.7,5.1,dwd_poi
-03772,London Heathrow,2026-02-10,11.3,7.7,dwd_mosmix dwd_poi
-03772,London Heathrow,2026-02-12,9.0,7.4,dwd_mosmix dwd_poi
 03772,London Heathrow,2026-02-13,8.8,4.1,dwd_poi
 03772,London Heathrow,2026-02-14,7.1,0.9,dwd_poi
 03772,London Heathrow,2026-02-15,9.4,3.5,dwd_poi
@@ -27618,13 +27583,7 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03772,London Heathrow,2026-04-24,20.1,4.8,dwd_poi
 03772,London Heathrow,2026-04-25,21.9,3.3,dwd_poi
 03772,London Heathrow,2026-04-26,19.7,7.1,dwd_poi
-03772,London Heathrow,2026-04-27,20.6,8.0,dwd_mosmix metar dwd_poi
 03772,London Heathrow,2026-04-28,16.7,9.3,dwd_poi
-03772,London Heathrow,2026-04-29,18.2,7.9,dwd_mosmix dwd_poi
-03772,London Heathrow,2026-04-30,21.5,10.4,dwd_poi dwd_mosmix
-03772,London Heathrow,2026-05-01,24.9,10.5,dwd_poi dwd_mosmix
-03772,London Heathrow,2026-05-02,19.0,10.0,dwd_mosmix dwd_poi
-03772,London Heathrow,2026-05-03,19.0,12.0,metar dwd_mosmix dwd_poi
 03772,London Heathrow,2026-05-04,15.0,12.0,metar
 03772,London Heathrow,2026-05-05,16.0,11.0,metar dwd_poi
 03772,London Heathrow,2026-05-06,13.6,8.4,dwd_poi
@@ -27660,8 +27619,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03772,London Heathrow,2026-06-05,17.6,11.7,dwd_poi
 03772,London Heathrow,2026-06-06,16.5,12.4,dwd_poi
 03772,London Heathrow,2026-06-07,18.3,10.9,dwd_poi
-03772,London Heathrow,2026-06-08,16.6,11.9,dwd_poi metar dwd_mosmix
-03772,London Heathrow,2026-06-09,19.7,9.5,dwd_mosmix dwd_poi
 03772,London Heathrow,2026-06-10,18.4,9.6,dwd_poi
 03772,London Heathrow,2026-06-11,16.9,9.0,dwd_poi
 03772,London Heathrow,2026-06-12,22.2,14.3,dwd_poi
@@ -27787,7 +27744,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03772,London Heathrow,2026-10-10,15.7,9.1,dwd_poi
 03772,London Heathrow,2026-10-11,16.0,8.3,dwd_poi
 03772,London Heathrow,2026-10-12,17.9,10.6,dwd_poi
-03772,London Heathrow,2026-10-13,20.0,13.0,dwd_mosmix dwd_poi
 03781,Kenley,2018-01-28,11.9,8.8,dwd_poi
 03781,Kenley,2018-01-29,10.8,2.5,dwd_poi
 03781,Kenley,2018-01-30,8.5,-1.2,dwd_poi
@@ -27986,13 +27942,11 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2018-08-19,22.6,16.1,dwd_poi
 03781,Kenley,2018-08-20,22.6,16.7,dwd_poi
 03781,Kenley,2018-08-21,22.1,16.1,dwd_poi
-03781,Kenley,2018-08-22,19.4,14.3,dwd_poi dwd_mosmix
 03781,Kenley,2018-08-23,20.1,14.5,dwd_poi
 03781,Kenley,2018-08-24,17.3,9.3,dwd_poi
 03781,Kenley,2018-08-25,16.6,7.1,dwd_poi
 03781,Kenley,2018-08-26,17.0,8.2,dwd_poi
 03781,Kenley,2018-08-27,16.6,12.5,dwd_poi
-03781,Kenley,2018-08-28,18.8,12.3,dwd_poi dwd_mosmix
 03781,Kenley,2018-08-29,18.0,11.7,dwd_poi
 03781,Kenley,2018-08-30,18.5,8.9,dwd_poi
 03781,Kenley,2018-08-31,19.3,9.9,dwd_poi
@@ -28034,7 +27988,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2018-10-06,11.7,7.6,dwd_poi
 03781,Kenley,2018-10-07,13.4,4.3,dwd_poi
 03781,Kenley,2018-10-08,14.4,6.7,dwd_poi
-03781,Kenley,2018-10-09,18.3,9.4,dwd_poi dwd_mosmix
 03781,Kenley,2018-10-10,22.1,13.9,dwd_poi
 03781,Kenley,2018-10-11,19.9,14.0,dwd_poi
 03781,Kenley,2018-10-12,19.7,13.4,dwd_poi
@@ -28183,8 +28136,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2019-03-04,8.6,3.0,dwd_poi
 03781,Kenley,2019-03-05,9.9,2.1,dwd_poi
 03781,Kenley,2019-03-06,10.6,7.8,dwd_poi
-03781,Kenley,2019-03-07,9.1,4.7,dwd_mosmix dwd_poi
-03781,Kenley,2019-03-11,8.7,2.0,dwd_poi dwd_mosmix
 03781,Kenley,2019-03-12,7.9,2.9,dwd_poi
 03781,Kenley,2019-03-13,9.4,4.5,dwd_poi
 03781,Kenley,2019-03-14,12.7,6.2,dwd_poi
@@ -28244,8 +28195,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2019-05-07,13.6,5.5,dwd_poi
 03781,Kenley,2019-05-08,14.2,7.4,dwd_poi
 03781,Kenley,2019-05-09,13.2,7.0,dwd_poi
-03781,Kenley,2019-05-10,13.0,6.0,dwd_mosmix dwd_poi
-03781,Kenley,2019-05-14,14.7,5.0,dwd_mosmix dwd_poi
 03781,Kenley,2019-05-15,17.3,5.4,dwd_poi
 03781,Kenley,2019-05-16,15.3,5.3,dwd_poi
 03781,Kenley,2019-05-17,12.5,7.8,dwd_poi
@@ -28331,7 +28280,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2019-08-05,22.4,14.8,dwd_poi
 03781,Kenley,2019-08-06,20.4,14.1,dwd_poi
 03781,Kenley,2019-08-07,20.7,13.2,dwd_poi
-03781,Kenley,2019-08-08,20.7,12.7,dwd_poi dwd_mosmix
 03781,Kenley,2019-08-09,22.1,16.8,dwd_poi
 03781,Kenley,2019-08-10,19.0,15.1,dwd_poi
 03781,Kenley,2019-08-11,19.8,13.6,dwd_poi
@@ -28484,8 +28432,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2020-01-05,7.1,5.1,dwd_poi
 03781,Kenley,2020-01-06,7.5,5.0,dwd_poi
 03781,Kenley,2020-01-07,11.2,4.7,dwd_poi
-03781,Kenley,2020-01-08,11.1,8.5,dwd_poi dwd_mosmix
-03781,Kenley,2020-01-09,11.1,6.2,dwd_poi dwd_mosmix
 03781,Kenley,2020-01-10,6.2,3.5,dwd_poi
 03781,Kenley,2020-01-11,8.8,4.1,dwd_poi
 03781,Kenley,2020-01-12,10.3,4.9,dwd_poi
@@ -28555,13 +28501,11 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2020-03-16,10.9,1.9,dwd_poi
 03781,Kenley,2020-03-17,11.0,3.5,dwd_poi
 03781,Kenley,2020-03-18,12.9,8.5,dwd_poi
-03781,Kenley,2020-03-19,8.5,5.3,dwd_poi dwd_mosmix
 03781,Kenley,2020-03-20,8.1,4.3,dwd_poi
 03781,Kenley,2020-03-21,7.9,4.0,dwd_poi
 03781,Kenley,2020-03-22,7.1,2.4,dwd_poi
 03781,Kenley,2020-03-23,10.5,1.9,dwd_poi
 03781,Kenley,2020-03-24,13.4,2.9,dwd_poi
-03781,Kenley,2020-03-25,12.0,1.6,dwd_poi dwd_mosmix
 03781,Kenley,2020-03-26,10.2,-1.4,dwd_poi
 03781,Kenley,2020-03-27,11.7,-1.4,dwd_poi
 03781,Kenley,2020-03-28,10.1,3.0,dwd_poi
@@ -28598,8 +28542,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2020-04-28,8.8,6.7,dwd_poi
 03781,Kenley,2020-04-29,11.7,6.6,dwd_poi
 03781,Kenley,2020-04-30,11.2,5.1,dwd_poi
-03781,Kenley,2020-05-01,13.0,6.2,dwd_poi dwd_mosmix
-03781,Kenley,2020-05-02,15.1,6.3,dwd_mosmix dwd_poi
 03781,Kenley,2020-05-03,12.9,6.4,dwd_poi
 03781,Kenley,2020-05-04,15.0,7.6,dwd_poi
 03781,Kenley,2020-05-05,12.1,6.2,dwd_poi
@@ -28652,7 +28594,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2020-06-21,20.9,13.4,dwd_poi
 03781,Kenley,2020-06-22,20.1,9.9,dwd_poi
 03781,Kenley,2020-06-23,25.0,12.2,dwd_poi
-03781,Kenley,2020-06-24,29.7,17.2,dwd_poi dwd_mosmix
 03781,Kenley,2020-06-25,29.7,19.2,dwd_poi
 03781,Kenley,2020-06-26,26.7,14.6,dwd_poi
 03781,Kenley,2020-06-27,17.6,13.7,dwd_poi
@@ -28665,7 +28606,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2020-07-04,17.9,13.9,dwd_poi
 03781,Kenley,2020-07-05,20.6,12.7,dwd_poi
 03781,Kenley,2020-07-06,18.6,10.6,dwd_poi
-03781,Kenley,2020-07-07,17.9,8.5,dwd_poi dwd_mosmix
 03781,Kenley,2020-07-08,18.3,13.3,dwd_poi
 03781,Kenley,2020-07-09,17.3,14.6,dwd_poi
 03781,Kenley,2020-07-10,17.2,11.4,dwd_poi
@@ -28820,7 +28760,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2020-12-06,4.6,0.7,dwd_poi
 03781,Kenley,2020-12-07,1.9,-0.1,dwd_poi
 03781,Kenley,2020-12-08,3.5,0.8,dwd_poi
-03781,Kenley,2020-12-09,5.3,2.9,dwd_poi dwd_mosmix
 03781,Kenley,2020-12-10,7.0,5.0,dwd_poi
 03781,Kenley,2020-12-11,10.1,6.4,dwd_poi
 03781,Kenley,2020-12-12,7.8,2.5,dwd_poi
@@ -28929,15 +28868,10 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2021-03-25,11.1,3.1,dwd_poi
 03781,Kenley,2021-03-26,10.4,3.4,dwd_poi
 03781,Kenley,2021-03-27,9.1,2.4,dwd_poi
-03781,Kenley,2021-03-28,11.2,7.4,dwd_poi dwd_mosmix
 03781,Kenley,2021-03-29,16.4,7.6,dwd_poi
 03781,Kenley,2021-03-30,21.6,6.5,dwd_poi
 03781,Kenley,2021-03-31,18.9,10.9,dwd_poi
-03781,Kenley,2021-04-01,14.1,5.2,dwd_mosmix dwd_poi
-03781,Kenley,2021-04-04,13.0,1.8,dwd_poi dwd_mosmix
 03781,Kenley,2021-04-05,13.0,5.0,dwd_poi
-03781,Kenley,2021-04-06,5.8,-2.3,dwd_mosmix dwd_poi
-03781,Kenley,2021-04-13,9.6,-0.9,dwd_poi dwd_mosmix
 03781,Kenley,2021-04-14,10.1,2.0,dwd_poi
 03781,Kenley,2021-04-15,8.3,-1.7,dwd_poi
 03781,Kenley,2021-04-16,9.5,-0.5,dwd_poi
@@ -28955,11 +28889,7 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2021-04-28,9.6,3.8,dwd_poi
 03781,Kenley,2021-04-29,9.4,4.1,dwd_poi
 03781,Kenley,2021-04-30,10.4,0.0,dwd_poi
-03781,Kenley,2021-05-01,10.2,0.3,dwd_mosmix dwd_poi
-03781,Kenley,2021-05-04,8.2,1.4,dwd_poi dwd_mosmix
 03781,Kenley,2021-05-05,11.3,0.9,dwd_poi
-03781,Kenley,2021-05-06,9.9,2.1,dwd_mosmix dwd_poi
-03781,Kenley,2021-05-11,13.9,7.5,dwd_mosmix dwd_poi
 03781,Kenley,2021-05-12,14.4,7.7,dwd_poi
 03781,Kenley,2021-05-13,12.9,6.4,dwd_poi
 03781,Kenley,2021-05-14,11.0,6.9,dwd_poi
@@ -29016,14 +28946,12 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2021-07-04,19.4,13.9,dwd_poi
 03781,Kenley,2021-07-05,18.2,12.9,dwd_poi
 03781,Kenley,2021-07-06,15.9,12.0,dwd_poi
-03781,Kenley,2021-07-07,17.7,11.8,dwd_poi dwd_mosmix
 03781,Kenley,2021-07-08,18.8,13.0,dwd_poi
 03781,Kenley,2021-07-09,20.6,13.5,dwd_poi
 03781,Kenley,2021-07-10,16.7,12.4,dwd_poi
 03781,Kenley,2021-07-11,19.4,11.1,dwd_poi
 03781,Kenley,2021-07-12,19.2,12.8,dwd_poi
 03781,Kenley,2021-07-13,20.5,15.0,dwd_poi
-03781,Kenley,2021-07-14,23.0,13.3,dwd_poi dwd_mosmix
 03781,Kenley,2021-07-15,20.2,13.0,dwd_poi
 03781,Kenley,2021-07-16,24.0,10.5,dwd_poi
 03781,Kenley,2021-07-17,25.4,14.3,dwd_poi
@@ -29086,7 +29014,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2021-09-12,19.0,11.3,dwd_poi
 03781,Kenley,2021-09-13,19.3,12.8,dwd_poi
 03781,Kenley,2021-09-14,18.0,14.4,dwd_poi
-03781,Kenley,2021-09-15,17.8,12.7,dwd_poi dwd_mosmix
 03781,Kenley,2021-09-16,21.1,9.7,dwd_poi
 03781,Kenley,2021-09-17,19.5,12.8,dwd_poi
 03781,Kenley,2021-09-18,21.7,14.4,dwd_poi
@@ -29110,7 +29037,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2021-10-06,14.9,8.6,dwd_poi
 03781,Kenley,2021-10-07,16.3,11.2,dwd_poi
 03781,Kenley,2021-10-08,16.3,10.4,dwd_poi
-03781,Kenley,2021-10-09,16.4,5.3,dwd_poi dwd_mosmix
 03781,Kenley,2021-10-10,15.9,7.6,dwd_poi
 03781,Kenley,2021-10-11,13.5,5.6,dwd_poi
 03781,Kenley,2021-10-12,15.0,6.4,dwd_poi
@@ -29180,7 +29106,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2021-12-15,11.4,9.8,dwd_poi
 03781,Kenley,2021-12-16,10.5,8.9,dwd_poi
 03781,Kenley,2021-12-17,8.8,5.8,dwd_poi
-03781,Kenley,2021-12-18,7.8,6.1,dwd_poi dwd_mosmix
 03781,Kenley,2021-12-19,5.6,2.3,dwd_poi
 03781,Kenley,2021-12-20,5.8,4.0,dwd_poi
 03781,Kenley,2021-12-21,4.5,0.0,dwd_poi
@@ -29211,7 +29136,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-01-15,4.8,1.9,dwd_poi
 03781,Kenley,2022-01-16,8.0,3.8,dwd_poi
 03781,Kenley,2022-01-17,7.9,0.3,dwd_poi
-03781,Kenley,2022-01-18,6.3,-0.3,dwd_poi dwd_mosmix
 03781,Kenley,2022-01-19,7.6,1.5,dwd_poi
 03781,Kenley,2022-01-20,4.1,-0.8,dwd_poi
 03781,Kenley,2022-01-21,3.7,-3.3,dwd_poi
@@ -29282,8 +29206,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-03-27,9.9,4.2,dwd_poi
 03781,Kenley,2022-03-28,15.1,0.8,dwd_poi
 03781,Kenley,2022-03-29,9.4,6.4,dwd_poi
-03781,Kenley,2022-03-30,9.3,3.9,dwd_poi dwd_mosmix
-03781,Kenley,2022-04-04,12.9,4.2,dwd_mosmix dwd_poi
 03781,Kenley,2022-04-05,13.3,9.1,dwd_poi
 03781,Kenley,2022-04-06,11.7,7.7,dwd_poi
 03781,Kenley,2022-04-07,11.0,5.2,dwd_poi
@@ -29293,7 +29215,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-04-11,16.1,5.7,dwd_poi
 03781,Kenley,2022-04-12,16.0,10.1,dwd_poi
 03781,Kenley,2022-04-13,17.2,9.2,dwd_poi
-03781,Kenley,2022-04-14,16.3,7.5,dwd_poi dwd_mosmix
 03781,Kenley,2022-04-15,20.5,7.6,dwd_poi
 03781,Kenley,2022-04-16,17.9,6.3,dwd_poi
 03781,Kenley,2022-04-17,17.1,8.2,dwd_poi
@@ -29303,7 +29224,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-04-21,15.6,5.5,dwd_poi
 03781,Kenley,2022-04-22,12.5,7.0,dwd_poi
 03781,Kenley,2022-04-23,14.7,8.5,dwd_poi
-03781,Kenley,2022-04-24,16.7,6.6,dwd_poi dwd_mosmix
 03781,Kenley,2022-04-25,12.1,5.1,dwd_poi
 03781,Kenley,2022-04-26,14.0,2.7,dwd_poi
 03781,Kenley,2022-04-27,9.7,3.9,dwd_poi
@@ -29318,7 +29238,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-05-06,21.4,9.8,dwd_poi
 03781,Kenley,2022-05-07,17.3,10.3,dwd_poi
 03781,Kenley,2022-05-08,16.5,7.9,dwd_poi
-03781,Kenley,2022-05-09,19.3,4.8,dwd_poi dwd_mosmix
 03781,Kenley,2022-05-10,18.1,12.5,dwd_poi
 03781,Kenley,2022-05-11,14.5,10.0,dwd_poi
 03781,Kenley,2022-05-12,17.0,7.3,dwd_poi
@@ -29347,7 +29266,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-06-04,16.1,11.4,dwd_poi
 03781,Kenley,2022-06-05,13.5,10.6,dwd_poi
 03781,Kenley,2022-06-06,14.9,11.2,dwd_poi
-03781,Kenley,2022-06-07,16.6,9.9,dwd_poi dwd_mosmix
 03781,Kenley,2022-06-08,19.6,12.9,dwd_poi
 03781,Kenley,2022-06-09,18.2,10.4,dwd_poi
 03781,Kenley,2022-06-10,19.8,13.1,dwd_poi
@@ -29355,14 +29273,12 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-06-12,20.3,9.9,dwd_poi
 03781,Kenley,2022-06-13,19.4,8.8,dwd_poi
 03781,Kenley,2022-06-14,21.7,8.5,dwd_poi
-03781,Kenley,2022-06-15,25.7,9.0,dwd_poi dwd_mosmix
 03781,Kenley,2022-06-16,26.2,11.3,dwd_poi
 03781,Kenley,2022-06-17,29.2,16.5,dwd_poi
 03781,Kenley,2022-06-18,23.3,11.7,dwd_poi
 03781,Kenley,2022-06-19,17.6,8.9,dwd_poi
 03781,Kenley,2022-06-20,19.9,10.1,dwd_poi
 03781,Kenley,2022-06-21,23.2,8.4,dwd_poi
-03781,Kenley,2022-06-22,23.1,8.7,dwd_poi dwd_mosmix
 03781,Kenley,2022-06-23,22.6,11.8,dwd_poi
 03781,Kenley,2022-06-24,19.3,13.1,dwd_poi
 03781,Kenley,2022-06-25,17.7,11.5,dwd_poi
@@ -29392,7 +29308,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-07-19,36.5,20.4,dwd_poi
 03781,Kenley,2022-07-20,24.9,0.2,dwd_poi
 03781,Kenley,2022-07-21,22.7,14.9,dwd_poi
-03781,Kenley,2022-07-22,19.8,15.0,dwd_poi dwd_mosmix
 03781,Kenley,2022-07-23,24.9,14.2,dwd_poi
 03781,Kenley,2022-07-24,25.0,16.1,dwd_poi
 03781,Kenley,2022-07-25,21.3,16.7,dwd_poi
@@ -29414,11 +29329,8 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-08-10,26.9,13.7,dwd_poi
 03781,Kenley,2022-08-11,29.7,15.7,dwd_poi
 03781,Kenley,2022-08-12,29.7,15.8,dwd_poi
-03781,Kenley,2022-08-13,31.2,16.0,dwd_poi dwd_mosmix
 03781,Kenley,2022-08-14,30.4,16.8,dwd_poi
 03781,Kenley,2022-08-15,27.7,16.8,dwd_poi
-03781,Kenley,2022-08-16,20.4,16.4,dwd_poi dwd_mosmix
-03781,Kenley,2022-08-17,22.2,14.9,dwd_poi dwd_mosmix
 03781,Kenley,2022-08-18,24.9,16.8,dwd_poi
 03781,Kenley,2022-08-19,23.5,15.4,dwd_poi
 03781,Kenley,2022-08-20,22.3,12.3,dwd_poi
@@ -29426,7 +29338,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-08-22,21.1,12.2,dwd_poi
 03781,Kenley,2022-08-23,23.6,17.0,dwd_poi
 03781,Kenley,2022-08-24,26.1,18.1,dwd_poi
-03781,Kenley,2022-08-25,21.5,15.1,dwd_poi dwd_mosmix
 03781,Kenley,2022-08-26,22.5,11.5,dwd_poi
 03781,Kenley,2022-08-27,22.4,12.8,dwd_poi
 03781,Kenley,2022-08-28,21.4,10.0,dwd_poi
@@ -29460,7 +29371,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-09-25,15.1,5.8,dwd_poi
 03781,Kenley,2022-09-26,13.5,9.5,dwd_poi
 03781,Kenley,2022-09-27,12.5,7.7,dwd_poi
-03781,Kenley,2022-09-28,13.0,4.0,dwd_poi dwd_mosmix
 03781,Kenley,2022-09-29,13.6,3.6,dwd_poi
 03781,Kenley,2022-09-30,15.0,6.7,dwd_poi
 03781,Kenley,2022-10-01,17.2,11.9,dwd_poi
@@ -29486,7 +29396,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-10-21,16.8,12.5,dwd_poi
 03781,Kenley,2022-10-22,16.6,11.4,dwd_poi
 03781,Kenley,2022-10-23,17.4,11.9,dwd_poi
-03781,Kenley,2022-10-24,16.0,10.5,dwd_poi dwd_mosmix
 03781,Kenley,2022-10-25,15.3,10.7,dwd_poi
 03781,Kenley,2022-10-26,17.5,13.9,dwd_poi
 03781,Kenley,2022-10-27,18.2,14.0,dwd_poi
@@ -29524,7 +29433,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2022-11-28,9.7,4.4,dwd_poi
 03781,Kenley,2022-11-29,6.2,4.1,dwd_poi
 03781,Kenley,2022-11-30,6.2,2.6,dwd_poi
-03781,Kenley,2022-12-01,6.2,3.0,dwd_poi dwd_mosmix
 03781,Kenley,2022-12-02,6.2,3.5,dwd_poi
 03781,Kenley,2022-12-03,6.0,3.5,dwd_poi
 03781,Kenley,2022-12-04,4.5,2.7,dwd_poi
@@ -29574,7 +29482,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2023-01-17,-0.4,-6.6,dwd_poi
 03781,Kenley,2023-01-18,3.3,-2.5,dwd_poi
 03781,Kenley,2023-01-19,4.0,-2.3,dwd_poi
-03781,Kenley,2023-01-20,4.6,-0.6,dwd_poi dwd_mosmix
 03781,Kenley,2023-01-21,4.4,-3.5,dwd_poi
 03781,Kenley,2023-01-22,3.6,-3.4,dwd_poi
 03781,Kenley,2023-01-23,1.9,-4.6,dwd_poi
@@ -29754,7 +29661,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2023-07-16,19.5,12.8,dwd_poi
 03781,Kenley,2023-07-17,20.8,11.8,dwd_poi
 03781,Kenley,2023-07-18,20.7,11.0,dwd_poi
-03781,Kenley,2023-07-19,21.3,14.4,dwd_poi dwd_mosmix
 03781,Kenley,2023-07-20,22.0,11.9,dwd_poi
 03781,Kenley,2023-07-21,19.3,10.9,dwd_poi
 03781,Kenley,2023-07-22,17.0,11.8,dwd_poi
@@ -29791,14 +29697,10 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2023-08-22,23.7,14.1,dwd_poi
 03781,Kenley,2023-08-23,25.1,13.6,dwd_poi
 03781,Kenley,2023-08-24,22.4,15.1,dwd_poi
-03781,Kenley,2023-08-25,17.7,12.2,dwd_mosmix dwd_poi
-03781,Kenley,2023-09-01,21.1,14.7,dwd_mosmix dwd_poi
 03781,Kenley,2023-09-02,22.1,15.6,dwd_poi
 03781,Kenley,2023-09-03,24.6,13.8,dwd_poi
 03781,Kenley,2023-09-04,27.5,14.4,dwd_poi
 03781,Kenley,2023-09-05,26.9,15.3,dwd_poi
-03781,Kenley,2023-09-06,29.3,14.7,dwd_mosmix dwd_poi
-03781,Kenley,2023-09-07,28.4,18.5,dwd_mosmix dwd_poi
 03781,Kenley,2023-09-08,28.1,17.5,dwd_poi
 03781,Kenley,2023-09-09,30.7,16.8,dwd_poi
 03781,Kenley,2023-09-10,29.6,17.8,dwd_poi
@@ -29931,7 +29833,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2024-01-15,1.4,-3.6,dwd_poi
 03781,Kenley,2024-01-16,2.7,-4.4,dwd_poi
 03781,Kenley,2024-01-17,1.4,-2.4,dwd_poi
-03781,Kenley,2024-01-18,0.8,-6.4,dwd_poi dwd_mosmix
 03781,Kenley,2024-01-19,4.5,-3.2,dwd_poi
 03781,Kenley,2024-01-20,4.6,0.0,dwd_poi
 03781,Kenley,2024-01-21,11.1,3.2,dwd_poi
@@ -30141,7 +30042,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2024-08-12,29.4,18.6,dwd_poi
 03781,Kenley,2024-08-13,23.7,13.2,dwd_poi
 03781,Kenley,2024-08-14,22.1,15.5,dwd_poi
-03781,Kenley,2024-08-15,19.2,13.4,dwd_poi dwd_mosmix
 03781,Kenley,2024-08-16,22.5,15.1,dwd_poi
 03781,Kenley,2024-08-17,21.8,10.7,dwd_poi
 03781,Kenley,2024-08-18,21.2,11.4,dwd_poi
@@ -30151,7 +30051,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2024-08-22,17.1,13.9,dwd_poi
 03781,Kenley,2024-08-23,20.4,14.7,dwd_poi
 03781,Kenley,2024-08-24,16.4,12.2,dwd_poi
-03781,Kenley,2024-08-25,17.1,9.1,dwd_mosmix dwd_poi
 03781,Kenley,2024-09-03,22.4,15.2,dwd_poi
 03781,Kenley,2024-09-04,17.6,12.9,dwd_poi
 03781,Kenley,2024-09-05,17.9,12.8,dwd_poi
@@ -30247,8 +30146,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2024-12-04,8.8,0.4,dwd_poi
 03781,Kenley,2024-12-05,13.1,7.7,dwd_poi
 03781,Kenley,2024-12-06,10.2,4.6,dwd_poi
-03781,Kenley,2024-12-07,11.7,5.0,dwd_poi dwd_mosmix
-03781,Kenley,2024-12-12,6.2,1.8,dwd_poi dwd_mosmix
 03781,Kenley,2024-12-13,5.1,2.2,dwd_poi
 03781,Kenley,2024-12-14,6.4,2.7,dwd_poi
 03781,Kenley,2024-12-15,11.1,4.6,dwd_poi
@@ -30274,7 +30171,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2025-01-04,2.4,-1.4,dwd_poi
 03781,Kenley,2025-01-05,11.6,0.3,dwd_poi
 03781,Kenley,2025-01-06,11.2,1.7,dwd_poi
-03781,Kenley,2025-01-07,3.9,-0.3,dwd_poi dwd_mosmix
 03781,Kenley,2025-01-08,2.2,-1.2,dwd_poi
 03781,Kenley,2025-01-09,2.2,-1.5,dwd_poi
 03781,Kenley,2025-01-10,2.4,-4.2,dwd_poi
@@ -30338,8 +30234,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2025-03-09,16.7,6.9,dwd_poi
 03781,Kenley,2025-03-10,13.3,6.5,dwd_poi
 03781,Kenley,2025-03-11,6.8,2.8,dwd_poi
-03781,Kenley,2025-03-12,5.3,2.2,dwd_mosmix dwd_poi
-03781,Kenley,2025-03-20,18.3,5.8,dwd_mosmix dwd_poi
 03781,Kenley,2025-03-21,16.5,10.4,dwd_poi
 03781,Kenley,2025-03-22,15.6,9.1,dwd_poi
 03781,Kenley,2025-03-23,12.4,6.9,dwd_poi
@@ -30360,8 +30254,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2025-04-07,12.3,2.8,dwd_poi
 03781,Kenley,2025-04-08,13.6,2.1,dwd_poi
 03781,Kenley,2025-04-09,10.7,2.6,dwd_poi
-03781,Kenley,2025-04-10,14.6,3.4,dwd_poi dwd_mosmix
-03781,Kenley,2025-04-11,20.7,5.9,dwd_mosmix dwd_poi
 03781,Kenley,2025-04-12,20.5,9.7,dwd_poi
 03781,Kenley,2025-04-13,15.0,7.8,dwd_poi
 03781,Kenley,2025-04-14,12.9,5.5,dwd_poi
@@ -30385,8 +30277,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2025-05-02,22.8,12.5,dwd_poi
 03781,Kenley,2025-05-03,19.5,8.9,dwd_poi
 03781,Kenley,2025-05-04,13.1,6.0,dwd_poi
-03781,Kenley,2025-05-05,10.7,3.7,dwd_mosmix dwd_poi
-03781,Kenley,2025-05-15,12.4,7.3,dwd_mosmix dwd_poi
 03781,Kenley,2025-05-16,17.1,6.4,dwd_poi
 03781,Kenley,2025-05-17,17.7,8.7,dwd_poi
 03781,Kenley,2025-05-18,14.8,8.7,dwd_poi
@@ -30442,7 +30332,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2025-07-07,19.6,12.6,dwd_poi
 03781,Kenley,2025-07-08,22.1,10.7,dwd_poi
 03781,Kenley,2025-07-09,25.1,10.7,dwd_poi
-03781,Kenley,2025-07-10,28.4,13.8,dwd_poi dwd_mosmix
 03781,Kenley,2025-07-11,28.8,17.6,dwd_poi
 03781,Kenley,2025-07-12,26.3,15.1,dwd_poi
 03781,Kenley,2025-07-13,25.5,14.3,dwd_poi
@@ -30486,7 +30375,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2025-08-20,20.5,14.1,dwd_poi
 03781,Kenley,2025-08-21,20.1,13.1,dwd_poi
 03781,Kenley,2025-08-22,20.6,7.2,dwd_poi
-03781,Kenley,2025-08-23,21.4,13.2,dwd_poi dwd_mosmix
 03781,Kenley,2025-08-24,22.6,13.1,dwd_poi
 03781,Kenley,2025-08-25,25.0,14.5,dwd_poi
 03781,Kenley,2025-08-26,22.9,16.1,dwd_poi
@@ -30496,8 +30384,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2025-08-30,18.6,12.0,dwd_poi
 03781,Kenley,2025-08-31,19.2,12.1,dwd_poi
 03781,Kenley,2025-09-01,18.6,13.2,dwd_poi
-03781,Kenley,2025-09-02,16.7,11.9,dwd_poi dwd_mosmix
-03781,Kenley,2025-09-18,18.6,15.5,dwd_mosmix dwd_poi
 03781,Kenley,2025-09-19,24.8,14.8,dwd_poi
 03781,Kenley,2025-09-20,19.9,12.8,dwd_poi
 03781,Kenley,2025-09-21,14.4,8.9,dwd_poi
@@ -30546,17 +30432,11 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2025-11-03,14.3,6.8,dwd_poi
 03781,Kenley,2025-11-04,14.6,12.2,dwd_poi
 03781,Kenley,2025-11-05,15.0,13.2,dwd_poi
-03781,Kenley,2025-11-06,14.7,12.8,dwd_mosmix dwd_poi
 03781,Kenley,2025-11-07,13.2,11.9,dwd_poi
 03781,Kenley,2025-11-08,13.3,8.1,dwd_poi
-03781,Kenley,2025-11-09,12.7,7.5,dwd_poi dwd_mosmix
 03781,Kenley,2025-11-10,12.1,7.9,dwd_poi
 03781,Kenley,2025-11-11,13.8,7.6,dwd_poi
-03781,Kenley,2025-11-12,13.9,12.7,dwd_mosmix dwd_poi
-03781,Kenley,2025-11-15,12.2,9.4,dwd_mosmix dwd_poi
 03781,Kenley,2025-11-16,9.3,5.9,dwd_poi
-03781,Kenley,2025-11-17,6.5,1.6,dwd_mosmix dwd_poi
-03781,Kenley,2025-11-18,5.5,0.6,dwd_mosmix dwd_poi
 03781,Kenley,2025-11-19,5.0,-0.5,dwd_poi
 03781,Kenley,2025-11-20,2.4,-3.0,dwd_poi
 03781,Kenley,2025-11-21,5.2,-1.2,dwd_poi
@@ -30603,8 +30483,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2026-01-01,4.2,-1.0,dwd_poi
 03781,Kenley,2026-01-02,2.0,-1.3,dwd_poi
 03781,Kenley,2026-01-03,1.1,-3.0,dwd_poi
-03781,Kenley,2026-01-04,1.1,-4.2,dwd_poi dwd_mosmix
-03781,Kenley,2026-01-07,4.8,1.6,dwd_mosmix dwd_poi
 03781,Kenley,2026-01-08,7.9,2.0,dwd_poi
 03781,Kenley,2026-01-09,5.1,0.5,dwd_poi
 03781,Kenley,2026-01-10,1.8,-2.4,dwd_poi
@@ -30638,8 +30516,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2026-02-07,9.1,6.6,dwd_poi
 03781,Kenley,2026-02-08,9.6,7.5,dwd_poi
 03781,Kenley,2026-02-09,8.2,5.8,dwd_poi
-03781,Kenley,2026-02-10,9.8,6.8,dwd_mosmix dwd_poi
-03781,Kenley,2026-02-12,8.3,6.2,dwd_mosmix dwd_poi
 03781,Kenley,2026-02-13,8.2,2.6,dwd_poi
 03781,Kenley,2026-02-14,4.5,-0.5,dwd_poi
 03781,Kenley,2026-02-15,7.6,1.8,dwd_poi
@@ -30713,13 +30589,7 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2026-04-24,16.8,4.4,dwd_poi
 03781,Kenley,2026-04-25,20.3,-0.8,dwd_poi
 03781,Kenley,2026-04-26,17.9,6.1,dwd_poi
-03781,Kenley,2026-04-27,19.0,4.4,dwd_poi dwd_mosmix
 03781,Kenley,2026-04-28,16.0,8.0,dwd_poi
-03781,Kenley,2026-04-29,15.4,6.9,dwd_mosmix dwd_poi
-03781,Kenley,2026-04-30,20.0,7.5,dwd_poi dwd_mosmix
-03781,Kenley,2026-05-01,21.9,11.5,dwd_poi dwd_mosmix
-03781,Kenley,2026-05-02,19.0,9.6,dwd_mosmix dwd_poi
-03781,Kenley,2026-05-03,17.4,11.8,dwd_poi dwd_mosmix
 03781,Kenley,2026-05-04,15.1,9.7,dwd_poi
 03781,Kenley,2026-05-05,15.3,9.6,dwd_poi
 03781,Kenley,2026-05-06,12.5,6.8,dwd_poi
@@ -30797,7 +30667,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2026-07-17,27.8,14.3,dwd_poi
 03781,Kenley,2026-07-18,21.9,15.1,dwd_poi
 03781,Kenley,2026-07-19,20.7,11.8,dwd_poi
-03781,Kenley,2026-07-20,23.5,8.3,dwd_poi dwd_mosmix
 03781,Kenley,2026-07-21,21.0,11.0,dwd_poi
 03781,Kenley,2026-07-22,25.2,15.0,dwd_poi
 03781,Kenley,2026-07-23,24.9,12.8,dwd_poi
@@ -30842,7 +30711,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2026-08-31,22.1,12.8,dwd_poi
 03781,Kenley,2026-09-01,21.6,10.9,dwd_poi
 03781,Kenley,2026-09-02,19.0,14.6,dwd_poi
-03781,Kenley,2026-09-03,23.8,17.3,dwd_poi dwd_mosmix
 03781,Kenley,2026-09-04,20.0,13.5,dwd_poi
 03781,Kenley,2026-09-05,22.1,11.9,dwd_poi
 03781,Kenley,2026-09-06,24.4,13.5,dwd_poi
@@ -30862,7 +30730,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2026-09-20,18.8,10.2,dwd_poi
 03781,Kenley,2026-09-21,21.6,8.4,dwd_poi
 03781,Kenley,2026-09-22,24.2,11.8,dwd_poi
-03781,Kenley,2026-09-23,22.1,13.0,dwd_poi dwd_mosmix
 03781,Kenley,2026-09-24,19.6,9.7,dwd_poi
 03781,Kenley,2026-09-25,22.3,11.3,dwd_poi
 03781,Kenley,2026-09-26,19.4,9.9,dwd_poi
@@ -30882,1582 +30749,6 @@ station_id,station,date,tmax_c,tmin_c,tmax_source
 03781,Kenley,2026-10-10,13.9,8.5,dwd_poi
 03781,Kenley,2026-10-11,14.4,7.8,dwd_poi
 03781,Kenley,2026-10-12,16.5,10.9,dwd_poi
-03781,Kenley,2026-10-13,18.7,11.7,dwd_mosmix dwd_poi
-EGKB0,Biggin Hill,2021-01-02,3.0,-1.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-03,4.0,-1.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-04,3.0,0.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-05,2.5,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-06,3.0,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-07,1.0,-2.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-08,0.0,-2.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-09,2.0,-2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-10,2.0,-3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-11,7.3,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-12,8.6,-0.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-13,9.0,-0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-14,9.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-15,2.0,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-16,6.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-17,6.0,2.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-18,7.5,1.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-19,10.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-20,9.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-21,8.6,2.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-22,6.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-23,3.0,-2.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-24,1.0,-3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-25,3.0,-3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-26,5.3,-1.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-27,9.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-28,12.0,7.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-29,9.3,5.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-30,5.9,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-01-31,3.1,-2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-01,3.7,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-02,11.0,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-03,8.0,4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-04,8.0,3.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-05,9.0,4.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-06,7.0,2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-07,2.3,-2.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-08,-2.1,-3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-09,-1.0,-3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-10,-1.0,-7.0,metar metno_forecast isd_lite
-EGKB0,Biggin Hill,2021-02-11,-2.0,-7.3,metar metno_forecast
-EGKB0,Biggin Hill,2021-02-12,-2.0,-5.5,metar metno_forecast
-EGKB0,Biggin Hill,2021-02-13,0.0,-6.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-14,4.3,-1.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-15,10.0,4.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-16,8.8,6.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-17,9.0,6.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-18,9.0,3.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-19,10.0,3.7,metar metno_forecast isd_lite
-EGKB0,Biggin Hill,2021-02-20,14.0,9.3,metar metno_forecast
-EGKB0,Biggin Hill,2021-02-21,13.0,9.0,metar metno_forecast isd_lite
-EGKB0,Biggin Hill,2021-02-22,10.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-23,12.0,4.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-24,13.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-25,10.7,5.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-26,10.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-02-27,10.0,1.5,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-02-28,8.0,2.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-01,8.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-02,7.0,2.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-03,8.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-04,5.3,1.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-05,5.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-06,5.0,-1.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-07,3.0,-2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-08,8.0,-1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-09,12.0,0.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-10,9.6,4.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-11,10.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-12,9.0,3.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-13,9.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-14,9.0,3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-15,9.0,4.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-16,12.0,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-17,8.0,3.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-18,8.0,3.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-19,9.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-20,8.0,0.2,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-03-21,10.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-22,13.0,3.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-23,11.0,2.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-24,11.0,3.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-25,11.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-26,11.0,3.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-27,9.0,2.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-28,11.0,7.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-03-29,17.0,6.2,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-03-30,21.0,5.7,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-03-31,20.0,8.9,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-04-01,13.4,4.0,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-04-02,9.0,2.3,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-04-03,8.0,4.0,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-04-04,13.0,2.4,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-04-05,6.2,0.8,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-04-06,6.0,-2.0,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-04-07,5.0,-2.7,isd_lite metno_forecast
-EGKB0,Biggin Hill,2021-04-08,10.0,1.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-09,12.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-10,5.9,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-11,7.0,-0.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-12,7.0,-1.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-13,10.0,-1.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-14,9.0,-0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-15,8.0,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-16,9.0,-0.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-17,10.0,-0.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-18,13.0,0.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-19,14.0,1.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-20,15.0,2.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-21,11.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-22,10.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-23,15.0,1.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-24,13.0,4.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-25,10.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-26,10.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-27,16.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-28,9.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-29,9.0,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-04-30,10.0,1.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-01,11.0,1.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-02,10.0,1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-03,11.0,3.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-04,12.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-05,11.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-06,10.0,1.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-07,12.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-08,15.0,4.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-09,18.0,10.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-10,14.0,8.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-11,15.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-12,15.0,7.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-13,12.0,6.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-14,11.0,6.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-15,13.0,7.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-16,11.0,7.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-17,14.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-18,15.0,6.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-19,16.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-20,12.0,5.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-21,11.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-22,12.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-23,12.0,4.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-24,11.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-25,14.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-26,15.0,5.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-27,18.0,6.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-28,18.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-29,18.0,9.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-30,17.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-05-31,21.0,8.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-01,23.0,10.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-02,26.0,11.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-03,21.0,14.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-04,14.4,11.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-05,21.0,10.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-06,21.0,10.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-07,21.0,11.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-08,22.0,10.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-09,24.0,10.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-10,22.0,12.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-11,22.0,14.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-12,23.0,11.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-13,24.0,11.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-14,27.0,12.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-15,22.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-16,26.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-17,19.0,16.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-18,17.1,11.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-19,14.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-20,17.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-21,12.1,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-22,15.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-23,19.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-24,20.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-25,19.0,12.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-26,19.0,9.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-27,17.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-28,20.0,14.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-29,17.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-06-30,16.0,11.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-01,20.0,10.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-02,22.0,13.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-03,19.0,14.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-04,20.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-05,18.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-06,16.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-07,19.0,12.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-08,20.0,12.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-09,21.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-10,16.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-11,19.0,10.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-12,19.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-13,21.0,14.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-14,22.0,13.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-15,20.0,13.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-16,24.0,10.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-17,25.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-18,29.0,14.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-19,29.0,16.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-20,28.0,15.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-21,27.0,15.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-22,25.0,15.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-23,20.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-24,21.0,15.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-25,21.0,14.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-26,22.0,15.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-27,19.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-28,19.0,13.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-29,20.0,11.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-30,17.0,13.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-07-31,19.0,11.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-01,19.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-02,17.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-03,19.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-04,20.0,10.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-05,19.0,12.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-06,19.0,13.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-07,17.0,12.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-08,17.0,11.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-09,18.0,12.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-10,21.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-11,21.0,11.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-12,20.0,13.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-13,20.0,12.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-14,22.0,13.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-15,21.0,13.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-16,17.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-17,17.0,10.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-18,21.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-19,19.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-20,19.0,13.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-21,19.0,14.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-22,20.0,14.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-23,19.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-24,20.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-25,21.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-26,16.0,13.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-27,18.0,11.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-28,18.0,10.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-29,17.0,9.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-30,16.0,12.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-08-31,17.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-01,17.0,11.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-02,17.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-03,20.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-04,17.0,13.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-05,23.0,13.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-06,26.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-07,27.0,16.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-08,27.0,16.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-09,21.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-10,19.0,16.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-11,21.0,13.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-12,19.0,11.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-13,19.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-14,18.0,14.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-15,18.0,12.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-16,21.0,10.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-17,19.0,12.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-18,22.0,14.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-19,18.0,13.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-20,17.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-21,20.0,9.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-22,20.0,10.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-23,19.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-24,21.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-25,19.0,12.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-26,20.0,12.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-27,16.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-28,15.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-29,14.0,7.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-09-30,14.6,6.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-01,15.0,8.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-02,16.0,7.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-03,15.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-04,15.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-05,13.4,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-06,15.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-07,16.0,10.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-08,16.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-09,16.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-10,16.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-11,14.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-12,14.0,7.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-13,15.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-14,16.0,8.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-15,13.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-16,14.0,9.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-17,15.0,10.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-18,16.0,10.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-19,18.0,15.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-20,16.5,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-21,10.7,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-22,12.0,4.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-23,12.0,4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-24,13.0,8.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-25,15.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-26,15.0,8.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-27,15.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-28,14.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-29,13.5,9.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-30,13.0,8.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-10-31,13.0,8.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-01,12.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-02,10.0,3.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-03,8.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-04,8.0,3.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-05,8.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-06,11.6,6.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-07,11.6,5.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-08,11.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-09,13.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-10,12.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-11,12.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-12,13.0,8.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-13,11.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-14,11.0,7.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-15,10.0,7.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-16,10.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-17,10.0,4.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-18,12.0,4.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-19,10.7,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-20,9.8,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-21,9.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-22,8.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-23,7.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-24,6.0,2.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-25,6.0,0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-26,7.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-27,4.0,0.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-28,3.0,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-29,4.0,-2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-11-30,10.0,4.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-01,10.0,1.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-02,4.0,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-03,8.0,-0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-04,6.0,2.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-05,5.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-06,6.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-07,7.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-08,7.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-09,7.1,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-10,7.2,1.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-11,10.0,0.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-12,12.0,9.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-13,10.4,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-14,11.0,7.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-15,11.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-16,10.0,6.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-17,8.2,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-18,8.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-19,7.3,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-20,6.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-21,4.5,-0.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-22,3.0,-0.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-23,10.0,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-24,9.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-26,9.0,5.8,metno_forecast isd_lite metar
-EGKB0,Biggin Hill,2021-12-27,10.0,6.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-28,10.2,5.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-29,14.0,6.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-30,13.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2021-12-31,13.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-01,13.0,10.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-02,11.6,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-03,9.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-04,7.0,0.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-05,4.0,-0.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-06,6.0,-3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-07,5.1,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-08,9.0,0.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-09,6.0,1.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-10,8.0,0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-11,9.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-12,7.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-13,10.0,0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-14,9.0,0.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-15,4.2,0.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-16,8.0,3.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-17,8.0,-0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-18,6.0,-1.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-19,7.0,1.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-20,4.0,-1.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-21,4.0,-2.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-22,4.0,-0.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-23,5.0,2.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-24,3.6,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-25,1.0,-1.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-26,6.0,0.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-27,10.0,3.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-28,8.6,1.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-29,11.0,4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-30,7.2,0.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-01-31,7.5,2.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-01,13.0,3.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-02,11.0,5.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-03,9.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-04,8.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-05,9.0,0.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-06,10.0,4.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-07,9.9,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-08,11.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-09,11.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-10,7.5,2.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-11,7.0,0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-12,7.0,2.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-13,9.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-14,8.4,3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-15,9.0,1.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-16,14.0,8.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-17,10.0,6.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-18,10.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-19,9.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-20,10.0,2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-21,9.0,2.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-22,12.0,3.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-23,10.0,2.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-24,7.2,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-25,9.0,1.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-26,8.0,1.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-27,8.0,1.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-02-28,11.0,4.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-01,9.2,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-02,7.0,4.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-03,11.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-04,8.2,4.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-05,6.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-06,5.0,0.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-07,6.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-08,10.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-09,10.0,6.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-10,13.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-11,11.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-12,10.0,6.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-13,10.0,5.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-14,11.0,2.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-15,13.0,4.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-16,10.0,5.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-17,12.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-18,13.0,2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-19,12.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-20,9.0,1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-21,15.0,1.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-22,17.0,6.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-23,17.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-24,17.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-25,15.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-26,15.0,4.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-27,9.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-28,14.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-29,9.1,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-30,10.0,2.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-03-31,6.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-01,7.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-02,7.0,-1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-03,8.0,-2.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-04,13.0,2.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-05,13.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-06,11.0,7.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-07,12.0,4.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-08,9.0,2.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-09,10.0,0.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-10,11.0,-0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-11,15.0,4.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-12,17.0,9.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-13,17.0,7.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-14,17.0,6.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-15,20.0,6.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-16,17.0,6.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-17,16.0,6.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-18,16.0,6.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-19,15.0,5.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-20,15.0,5.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-21,15.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-22,12.0,6.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-23,14.0,9.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-24,16.0,7.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-25,12.0,4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-26,13.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-27,9.0,4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-28,11.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-29,9.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-04-30,15.0,2.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-01,14.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-02,13.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-03,12.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-04,16.0,8.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-05,18.0,7.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-06,22.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-07,16.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-08,16.0,7.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-09,20.0,5.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-10,18.0,12.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-11,14.0,9.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-12,16.0,7.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-13,18.0,8.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-14,20.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-15,16.0,10.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-16,19.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-17,23.0,11.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-18,21.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-19,20.0,12.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-20,16.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-21,18.0,8.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-22,21.0,7.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-23,15.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-24,15.0,8.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-25,16.0,7.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-26,18.0,9.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-27,18.0,11.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-28,15.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-29,14.0,5.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-30,14.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-05-31,14.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-01,16.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-02,18.0,7.0,isd_lite metno_forecast
-EGKB0,Biggin Hill,2022-06-03,20.0,10.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-04,16.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-05,13.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-06,15.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-07,17.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-08,20.0,12.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-09,18.0,10.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-10,20.0,12.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-11,21.0,10.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-12,20.0,9.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-13,19.0,9.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-14,22.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-15,25.0,10.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-16,26.0,11.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-17,29.0,14.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-18,23.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-19,17.0,10.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-20,20.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-21,22.0,8.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-22,23.0,10.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-23,22.0,11.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-24,20.0,12.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-25,17.0,11.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-26,19.0,10.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-27,18.0,10.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-28,19.0,10.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-29,18.0,12.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-06-30,18.0,11.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-01,19.0,9.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-02,20.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-03,21.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-04,21.0,9.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-05,20.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-06,22.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-07,22.0,15.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-08,27.0,12.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-09,24.0,14.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-10,27.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-11,29.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-12,28.0,17.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-13,27.0,17.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-14,23.0,14.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-15,24.0,12.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-16,26.0,13.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-17,27.0,14.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-18,34.0,19.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-19,37.0,21.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-20,25.0,16.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-21,23.0,15.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-22,19.0,14.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-23,25.0,14.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-24,26.0,15.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-25,22.0,16.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-26,19.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-27,20.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-28,22.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-29,26.0,12.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-30,24.0,14.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-07-31,24.0,17.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-01,24.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-02,23.0,16.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-03,26.0,16.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-04,23.0,15.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-05,21.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-06,22.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-07,26.0,11.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-08,27.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-09,25.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-10,27.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-11,30.0,16.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-12,31.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-13,32.0,17.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-14,31.0,18.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-15,27.0,17.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-16,20.0,16.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-17,22.0,13.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-18,25.0,15.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-19,23.0,15.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-20,23.0,12.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-21,21.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-22,21.0,11.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-23,24.0,17.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-24,27.0,17.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-25,21.0,15.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-26,23.0,12.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-27,23.0,12.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-28,22.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-29,21.0,12.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-30,22.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-08-31,22.0,12.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-01,22.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-02,23.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-03,22.0,12.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-04,22.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-05,21.0,16.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-06,21.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-07,20.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-08,17.0,12.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-09,19.0,12.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-10,20.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-11,20.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-12,24.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-13,17.2,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-14,19.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-15,17.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-16,15.0,8.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-17,16.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-18,16.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-19,16.0,9.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-20,17.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-21,18.0,8.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-22,17.0,9.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-23,17.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-24,17.0,9.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-25,15.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-26,13.0,9.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-27,12.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-28,13.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-29,15.0,5.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-09-30,15.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-01,17.0,11.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-02,16.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-03,16.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-04,15.0,11.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-05,17.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-06,17.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-07,16.0,11.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-08,14.0,7.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-09,16.0,7.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-10,14.0,7.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-11,14.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-12,15.0,5.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-13,16.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-14,15.0,9.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-15,15.0,9.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-16,15.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-17,16.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-18,16.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-19,15.4,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-20,16.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-21,16.0,12.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-22,16.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-23,17.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-24,16.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-25,15.0,10.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-26,17.0,13.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-27,19.0,13.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-28,17.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-29,20.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-30,14.9,11.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-10-31,15.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-01,14.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-02,14.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-03,13.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-04,11.0,5.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-05,12.9,4.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-06,13.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-07,14.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-08,14.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-09,13.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-10,13.8,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-11,14.0,9.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-12,14.0,9.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-13,15.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-14,14.0,8.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-15,12.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-16,11.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-17,11.0,6.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-18,10.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-19,9.0,3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-20,10.0,2.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-21,8.0,2.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-22,9.0,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-23,11.0,4.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-24,12.0,6.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-25,11.0,6.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-26,11.0,5.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-27,12.0,8.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-28,10.0,4.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-29,6.5,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-11-30,6.0,3.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-01,8.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-02,7.0,2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-03,7.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-04,4.2,2.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-05,6.0,3.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-06,5.2,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-07,4.0,-1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-08,2.0,-3.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-09,1.0,-3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-10,4.0,-3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-11,-0.8,-4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-12,0.0,-2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-13,-1.0,-3.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-14,-1.0,-4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-15,-1.0,-6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-16,1.0,-5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-17,4.0,-2.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-18,7.9,-1.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-19,12.0,8.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-20,12.0,4.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-21,9.0,4.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-22,10.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-23,12.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-24,10.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-26,8.8,3.3,metno_forecast isd_lite metar
-EGKB0,Biggin Hill,2022-12-27,9.0,2.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-28,10.2,8.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-29,9.1,4.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-30,12.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2022-12-31,13.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-01,10.4,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-02,8.1,1.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-03,11.3,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-04,12.0,9.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-05,12.0,8.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-06,11.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-07,10.6,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-08,8.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-09,7.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-10,11.3,2.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-11,10.6,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-12,11.0,6.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-13,9.0,4.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-14,11.0,4.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-15,7.0,1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-16,3.5,-3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-17,0.0,-5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-18,3.0,-3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-19,4.0,-2.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-20,4.0,-1.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-21,4.0,-1.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-22,3.0,-3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-23,2.0,-4.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-24,3.0,1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-25,5.2,-1.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-26,6.0,2.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-27,6.0,-0.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-28,5.0,-2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-29,7.0,0.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-30,8.0,1.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-01-31,11.0,1.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-01,9.0,3.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-02,10.0,4.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-03,12.0,6.5,isd_lite metno_forecast
-EGKB0,Biggin Hill,2023-02-04,8.0,6.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-05,7.5,-0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-06,10.0,-0.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-07,7.0,-1.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-08,7.0,-3.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-09,8.0,0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-10,8.0,-1.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-11,9.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-12,7.0,4.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-13,10.0,1.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-14,12.0,3.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-15,13.0,3.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-16,11.0,6.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-17,12.0,9.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-18,12.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-19,12.0,5.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-20,10.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-21,8.2,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-22,8.0,2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-23,7.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-24,8.0,-1.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-25,6.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-26,6.0,-0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-27,7.0,-2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-02-28,6.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-01,5.0,1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-02,8.0,-3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-03,5.0,1.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-04,5.0,2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-05,3.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-06,8.0,-1.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-07,4.3,-0.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-08,2.0,-0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-09,10.0,1.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-10,7.5,-1.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-11,6.0,-2.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-12,12.0,6.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-13,12.0,8.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-14,8.3,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-15,7.0,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-16,12.0,6.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-17,12.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-18,11.0,7.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-19,9.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-20,10.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-21,11.0,7.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-22,11.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-23,13.0,7.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-24,11.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-25,12.0,6.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-26,7.1,3.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-27,9.0,1.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-28,8.9,2.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-29,13.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-30,13.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-03-31,11.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-01,9.2,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-02,10.0,2.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-03,10.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-04,12.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-05,11.0,0.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-06,12.0,5.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-07,14.0,2.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-08,13.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-09,14.0,3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-10,13.0,7.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-11,11.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-12,9.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-13,10.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-14,8.0,2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-15,13.0,4.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-16,14.0,3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-17,13.0,6.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-18,10.0,5.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-19,13.0,6.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-20,13.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-21,10.0,3.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-22,12.0,2.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-23,12.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-24,11.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-25,9.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-26,10.0,3.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-27,13.0,4.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-28,16.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-29,16.0,5.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-04-30,16.0,5.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-01,17.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-02,13.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-03,12.0,4.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-04,18.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-05,17.0,9.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-06,13.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-07,18.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-08,14.0,9.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-09,16.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-10,17.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-11,16.0,7.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-12,12.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-13,13.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-14,19.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-15,14.0,7.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-16,16.0,4.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-17,16.0,6.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-18,16.0,7.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-19,16.0,6.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-20,18.0,6.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-21,16.0,6.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-22,18.0,8.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-23,16.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-24,19.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-25,16.0,8.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-26,16.0,6.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-27,17.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-28,19.0,6.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-29,15.0,7.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-30,15.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-05-31,18.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-01,17.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-02,16.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-03,20.0,7.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-04,19.0,8.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-05,16.0,7.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-06,15.0,9.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-07,18.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-08,19.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-09,21.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-10,28.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-11,29.0,15.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-12,26.0,16.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-13,25.0,13.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-14,26.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-15,25.0,11.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-16,25.0,12.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-17,23.0,12.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-18,24.0,16.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-19,22.0,13.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-20,21.0,14.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-21,24.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-22,26.0,12.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-23,26.0,13.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-24,26.0,14.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-25,28.0,15.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-26,21.0,13.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-27,22.0,13.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-28,23.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-29,21.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-06-30,18.0,11.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-01,21.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-02,19.0,11.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-03,19.0,11.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-04,17.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-05,19.0,10.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-06,20.0,10.1,isd_lite metno_forecast
-EGKB0,Biggin Hill,2023-07-07,27.0,10.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-08,24.0,18.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-09,20.0,14.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-10,22.0,12.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-11,23.0,15.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-12,20.0,12.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-13,20.0,12.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-14,19.0,13.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-15,19.0,14.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-16,20.0,13.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-17,20.0,11.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-18,21.0,10.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-19,22.0,13.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-20,21.0,10.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-21,19.0,11.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-22,17.0,11.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-23,22.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-24,16.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-25,18.0,10.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-26,21.0,9.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-27,20.0,15.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-28,21.0,14.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-29,21.0,14.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-30,18.0,13.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-07-31,19.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-01,21.0,12.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-02,17.0,14.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-03,19.0,13.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-04,18.0,11.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-05,16.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-06,18.0,9.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-07,20.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-08,16.0,10.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-09,22.0,11.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-10,24.0,12.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-11,22.0,15.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-12,20.0,13.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-13,20.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-14,21.0,14.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-15,22.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-16,24.0,11.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-17,21.0,14.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-18,23.0,15.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-19,21.0,15.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-20,23.0,14.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-21,22.0,13.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-22,24.0,13.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-23,25.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-24,23.0,14.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-25,19.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-26,18.0,10.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-27,18.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-28,20.0,10.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-29,18.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-30,18.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-08-31,15.0,8.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-01,21.0,14.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-02,22.0,12.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-03,24.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-04,27.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-05,27.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-06,29.0,16.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-07,29.0,17.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-08,28.0,18.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-09,30.0,19.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-10,29.0,18.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-11,23.0,16.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-12,21.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-13,18.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-14,21.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-15,23.0,11.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-16,25.0,13.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-17,19.0,15.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-18,18.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-19,16.2,12.9,metar isd_lite metno_forecast
-EGKB0,Biggin Hill,2023-09-20,18.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-21,16.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-22,16.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-23,16.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-24,18.0,11.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-25,20.0,13.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-26,21.0,13.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-27,20.0,12.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-28,18.0,13.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-29,18.0,12.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-09-30,18.0,9.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-01,21.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-02,18.9,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-03,17.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-04,17.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-05,17.0,11.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-06,20.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-07,23.0,13.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-08,23.0,12.2,isd_lite metno_forecast
-EGKB0,Biggin Hill,2023-10-09,23.0,13.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-10,22.0,13.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-11,18.0,13.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-12,16.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-13,18.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-14,11.0,6.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-15,9.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-16,10.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-17,13.0,8.0,isd_lite metno_forecast
-EGKB0,Biggin Hill,2023-10-18,16.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-19,16.0,13.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-20,16.0,11.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-21,14.0,8.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-22,14.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-23,13.0,7.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-24,14.0,7.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-25,12.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-26,14.0,8.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-27,13.0,7.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-28,13.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-29,11.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-30,12.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-10-31,14.0,6.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-01,13.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-02,11.1,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-03,12.0,6.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-04,11.0,5.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-05,11.0,5.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-06,12.0,5.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-07,11.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-08,12.0,5.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-09,9.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-10,9.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-11,9.0,2.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-12,9.0,3.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-13,14.0,8.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-14,12.0,8.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-15,10.0,4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-16,7.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-17,10.0,3.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-18,14.0,7.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-19,12.0,9.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-20,11.0,7.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-21,10.0,4.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-22,10.0,3.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-23,12.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-24,10.1,1.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-25,4.0,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-26,9.2,-1.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-27,9.3,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-28,6.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-29,5.0,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-11-30,2.0,-3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-01,1.0,-2.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-02,-0.3,-3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-03,7.0,0.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-04,6.0,4.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-05,5.0,2.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-06,6.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-07,8.2,4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-08,10.0,6.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-09,13.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-10,11.0,6.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-11,10.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-12,10.0,6.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-13,7.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-14,7.0,1.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-15,8.0,3.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-16,10.0,4.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-17,9.6,6.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-18,11.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-19,12.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-20,10.0,4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-21,13.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-22,11.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-23,10.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-24,14.0,10.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-26,9.4,2.8,metno_forecast isd_lite metar
-EGKB0,Biggin Hill,2023-12-27,10.0,6.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-28,11.0,8.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-29,10.0,5.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-30,10.1,4.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2023-12-31,9.3,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-01,10.3,5.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-02,12.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-03,10.0,5.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-04,9.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-05,6.0,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-06,5.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-07,3.3,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-08,1.5,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-09,2.0,-0.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-10,4.0,-3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-11,4.6,-3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-12,4.6,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-13,3.4,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-14,4.0,0.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-15,1.2,-3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-16,3.0,-4.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-17,1.0,-2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-18,1.0,-5.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-19,4.0,-3.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-20,5.0,-0.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-21,11.0,2.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-22,11.3,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-23,11.6,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-24,11.8,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-25,11.0,4.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-26,11.0,1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-27,7.0,1.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-28,10.0,3.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-29,11.4,7.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-30,10.9,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-01-31,10.2,4.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-01,10.0,2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-02,13.0,2.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-03,12.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-04,12.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-05,10.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-06,12.0,9.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-07,10.3,2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-08,11.0,2.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-09,11.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-10,10.0,6.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-11,9.0,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-12,8.0,2.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-13,10.4,3.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-14,12.0,9.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-15,15.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-16,11.0,6.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-17,11.0,6.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-18,14.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-19,12.0,6.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-20,10.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-21,11.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-22,10.0,2.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-23,8.0,1.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-24,6.0,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-25,7.0,-1.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-26,6.0,2.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-27,7.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-28,10.0,4.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-02-29,9.7,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-01,6.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-02,7.0,0.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-03,8.0,-0.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-04,9.0,-0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-05,8.0,3.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-06,10.0,2.3,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-03-07,9.0,2.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-08,8.0,2.6,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-03-09,12.0,5.7,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-03-10,8.0,6.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-11,7.0,5.8,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-03-12,12.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-13,11.0,9.0,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-03-14,15.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-15,13.0,9.3,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-03-16,12.0,3.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-17,13.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-18,12.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-19,11.0,8.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-20,15.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-21,13.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-22,10.0,4.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-23,9.0,2.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-24,11.0,4.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-25,10.0,3.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-26,11.0,5.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-27,9.0,4.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-03-28,10.0,4.0,metar metno_forecast
-EGKB0,Biggin Hill,2024-03-29,11.0,6.0,metar metno_forecast
-EGKB0,Biggin Hill,2024-03-30,14.0,3.8,metar metno_forecast
-EGKB0,Biggin Hill,2024-03-31,12.0,4.9,metar metno_forecast
-EGKB0,Biggin Hill,2024-04-01,11.0,6.1,metar metno_forecast isd_lite
-EGKB0,Biggin Hill,2024-04-02,13.0,7.4,metar metno_forecast
-EGKB0,Biggin Hill,2024-04-03,12.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-04,14.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-05,15.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-06,17.0,12.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-07,14.0,9.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-08,15.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-09,11.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-10,12.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-11,16.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-12,19.0,9.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-13,18.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-14,13.0,6.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-15,11.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-16,11.0,4.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-17,10.0,3.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-18,12.0,2.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-19,11.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-20,9.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-21,10.0,3.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-22,8.0,1.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-23,10.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-24,9.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-25,10.0,-0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-26,10.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-27,10.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-28,11.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-29,14.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-04-30,17.0,6.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-01,17.0,7.8,metar metno_forecast
-EGKB0,Biggin Hill,2024-05-02,14.0,9.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-03,12.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-04,15.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-05,15.0,4.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-06,13.0,6.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-07,17.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-08,18.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-09,21.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-10,21.0,8.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-11,20.0,9.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-12,24.0,11.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-13,16.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-14,15.0,12.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-15,19.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-16,16.0,9.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-17,19.0,7.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-18,18.0,10.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-19,20.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-20,18.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-21,13.0,8.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-22,14.0,11.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-23,17.0,10.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-24,17.0,6.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-25,18.0,6.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-26,17.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-27,15.0,8.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-28,16.0,9.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-29,18.0,11.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-30,16.0,9.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-05-31,12.0,10.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-01,15.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-02,21.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-03,19.0,10.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-04,18.0,12.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-05,15.0,6.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-06,17.0,7.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-07,18.0,6.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-08,17.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-09,15.0,5.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-10,13.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-11,14.0,6.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-12,14.0,5.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-13,15.0,6.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-14,16.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-15,14.0,8.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-16,19.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-17,20.0,9.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-18,19.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-19,18.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-20,20.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-21,22.0,9.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-22,20.0,12.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-23,21.0,10.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-24,24.0,12.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-25,26.0,12.1,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-06-26,26.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-27,22.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-28,18.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-29,21.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-06-30,18.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-01,18.0,11.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-02,16.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-03,17.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-04,18.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-05,19.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-06,15.4,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-07,16.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-08,17.0,9.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-09,18.0,14.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-10,19.0,13.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-11,21.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-12,17.0,12.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-13,19.0,9.9,metno_forecast metar isd_lite
-EGKB0,Biggin Hill,2024-07-14,20.0,9.5,metno_forecast metar isd_lite
-EGKB0,Biggin Hill,2024-07-15,21.0,9.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-16,19.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-17,22.0,10.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-18,25.0,11.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-19,28.0,15.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-20,21.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-21,22.0,15.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-22,20.0,12.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-23,22.0,15.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-24,23.0,13.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-25,18.0,14.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-26,21.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-27,22.0,11.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-28,24.0,10.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-29,26.0,13.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-30,28.0,15.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-07-31,25.0,16.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-01,26.0,16.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-02,25.0,16.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-03,23.0,15.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-04,21.0,11.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-05,23.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-06,20.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-07,20.0,11.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-08,19.0,12.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-09,22.0,15.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-10,23.0,13.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-11,26.0,15.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-12,30.0,18.6,metar metno_forecast
-EGKB0,Biggin Hill,2024-08-13,24.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-14,22.0,15.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-15,20.0,13.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-16,22.0,15.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-17,21.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-18,21.0,11.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-19,20.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-20,21.0,13.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-21,19.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-22,17.0,14.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-23,20.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-24,16.0,12.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-08-25,18.0,9.8,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-08-26,21.0,13.2,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-09-05,18.4,12.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-06,17.0,13.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-07,18.0,11.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-08,18.0,13.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-09,16.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-10,17.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-11,15.0,7.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-12,14.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-13,15.0,5.0,metar isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-09-14,17.0,5.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-15,18.0,8.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-16,19.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-17,19.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-18,21.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-19,22.0,14.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-20,20.0,14.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-21,21.0,13.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-22,20.0,14.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-23,17.0,13.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-24,15.0,11.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-25,15.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-26,16.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-27,11.0,6.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-28,13.0,4.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-29,13.0,6.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-09-30,16.0,11.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-01,12.3,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-02,15.0,10.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-03,13.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-04,15.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-05,15.0,6.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-06,14.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-07,16.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-08,16.0,11.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-09,15.0,11.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-10,11.5,4.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-11,12.0,1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-12,14.0,6.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-13,9.0,4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-14,11.0,7.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-15,16.0,9.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-16,20.0,14.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-17,16.0,10.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-18,15.0,7.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-19,16.0,10.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-20,17.0,10.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-21,13.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-22,14.0,8.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-23,15.0,9.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-24,16.0,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-25,15.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-26,13.0,8.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-27,14.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-28,14.0,10.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-29,14.0,10.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-30,13.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-10-31,14.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-01,12.0,8.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-02,13.0,10.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-03,11.1,9.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-04,11.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-05,10.4,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-06,10.3,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-07,10.1,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-08,9.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-09,8.0,5.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-10,10.8,3.6,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-11-11,10.8,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-12,11.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-13,10.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-14,10.0,5.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-15,8.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-16,10.0,3.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-17,9.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-18,9.3,6.0,metar metno_forecast
-EGKB0,Biggin Hill,2024-11-19,10.5,-0.4,metar metno_forecast
-EGKB0,Biggin Hill,2024-11-20,4.0,-1.3,metar metno_forecast
-EGKB0,Biggin Hill,2024-11-21,2.0,-1.4,metar metno_forecast isd_lite
-EGKB0,Biggin Hill,2024-11-22,6.0,-0.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-23,13.5,-0.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-24,15.9,12.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-25,10.9,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-26,9.0,4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-27,12.0,1.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-28,6.0,-0.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-29,9.0,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-11-30,12.0,6.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-01,12.0,8.9,metar metno_forecast
-EGKB0,Biggin Hill,2024-12-02,10.6,6.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-03,6.3,1.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-04,8.3,0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-05,13.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-06,10.3,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-07,11.4,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-08,7.0,5.0,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-12-09,6.9,5.0,isd_lite metno_forecast
-EGKB0,Biggin Hill,2024-12-14,6.0,2.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-15,11.0,4.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-16,10.3,6.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-17,9.6,5.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-18,13.0,9.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-19,11.3,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-20,8.0,1.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-21,11.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-22,6.4,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-23,5.6,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-24,12.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-26,7.4,5.0,metno_forecast isd_lite metar
-EGKB0,Biggin Hill,2024-12-27,6.5,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-28,4.8,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-29,6.5,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-30,8.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2024-12-31,10.0,6.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-01,11.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-02,3.5,-2.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-03,3.0,-2.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-04,3.0,-2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-05,11.0,0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-06,11.6,1.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-07,3.0,-0.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-08,2.0,-1.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-09,2.0,-1.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-10,1.0,-4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-11,3.0,-4.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-12,4.0,-4.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-13,5.0,0.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-14,9.0,1.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-15,8.0,6.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-16,8.0,4.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-17,4.5,0.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-18,1.6,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-19,2.0,0.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-20,5.0,-1.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-21,3.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-22,3.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-23,7.0,0.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-24,10.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-25,7.0,0.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-26,8.0,0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-27,9.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-28,8.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-29,8.0,3.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-30,6.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-01-31,7.0,1.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-01,4.0,0.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-02,6.0,-0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-03,7.0,-0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-04,8.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-05,8.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-06,6.0,-1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-07,3.2,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-08,5.0,-0.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-09,4.0,-0.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-10,3.5,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-11,3.0,1.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-12,4.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-13,3.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-14,4.0,-0.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-15,4.0,0.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-16,3.0,-0.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-17,4.0,-1.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-18,5.0,-1.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-19,7.6,0.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-20,11.0,7.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-21,13.0,10.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-22,12.0,5.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-23,9.0,5.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-24,12.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-25,9.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-26,7.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-27,8.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-02-28,8.0,-0.5,metar isd_lite metno_forecast
-EGKB0,Biggin Hill,2025-03-01,7.0,-2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-02,9.0,-1.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-03,10.0,-1.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-04,11.0,1.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-05,12.0,-0.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-06,14.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-07,15.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-08,15.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-09,16.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-10,13.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-11,7.0,2.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-12,7.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-13,5.0,-0.5,isd_lite metno_forecast
-EGKB0,Biggin Hill,2025-03-14,6.0,-1.8,isd_lite metno_forecast
-EGKB0,Biggin Hill,2025-03-22,15.0,7.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-23,12.0,6.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-24,11.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-25,13.0,4.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-26,15.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-27,15.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-28,13.0,5.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-29,13.0,2.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-30,15.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-03-31,14.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-01,11.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-02,13.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-03,17.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-04,19.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-05,14.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-06,12.0,4.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-07,12.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-08,14.0,1.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-09,10.0,2.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-10,13.0,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-11,20.0,3.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-12,19.0,6.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-13,15.0,7.5,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-14,13.0,5.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-15,15.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-16,13.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-17,16.0,3.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-18,15.0,5.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-19,14.0,6.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-20,10.0,4.2,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-21,15.0,7.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-22,15.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-23,10.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-24,14.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-25,13.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-26,16.0,6.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-27,18.0,5.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-28,20.0,8.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-29,20.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-04-30,23.0,8.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-01,26.0,10.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-02,22.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-03,19.0,9.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-04,12.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-05,11.0,4.3,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-06,14.0,3.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-07,14.0,4.8,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-08,14.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-09,16.0,5.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-10,20.0,8.4,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-11,23.0,10.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-12,20.0,11.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-13,21.0,10.1,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-14,20.0,7.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-15,13.0,7.6,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-16,16.0,6.0,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-17,18.0,7.9,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-18,14.0,7.7,isd_lite metno_forecast metar
-EGKB0,Biggin Hill,2025-05-19,17.0,8.1,isd_lite metno_forecast metar
 EGKB0,Biggin Hill,2025-05-20,20.0,6.0,isd_lite
 EGKB0,Biggin Hill,2025-05-21,17.0,9.0,isd_lite
 EGKB0,Biggin Hill,2025-05-22,14.0,5.0,isd_lite
@@ -32512,7 +30803,6 @@ EGKB0,Biggin Hill,2025-07-09,24.0,12.0,isd_lite
 EGKB0,Biggin Hill,2025-07-10,28.0,16.0,isd_lite
 EGKB0,Biggin Hill,2025-07-11,28.0,17.0,isd_lite
 EGKB0,Biggin Hill,2025-07-12,26.0,15.0,isd_lite
-EGKB0,Biggin Hill,2025-07-13,25.0,14.0,isd_lite metno_forecast metar
 EGKB0,Biggin Hill,2025-07-14,23.0,15.0,isd_lite metar
 EGKB0,Biggin Hill,2025-07-15,21.0,13.0,isd_lite
 EGKB0,Biggin Hill,2025-07-16,23.0,14.0,isd_lite
@@ -32555,7 +30845,6 @@ EGKB0,Biggin Hill,2025-08-21,19.0,12.0,isd_lite
 EGKB0,Biggin Hill,2025-08-22,20.0,8.0,isd_lite
 EGKB0,Biggin Hill,2025-08-23,20.0,14.0,isd_lite
 EGKB0,Biggin Hill,2025-08-24,23.0,13.0,isd_lite metar
-EGKB0,Biggin Hill,2025-08-25,25.0,13.1,metar metno_forecast
 EGKB0,Biggin Hill,2025-08-26,23.0,16.0,metar
 EGKB0,Biggin Hill,2025-08-27,20.0,13.0,metar
 EGKB0,Biggin Hill,2025-08-28,19.0,12.0,metar
@@ -32580,17 +30869,11 @@ EGKB0,Biggin Hill,2025-09-15,17.0,13.0,metar
 EGKB0,Biggin Hill,2025-09-16,17.0,11.0,metar
 EGKB0,Biggin Hill,2025-09-17,16.0,12.0,metar
 EGKB0,Biggin Hill,2025-09-18,19.0,16.0,metar
-EGKB0,Biggin Hill,2025-09-19,25.0,14.7,metar metno_forecast
-EGKB0,Biggin Hill,2025-09-20,20.0,12.4,metar metno_forecast
-EGKB0,Biggin Hill,2025-09-21,15.0,8.3,metar metno_forecast
-EGKB0,Biggin Hill,2025-09-22,15.0,7.4,metar metno_forecast
-EGKB0,Biggin Hill,2025-09-23,15.0,6.2,metar metno_forecast
 EGKB0,Biggin Hill,2025-09-24,15.0,7.0,metar
 EGKB0,Biggin Hill,2025-09-25,17.0,7.0,metar
 EGKB0,Biggin Hill,2025-09-26,13.0,8.0,metar
 EGKB0,Biggin Hill,2025-09-27,15.0,8.0,metar
 EGKB0,Biggin Hill,2025-09-28,15.0,10.0,metar
-EGKB0,Biggin Hill,2025-09-29,16.0,6.0,metar metno_forecast
 EGKB0,Biggin Hill,2025-09-30,18.0,7.0,metar
 EGKB0,Biggin Hill,2025-10-01,16.0,10.0,metar
 EGKB0,Biggin Hill,2025-10-02,17.0,11.0,metar
@@ -32673,8 +30956,6 @@ EGKB0,Biggin Hill,2025-12-17,9.0,1.0,metar
 EGKB0,Biggin Hill,2025-12-18,11.0,9.0,metar
 EGKB0,Biggin Hill,2025-12-19,10.0,6.0,metar
 EGKB0,Biggin Hill,2025-12-20,8.0,5.0,metar
-EGKB0,Biggin Hill,2025-12-21,9.0,7.7,metno_forecast metar
-EGKB0,Biggin Hill,2025-12-22,9.0,6.4,metar metno_forecast
 EGKB0,Biggin Hill,2025-12-23,7.0,5.0,metar
 EGKB0,Biggin Hill,2025-12-24,5.0,2.0,metar
 EGKB0,Biggin Hill,2025-12-25,4.0,1.0,metar
@@ -32699,8 +30980,6 @@ EGKB0,Biggin Hill,2026-01-12,10.0,9.0,metar
 EGKB0,Biggin Hill,2026-01-13,10.0,5.0,metar
 EGKB0,Biggin Hill,2026-01-14,9.0,1.0,metar
 EGKB0,Biggin Hill,2026-01-15,9.0,5.0,metar
-EGKB0,Biggin Hill,2026-01-16,8.0,3.0,metar metno_forecast
-EGKB0,Biggin Hill,2026-01-17,9.0,6.0,metar metno_forecast
 EGKB0,Biggin Hill,2026-01-18,11.0,6.0,metar
 EGKB0,Biggin Hill,2026-01-19,9.0,7.0,metar
 EGKB0,Biggin Hill,2026-01-20,9.0,7.0,metar
@@ -32724,8 +31003,6 @@ EGKB0,Biggin Hill,2026-02-06,10.0,7.0,metar
 EGKB0,Biggin Hill,2026-02-07,9.0,6.0,metar
 EGKB0,Biggin Hill,2026-02-08,10.0,7.0,metar
 EGKB0,Biggin Hill,2026-02-09,8.0,6.0,metar
-EGKB0,Biggin Hill,2026-02-10,10.9,6.6,metno_forecast metar
-EGKB0,Biggin Hill,2026-02-12,9.0,5.6,metno_forecast metar
 EGKB0,Biggin Hill,2026-02-13,8.0,2.0,metar
 EGKB0,Biggin Hill,2026-02-14,5.0,-1.0,metar
 EGKB0,Biggin Hill,2026-02-15,8.0,2.0,metar
@@ -32772,13 +31049,8 @@ EGKB0,Biggin Hill,2026-03-27,10.0,5.0,metar
 EGKB0,Biggin Hill,2026-03-28,9.0,3.0,metar
 EGKB0,Biggin Hill,2026-03-29,9.0,2.0,metar
 EGKB0,Biggin Hill,2026-03-30,11.0,6.0,metar
-EGKB0,Biggin Hill,2026-03-31,15.4,7.0,metar metno_forecast
-EGKB0,Biggin Hill,2026-04-01,13.0,7.8,metar metno_forecast
 EGKB0,Biggin Hill,2026-04-02,10.0,5.0,metar
-EGKB0,Biggin Hill,2026-04-03,13.0,6.0,metar metno_forecast
 EGKB0,Biggin Hill,2026-04-04,13.0,7.0,metar
-EGKB0,Biggin Hill,2026-04-05,13.0,5.0,metar metno_forecast
-EGKB0,Biggin Hill,2026-04-06,14.0,2.1,metar metno_forecast
 EGKB0,Biggin Hill,2026-04-07,19.0,7.0,metar
 EGKB0,Biggin Hill,2026-04-08,24.0,11.0,metar
 EGKB0,Biggin Hill,2026-04-09,20.0,8.0,metar
@@ -32793,19 +31065,11 @@ EGKB0,Biggin Hill,2026-04-17,15.0,9.0,metar
 EGKB0,Biggin Hill,2026-04-18,15.0,8.0,metar
 EGKB0,Biggin Hill,2026-04-19,14.0,5.0,metar
 EGKB0,Biggin Hill,2026-04-20,11.0,4.0,metar
-EGKB0,Biggin Hill,2026-04-21,11.0,3.0,metar metno_forecast
 EGKB0,Biggin Hill,2026-04-22,14.0,3.0,metar
 EGKB0,Biggin Hill,2026-04-23,15.0,5.0,metar
 EGKB0,Biggin Hill,2026-04-24,16.0,5.0,metar
 EGKB0,Biggin Hill,2026-04-25,19.0,-0.0,metar
 EGKB0,Biggin Hill,2026-04-26,17.0,5.0,metar
-EGKB0,Biggin Hill,2026-04-27,19.1,5.0,metno_forecast metar
-EGKB0,Biggin Hill,2026-04-28,15.0,8.0,metar metno_forecast
-EGKB0,Biggin Hill,2026-04-29,14.1,8.0,metno_forecast metar
-EGKB0,Biggin Hill,2026-04-30,19.4,6.0,metar metno_forecast
-EGKB0,Biggin Hill,2026-05-01,22.0,11.0,metar metno_forecast
-EGKB0,Biggin Hill,2026-05-02,21.0,8.5,metno_forecast metar
-EGKB0,Biggin Hill,2026-05-03,18.7,12.0,metar metno_forecast
 EGKB0,Biggin Hill,2026-05-04,14.0,11.0,metar
 EGKB0,Biggin Hill,2026-05-05,15.0,9.0,metar
 EGKB0,Biggin Hill,2026-05-06,12.0,6.0,metar
@@ -32813,13 +31077,9 @@ EGKB0,Biggin Hill,2026-05-07,13.0,7.0,metar
 EGKB0,Biggin Hill,2026-05-08,16.0,6.0,metar
 EGKB0,Biggin Hill,2026-05-09,18.0,7.0,metar
 EGKB0,Biggin Hill,2026-05-10,11.0,4.0,metar
-EGKB0,Biggin Hill,2026-05-11,10.0,2.0,metar metno_forecast
-EGKB0,Biggin Hill,2026-05-12,15.0,2.2,metar metno_forecast
 EGKB0,Biggin Hill,2026-05-13,11.0,5.0,metar
 EGKB0,Biggin Hill,2026-05-14,10.0,5.0,metar
 EGKB0,Biggin Hill,2026-05-15,13.0,5.0,metar
-EGKB0,Biggin Hill,2026-05-16,14.0,4.0,metar metno_forecast
-EGKB0,Biggin Hill,2026-05-17,15.2,7.0,metno_forecast metar
 EGKB0,Biggin Hill,2026-05-18,13.0,7.0,metar
 EGKB0,Biggin Hill,2026-05-19,16.0,9.0,metar
 EGKB0,Biggin Hill,2026-05-20,18.0,11.0,metar
@@ -32862,8 +31122,6 @@ EGKB0,Biggin Hill,2026-06-25,29.0,18.0,metar
 EGKB0,Biggin Hill,2026-06-26,33.0,19.0,metar
 EGKB0,Biggin Hill,2026-06-27,28.0,19.0,metar
 EGKB0,Biggin Hill,2026-06-28,23.0,17.0,metar
-EGKB0,Biggin Hill,2026-06-29,22.7,12.0,metar metno_forecast
-EGKB0,Biggin Hill,2026-06-30,22.0,15.2,metno_forecast metar
 EGKB0,Biggin Hill,2026-07-01,25.0,14.0,metar
 EGKB0,Biggin Hill,2026-07-02,24.0,15.0,metar
 EGKB0,Biggin Hill,2026-07-03,24.0,12.0,metar
@@ -32900,7 +31158,6 @@ EGKB0,Biggin Hill,2026-08-02,26.0,12.0,metar
 EGKB0,Biggin Hill,2026-08-03,30.0,15.0,metar
 EGKB0,Biggin Hill,2026-08-04,28.0,16.0,metar
 EGKB0,Biggin Hill,2026-08-05,24.0,16.0,metar
-EGKB0,Biggin Hill,2026-08-06,21.0,12.0,metar metno_forecast
 EGKB0,Biggin Hill,2026-08-07,24.0,11.0,metar
 EGKB0,Biggin Hill,2026-08-08,26.0,13.0,metar
 EGKB0,Biggin Hill,2026-08-09,30.0,15.0,metar
@@ -32965,7 +31222,6 @@ EGKB0,Biggin Hill,2026-10-06,20.0,11.0,metar
 EGKB0,Biggin Hill,2026-10-07,14.0,9.0,metar
 EGKB0,Biggin Hill,2026-10-08,13.0,6.0,metar
 EGKB0,Biggin Hill,2026-10-09,18.0,10.0,metar
-EGKB0,Biggin Hill,2026-10-10,13.5,8.4,metno_forecast metar
 EGLC0,London City Airport,2007-09-26,12.0,9.0,isd_lite
 EGLC0,London City Airport,2007-09-27,14.0,8.0,isd_lite
 EGLC0,London City Airport,2007-09-29,17.0,12.0,isd_lite
@@ -37675,7 +35931,6 @@ EGLC0,London City Airport,2023-01-30,9.0,5.0,isd_lite
 EGLC0,London City Airport,2023-01-31,11.0,4.0,isd_lite metar
 EGLC0,London City Airport,2023-02-01,11.0,6.0,isd_lite metar
 EGLC0,London City Airport,2023-02-02,12.0,7.0,isd_lite metar
-EGLC0,London City Airport,2023-02-03,13.0,7.2,isd_lite metno_forecast
 EGLC0,London City Airport,2023-02-04,10.0,9.0,isd_lite metar
 EGLC0,London City Airport,2023-02-05,9.0,4.0,isd_lite metar
 EGLC0,London City Airport,2023-02-06,10.0,3.0,isd_lite metar
@@ -37781,7 +36036,6 @@ EGLC0,London City Airport,2023-05-16,17.0,9.0,isd_lite metar
 EGLC0,London City Airport,2023-05-17,18.0,10.0,isd_lite
 EGLC0,London City Airport,2023-05-18,18.0,10.0,isd_lite metar
 EGLC0,London City Airport,2023-05-19,18.0,9.0,isd_lite
-EGLC0,London City Airport,2023-05-20,18.7,8.0,isd_lite metno_forecast
 EGLC0,London City Airport,2023-05-21,18.0,9.0,isd_lite
 EGLC0,London City Airport,2023-05-22,19.0,12.0,isd_lite
 EGLC0,London City Airport,2023-05-23,18.0,10.0,isd_lite
@@ -37795,7 +36049,6 @@ EGLC0,London City Airport,2023-05-30,15.0,9.0,isd_lite
 EGLC0,London City Airport,2023-05-31,18.0,10.0,isd_lite
 EGLC0,London City Airport,2023-06-01,18.0,10.0,isd_lite metar
 EGLC0,London City Airport,2023-06-02,17.0,11.0,isd_lite
-EGLC0,London City Airport,2023-06-03,20.3,9.0,isd_lite metno_forecast metar
 EGLC0,London City Airport,2023-06-04,21.0,10.0,isd_lite
 EGLC0,London City Airport,2023-06-05,17.0,11.0,isd_lite
 EGLC0,London City Airport,2023-06-06,16.0,12.0,isd_lite
@@ -37803,7 +36056,6 @@ EGLC0,London City Airport,2023-06-07,20.0,11.0,isd_lite
 EGLC0,London City Airport,2023-06-08,21.0,11.0,isd_lite metar
 EGLC0,London City Airport,2023-06-09,24.0,11.0,isd_lite
 EGLC0,London City Airport,2023-06-10,29.0,14.0,isd_lite
-EGLC0,London City Airport,2023-06-11,31.0,17.0,isd_lite metno_forecast metar
 EGLC0,London City Airport,2023-06-12,28.0,19.0,isd_lite
 EGLC0,London City Airport,2023-06-13,27.0,15.0,isd_lite
 EGLC0,London City Airport,2023-06-14,27.0,12.0,isd_lite metar
@@ -38093,7 +36345,6 @@ EGLC0,London City Airport,2024-03-23,10.0,5.0,isd_lite
 EGLC0,London City Airport,2024-03-24,13.0,7.0,isd_lite
 EGLC0,London City Airport,2024-03-25,12.0,6.0,isd_lite
 EGLC0,London City Airport,2024-03-26,13.0,7.0,isd_lite metar
-EGLC0,London City Airport,2024-03-27,12.0,5.4,isd_lite metar metno_forecast
 EGLC0,London City Airport,2024-03-28,11.0,6.0,metar
 EGLC0,London City Airport,2024-03-29,14.0,7.0,metar
 EGLC0,London City Airport,2024-03-30,16.0,7.0,metar
@@ -38233,7 +36484,6 @@ EGLC0,London City Airport,2024-08-10,26.0,16.0,isd_lite
 EGLC0,London City Airport,2024-08-11,27.0,18.0,isd_lite metar
 EGLC0,London City Airport,2024-08-12,33.0,19.0,metar isd_lite
 EGLC0,London City Airport,2024-08-13,27.0,16.0,isd_lite
-EGLC0,London City Airport,2024-08-14,25.0,19.0,isd_lite metno_forecast metar
 EGLC0,London City Airport,2024-08-15,23.0,16.0,isd_lite
 EGLC0,London City Airport,2024-08-16,25.0,16.0,isd_lite
 EGLC0,London City Airport,2024-08-17,23.0,15.0,isd_lite
@@ -38443,7 +36693,6 @@ EGLC0,London City Airport,2025-03-08,17.0,6.0,isd_lite
 EGLC0,London City Airport,2025-03-09,16.0,7.0,isd_lite
 EGLC0,London City Airport,2025-03-10,13.0,8.0,isd_lite
 EGLC0,London City Airport,2025-03-11,8.0,5.0,isd_lite
-EGLC0,London City Airport,2025-03-12,8.0,3.3,isd_lite metno_forecast
 EGLC0,London City Airport,2025-03-13,7.0,3.0,isd_lite
 EGLC0,London City Airport,2025-03-14,8.0,1.0,isd_lite
 EGLC0,London City Airport,2025-03-15,8.0,2.0,isd_lite
@@ -38697,7 +36946,6 @@ EGLC0,London City Airport,2025-11-17,8.0,3.0,metar
 EGLC0,London City Airport,2025-11-18,7.0,1.0,metar
 EGLC0,London City Airport,2025-11-19,6.0,2.0,metar
 EGLC0,London City Airport,2025-11-20,4.0,0.0,metar
-EGLC0,London City Airport,2025-11-21,7.0,2.0,metar metno_forecast
 EGLC0,London City Airport,2025-11-22,8.0,2.0,metar
 EGLC0,London City Airport,2025-11-23,11.0,7.0,metar
 EGLC0,London City Airport,2025-11-24,7.0,6.0,metar
@@ -38727,8 +36975,6 @@ EGLC0,London City Airport,2025-12-17,11.0,3.0,metar
 EGLC0,London City Airport,2025-12-18,13.0,11.0,metar
 EGLC0,London City Airport,2025-12-19,12.0,7.0,metar
 EGLC0,London City Airport,2025-12-20,10.0,5.0,metar
-EGLC0,London City Airport,2025-12-21,10.0,7.3,metno_forecast metar
-EGLC0,London City Airport,2025-12-22,10.0,6.6,metar metno_forecast
 EGLC0,London City Airport,2025-12-23,9.0,7.0,metar
 EGLC0,London City Airport,2025-12-24,7.0,4.0,metar
 EGLC0,London City Airport,2025-12-25,6.0,4.0,metar
@@ -38778,8 +37024,6 @@ EGLC0,London City Airport,2026-02-06,12.0,8.0,metar
 EGLC0,London City Airport,2026-02-07,11.0,8.0,metar
 EGLC0,London City Airport,2026-02-08,11.0,6.0,metar
 EGLC0,London City Airport,2026-02-09,9.0,7.0,metar
-EGLC0,London City Airport,2026-02-10,11.8,7.3,metno_forecast metar
-EGLC0,London City Airport,2026-02-12,11.0,5.8,metno_forecast metar
 EGLC0,London City Airport,2026-02-13,8.0,4.0,metar
 EGLC0,London City Airport,2026-02-14,6.0,1.0,metar
 EGLC0,London City Airport,2026-02-15,9.0,3.0,metar
@@ -38831,11 +37075,8 @@ EGLC0,London City Airport,2026-04-01,14.0,9.0,metar
 EGLC0,London City Airport,2026-04-02,12.0,6.0,metar
 EGLC0,London City Airport,2026-04-03,16.0,8.0,metar
 EGLC0,London City Airport,2026-04-04,15.0,8.0,metar
-EGLC0,London City Airport,2026-04-05,14.0,8.0,metar metno_forecast
 EGLC0,London City Airport,2026-04-06,16.0,5.0,metar
 EGLC0,London City Airport,2026-04-07,17.0,6.0,metar
-EGLC0,London City Airport,2026-04-08,26.0,8.0,metar metno_forecast
-EGLC0,London City Airport,2026-04-09,20.0,10.0,metno_forecast metar
 EGLC0,London City Airport,2026-04-10,13.0,7.0,metar
 EGLC0,London City Airport,2026-04-11,14.0,9.0,metar
 EGLC0,London City Airport,2026-04-12,15.0,8.0,metar
@@ -38847,19 +37088,11 @@ EGLC0,London City Airport,2026-04-17,18.0,11.0,metar
 EGLC0,London City Airport,2026-04-18,16.0,11.0,metar
 EGLC0,London City Airport,2026-04-19,15.0,8.0,metar
 EGLC0,London City Airport,2026-04-20,13.0,6.0,metar
-EGLC0,London City Airport,2026-04-21,13.0,6.0,metar metno_forecast
 EGLC0,London City Airport,2026-04-22,15.0,7.0,metar
 EGLC0,London City Airport,2026-04-23,18.0,7.0,metar
 EGLC0,London City Airport,2026-04-24,18.0,6.0,metar
 EGLC0,London City Airport,2026-04-25,21.0,5.0,metar
 EGLC0,London City Airport,2026-04-26,17.0,8.0,metar
-EGLC0,London City Airport,2026-04-27,21.2,6.3,metno_forecast metar
-EGLC0,London City Airport,2026-04-28,16.0,9.0,metar metno_forecast
-EGLC0,London City Airport,2026-04-29,16.0,9.1,metno_forecast metar
-EGLC0,London City Airport,2026-04-30,19.2,11.0,metar metno_forecast
-EGLC0,London City Airport,2026-05-01,24.0,10.0,metar metno_forecast
-EGLC0,London City Airport,2026-05-02,22.0,10.6,metno_forecast metar
-EGLC0,London City Airport,2026-05-03,20.6,14.0,metar metno_forecast
 EGLC0,London City Airport,2026-05-04,15.0,12.0,metar
 EGLC0,London City Airport,2026-05-05,16.0,11.0,metar
 EGLC0,London City Airport,2026-05-06,13.0,8.0,metar
@@ -38905,7 +37138,6 @@ EGLC0,London City Airport,2026-06-14,21.0,13.0,metar
 EGLC0,London City Airport,2026-06-15,21.0,13.0,metar
 EGLC0,London City Airport,2026-06-16,27.0,15.0,metar
 EGLC0,London City Airport,2026-06-17,26.0,17.0,metar
-EGLC0,London City Airport,2026-06-18,26.0,17.0,metar metno_forecast
 EGLC0,London City Airport,2026-06-19,30.0,19.0,metar
 EGLC0,London City Airport,2026-06-20,25.0,18.0,metar
 EGLC0,London City Airport,2026-06-21,28.0,19.0,metar
@@ -38926,8 +37158,6 @@ EGLC0,London City Airport,2026-07-05,28.0,18.0,metar
 EGLC0,London City Airport,2026-07-06,32.0,19.0,metar
 EGLC0,London City Airport,2026-07-07,32.0,20.0,metar
 EGLC0,London City Airport,2026-07-08,33.0,21.0,metar
-EGLC0,London City Airport,2026-07-09,34.0,22.0,metar metno_forecast
-EGLC0,London City Airport,2026-07-10,29.0,20.9,metno_forecast metar
 EGLC0,London City Airport,2026-07-11,27.0,18.0,metar
 EGLC0,London City Airport,2026-07-12,28.0,17.0,metar
 EGLC0,London City Airport,2026-07-13,26.0,16.0,metar
@@ -38954,7 +37184,6 @@ EGLC0,London City Airport,2026-08-02,27.0,16.0,metar
 EGLC0,London City Airport,2026-08-03,29.0,18.0,metar
 EGLC0,London City Airport,2026-08-04,30.0,19.0,metar
 EGLC0,London City Airport,2026-08-05,25.0,19.0,metar
-EGLC0,London City Airport,2026-08-06,23.0,15.0,metar metno_forecast
 EGLC0,London City Airport,2026-08-07,26.0,14.0,metar
 EGLC0,London City Airport,2026-08-08,28.0,14.0,metar
 EGLC0,London City Airport,2026-08-09,31.0,18.0,metar
@@ -39019,4 +37248,3 @@ EGLC0,London City Airport,2026-10-06,21.0,13.0,metar
 EGLC0,London City Airport,2026-10-07,16.0,10.0,metar
 EGLC0,London City Airport,2026-10-08,15.0,8.0,metar
 EGLC0,London City Airport,2026-10-09,20.0,12.0,metar
-EGLC0,London City Airport,2026-10-10,14.8,9.8,metno_forecast metar
