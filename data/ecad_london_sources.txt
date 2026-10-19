@@ -1,0 +1,5 @@
+ 1844,105822,ROTHAMSTED                              ,GB,+51:48:21,-000:21:29, 128, TX9,19160101,20260929,   35,National Climate Information Centre (UKMO)        
+ 1859,105837,HAMPSTEAD                               ,GB,+51:33:39,-000:10:44, 137, TX9,19591231,20160716,   35,National Climate Information Centre (UKMO)        
+ 1860,105838,HEATHROW                                ,GB,+51:28:44,-000:26:56,  25, TX9,19591231,20260929,   35,National Climate Information Centre (UKMO)        
+ 1860,903772,HEATHROW                                ,GB,+51:28:59,-000:27:00,  25, TX7,19820112,20260930,    -,Synoptical message from GTS
+11112,156881,WISLEY                                  ,GB,+51:18:36,-000:28:28,  38, TX9,19040201,20260929,   35,National Climate Information Centre (UKMO)        

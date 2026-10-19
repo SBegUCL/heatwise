@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-19T19:14:56+00:00",
+ "generated_utc": "2026-10-19T19:17:46+00:00",
  "sources": {
   "metoffice_station_heathrow": {
    "url": "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/heathrowdata.txt",
@@ -16,6 +16,54 @@
   },
   "midas_open": {
    "status": "skipped: add CEDA_USERNAME and CEDA_PASSWORD repository secrets to enable"
+  },
+  "ecad_blend_tx": {
+   "tried": [
+    [
+     "https://knmi-ecad-assets-prd.s3.amazonaws.com/download/ECA_blend_tx.zip",
+     200
+    ]
+   ],
+   "bytes": 818616116,
+   "url": "https://knmi-ecad-assets-prd.s3.amazonaws.com/download/ECA_blend_tx.zip",
+   "stations": [
+    {
+     "staid": 1844,
+     "name": "ROTHAMSTED",
+     "lat": 51.8058,
+     "lon": -0.3581,
+     "km": 36.8,
+     "rows": 15890,
+     "last": "20260929"
+    },
+    {
+     "staid": 1859,
+     "name": "HAMPSTEAD",
+     "lat": 51.5608,
+     "lon": -0.1789,
+     "km": 6.9,
+     "rows": 12669,
+     "last": "20160716"
+    },
+    {
+     "staid": 1860,
+     "name": "HEATHROW",
+     "lat": 51.4789,
+     "lon": -0.4489,
+     "km": 22.5,
+     "rows": 17201,
+     "last": "20260930"
+    },
+    {
+     "staid": 11112,
+     "name": "WISLEY",
+     "lat": 51.31,
+     "lon": -0.4744,
+     "km": 32.6,
+     "rows": 15360,
+     "last": "20260929"
+    }
+   ]
   },
   "meteostat_daily": {
    "url_pattern": "https://data.meteostat.net/daily/{year}/{station}.csv.gz",
