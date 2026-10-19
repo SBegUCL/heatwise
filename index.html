@@ -154,7 +154,8 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
 .ms b{display:block;font-size:16px}
 
 /* tabs */
-.tabs{display:flex;gap:4px;border-bottom:1px solid var(--axis);margin:14px 0 0}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--axis);margin:14px 0 0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.tabs button{white-space:nowrap}
 .tabs button{font:inherit;font-size:15px;font-weight:600;background:transparent;border:0;border-bottom:3px solid transparent;color:var(--ink-2);padding:10px 14px;cursor:pointer;margin-bottom:-1px}
 .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--s1)}
 .tabpanel{padding-top:16px}
@@ -191,6 +192,10 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
 .tot td{font-weight:650;border-top:2px solid var(--axis)}
 .prompt{border:1px dashed var(--axis);border-radius:10px;padding:12px 14px;font-size:14px;background:var(--surface)}
 .prompt ol{margin:6px 0 0;padding-left:20px}
+.deckbox{border:1px solid var(--s1);border-radius:10px;padding:12px 14px;margin-top:14px;background:var(--s1-wash)}
+.deckbox h3{margin-top:0}
+.gantt text,.net text{fill:var(--ink-2);font-size:11px;font-family:inherit}
+.gantt .lbl,.net .lbl{fill:var(--ink)}
 @media print{.controls{position:static}}
 </style>
 </head>
@@ -201,14 +206,22 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
   <h1>HEATWISE: risk what-if dashboard</h1>
   <p class="lede" id="lede"></p>
   <div class="targets" id="targets"></div>
-  <p class="small" style="margin:10px 0 0">Companion workbook (register, EMV view, scenario log, decision sheet and Round 2 brief): <a href="HEATWISE_Risk_WhatIf_Workbook.xlsx" download>download .xlsx</a></p>
+  <p class="small" style="margin:10px 0 0">Read the first five tabs to understand the project, then test your options on <b>Risk what-if</b>. When your group has decided, download your 3-slide recommendation summary from <b>Risk what-if → Your scenarios</b>.</p>
   <div class="tabs" role="tablist" aria-label="Views">
-    <button role="tab" id="tabbtn-brief" aria-controls="tab-brief" aria-selected="false">Project brief</button>
+    <button role="tab" id="tabbtn-overview" aria-controls="tab-overview" aria-selected="false">Overview</button>
+    <button role="tab" id="tabbtn-stake" aria-controls="tab-stake" aria-selected="false">Stakeholders</button>
+    <button role="tab" id="tabbtn-sched" aria-controls="tab-sched" aria-selected="false">Schedule</button>
+    <button role="tab" id="tabbtn-budget" aria-controls="tab-budget" aria-selected="false">Budget &amp; cashflow</button>
+    <button role="tab" id="tabbtn-success" aria-controls="tab-success" aria-selected="false">Success</button>
     <button role="tab" id="tabbtn-whatif" aria-controls="tab-whatif" aria-selected="true">Risk what-if</button>
   </div>
 </header>
 
-<div id="tab-brief" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-brief"></div>
+<div id="tab-overview" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-overview"></div>
+<div id="tab-stake" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-stake"></div>
+<div id="tab-sched" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-sched"></div>
+<div id="tab-budget" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-budget"></div>
+<div id="tab-success" class="tabpanel hidden" role="tabpanel" aria-labelledby="tabbtn-success"></div>
 <div id="tab-whatif" class="tabpanel" role="tabpanel" aria-labelledby="tabbtn-whatif">
 <div class="controls" role="region" aria-label="Scenario controls">
   <div class="row">
@@ -317,11 +330,19 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
     <div>
       <div class="tablewrap"><table id="sctable"></table></div>
       <div class="row" style="margin-top:10px">
-        <button class="btn" id="copy">Copy rows for the workbook</button>
-        <button class="btn" id="csv">Download CSV</button>
+        <button class="btn" id="share">Copy share link</button>
         <button class="btn" id="clear">Clear saved scenarios</button>
       </div>
-      <p class="small">Scenarios are kept only in this browser. Paste the copied rows into the <b>Scenario_Log</b> sheet of the workbook (first empty row, column B).</p>
+      <p class="small">Saved scenarios stay in this browser only. To show your current settings to a teammate or your tutor, use <b>Copy share link</b>: the link opens the page with the same responses, station and round.</p>
+      <div class="deckbox">
+        <h3>Your recommendation summary (3 slides)</h3>
+        <p class="small">When your group has made its final decision, download a UCL-branded PowerPoint with your chosen scenario's figures filled in: (1) the recommendation and its forecast, (2) how you optimised the responses and the trade-offs, and (3) the residual risk the board must accept and your group reflective statement. Purple <i>[Edit: …]</i> prompts mark where to add your own words.</p>
+        <div class="row">
+          <label class="inline">Final scenario <select id="deckpick"></select></label>
+          <button class="btn primary" id="deckbtn">Download PowerPoint</button>
+        </div>
+        <p class="small" id="deckmsg" role="status"></p>
+      </div>
     </div>
   </div>
 </section>
@@ -346,9 +367,9 @@ footer{padding:16px 0 40px;font-size:12.5px;color:var(--muted)}
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-var MODEL = {"project": {"name": "HEATWISE Delivery Project", "scope": "Retrofit 20 London public buildings (schools, care homes, libraries) with cool roofs, external shading and ventilation, and open them as community cooling centres.", "start": "2027-04-05", "baseCost": 8.6, "reserve": 1.2, "budget": 9.8, "baseWeeks": 22, "deadlineWeeks": 27, "prelimsPerWeek": 35, "heatAllowanceDays": 5, "heatCostPerDay": 40, "heatWeeksPerDay": 0.25, "heatThreshold": 30, "targetBudgetConf": 0.7, "targetTimeConf": 0.6, "buildings": 20, "plannedBenefit": 13500, "benefitNote": "Whole-life (10-year) benefit: avoided heat-related harm, energy savings and learning days kept. Illustrative.", "satBase": 7.5, "satLatePerWeek": 0.25, "benefitLatePerWeek": 0.01, "utilPlanned": 0.9, "snagsBase": 6, "snagsPerFail": 12, "milestones": [{"id": "M1", "name": "Designs and surveys complete", "week": 4}, {"id": "M2", "name": "Materials on site", "week": 7}, {"id": "M3", "name": "Half of roofs complete", "week": 13}, {"id": "M4", "name": "All roofs complete", "week": 19}, {"id": "M5", "name": "Handover; cooling centres open", "week": 22}], "evm": {"week": 10, "slipWeeks": 0.8, "costOverrun": 0.05}, "reworkBase": 0.012, "failBase": 1, "heatAllowanceNote": "The 1991–2020 average at Heathrow is 5.5 days, rounded down.", "heatStation": "Heathrow", "cbs": [[420, 0, 22], [120, 0, 22], [80, 0, 22], [150, 0, 3], [60, 0, 3], [380, 0, 4], [40, 0, 4], [70, 0, 2], [2600, 2, 7], [770, 0, 22], [1900, 5, 19], [750, 8, 19], [820, 10, 20], [120, 18, 22], [60, 20, 22], [180, 16, 22], [80, 18, 22]]}, "risks": [{"id": "R1", "cat": "Weather", "owner": "Construction manager", "heat": true, "desc": "Hot days (≥30°C) stop roof work beyond the 5 weather days allowed in the programme", "p": null, "cost": null, "delay": null, "at": 14}, {"id": "R2", "cat": "Supply chain", "owner": "Procurement lead", "desc": "Cool-roof membrane supplier misses delivery dates", "p": 0.45, "cost": [150, 350, 700], "delay": [1, 3, 6], "at": 6}, {"id": "R3", "cat": "Technical / H&S", "owner": "Principal designer", "desc": "Asbestos found in older school roofs once work starts", "p": 0.4, "cost": [200, 450, 900], "delay": [1, 2, 5], "at": 8}, {"id": "R4", "cat": "Regulatory", "owner": "Planning lead", "desc": "Listed-building consent delayed at heritage sites", "p": 0.3, "cost": [50, 120, 250], "delay": [1, 3, 6], "at": 2}, {"id": "R5", "cat": "Resource", "owner": "Procurement lead", "desc": "Roofing subcontractor over-committed across London", "p": 0.3, "cost": [100, 220, 450], "delay": [0.5, 1.5, 4], "at": 10}, {"id": "R6", "cat": "Technical", "owner": "Structural engineer", "desc": "Roofs cannot carry new ventilation plant without strengthening", "p": 0.2, "cost": [150, 300, 650], "delay": [1, 2, 4], "at": 3}, {"id": "R7", "cat": "Commercial", "owner": "Cost manager", "desc": "Material price inflation above the estimate's allowance", "p": 0.5, "cost": [100, 250, 500], "delay": [0, 0, 0], "at": 12}, {"id": "R8", "cat": "Stakeholder", "owner": "Engagement lead", "desc": "Residents object to cooling-centre opening hours", "p": 0.2, "cost": [10, 30, 70], "delay": [0, 0.5, 1], "at": 21, "sat": -1.5}], "options": {"R1": [{"id": "R1a", "type": "Reduce", "name": "Early and night shifts on hot days", "cost": 110, "weeks": 0, "heatLoss": 0.4, "note": "Work 05:00–11:00 and after dark; each hot day loses 40% of a shift instead of a full shift.", "sec": {"id": "S1a", "desc": "Night-working noise complaints halt work at residential sites", "p": 0.3, "cost": [20, 50, 100], "delay": [0, 0.5, 1.5], "at": 14, "sat": -1.0}}, {"id": "R1b", "type": "Avoid", "name": "Re-sequence: roofs in spring, interiors in July–August", "cost": 40, "weeks": 0.5, "heatExposure": 0.45, "note": "Only 45% of hot days now fall during roof works; re-sequencing adds half a week.", "sec": {"id": "S1b", "desc": "Roof works squeezed into wetter spring weeks: rain delays", "p": 0.35, "cost": [40, 80, 160], "delay": [0.5, 1.5, 3], "at": 6}}, {"id": "R1c", "type": "Transfer", "name": "Parametric weather insurance", "cost": 90, "weeks": 0, "insure": 0.7, "note": "Pays 70% of heat-stoppage costs. Does not recover lost time.", "sec": {"id": "S1c", "desc": "Insurer disputes the claim (station reading vs site reading)", "p": 0.2, "cost": [20, 40, 80], "delay": [0, 0, 0], "at": 22}}], "R2": [{"id": "R2a", "type": "Avoid", "name": "Buy all membrane up front and store it", "cost": 120, "weeks": 0, "pMul": 0.2, "note": "Delivery risk mostly removed; storage and capital cost.", "sec": {"id": "S2a", "desc": "Stored membrane damaged or stolen at depot", "p": 0.15, "cost": [60, 120, 250], "delay": [0.5, 1, 3], "at": 6}}, {"id": "R2b", "type": "Reduce", "name": "Qualify a second supplier", "cost": 80, "weeks": 0, "pMul": 0.55, "impMul": 0.6, "note": "Fewer and shorter delays.", "sec": {"id": "S2b", "desc": "Two products on one roof: warranty and compatibility dispute", "p": 0.2, "cost": [40, 90, 200], "delay": [0.5, 1, 2], "at": 12, "rework": true, "bldg": 3}}, {"id": "R2c", "type": "Reduce", "name": "Specify cool-roof paint where roofs allow", "cost": 30, "weeks": 0, "impMul": 0.5, "note": "Halves dependence on membrane; paint is lower performing.", "sec": {"id": "S2c", "desc": "Painted roofs fail the thermal performance test at handover", "p": 0.3, "cost": [60, 140, 300], "delay": [0.5, 1, 2], "at": 22, "rework": true, "bldg": 6, "ben": -0.05}}], "R3": [{"id": "R3a", "type": "Reduce", "name": "Intrusive asbestos surveys before start", "cost": 90, "weeks": 1, "pMul": 0.25, "impMul": 0.8, "note": "Finds most asbestos in advance; surveys add a week.", "sec": {"id": "S3a", "desc": "Survey openings cause roof leaks in occupied buildings", "p": 0.1, "cost": [20, 50, 120], "delay": [0, 0.5, 1], "at": 4, "rework": true, "bldg": 2, "sat": -0.5}}, {"id": "R3b", "type": "Reduce", "name": "Licensed removal contractor on standby", "cost": 60, "weeks": 0, "costMul": 0.75, "delayMul": 0.4, "note": "Same chance of finding asbestos; much faster response.", "sec": null}], "R4": [{"id": "R4a", "type": "Reduce", "name": "Pre-application meetings with conservation officers", "cost": 40, "weeks": 0.5, "pMul": 0.4, "note": "Consent far more likely first time; engagement adds half a week.", "sec": {"id": "S4a", "desc": "Officers require design changes at heritage sites", "p": 0.35, "cost": [50, 100, 200], "delay": [0.5, 1, 2], "at": 2}}, {"id": "R4b", "type": "Avoid", "name": "Swap the 3 heritage sites for non-listed buildings", "cost": 60, "weeks": 1, "pMul": 0, "note": "Removes the consent risk; replacement sites need new surveys and designs.", "sec": {"id": "S4b", "desc": "Replacement sites draw objections and need fresh surveys", "p": 0.35, "cost": [30, 60, 150], "delay": [0.5, 1.5, 3], "at": 3, "sat": -0.6}}], "R5": [{"id": "R5a", "type": "Reduce", "name": "Appoint a second roofing contractor", "cost": 50, "weeks": 0, "pMul": 0.4, "note": "Spreads the work across two firms.", "sec": {"id": "S5a", "desc": "Interface problems between two contractors", "p": 0.25, "cost": [30, 60, 130], "delay": [0.5, 1, 2], "at": 10, "rework": true, "bldg": 2}}, {"id": "R5b", "type": "Reduce", "name": "On-time completion bonus", "cost": 140, "weeks": 0, "pMul": 0.3, "impMul": 0.7, "note": "Contractor prioritises HEATWISE crews.", "sec": {"id": "S5b", "desc": "Rushed work: defects and snagging at handover", "p": 0.25, "cost": [40, 90, 180], "delay": [0, 1, 2], "at": 22, "rework": true, "bldg": 5}}], "R6": [{"id": "R6a", "type": "Reduce", "name": "Intrusive structural surveys and load tests of all roofs", "cost": 80, "weeks": 0.5, "pMul": 0.35, "note": "Goes beyond the desk-based review in WBS 2.1, so strengthening is designed in where needed.", "sec": null}, {"id": "R6b", "type": "Avoid", "name": "Lightweight design: no rooftop plant", "cost": 50, "weeks": 0, "pMul": 0.1, "note": "Ventilation units go inside instead.", "sec": {"id": "S6b", "desc": "Indoor units under-perform: cooling centres miss comfort target", "p": 0.25, "cost": [30, 70, 150], "delay": [0, 0.5, 1], "at": 22, "ben": -0.08, "bldg": 4}}], "R7": [{"id": "R7a", "type": "Transfer", "name": "Fixed-price contract", "cost": 240, "weeks": 0, "costMul": 0.15, "note": "Contractor carries inflation risk for a premium.", "sec": {"id": "S7a", "desc": "Contractor becomes insolvent under the fixed price", "p": 0.06, "cost": [300, 700, 1400], "delay": [4, 8, 14], "at": 12}}, {"id": "R7b", "type": "Reduce", "name": "Forward-buy steel and insulation", "cost": 50, "weeks": 0, "costMul": 0.6, "note": "Locks in today's prices for the main materials.", "sec": {"id": "S7b", "desc": "Forward-bought materials don't match final design", "p": 0.15, "cost": [20, 50, 120], "delay": [0, 0.5, 1], "at": 8}}], "R8": [{"id": "R8a", "type": "Reduce", "name": "Co-design opening hours with residents", "cost": 25, "weeks": 0, "pMul": 0.4, "note": "Community workshops before opening.", "sec": null, "satBonus": 0.5}]}, "round2": {"week": 10, "spent": 4.76, "occurred": "R2", "r2Delay": 5, "r2Cost": 380, "heatShift": 1.35, "recovery": [{"id": "X1", "name": "Weekend working", "detail": "Recover up to 4 weeks of delay at £55k per week committed.", "costPerWeek": 55, "max": 4}, {"id": "X2", "name": "Overlap trades on site (fast-track)", "detail": "Recover up to 2 weeks at no direct cost.", "cost": 0, "recover": 2, "sec": {"id": "SX2", "desc": "Fast-tracking causes rework", "p": 0.35, "cost": [50, 120, 250], "delay": [0.5, 1, 2], "at": 14, "rework": true, "bldg": 4}}, {"id": "X3", "name": "Ask the sponsor for £0.4m client contingency", "detail": "Raises the authorised budget to £10.2m.", "budgetAdd": 0.4, "sec": {"id": "SX3", "desc": "Sponsor attaches conditions: extra assurance reviews", "p": 0.5, "cost": [10, 20, 40], "delay": [0, 0.5, 1], "at": 12}}, {"id": "X4", "name": "Start early and night shifts now", "detail": "Late adoption of R1a: same effect, £130k with a late-booking premium. Only if R1a was not chosen in Round 1.", "cost": 130, "sec": {"id": "S1a", "desc": "Night-working noise complaints halt work at residential sites", "p": 0.3, "cost": [20, 50, 100], "delay": [0, 0.5, 1.5], "at": 14, "sat": -1.0}}], "closed": ["R4", "R6"], "r2Mul": {"R2a": 0, "R2b": 0.6, "R2c": 0.5}}};
+var MODEL = {"project": {"name": "HEATWISE Delivery Project", "scope": "Retrofit 20 London public buildings (schools, care homes, libraries) with cool roofs, external shading and ventilation, and open them as community cooling centres.", "start": "2027-04-05", "baseCost": 8.6, "reserve": 1.2, "budget": 9.8, "baseWeeks": 22, "deadlineWeeks": 27, "prelimsPerWeek": 35, "heatAllowanceDays": 5, "heatCostPerDay": 40, "heatWeeksPerDay": 0.25, "heatThreshold": 30, "targetBudgetConf": 0.7, "targetTimeConf": 0.6, "buildings": 20, "plannedBenefit": 13500, "benefitNote": "Whole-life (10-year) benefit: avoided heat-related harm, energy savings and learning days kept. Illustrative.", "satBase": 7.5, "satLatePerWeek": 0.25, "benefitLatePerWeek": 0.01, "utilPlanned": 0.9, "snagsBase": 6, "snagsPerFail": 12, "milestones": [{"id": "M1", "name": "Designs and surveys complete", "week": 4}, {"id": "M2", "name": "Materials on site", "week": 7}, {"id": "M3", "name": "Half of roofs complete", "week": 13}, {"id": "M4", "name": "All roofs complete", "week": 19}, {"id": "M5", "name": "Handover; cooling centres open", "week": 22}], "evm": {"week": 10, "slipWeeks": 0.8, "costOverrun": 0.05}, "reworkBase": 0.012, "failBase": 1, "heatAllowanceNote": "The 1991–2020 average at Heathrow is 5.5 days, rounded down.", "heatStation": "Heathrow", "cbs": [[420, 0, 22], [120, 0, 22], [80, 0, 22], [150, 0, 3], [60, 0, 3], [380, 0, 4], [40, 0, 4], [70, 0, 2], [2600, 2, 7], [770, 0, 22], [1900, 5, 19], [750, 8, 19], [820, 10, 20], [120, 18, 22], [60, 20, 22], [180, 16, 22], [80, 18, 22]]}, "risks": [{"id": "R1", "cat": "Weather", "owner": "Construction manager", "heat": true, "desc": "Hot days (≥30°C) stop roof work beyond the 5 weather days allowed in the programme", "p": null, "cost": null, "delay": null, "at": 14, "short": "Hot-day stoppages"}, {"id": "R2", "cat": "Supply chain", "owner": "Procurement lead", "desc": "Cool-roof membrane supplier misses delivery dates", "p": 0.45, "cost": [150, 350, 700], "delay": [1, 3, 6], "at": 6, "short": "Membrane supply delay"}, {"id": "R3", "cat": "Technical / H&S", "owner": "Principal designer", "desc": "Asbestos found in older school roofs once work starts", "p": 0.4, "cost": [200, 450, 900], "delay": [1, 2, 5], "at": 8, "short": "Asbestos in roofs"}, {"id": "R4", "cat": "Regulatory", "owner": "Planning lead", "desc": "Listed-building consent delayed at heritage sites", "p": 0.3, "cost": [50, 120, 250], "delay": [1, 3, 6], "at": 2, "short": "Listed-building consent"}, {"id": "R5", "cat": "Resource", "owner": "Procurement lead", "desc": "Roofing subcontractor over-committed across London", "p": 0.3, "cost": [100, 220, 450], "delay": [0.5, 1.5, 4], "at": 10, "short": "Roofing contractor capacity"}, {"id": "R6", "cat": "Technical", "owner": "Structural engineer", "desc": "Roofs cannot carry new ventilation plant without strengthening", "p": 0.2, "cost": [150, 300, 650], "delay": [1, 2, 4], "at": 3, "short": "Roof strengthening for plant"}, {"id": "R7", "cat": "Commercial", "owner": "Cost manager", "desc": "Material price inflation above the estimate's allowance", "p": 0.5, "cost": [100, 250, 500], "delay": [0, 0, 0], "at": 12, "short": "Material price inflation"}, {"id": "R8", "cat": "Stakeholder", "owner": "Engagement lead", "desc": "Residents object to cooling-centre opening hours", "p": 0.2, "cost": [10, 30, 70], "delay": [0, 0.5, 1], "at": 21, "sat": -1.5, "short": "Resident objections"}], "options": {"R1": [{"id": "R1a", "type": "Reduce", "name": "Early and night shifts on hot days", "cost": 110, "weeks": 0, "heatLoss": 0.4, "note": "Work 05:00–11:00 and after dark; each hot day loses 40% of a shift instead of a full shift.", "sec": {"id": "S1a", "desc": "Night-working noise complaints halt work at residential sites", "p": 0.3, "cost": [20, 50, 100], "delay": [0, 0.5, 1.5], "at": 14, "sat": -1.0, "short": "Night-work noise complaints"}}, {"id": "R1b", "type": "Avoid", "name": "Re-sequence: roofs in spring, interiors in July–August", "cost": 40, "weeks": 0.5, "heatExposure": 0.45, "note": "Only 45% of hot days now fall during roof works; re-sequencing adds half a week.", "sec": {"id": "S1b", "desc": "Roof works squeezed into wetter spring weeks: rain delays", "p": 0.35, "cost": [40, 80, 160], "delay": [0.5, 1.5, 3], "at": 6, "short": "Spring rain delays"}}, {"id": "R1c", "type": "Transfer", "name": "Parametric weather insurance", "cost": 90, "weeks": 0, "insure": 0.7, "note": "Pays 70% of heat-stoppage costs. Does not recover lost time.", "sec": {"id": "S1c", "desc": "Insurer disputes the claim (station reading vs site reading)", "p": 0.2, "cost": [20, 40, 80], "delay": [0, 0, 0], "at": 22, "short": "Insurance claim dispute"}}], "R2": [{"id": "R2a", "type": "Avoid", "name": "Buy all membrane up front and store it", "cost": 120, "weeks": 0, "pMul": 0.2, "note": "Delivery risk mostly removed; storage and capital cost.", "sec": {"id": "S2a", "desc": "Stored membrane damaged or stolen at depot", "p": 0.15, "cost": [60, 120, 250], "delay": [0.5, 1, 3], "at": 6, "short": "Stored membrane damaged"}}, {"id": "R2b", "type": "Reduce", "name": "Qualify a second supplier", "cost": 80, "weeks": 0, "pMul": 0.55, "impMul": 0.6, "note": "Fewer and shorter delays.", "sec": {"id": "S2b", "desc": "Two products on one roof: warranty and compatibility dispute", "p": 0.2, "cost": [40, 90, 200], "delay": [0.5, 1, 2], "at": 12, "rework": true, "bldg": 3, "short": "Two-product warranty dispute"}}, {"id": "R2c", "type": "Reduce", "name": "Specify cool-roof paint where roofs allow", "cost": 30, "weeks": 0, "impMul": 0.5, "note": "Halves dependence on membrane; paint is lower performing.", "sec": {"id": "S2c", "desc": "Painted roofs fail the thermal performance test at handover", "p": 0.3, "cost": [60, 140, 300], "delay": [0.5, 1, 2], "at": 22, "rework": true, "bldg": 6, "ben": -0.05, "short": "Painted roofs fail thermal test"}}], "R3": [{"id": "R3a", "type": "Reduce", "name": "Intrusive asbestos surveys before start", "cost": 90, "weeks": 1, "pMul": 0.25, "impMul": 0.8, "note": "Finds most asbestos in advance; surveys add a week.", "sec": {"id": "S3a", "desc": "Survey openings cause roof leaks in occupied buildings", "p": 0.1, "cost": [20, 50, 120], "delay": [0, 0.5, 1], "at": 4, "rework": true, "bldg": 2, "sat": -0.5, "short": "Survey openings leak"}}, {"id": "R3b", "type": "Reduce", "name": "Licensed removal contractor on standby", "cost": 60, "weeks": 0, "costMul": 0.75, "delayMul": 0.4, "note": "Same chance of finding asbestos; much faster response.", "sec": null}], "R4": [{"id": "R4a", "type": "Reduce", "name": "Pre-application meetings with conservation officers", "cost": 40, "weeks": 0.5, "pMul": 0.4, "note": "Consent far more likely first time; engagement adds half a week.", "sec": {"id": "S4a", "desc": "Officers require design changes at heritage sites", "p": 0.35, "cost": [50, 100, 200], "delay": [0.5, 1, 2], "at": 2, "short": "Design changes demanded"}}, {"id": "R4b", "type": "Avoid", "name": "Swap the 3 heritage sites for non-listed buildings", "cost": 60, "weeks": 1, "pMul": 0, "note": "Removes the consent risk; replacement sites need new surveys and designs.", "sec": {"id": "S4b", "desc": "Replacement sites draw objections and need fresh surveys", "p": 0.35, "cost": [30, 60, 150], "delay": [0.5, 1.5, 3], "at": 3, "sat": -0.6, "short": "Replacement-site objections"}}], "R5": [{"id": "R5a", "type": "Reduce", "name": "Appoint a second roofing contractor", "cost": 50, "weeks": 0, "pMul": 0.4, "note": "Spreads the work across two firms.", "sec": {"id": "S5a", "desc": "Interface problems between two contractors", "p": 0.25, "cost": [30, 60, 130], "delay": [0.5, 1, 2], "at": 10, "rework": true, "bldg": 2, "short": "Two-contractor interfaces"}}, {"id": "R5b", "type": "Reduce", "name": "On-time completion bonus", "cost": 140, "weeks": 0, "pMul": 0.3, "impMul": 0.7, "note": "Contractor prioritises HEATWISE crews.", "sec": {"id": "S5b", "desc": "Rushed work: defects and snagging at handover", "p": 0.25, "cost": [40, 90, 180], "delay": [0, 1, 2], "at": 22, "rework": true, "bldg": 5, "short": "Rushed work: defects"}}], "R6": [{"id": "R6a", "type": "Reduce", "name": "Intrusive structural surveys and load tests of all roofs", "cost": 80, "weeks": 0.5, "pMul": 0.35, "note": "Goes beyond the desk-based review in WBS 2.1, so strengthening is designed in where needed.", "sec": null}, {"id": "R6b", "type": "Avoid", "name": "Lightweight design: no rooftop plant", "cost": 50, "weeks": 0, "pMul": 0.1, "note": "Ventilation units go inside instead.", "sec": {"id": "S6b", "desc": "Indoor units under-perform: cooling centres miss comfort target", "p": 0.25, "cost": [30, 70, 150], "delay": [0, 0.5, 1], "at": 22, "ben": -0.08, "bldg": 4, "short": "Indoor units under-perform"}}], "R7": [{"id": "R7a", "type": "Transfer", "name": "Fixed-price contract", "cost": 240, "weeks": 0, "costMul": 0.15, "note": "Contractor carries inflation risk for a premium.", "sec": {"id": "S7a", "desc": "Contractor becomes insolvent under the fixed price", "p": 0.06, "cost": [300, 700, 1400], "delay": [4, 8, 14], "at": 12, "short": "Contractor insolvency"}}, {"id": "R7b", "type": "Reduce", "name": "Forward-buy steel and insulation", "cost": 50, "weeks": 0, "costMul": 0.6, "note": "Locks in today's prices for the main materials.", "sec": {"id": "S7b", "desc": "Forward-bought materials don't match final design", "p": 0.15, "cost": [20, 50, 120], "delay": [0, 0.5, 1], "at": 8, "short": "Materials don't match design"}}], "R8": [{"id": "R8a", "type": "Reduce", "name": "Co-design opening hours with residents", "cost": 25, "weeks": 0, "pMul": 0.4, "note": "Community workshops before opening.", "sec": null, "satBonus": 0.5}]}, "round2": {"week": 10, "spent": 4.76, "occurred": "R2", "r2Delay": 5, "r2Cost": 380, "heatShift": 1.35, "recovery": [{"id": "X1", "name": "Weekend working", "detail": "Recover up to 4 weeks of delay at £55k per week committed.", "costPerWeek": 55, "max": 4}, {"id": "X2", "name": "Overlap trades on site (fast-track)", "detail": "Recover up to 2 weeks at no direct cost.", "cost": 0, "recover": 2, "sec": {"id": "SX2", "desc": "Fast-tracking causes rework", "p": 0.35, "cost": [50, 120, 250], "delay": [0.5, 1, 2], "at": 14, "rework": true, "bldg": 4, "short": "Fast-track rework"}}, {"id": "X3", "name": "Ask the sponsor for £0.4m client contingency", "detail": "Raises the authorised budget to £10.2m.", "budgetAdd": 0.4, "sec": {"id": "SX3", "desc": "Sponsor attaches conditions: extra assurance reviews", "p": 0.5, "cost": [10, 20, 40], "delay": [0, 0.5, 1], "at": 12, "short": "Sponsor conditions"}}, {"id": "X4", "name": "Start early and night shifts now", "detail": "Late adoption of R1a: same effect, £130k with a late-booking premium. Only if R1a was not chosen in Round 1.", "cost": 130, "sec": {"id": "S1a", "desc": "Night-working noise complaints halt work at residential sites", "p": 0.3, "cost": [20, 50, 100], "delay": [0, 0.5, 1.5], "at": 14, "sat": -1.0, "short": "Night-work noise complaints"}}], "closed": ["R4", "R6"], "r2Mul": {"R2a": 0, "R2b": 0.6, "R2c": 0.5}}};
 var SUMMARY = {"generated_utc":"2026-10-19T19:21:41+00:00","thresholds":[28,30,32],"season":"May-September","source":"ECA&D blended daily maximum temperature, series supplied by the Met Office National Climate Information Centre","stations":{"Rothamsted":{"area":"Hertfordshire, 37 km NW of central London","annual":[{"year":1979,"valid":148,"maxTx":28.0,"hot":{"28":1,"30":0,"32":0}},{"year":1980,"valid":148,"maxTx":27.3,"hot":{"28":0,"30":0,"32":0}},{"year":1981,"valid":147,"maxTx":27.4,"hot":{"28":0,"30":0,"32":0}},{"year":1982,"valid":147,"maxTx":27.7,"hot":{"28":0,"30":0,"32":0}},{"year":1983,"valid":144,"maxTx":30.8,"hot":{"28":11,"30":2,"32":0}},{"year":1984,"valid":143,"maxTx":29.5,"hot":{"28":3,"30":0,"32":0}},{"year":1985,"valid":149,"maxTx":26.5,"hot":{"28":0,"30":0,"32":0}},{"year":1986,"valid":146,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1987,"valid":148,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1988,"valid":146,"maxTx":27.4,"hot":{"28":0,"30":0,"32":0}},{"year":1989,"valid":145,"maxTx":31.7,"hot":{"28":6,"30":2,"32":0}},{"year":1990,"valid":148,"maxTx":33.8,"hot":{"28":9,"30":5,"32":1}},{"year":1991,"valid":145,"maxTx":27.7,"hot":{"28":0,"30":0,"32":0}},{"year":1992,"valid":148,"maxTx":27.2,"hot":{"28":0,"30":0,"32":0}},{"year":1993,"valid":142,"maxTx":26.7,"hot":{"28":0,"30":0,"32":0}},{"year":1994,"valid":144,"maxTx":30.6,"hot":{"28":5,"30":2,"32":0}},{"year":1995,"valid":147,"maxTx":31.7,"hot":{"28":18,"30":7,"32":0}},{"year":1996,"valid":148,"maxTx":30.4,"hot":{"28":6,"30":1,"32":0}},{"year":1997,"valid":146,"maxTx":30.3,"hot":{"28":9,"30":1,"32":0}},{"year":1998,"valid":145,"maxTx":28.9,"hot":{"28":2,"30":0,"32":0}},{"year":1999,"valid":147,"maxTx":30.0,"hot":{"28":3,"30":1,"32":0}},{"year":2000,"valid":144,"maxTx":29.7,"hot":{"28":2,"30":0,"32":0}},{"year":2001,"valid":147,"maxTx":29.5,"hot":{"28":5,"30":0,"32":0}},{"year":2002,"valid":146,"maxTx":30.0,"hot":{"28":3,"30":1,"32":0}},{"year":2003,"valid":150,"maxTx":36.0,"hot":{"28":12,"30":5,"32":4}},{"year":2004,"valid":144,"maxTx":29.3,"hot":{"28":3,"30":0,"32":0}},{"year":2005,"valid":138,"maxTx":30.8,"hot":{"28":7,"30":2,"32":0}},{"year":2006,"valid":147,"maxTx":33.8,"hot":{"28":15,"30":5,"32":1}},{"year":2007,"valid":138,"maxTx":27.7,"hot":{"28":0,"30":0,"32":0}},{"year":2008,"valid":144,"maxTx":27.2,"hot":{"28":0,"30":0,"32":0}},{"year":2009,"valid":147,"maxTx":27.9,"hot":{"28":0,"30":0,"32":0}},{"year":2010,"valid":141,"maxTx":29.1,"hot":{"28":1,"30":0,"32":0}},{"year":2011,"valid":139,"maxTx":29.3,"hot":{"28":1,"30":0,"32":0}},{"year":2012,"valid":144,"maxTx":29.8,"hot":{"28":4,"30":0,"32":0}},{"year":2013,"valid":141,"maxTx":31.5,"hot":{"28":5,"30":2,"32":0}},{"year":2014,"valid":146,"maxTx":30.1,"hot":{"28":1,"30":1,"32":0}},{"year":2015,"valid":145,"maxTx":33.7,"hot":{"28":3,"30":1,"32":1}},{"year":2016,"valid":144,"maxTx":31.5,"hot":{"28":7,"30":3,"32":0}},{"year":2017,"valid":145,"maxTx":31.5,"hot":{"28":5,"30":3,"32":0}},{"year":2018,"valid":144,"maxTx":32.6,"hot":{"28":16,"30":5,"32":1}},{"year":2019,"valid":149,"maxTx":36.6,"hot":{"28":8,"30":7,"32":2}},{"year":2020,"valid":143,"maxTx":34.5,"hot":{"28":10,"30":6,"32":5}},{"year":2021,"valid":150,"maxTx":29.3,"hot":{"28":4,"30":0,"32":0}},{"year":2022,"valid":145,"maxTx":38.5,"hot":{"28":12,"30":8,"32":4}},{"year":2023,"valid":149,"maxTx":30.9,"hot":{"28":11,"30":2,"32":0}},{"year":2024,"valid":146,"maxTx":31.9,"hot":{"28":4,"30":1,"32":0}},{"year":2025,"valid":145,"maxTx":31.7,"hot":{"28":12,"30":5,"32":0}},{"year":2026,"valid":147,"maxTx":35.5,"hot":{"28":27,"30":19,"32":9}}],"latestYear":2026,"latestSummer":[["2026-05-01",21.4],["2026-05-02",18.0],["2026-05-04",15.7],["2026-05-06",14.9],["2026-05-07",17.2],["2026-05-08",20.4],["2026-05-09",12.8],["2026-05-10",11.8],["2026-05-11",14.3],["2026-05-12",12.4],["2026-05-13",12.9],["2026-05-14",14.0],["2026-05-15",12.9],["2026-05-16",16.1],["2026-05-17",13.7],["2026-05-18",16.8],["2026-05-19",20.1],["2026-05-20",22.3],["2026-05-21",26.9],["2026-05-22",26.5],["2026-05-23",29.7],["2026-05-24",32.0],["2026-05-25",32.5],["2026-05-26",26.1],["2026-05-27",30.1],["2026-05-28",23.2],["2026-05-29",27.9],["2026-05-30",21.3],["2026-05-31",21.8],["2026-06-01",20.7],["2026-06-02",19.4],["2026-06-03",19.0],["2026-06-04",17.5],["2026-06-05",16.4],["2026-06-06",18.4],["2026-06-07",17.2],["2026-06-08",17.5],["2026-06-09",16.5],["2026-06-10",16.2],["2026-06-11",20.9],["2026-06-12",19.9],["2026-06-13",19.4],["2026-06-14",20.7],["2026-06-15",24.7],["2026-06-16",23.0],["2026-06-17",24.4],["2026-06-18",28.2],["2026-06-19",25.3],["2026-06-20",27.2],["2026-06-21",28.2],["2026-06-22",32.6],["2026-06-23",32.2],["2026-06-24",31.9],["2026-06-25",34.3],["2026-06-26",30.1],["2026-06-27",24.5],["2026-06-28",22.3],["2026-06-29",23.9],["2026-06-30",25.1],["2026-07-01",24.1],["2026-07-02",25.8],["2026-07-03",27.2],["2026-07-04",27.2],["2026-07-05",31.1],["2026-07-06",30.1],["2026-07-07",31.6],["2026-07-08",33.1],["2026-07-09",31.3],["2026-07-10",28.8],["2026-07-11",29.0],["2026-07-12",26.5],["2026-07-13",26.3],["2026-07-14",27.3],["2026-07-15",28.0],["2026-07-16",26.5],["2026-07-17",21.2],["2026-07-18",21.2],["2026-07-19",25.0],["2026-07-20",22.7],["2026-07-21",25.4],["2026-07-22",26.1],["2026-07-23",27.5],["2026-07-24",27.3],["2026-07-25",25.7],["2026-07-26",25.3],["2026-07-27",28.8],["2026-07-28",33.1],["2026-07-29",27.3],["2026-07-30",24.3],["2026-07-31",24.8],["2026-08-01",26.8],["2026-08-02",31.1],["2026-08-03",28.4],["2026-08-04",24.6],["2026-08-05",22.3],["2026-08-06",24.7],["2026-08-07",27.1],["2026-08-08",30.3],["2026-08-09",24.9],["2026-08-10",25.2],["2026-08-11",31.8],["2026-08-12",35.5],["2026-08-13",32.6],["2026-08-15",25.1],["2026-08-16",26.3],["2026-08-17",23.5],["2026-08-18",24.6],["2026-08-19",23.6],["2026-08-20",20.9],["2026-08-21",21.3],["2026-08-22",23.5],["2026-08-23",22.7],["2026-08-24",25.2],["2026-08-25",25.7],["2026-08-26",23.1],["2026-08-27",22.6],["2026-08-28",19.2],["2026-08-29",22.9],["2026-08-30",22.3],["2026-08-31",22.5],["2026-09-01",20.7],["2026-09-02",25.4],["2026-09-04",22.0],["2026-09-05",26.9],["2026-09-06",24.2],["2026-09-08",19.1],["2026-09-09",19.7],["2026-09-10",20.4],["2026-09-11",23.0],["2026-09-12",22.1],["2026-09-13",24.6],["2026-09-14",22.0],["2026-09-15",19.7],["2026-09-16",20.2],["2026-09-17",19.3],["2026-09-18",23.5],["2026-09-19",19.6],["2026-09-20",22.7],["2026-09-21",23.7],["2026-09-22",22.5],["2026-09-23",20.8],["2026-09-24",22.7],["2026-09-25",20.9],["2026-09-26",22.1],["2026-09-27",19.1],["2026-09-28",25.0],["2026-09-29",23.9]]},"Hampstead":{"area":"North London (closed 2016)","annual":[{"year":1979,"valid":147,"maxTx":29.6,"hot":{"28":1,"30":0,"32":0}},{"year":1980,"valid":147,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1981,"valid":145,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1982,"valid":145,"maxTx":28.0,"hot":{"28":1,"30":0,"32":0}},{"year":1983,"valid":147,"maxTx":32.1,"hot":{"28":9,"30":4,"32":1}},{"year":1984,"valid":140,"maxTx":30.2,"hot":{"28":5,"30":1,"32":0}},{"year":1985,"valid":144,"maxTx":26.7,"hot":{"28":0,"30":0,"32":0}},{"year":1986,"valid":148,"maxTx":28.1,"hot":{"28":1,"30":0,"32":0}},{"year":1987,"valid":148,"maxTx":27.9,"hot":{"28":0,"30":0,"32":0}},{"year":1988,"valid":149,"maxTx":26.8,"hot":{"28":0,"30":0,"32":0}},{"year":1989,"valid":141,"maxTx":31.8,"hot":{"28":8,"30":2,"32":0}},{"year":1990,"valid":142,"maxTx":34.6,"hot":{"28":9,"30":5,"32":2}},{"year":1991,"valid":146,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1992,"valid":148,"maxTx":28.0,"hot":{"28":1,"30":0,"32":0}},{"year":1993,"valid":140,"maxTx":27.1,"hot":{"28":0,"30":0,"32":0}},{"year":1994,"valid":146,"maxTx":31.3,"hot":{"28":7,"30":2,"32":0}},{"year":1995,"valid":146,"maxTx":33.4,"hot":{"28":20,"30":9,"32":2}},{"year":1996,"valid":148,"maxTx":30.8,"hot":{"28":6,"30":4,"32":0}},{"year":1997,"valid":146,"maxTx":29.9,"hot":{"28":8,"30":0,"32":0}},{"year":1998,"valid":146,"maxTx":28.9,"hot":{"28":4,"30":0,"32":0}},{"year":1999,"valid":146,"maxTx":30.1,"hot":{"28":7,"30":1,"32":0}},{"year":2000,"valid":148,"maxTx":30.5,"hot":{"28":2,"30":1,"32":0}},{"year":2001,"valid":144,"maxTx":30.8,"hot":{"28":8,"30":2,"32":0}},{"year":2002,"valid":148,"maxTx":30.8,"hot":{"28":4,"30":2,"32":0}},{"year":2003,"valid":149,"maxTx":37.4,"hot":{"28":15,"30":9,"32":4}},{"year":2004,"valid":144,"maxTx":30.8,"hot":{"28":8,"30":2,"32":0}},{"year":2005,"valid":153,"maxTx":31.8,"hot":{"28":11,"30":4,"32":0}},{"year":2006,"valid":153,"maxTx":34.4,"hot":{"28":21,"30":10,"32":2}},{"year":2007,"valid":153,"maxTx":28.9,"hot":{"28":1,"30":0,"32":0}},{"year":2008,"valid":153,"maxTx":28.3,"hot":{"28":2,"30":0,"32":0}},{"year":2009,"valid":149,"maxTx":28.4,"hot":{"28":1,"30":0,"32":0}},{"year":2010,"valid":148,"maxTx":29.9,"hot":{"28":4,"30":0,"32":0}},{"year":2011,"valid":147,"maxTx":30.9,"hot":{"28":5,"30":1,"32":0}},{"year":2012,"valid":145,"maxTx":29.6,"hot":{"28":4,"30":0,"32":0}},{"year":2013,"valid":147,"maxTx":33.0,"hot":{"28":11,"30":5,"32":2}},{"year":2014,"valid":150,"maxTx":30.5,"hot":{"28":3,"30":1,"32":0}},{"year":2015,"valid":147,"maxTx":34.2,"hot":{"28":3,"30":1,"32":1}},{"year":2016,"valid":75,"maxTx":26.4,"hot":{"28":0,"30":0,"32":0}},{"year":2017,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2018,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2019,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2020,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2021,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2022,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2023,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2024,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2025,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2026,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}}],"latestYear":2016,"latestSummer":[["2016-05-01",17.1],["2016-05-02",14.9],["2016-05-03",17.8],["2016-05-04",20.0],["2016-05-05",22.0],["2016-05-06",23.9],["2016-05-07",26.1],["2016-05-08",24.3],["2016-05-10",18.1],["2016-05-11",23.4],["2016-05-12",16.9],["2016-05-13",13.7],["2016-05-14",17.0],["2016-05-15",17.8],["2016-05-16",17.6],["2016-05-17",14.0],["2016-05-18",17.6],["2016-05-19",18.6],["2016-05-20",17.0],["2016-05-21",18.9],["2016-05-22",19.7],["2016-05-23",16.3],["2016-05-24",15.0],["2016-05-25",20.1],["2016-05-26",20.8],["2016-05-27",19.5],["2016-05-28",18.7],["2016-05-29",16.2],["2016-05-31",12.3],["2016-06-01",12.0],["2016-06-02",13.3],["2016-06-03",18.1],["2016-06-04",23.1],["2016-06-05",23.4],["2016-06-06",24.5],["2016-06-07",24.5],["2016-06-08",21.3],["2016-06-09",24.0],["2016-06-10",21.4],["2016-06-11",19.8],["2016-06-12",18.2],["2016-06-13",17.1],["2016-06-14",19.0],["2016-06-15",19.6],["2016-06-16",20.0],["2016-06-17",17.2],["2016-06-18",20.1],["2016-06-19",21.3],["2016-06-20",20.4],["2016-06-21",20.8],["2016-06-22",21.2],["2016-06-23",21.4],["2016-06-24",20.3],["2016-06-25",20.6],["2016-06-26",21.3],["2016-06-27",20.2],["2016-06-28",16.5],["2016-06-29",20.1],["2016-06-30",18.1],["2016-07-01",19.6],["2016-07-02",20.7],["2016-07-03",21.2],["2016-07-04",20.6],["2016-07-05",21.7],["2016-07-06",22.6],["2016-07-07",22.5],["2016-07-08",22.6],["2016-07-09",21.6],["2016-07-10",20.6],["2016-07-11",18.3],["2016-07-12",18.8],["2016-07-13",20.4],["2016-07-14",18.8],["2016-07-15",25.5],["2016-07-16",26.4]]},"Heathrow":{"area":"West London (airport)","annual":[{"year":1979,"valid":150,"maxTx":29.9,"hot":{"28":1,"30":0,"32":0}},{"year":1980,"valid":147,"maxTx":29.0,"hot":{"28":1,"30":0,"32":0}},{"year":1981,"valid":148,"maxTx":28.8,"hot":{"28":1,"30":0,"32":0}},{"year":1982,"valid":153,"maxTx":29.3,"hot":{"28":5,"30":0,"32":0}},{"year":1983,"valid":153,"maxTx":32.8,"hot":{"28":19,"30":9,"32":2}},{"year":1984,"valid":153,"maxTx":31.7,"hot":{"28":10,"30":4,"32":0}},{"year":1985,"valid":153,"maxTx":29.9,"hot":{"28":3,"30":0,"32":0}},{"year":1986,"valid":153,"maxTx":30.6,"hot":{"28":8,"30":3,"32":0}},{"year":1987,"valid":153,"maxTx":29.2,"hot":{"28":5,"30":0,"32":0}},{"year":1988,"valid":153,"maxTx":29.1,"hot":{"28":1,"30":0,"32":0}},{"year":1989,"valid":152,"maxTx":34.2,"hot":{"28":19,"30":7,"32":2}},{"year":1990,"valid":150,"maxTx":36.5,"hot":{"28":15,"30":12,"32":7}},{"year":1991,"valid":153,"maxTx":29.7,"hot":{"28":3,"30":0,"32":0}},{"year":1992,"valid":153,"maxTx":30.2,"hot":{"28":4,"30":1,"32":0}},{"year":1993,"valid":153,"maxTx":28.4,"hot":{"28":3,"30":0,"32":0}},{"year":1994,"valid":153,"maxTx":33.1,"hot":{"28":13,"30":8,"32":3}},{"year":1995,"valid":153,"maxTx":34.3,"hot":{"28":28,"30":17,"32":7}},{"year":1996,"valid":153,"maxTx":31.9,"hot":{"28":13,"30":7,"32":0}},{"year":1997,"valid":153,"maxTx":31.5,"hot":{"28":10,"30":3,"32":0}},{"year":1998,"valid":153,"maxTx":31.2,"hot":{"28":5,"30":1,"32":0}},{"year":1999,"valid":153,"maxTx":32.7,"hot":{"28":10,"30":4,"32":2}},{"year":2000,"valid":153,"maxTx":31.5,"hot":{"28":3,"30":3,"32":0}},{"year":2001,"valid":153,"maxTx":31.9,"hot":{"28":15,"30":8,"32":0}},{"year":2002,"valid":153,"maxTx":32.5,"hot":{"28":4,"30":2,"32":1}},{"year":2003,"valid":153,"maxTx":37.9,"hot":{"28":19,"30":10,"32":7}},{"year":2004,"valid":153,"maxTx":30.6,"hot":{"28":9,"30":3,"32":0}},{"year":2005,"valid":153,"maxTx":32.6,"hot":{"28":13,"30":6,"32":1}},{"year":2006,"valid":153,"maxTx":35.5,"hot":{"28":23,"30":15,"32":6}},{"year":2007,"valid":153,"maxTx":29.0,"hot":{"28":1,"30":0,"32":0}},{"year":2008,"valid":153,"maxTx":29.5,"hot":{"28":3,"30":0,"32":0}},{"year":2009,"valid":153,"maxTx":30.9,"hot":{"28":7,"30":3,"32":0}},{"year":2010,"valid":153,"maxTx":31.2,"hot":{"28":11,"30":2,"32":0}},{"year":2011,"valid":153,"maxTx":31.2,"hot":{"28":10,"30":4,"32":0}},{"year":2012,"valid":153,"maxTx":30.5,"hot":{"28":6,"30":3,"32":0}},{"year":2013,"valid":153,"maxTx":34.1,"hot":{"28":16,"30":6,"32":2}},{"year":2014,"valid":153,"maxTx":30.3,"hot":{"28":6,"30":1,"32":0}},{"year":2015,"valid":153,"maxTx":36.7,"hot":{"28":5,"30":5,"32":3}},{"year":2016,"valid":153,"maxTx":33.2,"hot":{"28":11,"30":6,"32":3}},{"year":2017,"valid":152,"maxTx":34.5,"hot":{"28":9,"30":7,"32":3}},{"year":2018,"valid":151,"maxTx":35.0,"hot":{"28":32,"30":19,"32":5}},{"year":2019,"valid":153,"maxTx":38.0,"hot":{"28":9,"30":9,"32":8}},{"year":2020,"valid":153,"maxTx":37.8,"hot":{"28":19,"30":12,"32":10}},{"year":2021,"valid":145,"maxTx":32.2,"hot":{"28":12,"30":6,"32":1}},{"year":2022,"valid":146,"maxTx":40.2,"hot":{"28":22,"30":11,"32":7}},{"year":2023,"valid":149,"maxTx":33.0,"hot":{"28":17,"30":10,"32":2}},{"year":2024,"valid":145,"maxTx":33.0,"hot":{"28":14,"30":5,"32":2}},{"year":2025,"valid":147,"maxTx":33.9,"hot":{"28":21,"30":14,"32":6}},{"year":2026,"valid":150,"maxTx":37.7,"hot":{"28":48,"30":31,"32":18}}],"latestYear":2026,"latestSummer":[["2026-05-01",23.1],["2026-05-02",19.6],["2026-05-03",16.2],["2026-05-04",16.7],["2026-05-05",14.6],["2026-05-06",17.6],["2026-05-07",19.3],["2026-05-08",22.1],["2026-05-10",13.4],["2026-05-11",17.0],["2026-05-12",13.0],["2026-05-13",14.7],["2026-05-14",15.0],["2026-05-15",16.1],["2026-05-16",18.6],["2026-05-17",16.5],["2026-05-18",19.1],["2026-05-19",21.8],["2026-05-20",24.6],["2026-05-21",28.4],["2026-05-22",29.7],["2026-05-23",32.1],["2026-05-24",34.4],["2026-05-25",35.0],["2026-05-26",28.6],["2026-05-27",32.0],["2026-05-28",26.1],["2026-05-29",30.1],["2026-05-30",24.0],["2026-05-31",24.2],["2026-06-01",20.9],["2026-06-02",20.8],["2026-06-03",20.5],["2026-06-04",18.9],["2026-06-05",17.3],["2026-06-06",19.0],["2026-06-07",17.5],["2026-06-08",20.6],["2026-06-09",19.3],["2026-06-10",17.3],["2026-06-11",22.9],["2026-06-12",22.4],["2026-06-13",21.3],["2026-06-14",23.3],["2026-06-15",27.1],["2026-06-16",26.6],["2026-06-17",25.7],["2026-06-18",30.3],["2026-06-19",26.4],["2026-06-20",31.8],["2026-06-21",30.0],["2026-06-22",34.3],["2026-06-23",35.3],["2026-06-24",33.1],["2026-06-25",36.4],["2026-06-26",31.7],["2026-06-27",27.2],["2026-06-28",24.7],["2026-06-29",25.6],["2026-06-30",27.6],["2026-07-01",26.4],["2026-07-02",27.5],["2026-07-03",29.1],["2026-07-04",30.3],["2026-07-05",33.3],["2026-07-06",32.0],["2026-07-07",33.7],["2026-07-08",34.9],["2026-07-09",31.1],["2026-07-10",31.0],["2026-07-11",31.5],["2026-07-12",28.6],["2026-07-13",30.4],["2026-07-14",29.6],["2026-07-15",30.3],["2026-07-16",29.6],["2026-07-17",23.5],["2026-07-18",23.8],["2026-07-19",26.6],["2026-07-20",24.7],["2026-07-21",27.9],["2026-07-22",28.0],["2026-07-23",29.2],["2026-07-24",29.8],["2026-07-25",27.1],["2026-07-26",28.0],["2026-07-27",30.7],["2026-07-28",35.0],["2026-07-29",29.3],["2026-07-30",26.8],["2026-07-31",26.7],["2026-08-01",28.8],["2026-08-02",33.2],["2026-08-03",31.5],["2026-08-04",26.1],["2026-08-05",23.2],["2026-08-06",26.7],["2026-08-07",28.8],["2026-08-08",32.3],["2026-08-09",27.4],["2026-08-10",27.1],["2026-08-11",34.0],["2026-08-12",37.7],["2026-08-13",34.7],["2026-08-14",28.0],["2026-08-15",27.5],["2026-08-16",29.0],["2026-08-17",26.1],["2026-08-18",26.3],["2026-08-19",24.6],["2026-08-20",21.8],["2026-08-21",23.2],["2026-08-22",25.7],["2026-08-23",24.0],["2026-08-24",26.6],["2026-08-25",27.5],["2026-08-26",26.2],["2026-08-27",26.1],["2026-08-28",21.4],["2026-08-29",24.6],["2026-08-30",25.0],["2026-08-31",25.0],["2026-09-01",21.6],["2026-09-02",27.8],["2026-09-04",23.9],["2026-09-05",28.2],["2026-09-06",25.3],["2026-09-08",19.0],["2026-09-09",21.4],["2026-09-10",22.4],["2026-09-11",24.3],["2026-09-12",24.2],["2026-09-13",26.6],["2026-09-14",24.3],["2026-09-15",21.9],["2026-09-16",22.6],["2026-09-17",21.5],["2026-09-18",23.7],["2026-09-19",21.5],["2026-09-20",24.7],["2026-09-21",26.9],["2026-09-22",24.7],["2026-09-23",22.4],["2026-09-24",25.1],["2026-09-25",22.6],["2026-09-26",22.5],["2026-09-27",20.6],["2026-09-28",27.7],["2026-09-29",24.9],["2026-09-30",25.1]]},"Wisley":{"area":"Surrey, 33 km SW of central London","annual":[{"year":1979,"valid":147,"maxTx":30.0,"hot":{"28":1,"30":1,"32":0}},{"year":1980,"valid":143,"maxTx":27.8,"hot":{"28":0,"30":0,"32":0}},{"year":1981,"valid":143,"maxTx":28.5,"hot":{"28":1,"30":0,"32":0}},{"year":1982,"valid":137,"maxTx":28.1,"hot":{"28":2,"30":0,"32":0}},{"year":1983,"valid":144,"maxTx":32.1,"hot":{"28":16,"30":8,"32":1}},{"year":1984,"valid":145,"maxTx":29.9,"hot":{"28":6,"30":0,"32":0}},{"year":1985,"valid":143,"maxTx":28.6,"hot":{"28":1,"30":0,"32":0}},{"year":1986,"valid":146,"maxTx":29.6,"hot":{"28":5,"30":0,"32":0}},{"year":1987,"valid":143,"maxTx":29.2,"hot":{"28":4,"30":0,"32":0}},{"year":1988,"valid":141,"maxTx":29.0,"hot":{"28":1,"30":0,"32":0}},{"year":1989,"valid":145,"maxTx":33.8,"hot":{"28":9,"30":4,"32":1}},{"year":1990,"valid":144,"maxTx":35.4,"hot":{"28":10,"30":7,"32":5}},{"year":1991,"valid":146,"maxTx":28.8,"hot":{"28":2,"30":0,"32":0}},{"year":1992,"valid":148,"maxTx":29.7,"hot":{"28":3,"30":0,"32":0}},{"year":1993,"valid":142,"maxTx":27.3,"hot":{"28":0,"30":0,"32":0}},{"year":1994,"valid":139,"maxTx":31.4,"hot":{"28":9,"30":4,"32":0}},{"year":1995,"valid":147,"maxTx":32.5,"hot":{"28":23,"30":11,"32":1}},{"year":1996,"valid":145,"maxTx":31.1,"hot":{"28":8,"30":3,"32":0}},{"year":1997,"valid":142,"maxTx":30.2,"hot":{"28":10,"30":1,"32":0}},{"year":1998,"valid":135,"maxTx":30.6,"hot":{"28":3,"30":1,"32":0}},{"year":1999,"valid":145,"maxTx":31.7,"hot":{"28":8,"30":3,"32":0}},{"year":2000,"valid":143,"maxTx":29.6,"hot":{"28":4,"30":0,"32":0}},{"year":2001,"valid":146,"maxTx":32.0,"hot":{"28":11,"30":5,"32":1}},{"year":2002,"valid":150,"maxTx":31.8,"hot":{"28":4,"30":1,"32":0}},{"year":2003,"valid":115,"maxTx":37.8,"hot":{"28":19,"30":12,"32":8}},{"year":2004,"valid":0,"maxTx":null,"hot":{"28":0,"30":0,"32":0}},{"year":2005,"valid":143,"maxTx":31.0,"hot":{"28":14,"30":5,"32":0}},{"year":2006,"valid":137,"maxTx":36.5,"hot":{"28":18,"30":13,"32":4}},{"year":2007,"valid":103,"maxTx":27.9,"hot":{"28":0,"30":0,"32":0}},{"year":2008,"valid":147,"maxTx":29.4,"hot":{"28":2,"30":0,"32":0}},{"year":2009,"valid":120,"maxTx":31.8,"hot":{"28":5,"30":4,"32":0}},{"year":2010,"valid":145,"maxTx":30.7,"hot":{"28":9,"30":2,"32":0}},{"year":2011,"valid":143,"maxTx":31.1,"hot":{"28":4,"30":1,"32":0}},{"year":2012,"valid":145,"maxTx":30.3,"hot":{"28":5,"30":1,"32":0}},{"year":2013,"valid":143,"maxTx":33.1,"hot":{"28":14,"30":6,"32":2}},{"year":2014,"valid":147,"maxTx":28.8,"hot":{"28":5,"30":0,"32":0}},{"year":2015,"valid":146,"maxTx":34.9,"hot":{"28":3,"30":1,"32":1}},{"year":2016,"valid":148,"maxTx":32.0,"hot":{"28":8,"30":3,"32":1}},{"year":2017,"valid":146,"maxTx":33.3,"hot":{"28":9,"30":5,"32":1}},{"year":2018,"valid":147,"maxTx":35.1,"hot":{"28":29,"30":16,"32":6}},{"year":2019,"valid":151,"maxTx":36.7,"hot":{"28":8,"30":7,"32":5}},{"year":2020,"valid":149,"maxTx":36.2,"hot":{"28":16,"30":10,"32":7}},{"year":2021,"valid":150,"maxTx":31.2,"hot":{"28":10,"30":3,"32":0}},{"year":2022,"valid":148,"maxTx":39.3,"hot":{"28":21,"30":10,"32":7}},{"year":2023,"valid":150,"maxTx":33.1,"hot":{"28":18,"30":8,"32":2}},{"year":2024,"valid":148,"maxTx":33.5,"hot":{"28":14,"30":5,"32":1}},{"year":2025,"valid":148,"maxTx":33.9,"hot":{"28":20,"30":13,"32":5}},{"year":2026,"valid":149,"maxTx":37.4,"hot":{"28":44,"30":24,"32":16}}],"latestYear":2026,"latestSummer":[["2026-05-01",22.5],["2026-05-02",18.9],["2026-05-03",17.9],["2026-05-04",16.7],["2026-05-05",15.2],["2026-05-06",17.5],["2026-05-07",19.0],["2026-05-08",21.4],["2026-05-09",14.1],["2026-05-10",12.8],["2026-05-11",17.1],["2026-05-12",14.2],["2026-05-13",14.4],["2026-05-14",14.4],["2026-05-15",15.6],["2026-05-16",17.6],["2026-05-17",15.0],["2026-05-18",17.9],["2026-05-19",19.6],["2026-05-20",23.8],["2026-05-21",27.0],["2026-05-22",29.4],["2026-05-23",31.6],["2026-05-24",33.3],["2026-05-25",33.8],["2026-05-26",27.8],["2026-05-27",31.3],["2026-05-28",25.3],["2026-05-29",29.9],["2026-05-30",24.0],["2026-05-31",23.7],["2026-06-01",18.5],["2026-06-02",19.3],["2026-06-03",19.4],["2026-06-04",18.9],["2026-06-05",17.3],["2026-06-06",18.9],["2026-06-07",17.3],["2026-06-08",18.7],["2026-06-09",18.2],["2026-06-10",17.4],["2026-06-11",22.9],["2026-06-12",22.1],["2026-06-13",21.8],["2026-06-14",22.7],["2026-06-15",26.6],["2026-06-16",24.4],["2026-06-17",25.1],["2026-06-18",29.3],["2026-06-19",25.2],["2026-06-20",31.7],["2026-06-21",28.8],["2026-06-22",34.6],["2026-06-23",36.0],["2026-06-24",34.3],["2026-06-25",35.5],["2026-06-26",31.9],["2026-06-27",26.4],["2026-06-28",24.6],["2026-06-29",25.4],["2026-06-30",27.6],["2026-07-01",26.5],["2026-07-02",27.5],["2026-07-03",28.7],["2026-07-04",29.7],["2026-07-05",32.6],["2026-07-06",32.2],["2026-07-07",33.8],["2026-07-08",35.5],["2026-07-09",31.2],["2026-07-10",29.9],["2026-07-11",30.3],["2026-07-12",28.1],["2026-07-13",29.9],["2026-07-14",28.8],["2026-07-15",29.8],["2026-07-16",29.5],["2026-07-17",24.3],["2026-07-18",23.7],["2026-07-19",26.0],["2026-07-20",24.1],["2026-07-21",27.7],["2026-07-22",27.7],["2026-07-23",29.4],["2026-07-24",29.7],["2026-07-25",26.5],["2026-07-26",27.8],["2026-07-27",30.0],["2026-07-28",34.9],["2026-07-29",28.9],["2026-07-30",25.9],["2026-07-31",26.9],["2026-08-01",29.6],["2026-08-02",33.5],["2026-08-03",30.8],["2026-08-04",25.4],["2026-08-05",23.6],["2026-08-06",26.9],["2026-08-07",28.7],["2026-08-08",32.7],["2026-08-09",27.4],["2026-08-10",27.8],["2026-08-11",34.3],["2026-08-12",37.4],["2026-08-13",34.7],["2026-08-14",28.7],["2026-08-15",27.4],["2026-08-16",28.8],["2026-08-17",25.9],["2026-08-18",25.2],["2026-08-19",23.9],["2026-08-20",21.1],["2026-08-21",23.1],["2026-08-22",25.3],["2026-08-23",23.9],["2026-08-24",26.1],["2026-08-25",28.6],["2026-08-27",25.3],["2026-08-28",20.9],["2026-08-29",22.7],["2026-08-30",25.0],["2026-08-31",24.1],["2026-09-01",21.1],["2026-09-02",26.6],["2026-09-04",23.9],["2026-09-05",27.9],["2026-09-06",24.8],["2026-09-08",19.0],["2026-09-09",20.9],["2026-09-10",22.4],["2026-09-11",24.3],["2026-09-12",23.0],["2026-09-13",24.5],["2026-09-14",23.5],["2026-09-15",20.6],["2026-09-16",21.3],["2026-09-17",20.5],["2026-09-18",22.2],["2026-09-19",20.8],["2026-09-20",24.2],["2026-09-21",26.4],["2026-09-22",24.6],["2026-09-23",22.3],["2026-09-24",23.6],["2026-09-25",21.9],["2026-09-26",22.6],["2026-09-27",20.5],["2026-09-28",27.2],["2026-09-29",24.2]]}},"metofficeHeathrowLatest":[[2026,1,"8.4","Y"],[2026,2,"10.7","Y"],[2026,3,"13.5","Y"],[2026,4,"17.8","Y"],[2026,5,"21.9","Y"],[2026,6,"25.1","Y"],[2026,7,"29.3","Y"],[2026,8,"27.5","Y"],[2026,9,"23.6","Y"]]};
-var BRIEF = {"purpose": "London's summers are getting hotter. Summer 2026 was the UK's warmest on record, and Heathrow saw 31 days at or above 30°C against a 1991–2020 average of 5.5. Older schools, care homes and libraries overheat, and the people who use them, children, older and clinically vulnerable residents, are among those most at risk from heat. HEATWISE is a fictional, publicly funded project to retrofit 20 such buildings and open them as community cooling centres before summer 2028.", "scope": {"statement": "The HEATWISE Delivery Project will design, procure, install, commission and hand over passive and low-energy cooling measures (cool roofs, external shading and ventilation upgrades) at 20 council-owned public buildings in eight London boroughs, and will set each building up to operate as a community cooling centre. Works run from 5 April 2027 for 22 weeks, with a deadline of week 27 (11 October 2027), within an authorised budget of £9.8m (base estimate £8.6m plus a £1.2m management reserve held by the sponsor).", "in": ["Condition surveys, desk-based structural review and standard asbestos surveys at all 20 sites", "Design of cool roofs, external shading and ventilation for each building", "Planning and listed-building consents where required (3 heritage sites)", "Procurement of contractors and materials", "Installation: 20 cool roofs, external shading on south and west elevations, ventilation upgrades", "Testing, commissioning and handover, including operation and maintenance training for building managers", "Cooling-centre fit-out (signage, seating, drinking water) and a co-designed operating model", "Indoor temperature sensors and a benefits monitoring plan"], "out": ["Air-conditioning or other active cooling (deliberately excluded: carbon and running cost)", "Structural strengthening beyond what the roof works need", "Running the cooling centres after handover (a business-as-usual cost for each borough)", "Buildings outside the agreed list of 20", "Measuring benefits after summer 2028 (owned by the boroughs)"], "assumptions": ["Sites are available for works from April 2027; school works avoid exam weeks", "The 3 heritage sites need listed-building consent; the other 17 do not", "Hot-day stoppages are allowed for up to 5 days (the 1991–2020 Heathrow average)", "Prices are at Q1 2027 levels with a standard allowance for inflation"], "constraints": ["Budget: £9.8m authorised; any increase needs the sponsor's approval", "Time: buildings must be open as cooling centres before summer 2028; the deadline is 11 October 2027", "Roof work stops at 30°C or above (HEATWISE site heat policy)", "No active cooling; low-carbon measures only", "CDM 2015 and building regulations apply"], "deliverables": ["20 retrofitted buildings with completion certificates", "Thermal performance test report for each building", "Operation and maintenance manuals and trained building managers", "A cooling-centre operating model agreed with each community", "A benefits monitoring plan with indoor sensors live"]}, "smart": [{"id": "O1", "title": "Deliver the scope", "S": "Retrofit and hand over all 20 named buildings (cool roof, shading, ventilation).", "M": "20 of 20 completion certificates and handover packs signed; at least 60% confidence of meeting the deadline at approval (board risk appetite).", "A": "22-week programme with 5 weeks of float; works proven elsewhere in London.", "R": "Delivers the cooling capacity the boroughs need before summer 2028.", "T": "By week 27, 11 October 2027.", "kpi": "pTime"}, {"id": "O2", "title": "Stay within budget", "S": "Complete the project within the authorised budget, including risk responses.", "M": "Final cost ≤ £9.8m; at least 70% confidence at approval (P70).", "A": "Base estimate £8.6m plus £1.2m management reserve.", "R": "Public funding is fixed; overspend displaces other services.", "T": "Final account agreed within 3 months of handover.", "kpi": "pBudget"}, {"id": "O3", "title": "Meet the quality standard", "S": "Each building meets its thermal performance specification at handover.", "M": "≥ 90% of buildings accepted first time; ≤ 7.5 snags per building; cooling room ≤ 26°C when outside is 30°C.", "A": "Specification uses proven cool-roof and shading products.", "R": "A building that does not perform is not a cooling centre.", "T": "Tested at handover; confirmed in the first 30°C week of 2028.", "kpi": "acceptance"}, {"id": "O4", "title": "Keep people safe", "S": "Deliver the works without serious harm to workers, building users or the public.", "M": "Zero RIDDOR-reportable incidents; heat-stress plan in place for every hot day.", "A": "CDM duties assigned; principal designer appointed.", "R": "Works take place at height, in heat and in occupied buildings.", "T": "Throughout the works.", "kpi": null}, {"id": "O5", "title": "Earn community support", "S": "Co-design each cooling centre's operating model with its users.", "M": "Stakeholder satisfaction ≥ 7.0 / 10 in the handover survey.", "A": "Engagement lead and budget in place from week 0.", "R": "Centres only help if people know about them and trust them.", "T": "Survey at handover, week 27.", "kpi": "satisfaction"}, {"id": "O6", "title": "Realise the benefits", "S": "Operate all 20 buildings as cooling centres in summer 2028.", "M": "Open on 100% of UKHSA amber and red heat-health alert days; overheating hours in cooling rooms down ≥ 50% against 2026; benefits realisation ≥ 97% of the £13.5m plan.", "A": "Operating model and trained staff in place at handover.", "R": "This is why the project exists.", "T": "Measured 1 June – 30 September 2028.", "kpi": "benefitsRealised"}], "vuca": [{"k": "Volatility", "what": "Weather and prices change fast and by a lot. Hot days at Heathrow ranged from 5 in 2024 to 31 in 2026. Material prices swing with global markets.", "risks": "R1, R7", "response": "Vision: keep the outcome (centres open for summer 2028) fixed, and flex how and when work is done."}, {"k": "Uncertainty", "what": "Key facts cannot be known in advance: whether asbestos is in each roof, whether consent will be granted, whether the membrane supplier will deliver, and how hot summer 2027 will be.", "risks": "R2, R3, R4, R6", "response": "Understanding: buy information early (surveys, pre-application meetings) and use forecasts as ranges, not single numbers."}, {"k": "Complexity", "what": "20 sites, 8 boroughs, 3 types of work, several contractors and many stakeholders, with dependencies (structure → plant; consent → design; materials → roofs). One response can create a new risk elsewhere.", "risks": "Secondary risks S1a–S7b", "response": "Clarity: map dependencies (WBS, RACI) and check every response for secondary risks."}, {"k": "Ambiguity", "what": "Key ideas have more than one meaning. How cool is 'cool enough'? Whose needs come first, schools' or care homes'? Which weather station represents London? Is success the buildings, or the lives protected?", "risks": "R8, choice of station", "response": "Agility: agree definitions and success criteria early, test options cheaply and record why each choice was made."}], "stakeholders": [{"name": "Programme sponsor (London heat resilience fund)", "short": "Sponsor", "power": 5, "interest": 5, "strategy": "Manage closely: monthly board, approves reserve and scope changes.", "risks": "R7, X3, SX3"}, {"name": "Borough councils (building owners)", "short": "Boroughs", "power": 4, "interest": 5, "strategy": "Manage closely: site access, consents, and they run the centres after handover.", "risks": "R4, R6"}, {"name": "Roofing and building contractors", "short": "Contractors", "power": 4, "interest": 4, "strategy": "Manage closely: weekly progress, incentives, interfaces.", "risks": "R5, S5a, S5b, S7a"}, {"name": "Local planning authority and conservation officers", "short": "Planning", "power": 5, "interest": 2, "strategy": "Keep satisfied: early pre-application meetings, complete applications.", "risks": "R4, S4a"}, {"name": "Health and Safety Executive", "short": "HSE", "power": 5, "interest": 1, "strategy": "Keep satisfied: CDM compliance, asbestos and heat-stress controls.", "risks": "R3, S3a"}, {"name": "Membrane and materials suppliers", "short": "Suppliers", "power": 4, "interest": 3, "strategy": "Keep satisfied: firm delivery dates, early warning of shortages.", "risks": "R2, S2a, S2b"}, {"name": "Head teachers and school governors", "short": "Schools", "power": 3, "interest": 5, "strategy": "Keep informed and involve: work around term dates and exams.", "risks": "R3, S3a"}, {"name": "Care home operators, residents and families", "short": "Care homes", "power": 2, "interest": 5, "strategy": "Keep informed and protect: vulnerable occupants; quiet working hours.", "risks": "S1a, S6b"}, {"name": "Local residents near sites", "short": "Residents", "power": 2, "interest": 4, "strategy": "Keep informed: notices, a named contact and co-design of opening hours.", "risks": "R8, S1a, S4b"}, {"name": "UKHSA and public health teams", "short": "UKHSA", "power": 2, "interest": 4, "strategy": "Keep informed: link the centres to heat-health alerts.", "risks": "Outcome O6"}, {"name": "Insurers", "short": "Insurers", "power": 2, "interest": 2, "strategy": "Monitor: policy terms and claims evidence.", "risks": "R1c, S1c"}, {"name": "Local media", "short": "Media", "power": 3, "interest": 1, "strategy": "Monitor: proactive news on progress; respond to complaints quickly.", "risks": "Reputation"}], "roles": [{"id": "SP", "name": "Sponsor"}, {"id": "PM", "name": "Project manager"}, {"id": "CM", "name": "Construction manager"}, {"id": "PD", "name": "Principal designer"}, {"id": "SE", "name": "Structural engineer"}, {"id": "PL", "name": "Procurement lead"}, {"id": "PLN", "name": "Planning lead"}, {"id": "CST", "name": "Cost manager"}, {"id": "EL", "name": "Engagement lead"}, {"id": "CON", "name": "Contractors"}, {"id": "BM", "name": "Building managers"}], "raci": [{"wbs": "1.1", "task": "Project management and reporting", "r": {"SP": "A", "PM": "R", "CST": "C", "CM": "C", "EL": "I", "BM": "I"}}, {"wbs": "1.2", "task": "Health and safety (CDM) and heat-stress plan", "r": {"SP": "I", "PM": "A", "PD": "R", "CM": "R", "CON": "C", "BM": "I"}}, {"wbs": "1.3", "task": "Stakeholder engagement and communications", "r": {"SP": "I", "PM": "A", "EL": "R", "BM": "C", "CM": "C"}}, {"wbs": "2.1", "task": "Condition and structural surveys", "r": {"PM": "A", "SE": "R", "PD": "C", "BM": "C", "CM": "I"}}, {"wbs": "2.2", "task": "Asbestos management surveys", "r": {"PM": "I", "PD": "A", "CON": "R", "BM": "C", "CM": "I"}}, {"wbs": "2.3", "task": "Design: cool roofs, shading, ventilation", "r": {"PM": "A", "PD": "R", "SE": "C", "CM": "C", "BM": "C", "CST": "C"}}, {"wbs": "2.4", "task": "Planning and listed-building consents", "r": {"SP": "I", "PM": "A", "PLN": "R", "PD": "C", "EL": "C"}}, {"wbs": "3.1", "task": "Contractor procurement and contracts", "r": {"SP": "C", "PM": "A", "PL": "R", "CST": "C", "CM": "C"}}, {"wbs": "3.2", "task": "Materials procurement and logistics", "r": {"PM": "A", "PL": "R", "CM": "C", "CST": "C", "CON": "I"}}, {"wbs": "4.1", "task": "Site set-up and preliminaries", "r": {"PM": "I", "CM": "A", "CON": "R", "BM": "C"}}, {"wbs": "4.2–4.4", "task": "Install cool roofs, shading and ventilation", "r": {"PM": "I", "CM": "A", "CON": "R", "PD": "C", "SE": "C", "BM": "I"}}, {"wbs": "–", "task": "Cost control, change and risk register", "r": {"SP": "I", "PM": "A", "CST": "R", "CM": "C", "PL": "C"}}, {"wbs": "5.1", "task": "Testing and commissioning", "r": {"PM": "I", "CM": "A", "CON": "R", "PD": "C", "BM": "I"}}, {"wbs": "5.2", "task": "Handover and building-manager training", "r": {"SP": "I", "PM": "A", "CM": "R", "BM": "C", "CON": "R"}}, {"wbs": "5.3", "task": "Cooling-centre fit-out and operating model", "r": {"SP": "C", "PM": "A", "EL": "R", "BM": "R", "CM": "C"}}, {"wbs": "6.1", "task": "Benefits monitoring plan and sensors", "r": {"SP": "A", "PM": "R", "BM": "C", "EL": "C"}}], "wbs": [{"id": "1", "name": "Project management and assurance", "children": [{"id": "1.1", "name": "Project management, reporting and assurance", "cost": 420, "type": "Fees", "ms": "", "risks": "R7", "start": 0, "end": 22}, {"id": "1.2", "name": "Health and safety (CDM) and principal designer", "cost": 120, "type": "Fees", "ms": "", "risks": "R3", "start": 0, "end": 22}, {"id": "1.3", "name": "Stakeholder engagement and communications", "cost": 80, "type": "Fees", "ms": "", "risks": "R8", "start": 0, "end": 22}]}, {"id": "2", "name": "Design and surveys", "children": [{"id": "2.1", "name": "Condition surveys and desk-based structural review (20 sites)", "cost": 150, "type": "Fees", "ms": "M1", "risks": "R6", "start": 0, "end": 3}, {"id": "2.2", "name": "Asbestos management surveys (standard)", "cost": 60, "type": "Fees", "ms": "M1", "risks": "R3", "start": 0, "end": 3}, {"id": "2.3", "name": "Design: cool roofs, shading and ventilation", "cost": 380, "type": "Fees", "ms": "M1", "risks": "R6", "start": 0, "end": 4}, {"id": "2.4", "name": "Planning and listed-building consents", "cost": 40, "type": "Fees", "ms": "M1", "risks": "R4", "start": 0, "end": 4}]}, {"id": "3", "name": "Procurement", "children": [{"id": "3.1", "name": "Contractor procurement and contracts", "cost": 70, "type": "Fees", "ms": "M2", "risks": "R5, R7", "start": 0, "end": 2}, {"id": "3.2", "name": "Materials: membrane, shading, ventilation units", "cost": 2600, "type": "Materials", "ms": "M2", "risks": "R2, R7", "start": 2, "end": 7}]}, {"id": "4", "name": "Construction", "children": [{"id": "4.1", "name": "Site set-up and preliminaries (22 weeks × £35k)", "cost": 770, "type": "Preliminaries", "ms": "", "risks": "All delays", "start": 0, "end": 22}, {"id": "4.2", "name": "Install cool roofs (20 roofs)", "cost": 1900, "type": "Labour and plant", "ms": "M3, M4", "risks": "R1, R3, R5", "start": 5, "end": 19}, {"id": "4.3", "name": "Install external shading", "cost": 750, "type": "Labour and plant", "ms": "M4", "risks": "R5", "start": 8, "end": 19}, {"id": "4.4", "name": "Ventilation upgrades", "cost": 820, "type": "Labour and plant", "ms": "M4", "risks": "R6", "start": 10, "end": 20}]}, {"id": "5", "name": "Commissioning, handover and cooling centres", "children": [{"id": "5.1", "name": "Testing and commissioning (thermal performance)", "cost": 120, "type": "Fees", "ms": "M5", "risks": "S2c, S6b", "start": 18, "end": 22}, {"id": "5.2", "name": "Handover, O&M manuals and training", "cost": 60, "type": "Fees", "ms": "M5", "risks": "", "start": 20, "end": 22}, {"id": "5.3", "name": "Cooling-centre fit-out and operating model", "cost": 180, "type": "Materials", "ms": "M5", "risks": "R8", "start": 16, "end": 22}]}, {"id": "6", "name": "Benefits monitoring", "children": [{"id": "6.1", "name": "Indoor sensors and benefits monitoring plan", "cost": 80, "type": "Materials", "ms": "M5", "risks": "", "start": 18, "end": 22}]}], "success": {"outputs": [{"c": "All 20 buildings retrofitted and handed over by the deadline", "m": "Completion certificates; handover by week 27", "t": "100% by 11 Oct 2027", "kpi": "pTime", "w": "Handover"}, {"c": "Delivered within the authorised budget", "m": "Final account against £9.8m", "t": "≤ £9.8m (≥ 70% confidence at approval)", "kpi": "pBudget", "w": "Final account"}, {"c": "Buildings accepted first time", "m": "Share of buildings passing the thermal test without remedial work", "t": "≥ 90%", "kpi": "acceptance", "w": "Handover"}, {"c": "Quality of finish", "m": "Snag items per building at handover", "t": "≤ 7.5", "kpi": "snags", "w": "Handover"}, {"c": "Delivered safely", "m": "RIDDOR-reportable incidents", "t": "0", "kpi": null, "w": "Throughout"}, {"c": "Cost efficiency", "m": "CPI = BAC ÷ EAC", "t": "≥ 0.95", "kpi": "cpi", "w": "Monthly"}], "outcomes": [{"c": "Centres open when London needs them", "m": "Share of UKHSA amber and red heat-health alert days on which all 20 centres open", "t": "100% in summer 2028", "kpi": null, "w": "Sept 2028"}, {"c": "Buildings stay cooler", "m": "Hours above 26°C in cooling rooms, against the 2026 baseline", "t": "≥ 50% fewer", "kpi": "benefitsRealised", "w": "Sept 2028", "proxy": true}, {"c": "Communities use and trust the centres", "m": "Visits per centre per heat-alert day; satisfaction survey", "t": "≥ 40 visits; ≥ 7.0 / 10", "kpi": "satisfaction", "w": "Handover and Sept 2028"}, {"c": "Value for public money", "m": "ROI on whole-life benefit (£13.5m planned)", "t": "≥ 35%", "kpi": "roi", "w": "Business case review"}, {"c": "Benefits delivered as planned", "m": "Realised benefit ÷ planned benefit", "t": "≥ 97%", "kpi": "benefitsRealised", "w": "Sept 2028"}]}};
+var BRIEF = {"purpose": "London's summers are getting hotter. Summer 2026 was the UK's warmest on record, and Heathrow saw 31 days at or above 30°C against a 1991–2020 average of 5.5. Older schools, care homes and libraries overheat, and the people who use them, children, older and clinically vulnerable residents, are among those most at risk from heat. HEATWISE is a fictional, publicly funded project to retrofit 20 such buildings and open them as community cooling centres before summer 2028.", "scope": {"statement": "The HEATWISE Delivery Project will design, procure, install, commission and hand over passive and low-energy cooling measures (cool roofs, external shading and ventilation upgrades) at 20 council-owned public buildings in eight London boroughs, and will set each building up to operate as a community cooling centre. Works run from 5 April 2027 for 22 weeks, with a deadline of week 27 (11 October 2027), within an authorised budget of £9.8m (base estimate £8.6m plus a £1.2m management reserve held by the sponsor).", "in": ["Condition surveys, desk-based structural review and standard asbestos surveys at all 20 sites", "Design of cool roofs, external shading and ventilation for each building", "Planning and listed-building consents where required (3 heritage sites)", "Procurement of contractors and materials", "Installation: 20 cool roofs, external shading on south and west elevations, ventilation upgrades", "Testing, commissioning and handover, including operation and maintenance training for building managers", "Cooling-centre fit-out (signage, seating, drinking water) and a co-designed operating model", "Indoor temperature sensors and a benefits monitoring plan"], "out": ["Air-conditioning or other active cooling (deliberately excluded: carbon and running cost)", "Structural strengthening beyond what the roof works need", "Running the cooling centres after handover (a business-as-usual cost for each borough)", "Buildings outside the agreed list of 20", "Measuring benefits after summer 2028 (owned by the boroughs)"], "assumptions": ["Sites are available for works from April 2027; school works avoid exam weeks", "The 3 heritage sites need listed-building consent; the other 17 do not", "Hot-day stoppages are allowed for up to 5 days (the 1991–2020 Heathrow average)", "Prices are at Q1 2027 levels with a standard allowance for inflation"], "constraints": ["Budget: £9.8m authorised; any increase needs the sponsor's approval", "Time: buildings must be open as cooling centres before summer 2028; the deadline is 11 October 2027", "Roof work stops at 30°C or above (HEATWISE site heat policy)", "No active cooling; low-carbon measures only", "CDM 2015 and building regulations apply"], "deliverables": ["20 retrofitted buildings with completion certificates", "Thermal performance test report for each building", "Operation and maintenance manuals and trained building managers", "A cooling-centre operating model agreed with each community", "A benefits monitoring plan with indoor sensors live"]}, "smart": [{"id": "O1", "title": "Deliver the scope", "S": "Retrofit and hand over all 20 named buildings (cool roof, shading, ventilation).", "M": "20 of 20 completion certificates and handover packs signed; at least 60% confidence of meeting the deadline at approval (board risk appetite).", "A": "22-week programme with 5 weeks of float; works proven elsewhere in London.", "R": "Delivers the cooling capacity the boroughs need before summer 2028.", "T": "By week 27, 11 October 2027.", "kpi": "pTime"}, {"id": "O2", "title": "Stay within budget", "S": "Complete the project within the authorised budget, including risk responses.", "M": "Final cost ≤ £9.8m; at least 70% confidence at approval (P70).", "A": "Base estimate £8.6m plus £1.2m management reserve.", "R": "Public funding is fixed; overspend displaces other services.", "T": "Final account agreed within 3 months of handover.", "kpi": "pBudget"}, {"id": "O3", "title": "Meet the quality standard", "S": "Each building meets its thermal performance specification at handover.", "M": "≥ 90% of buildings accepted first time; ≤ 7.5 snags per building; cooling room ≤ 26°C when outside is 30°C.", "A": "Specification uses proven cool-roof and shading products.", "R": "A building that does not perform is not a cooling centre.", "T": "Tested at handover; confirmed in the first 30°C week of 2028.", "kpi": "acceptance"}, {"id": "O4", "title": "Keep people safe", "S": "Deliver the works without serious harm to workers, building users or the public.", "M": "Zero RIDDOR-reportable incidents; heat-stress plan in place for every hot day.", "A": "CDM duties assigned; principal designer appointed.", "R": "Works take place at height, in heat and in occupied buildings.", "T": "Throughout the works.", "kpi": null}, {"id": "O5", "title": "Earn community support", "S": "Co-design each cooling centre's operating model with its users.", "M": "Stakeholder satisfaction ≥ 7.0 / 10 in the handover survey.", "A": "Engagement lead and budget in place from week 0.", "R": "Centres only help if people know about them and trust them.", "T": "Survey at handover, week 27.", "kpi": "satisfaction"}, {"id": "O6", "title": "Realise the benefits", "S": "Operate all 20 buildings as cooling centres in summer 2028.", "M": "Open on 100% of UKHSA amber and red heat-health alert days; overheating hours in cooling rooms down ≥ 50% against 2026; benefits realisation ≥ 97% of the £13.5m plan.", "A": "Operating model and trained staff in place at handover.", "R": "This is why the project exists.", "T": "Measured 1 June – 30 September 2028.", "kpi": "benefitsRealised"}], "vuca": [{"k": "Volatility", "what": "Weather and prices change fast and by a lot. Hot days at Heathrow ranged from 5 in 2024 to 31 in 2026. Material prices swing with global markets.", "risks": "R1, R7", "response": "Vision: keep the outcome (centres open for summer 2028) fixed, and flex how and when work is done."}, {"k": "Uncertainty", "what": "Key facts cannot be known in advance: whether asbestos is in each roof, whether consent will be granted, whether the membrane supplier will deliver, and how hot summer 2027 will be.", "risks": "R2, R3, R4, R6", "response": "Understanding: buy information early (surveys, pre-application meetings) and use forecasts as ranges, not single numbers."}, {"k": "Complexity", "what": "20 sites, 8 boroughs, 3 types of work, several contractors and many stakeholders, with dependencies (structure → plant; consent → design; materials → roofs). One response can create a new risk elsewhere.", "risks": "Secondary risks S1a–S7b", "response": "Clarity: map dependencies (WBS, RACI) and check every response for secondary risks."}, {"k": "Ambiguity", "what": "Key ideas have more than one meaning. How cool is 'cool enough'? Whose needs come first, schools' or care homes'? Which weather station represents London? Is success the buildings, or the lives protected?", "risks": "R8, choice of station", "response": "Agility: agree definitions and success criteria early, test options cheaply and record why each choice was made."}], "stakeholders": [{"name": "Programme sponsor (London heat resilience fund)", "short": "Sponsor", "power": 5, "interest": 5, "strategy": "Manage closely: monthly board, approves reserve and scope changes.", "risks": "R7, X3, SX3"}, {"name": "Borough councils (building owners)", "short": "Boroughs", "power": 4, "interest": 5, "strategy": "Manage closely: site access, consents, and they run the centres after handover.", "risks": "R4, R6"}, {"name": "Roofing and building contractors", "short": "Contractors", "power": 4, "interest": 4, "strategy": "Manage closely: weekly progress, incentives, interfaces.", "risks": "R5, S5a, S5b, S7a"}, {"name": "Local planning authority and conservation officers", "short": "Planning", "power": 5, "interest": 2, "strategy": "Keep satisfied: early pre-application meetings, complete applications.", "risks": "R4, S4a"}, {"name": "Health and Safety Executive", "short": "HSE", "power": 5, "interest": 1, "strategy": "Keep satisfied: CDM compliance, asbestos and heat-stress controls.", "risks": "R3, S3a"}, {"name": "Membrane and materials suppliers", "short": "Suppliers", "power": 4, "interest": 3, "strategy": "Keep satisfied: firm delivery dates, early warning of shortages.", "risks": "R2, S2a, S2b"}, {"name": "Head teachers and school governors", "short": "Schools", "power": 3, "interest": 5, "strategy": "Keep informed and involve: work around term dates and exams.", "risks": "R3, S3a"}, {"name": "Care home operators, residents and families", "short": "Care homes", "power": 2, "interest": 5, "strategy": "Keep informed and protect: vulnerable occupants; quiet working hours.", "risks": "S1a, S6b"}, {"name": "Local residents near sites", "short": "Residents", "power": 2, "interest": 4, "strategy": "Keep informed: notices, a named contact and co-design of opening hours.", "risks": "R8, S1a, S4b"}, {"name": "UKHSA and public health teams", "short": "UKHSA", "power": 2, "interest": 4, "strategy": "Keep informed: link the centres to heat-health alerts.", "risks": "Outcome O6"}, {"name": "Insurers", "short": "Insurers", "power": 2, "interest": 2, "strategy": "Monitor: policy terms and claims evidence.", "risks": "R1c, S1c"}, {"name": "Local media", "short": "Media", "power": 3, "interest": 1, "strategy": "Monitor: proactive news on progress; respond to complaints quickly.", "risks": "Reputation"}], "roles": [{"id": "SP", "name": "Sponsor"}, {"id": "PM", "name": "Project manager"}, {"id": "CM", "name": "Construction manager"}, {"id": "PD", "name": "Principal designer"}, {"id": "SE", "name": "Structural engineer"}, {"id": "PL", "name": "Procurement lead"}, {"id": "PLN", "name": "Planning lead"}, {"id": "CST", "name": "Cost manager"}, {"id": "EL", "name": "Engagement lead"}, {"id": "CON", "name": "Contractors"}, {"id": "BM", "name": "Building managers"}], "raci": [{"wbs": "1.1", "task": "Project management and reporting", "r": {"SP": "A", "PM": "R", "CST": "C", "CM": "C", "EL": "I", "BM": "I"}}, {"wbs": "1.2", "task": "Health and safety (CDM) and heat-stress plan", "r": {"SP": "I", "PM": "A", "PD": "R", "CM": "R", "CON": "C", "BM": "I"}}, {"wbs": "1.3", "task": "Stakeholder engagement and communications", "r": {"SP": "I", "PM": "A", "EL": "R", "BM": "C", "CM": "C"}}, {"wbs": "2.1", "task": "Condition and structural surveys", "r": {"PM": "A", "SE": "R", "PD": "C", "BM": "C", "CM": "I"}}, {"wbs": "2.2", "task": "Asbestos management surveys", "r": {"PM": "I", "PD": "A", "CON": "R", "BM": "C", "CM": "I"}}, {"wbs": "2.3", "task": "Design: cool roofs, shading, ventilation", "r": {"PM": "A", "PD": "R", "SE": "C", "CM": "C", "BM": "C", "CST": "C"}}, {"wbs": "2.4", "task": "Planning and listed-building consents", "r": {"SP": "I", "PM": "A", "PLN": "R", "PD": "C", "EL": "C"}}, {"wbs": "3.1", "task": "Contractor procurement and contracts", "r": {"SP": "C", "PM": "A", "PL": "R", "CST": "C", "CM": "C"}}, {"wbs": "3.2", "task": "Materials procurement and logistics", "r": {"PM": "A", "PL": "R", "CM": "C", "CST": "C", "CON": "I"}}, {"wbs": "4.1", "task": "Site set-up and preliminaries", "r": {"PM": "I", "CM": "A", "CON": "R", "BM": "C"}}, {"wbs": "4.2–4.4", "task": "Install cool roofs, shading and ventilation", "r": {"PM": "I", "CM": "A", "CON": "R", "PD": "C", "SE": "C", "BM": "I"}}, {"wbs": "–", "task": "Cost control, change and risk register", "r": {"SP": "I", "PM": "A", "CST": "R", "CM": "C", "PL": "C"}}, {"wbs": "5.1", "task": "Testing and commissioning", "r": {"PM": "I", "CM": "A", "CON": "R", "PD": "C", "BM": "I"}}, {"wbs": "5.2", "task": "Handover and building-manager training", "r": {"SP": "I", "PM": "A", "CM": "R", "BM": "C", "CON": "R"}}, {"wbs": "5.3", "task": "Cooling-centre fit-out and operating model", "r": {"SP": "C", "PM": "A", "EL": "R", "BM": "R", "CM": "C"}}, {"wbs": "6.1", "task": "Benefits monitoring plan and sensors", "r": {"SP": "A", "PM": "R", "BM": "C", "EL": "C"}}], "wbs": [{"id": "1", "name": "Project management and assurance", "children": [{"id": "1.1", "name": "Project management, reporting and assurance", "cost": 420, "type": "Fees", "ms": "", "risks": "R7", "start": 0, "end": 22, "short": "Project management"}, {"id": "1.2", "name": "Health and safety (CDM) and principal designer", "cost": 120, "type": "Fees", "ms": "", "risks": "R3", "start": 0, "end": 22, "short": "Health and safety (CDM)"}, {"id": "1.3", "name": "Stakeholder engagement and communications", "cost": 80, "type": "Fees", "ms": "", "risks": "R8", "start": 0, "end": 22, "short": "Stakeholder engagement"}]}, {"id": "2", "name": "Design and surveys", "children": [{"id": "2.1", "name": "Condition surveys and desk-based structural review (20 sites)", "cost": 150, "type": "Fees", "ms": "M1", "risks": "R6", "start": 0, "end": 3, "short": "Surveys and structural review"}, {"id": "2.2", "name": "Asbestos management surveys (standard)", "cost": 60, "type": "Fees", "ms": "M1", "risks": "R3", "start": 0, "end": 3, "short": "Asbestos surveys"}, {"id": "2.3", "name": "Design: cool roofs, shading and ventilation", "cost": 380, "type": "Fees", "ms": "M1", "risks": "R6", "start": 0, "end": 4, "short": "Design"}, {"id": "2.4", "name": "Planning and listed-building consents", "cost": 40, "type": "Fees", "ms": "M1", "risks": "R4", "start": 0, "end": 4, "short": "Consents"}]}, {"id": "3", "name": "Procurement", "children": [{"id": "3.1", "name": "Contractor procurement and contracts", "cost": 70, "type": "Fees", "ms": "M2", "risks": "R5, R7", "start": 0, "end": 2, "short": "Contractor procurement"}, {"id": "3.2", "name": "Materials: membrane, shading, ventilation units", "cost": 2600, "type": "Materials", "ms": "M2", "risks": "R2, R7", "start": 2, "end": 7, "short": "Materials"}]}, {"id": "4", "name": "Construction", "children": [{"id": "4.1", "name": "Site set-up and preliminaries (22 weeks × £35k)", "cost": 770, "type": "Preliminaries", "ms": "", "risks": "All delays", "start": 0, "end": 22, "short": "Site set-up and preliminaries"}, {"id": "4.2", "name": "Install cool roofs (20 roofs)", "cost": 1900, "type": "Labour and plant", "ms": "M3, M4", "risks": "R1, R3, R5", "start": 5, "end": 19, "short": "Cool roofs"}, {"id": "4.3", "name": "Install external shading", "cost": 750, "type": "Labour and plant", "ms": "M4", "risks": "R5", "start": 8, "end": 19, "short": "External shading"}, {"id": "4.4", "name": "Ventilation upgrades", "cost": 820, "type": "Labour and plant", "ms": "M4", "risks": "R6", "start": 10, "end": 20, "short": "Ventilation"}]}, {"id": "5", "name": "Commissioning, handover and cooling centres", "children": [{"id": "5.1", "name": "Testing and commissioning (thermal performance)", "cost": 120, "type": "Fees", "ms": "M5", "risks": "S2c, S6b", "start": 18, "end": 22, "short": "Testing and commissioning"}, {"id": "5.2", "name": "Handover, O&M manuals and training", "cost": 60, "type": "Fees", "ms": "M5", "risks": "", "start": 20, "end": 22, "short": "Handover and training"}, {"id": "5.3", "name": "Cooling-centre fit-out and operating model", "cost": 180, "type": "Materials", "ms": "M5", "risks": "R8", "start": 16, "end": 22, "short": "Cooling-centre fit-out"}]}, {"id": "6", "name": "Benefits monitoring", "children": [{"id": "6.1", "name": "Indoor sensors and benefits monitoring plan", "cost": 80, "type": "Materials", "ms": "M5", "risks": "", "start": 18, "end": 22, "short": "Sensors and monitoring"}]}], "success": {"outputs": [{"c": "All 20 buildings retrofitted and handed over by the deadline", "m": "Completion certificates; handover by week 27", "t": "100% by 11 Oct 2027", "kpi": "pTime", "w": "Handover"}, {"c": "Delivered within the authorised budget", "m": "Final account against £9.8m", "t": "≤ £9.8m (≥ 70% confidence at approval)", "kpi": "pBudget", "w": "Final account"}, {"c": "Buildings accepted first time", "m": "Share of buildings passing the thermal test without remedial work", "t": "≥ 90%", "kpi": "acceptance", "w": "Handover"}, {"c": "Quality of finish", "m": "Snag items per building at handover", "t": "≤ 7.5", "kpi": "snags", "w": "Handover"}, {"c": "Delivered safely", "m": "RIDDOR-reportable incidents", "t": "0", "kpi": null, "w": "Throughout"}, {"c": "Cost efficiency", "m": "CPI = BAC ÷ EAC", "t": "≥ 0.95", "kpi": "cpi", "w": "Monthly"}], "outcomes": [{"c": "Centres open when London needs them", "m": "Share of UKHSA amber and red heat-health alert days on which all 20 centres open", "t": "100% in summer 2028", "kpi": null, "w": "Sept 2028"}, {"c": "Buildings stay cooler", "m": "Hours above 26°C in cooling rooms, against the 2026 baseline", "t": "≥ 50% fewer", "kpi": "benefitsRealised", "w": "Sept 2028", "proxy": true}, {"c": "Communities use and trust the centres", "m": "Visits per centre per heat-alert day; satisfaction survey", "t": "≥ 40 visits; ≥ 7.0 / 10", "kpi": "satisfaction", "w": "Handover and Sept 2028"}, {"c": "Value for public money", "m": "ROI on whole-life benefit (£13.5m planned)", "t": "≥ 35%", "kpi": "roi", "w": "Business case review"}, {"c": "Benefits delivered as planned", "m": "Realised benefit ÷ planned benefit", "t": "≥ 97%", "kpi": "benefitsRealised", "w": "Sept 2028"}]}, "network": {"note": "Activity-on-node. FS = finish-to-start, SS = start-to-start; lag in weeks (negative = lead). Packages 1.1–1.3 and 4.1 are level-of-effort across the whole project and are not in the network.", "activities": [{"id": "2.1", "dur": 3, "preds": []}, {"id": "2.2", "dur": 3, "preds": []}, {"id": "2.3", "dur": 4, "preds": []}, {"id": "2.4", "dur": 4, "preds": []}, {"id": "3.1", "dur": 2, "preds": []}, {"id": "3.2", "dur": 5, "preds": [{"id": "3.1", "type": "FS", "lag": 0}]}, {"id": "4.2", "dur": 14, "preds": [{"id": "2.1", "type": "FS", "lag": 0}, {"id": "2.2", "type": "FS", "lag": 0}, {"id": "2.3", "type": "FS", "lag": 0}, {"id": "2.4", "type": "FS", "lag": 0}, {"id": "3.2", "type": "SS", "lag": 3}]}, {"id": "4.3", "dur": 11, "preds": [{"id": "4.2", "type": "SS", "lag": 3}, {"id": "3.2", "type": "FS", "lag": 0}]}, {"id": "4.4", "dur": 10, "preds": [{"id": "4.2", "type": "SS", "lag": 5}, {"id": "3.2", "type": "FS", "lag": 0}]}, {"id": "5.1", "dur": 4, "preds": [{"id": "4.2", "type": "FS", "lag": -1}]}, {"id": "5.2", "dur": 2, "preds": [{"id": "4.4", "type": "FS", "lag": 0}, {"id": "4.3", "type": "FS", "lag": 0}]}, {"id": "5.3", "dur": 6, "preds": [{"id": "4.2", "type": "SS", "lag": 11}]}, {"id": "6.1", "dur": 4, "preds": [{"id": "4.2", "type": "FS", "lag": -1}]}], "milestones": [{"id": "M1", "after": ["2.1", "2.2", "2.3", "2.4"]}, {"id": "M2", "after": ["3.2"]}, {"id": "M3", "ss": "4.2", "lag": 8}, {"id": "M4", "after": ["4.2", "4.3"]}, {"id": "M5", "after": ["5.1", "5.2", "5.3", "6.1", "4.4"]}]}};
 </script>
 <script>
 /* HEATWISE risk engine: pure functions, no DOM. Shared by the page and the test harness. */
@@ -633,6 +654,186 @@ function stationH(S, name, thr) {
 }
 if (typeof module !== 'undefined') module.exports = stationH;
 
+// Critical path method over activity-on-node with FS/SS links and lags. Shared by page and audit.
+function cpm(net) {
+  var A = {}, order = [];
+  net.activities.forEach(function (a) { A[a.id] = { id: a.id, dur: a.dur, preds: a.preds, succs: [] }; });
+  net.activities.forEach(function (a) { a.preds.forEach(function (p) { A[p.id].succs.push({ id: a.id, type: p.type, lag: p.lag }); }); });
+  var seen = {};
+  function visit(id) { if (seen[id]) return; seen[id] = 1; A[id].preds.forEach(function (p) { visit(p.id); }); order.push(id); }
+  Object.keys(A).forEach(visit);
+  order.forEach(function (id) {
+    var a = A[id]; a.ES = 0;
+    a.preds.forEach(function (p) { var q = A[p.id]; a.ES = Math.max(a.ES, p.type === 'SS' ? q.ES + p.lag : q.EF + p.lag); });
+    a.EF = a.ES + a.dur;
+  });
+  var end = Math.max.apply(null, order.map(function (id) { return A[id].EF; }));
+  order.slice().reverse().forEach(function (id) {
+    var a = A[id]; a.LF = end;
+    a.succs.forEach(function (s) { var b = A[s.id]; a.LF = Math.min(a.LF, s.type === 'SS' ? b.LS - s.lag + a.dur : b.LS - s.lag); });
+    a.LS = a.LF - a.dur; a.float = a.LS - a.ES; a.critical = Math.abs(a.float) < 1e-9;
+  });
+  var level = {};
+  order.forEach(function (id) { level[id] = A[id].preds.length ? 1 + Math.max.apply(null, A[id].preds.map(function (p) { return level[p.id]; })) : 0; A[id].level = level[id]; });
+  return { acts: A, order: order, end: end };
+}
+if (typeof module !== 'undefined') module.exports = cpm;
+
+/* HEATWISE 3-slide recommendation summary (PptxGenJS). Works in the browser and in Node.
+ * buildHeatwiseDeck(PptxGenJS, d) -> pres. `d` is assembled by the dashboard (deckData() in app.js). */
+(function (root) {
+  'use strict';
+  var C = { dp: '361A54', ow: 'FAFAFA', wh: 'FFFFFF', bp: '993BFF', mp: 'BA82FF', lp: 'DDBDFF', pp: 'EEDEFF', grey: '625A70', rule: 'D9CCEB',
+    good: '1B7F3B', amber: '8A5A00', bad: 'C62828' };
+  var FONT = 'Aptos', W = 13.333, H = 7.5, MX = 0.55;
+  var FOOT = 'SPCE0019 Project Simulation  ·  UCL Centre for Systems Engineering  ·  University College London';
+
+  function edit(t) { return { text: '[Edit: ' + t + ']', options: { color: C.bp, italic: true } }; }
+  function pct(x) { return Math.round(x * 100) + '%'; }
+  function km(x) { return (x < 0 ? '−' : '') + '£' + Math.abs(Math.round(x)).toLocaleString('en-GB') + 'k'; }
+  function mm(x) { return '£' + (x / 1000).toFixed(2) + 'm'; }
+  function stColor(s) { return s === 'On track' ? C.good : s === 'Watch' ? C.amber : s === 'Off track' ? C.bad : C.grey; }
+  function prColor(p) { return p === 'High' ? C.bad : p === 'Medium' ? C.amber : C.good; }
+
+  function buildHeatwiseDeck(PptxGenJS, d) {
+    var pres = new PptxGenJS();
+    pres.layout = 'LAYOUT_WIDE';
+    pres.author = d.group || 'HEATWISE group';
+    pres.company = 'UCL Centre for Systems Engineering';
+    pres.subject = 'SPCE0019 Project Simulation: HEATWISE recommendation summary';
+    pres.title = 'HEATWISE recommendation' + (d.group ? ' (' + d.group + ')' : '');
+    pres.theme = { headFontFace: FONT, bodyFontFace: FONT };
+
+    var objs = [{ text: { text: FOOT, options: { x: MX, y: H - 0.4, w: 9.5, h: 0.28, fontFace: FONT, fontSize: 10, color: C.grey, margin: 0 } } }];
+    if (d.logo) objs.push({ image: { x: W - MX - d.logo.w, y: 0.3, w: d.logo.w, h: d.logo.h, data: d.logo.data } });
+    pres.defineSlideMaster({
+      title: 'UCL Content', background: { color: C.ow },
+      objects: objs.concat([{ placeholder: { options: { name: 'title', type: 'title', x: MX, y: 0.3, w: W - 2 * MX - (d.logo ? d.logo.w + 0.3 : 0), h: 0.7,
+        fontFace: FONT, fontSize: 28, bold: true, color: C.dp, valign: 'middle', align: 'left', margin: 0 }, text: '' } }]),
+      slideNumber: { x: W - MX - 0.6, y: H - 0.4, w: 0.6, h: 0.28, fontFace: FONT, fontSize: 10, color: C.grey, align: 'right' }
+    });
+
+    function slide(title, notes) {
+      var s = pres.addSlide({ masterName: 'UCL Content' });
+      s.addText(title, { placeholder: 'title' });
+      s.addNotes(notes);
+      return s;
+    }
+    function text(s, runs, o) {
+      var opts = { x: o.x, y: o.y, w: o.w, h: o.h, fontFace: FONT, fontSize: o.size || 14, color: o.color || C.dp, valign: o.valign || 'top', margin: o.margin != null ? o.margin : 0.1,
+        isTextBox: true, paraSpaceAfter: o.psa || 4, bold: o.bold, align: o.align, fit: 'shrink', objectName: o.name };
+      if (o.fill) { opts.fill = { color: o.fill }; opts.shape = pres.shapes.ROUNDED_RECTANGLE; opts.rectRadius = 0.08; opts.line = { color: o.line || o.fill, width: 0.75 }; }
+      s.addText(runs, opts);
+    }
+    function stat(s, x, y, w, h, label, value, sub, status) {
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x, y: y, w: w, h: h, fill: { color: C.wh }, line: { color: C.rule, width: 0.75 }, rectRadius: 0.08, objectName: 'Stat card' });
+      text(s, label, { x: x + 0.12, y: y + 0.08, w: w - 0.24, h: 0.32, size: 11, color: C.grey });
+      text(s, value, { x: x + 0.12, y: y + 0.38, w: w - 0.24, h: 0.58, size: 28, bold: true });
+      var runs = [];
+      if (status) runs.push({ text: '● ' + status + '   ', options: { color: stColor(status), bold: true } });
+      if (sub) runs.push({ text: sub, options: { color: C.grey } });
+      if (runs.length) text(s, runs, { x: x + 0.12, y: y + 0.98, w: w - 0.24, h: h - 1.04, size: 11 });
+    }
+    function th(t, o) { return { text: t, options: Object.assign({ bold: true, color: C.dp, fill: { color: C.pp }, fontFace: FONT, fontSize: 11 }, o || {}) }; }
+    function td(t, o) { return { text: String(t), options: Object.assign({ fontFace: FONT, fontSize: 11, color: C.dp }, o || {}) }; }
+    function table(s, rows, o) {
+      s.addTable(rows, { x: o.x, y: o.y, w: o.w, colW: o.colW, border: { type: 'solid', color: C.rule, pt: 0.75 }, fill: { color: C.wh }, margin: 0.04, valign: 'middle', rowH: o.rowH || 0.3, autoPage: false });
+    }
+
+    var S = d.summary, P = d.project;
+    var resp = d.register.filter(function (r) { return r.resp; });
+
+    // ---------- Slide 1: the recommendation ----------
+    var s1 = slide('Our recommendation: ' + d.chosen.name,
+      'Slide 1 of 3: the decision. Lead with what you recommend and what it achieves against the board\'s risk appetite. All figures come from the HEATWISE dashboard (Monte Carlo, 4,000 runs) for scenario ' + d.chosen.id + ', generated ' + d.generated + '. Replace every purple [Edit: …] prompt with your own words.');
+    text(s1, [
+      { text: (d.group || '[Edit: group name]') + '  ·  ', options: { bold: true } },
+      d.members ? { text: d.members, options: {} } : edit('group members'),
+      { text: '  ·  ' + d.generated + (d.round === 2 ? '  ·  includes Round 2 (week 10) recovery decisions' : ''), options: { color: C.grey } }
+    ], { x: MX, y: 1.0, w: W - 2 * MX, h: 0.4, size: 12, margin: 0 });
+    var lines = resp.length ? resp.map(function (r) { return { text: r.resp.id + '  ' + r.resp.type + ': ' + r.resp.name + ' (' + km(r.resp.cost) + (r.resp.weeks ? ', +' + r.resp.weeks + ' wk' : '') + ')', options: { bullet: true, breakLine: true } }; })
+      : [{ text: 'Accept all risks without further mitigation', options: { bullet: true, breakLine: true } }];
+    if (d.recovery && d.recovery.length) lines = lines.concat(d.recovery.map(function (l) { return { text: 'Round 2: ' + l, options: { bullet: true, breakLine: true } }; }));
+    text(s1, [{ text: 'We recommend these risk responses', options: { bold: true, fontSize: 16, breakLine: true } }].concat(lines).concat([
+      { text: 'Total spend on responses ' + km(S.mit) + '. Chance of meeting both board targets rises from ' + pct(S.ref.pBoth) + ' (no mitigation) to ' + pct(S.pBoth) + '.', options: { breakLine: true, bold: true } },
+      edit('in two sentences, why this is the best balance of probability, cost and time for the board')
+    ]), { x: MX, y: 1.55, w: 6.35, h: 4.9, size: 13, fill: C.wh, line: C.rule, psa: 5 });
+    var gx = MX + 6.6, gw = (W - MX - gx - 0.25) / 2, gh = 1.62;
+    stat(s1, gx, 1.55, gw, gh, 'Chance of staying within ' + mm(S.budget), pct(S.pB), 'target ' + pct(P.targetB) + ' · was ' + pct(S.ref.pB), S.pB >= P.targetB ? 'On track' : 'Off track');
+    stat(s1, gx + gw + 0.25, 1.55, gw, gh, 'Chance of finishing by week ' + P.deadlineWeek, pct(S.pT), 'target ' + pct(P.targetT) + ' · was ' + pct(S.ref.pT), S.pT >= P.targetT ? 'On track' : 'Off track');
+    stat(s1, gx, 1.55 + gh + 0.22, gw, gh, 'Expected final cost', mm(S.costMean), 'P80 ' + mm(S.costP80) + ' · reserve left ' + km(S.budget - S.costMean));
+    stat(s1, gx + gw + 0.25, 1.55 + gh + 0.22, gw, gh, 'Likely finish (P50)', 'Week ' + S.weeksP50.toFixed(1), S.finishDate + ' · P80 week ' + S.weeksP80.toFixed(1));
+    text(s1, [
+      { text: 'Basis: ', options: { bold: true } },
+      { text: 'heat forecast from ' + d.heat.station + ' (' + d.heat.basisLabel + '): ' + d.heat.f50 + ' hot days expected in 2027 (10–90%: ' + d.heat.f10 + '–' + d.heat.f90 + ') against an allowance of ' + d.heat.allowance + '. Summer ' + d.heat.latestYear + ' had ' + d.heat.latestHot + '.', options: {} }
+    ], { x: gx, y: 1.55 + 2 * (gh + 0.22), w: W - MX - gx, h: 1.05, size: 12, fill: C.pp });
+
+    // ---------- Slide 2: how we optimised ----------
+    var s2 = slide('How we optimised: responses and trade-offs',
+      'Slide 2 of 3: the analysis. Show how each response changed the risk, what it cost, and how your final choice compares with the other options you tested. EMV = probability × impact in £k, with delay costed at £35k a week of site overheads.');
+    var rows = [[th('Risk'), th('Inherent'), th('Our response'), th('Residual'), th('EMV before → after')]];
+    d.register.forEach(function (r) {
+      rows.push([
+        td(r.id + ' ' + r.short, { fontSize: 10.5 }),
+        td(r.inhS + ' ' + r.inhPr, { bold: true, color: prColor(r.inhPr) }),
+        td(r.resp ? r.resp.id + ' ' + r.resp.type : (r.status === 'closed' ? 'Closed at week 10' : 'Accept'), { fontSize: 10.5 }),
+        td(r.status === 'occurred' ? 'Occurred' : r.status === 'closed' ? '–' : r.resS + ' ' + r.resPr, { bold: true, color: r.status === 'occurred' ? C.bad : prColor(r.resPr) }),
+        td(km(r.emvIn) + ' → ' + (r.status === 'closed' ? '£0k' : km(r.emvRes)))
+      ]);
+    });
+    rows.push([td('Secondary risks created (' + d.secondaries.length + ')', { bold: true }), td(''), td(d.secondaries.map(function (x) { return x.id; }).join(', ') || 'None', { fontSize: 10.5 }), td(''),
+      td('+' + km(d.secondaries.reduce(function (a, x) { return a + x.emv; }, 0)), { bold: true })]);
+    rows.push([td('Total exposure', { bold: true }), td(''), td(''), td(''), td(km(S.emvBefore) + ' → ' + km(S.emvAfter), { bold: true })]);
+    table(s2, rows, { x: MX, y: 1.1, w: 7.25, colW: [2.5, 0.95, 1.2, 0.95, 1.65], rowH: 0.36 });
+    var sc = d.scenarios.slice(-6);
+    if (sc.length >= 2) {
+      s2.addChart(pres.charts.BAR, [
+        { name: 'Within budget', labels: sc.map(function (x) { return x.id; }), values: sc.map(function (x) { return Math.round(x.pB * 100); }) },
+        { name: 'On time', labels: sc.map(function (x) { return x.id; }), values: sc.map(function (x) { return Math.round(x.pT * 100); }) }
+      ], { x: 8.05, y: 1.05, w: W - 8.05 - MX, h: 3.3, barDir: 'col', barGrouping: 'clustered', chartColors: [C.dp, C.mp], showLegend: true, legendPos: 'b', legendFontSize: 10, legendFontFace: '+mn-lt',
+        showTitle: true, title: 'Options tested: confidence (%) vs targets ' + pct(P.targetB) + ' / ' + pct(P.targetT), titleFontSize: 12, titleColor: C.dp, titleFontFace: '+mn-lt',
+        valAxisMinVal: 0, valAxisMaxVal: 100, valGridLine: { color: 'E6DDF2', size: 0.5 }, catGridLine: { style: 'none' }, catAxisLabelColor: C.grey, valAxisLabelColor: C.grey,
+        catAxisLabelFontSize: 10, valAxisLabelFontSize: 9, catAxisLabelFontFace: '+mn-lt', valAxisLabelFontFace: '+mn-lt',
+        showValue: true, dataLabelPosition: 'outEnd', dataLabelFontSize: 8, dataLabelColor: C.dp, dataLabelFontFace: '+mn-lt' });
+      text(s2, sc.map(function (x, i) { return { text: x.id + ' ' + x.name + (x.id === d.chosen.id ? '  (recommended)' : ''), options: { bold: x.id === d.chosen.id, breakLine: i < sc.length - 1 } }; }),
+        { x: 8.05, y: 4.4, w: W - 8.05 - MX, h: 1.05, size: 10, color: C.grey });
+    } else {
+      text(s2, [{ text: 'Options tested', options: { bold: true, breakLine: true } }, edit('save at least two scenarios on the dashboard before downloading, so this panel can compare them; or list the alternatives you considered and why you rejected them')],
+        { x: 8.05, y: 1.1, w: W - 8.05 - MX, h: 4.3, size: 13, fill: C.wh, line: C.rule });
+    }
+    text(s2, [{ text: 'Why this is the optimum for us: ', options: { bold: true } }, edit('the trade-off we made (e.g. which risks we accepted, which response gave most risk reduction per £), and why a cheaper or a more cautious option was worse')],
+      { x: 8.05, y: 5.55, w: W - 8.05 - MX, h: 1.35, size: 12, fill: C.pp });
+
+    // ---------- Slide 3: what the board must accept, and our reflection ----------
+    var s3 = slide('What the board must accept, and what we learned',
+      'Slide 3 of 3: the ask and the reflection. Name the residual and secondary risks the board must accept and who owns them. The group reflective statement should be about 150–200 words, written together after the session, using What? So what? Now what? (Rolfe, Freshwater and Jasper, 2001).');
+    var top = d.residualTop.slice(0, 5);
+    var r3 = [[th('Largest remaining risks'), th('EMV'), th('Owner')]];
+    top.forEach(function (x) { r3.push([td(x.id + ' ' + x.short + (x.secondary ? ' (secondary)' : ''), { fontSize: 10.5 }), td(km(x.emv)), td(x.owner || '[Edit: owner]', x.owner ? { fontSize: 10.5 } : { color: C.bp, italic: true })]); });
+    table(s3, r3, { x: MX, y: 1.1, w: 6.3, colW: [3.5, 0.75, 2.05], rowH: 0.32 });
+    var kr = [[th('KPI forecast'), th('Value'), th('Status')]];
+    d.kpis.forEach(function (k) { kr.push([td(k.name), td(k.value, { bold: true }), td('● ' + k.status, { bold: true, color: stColor(k.status) })]); });
+    table(s3, kr, { x: MX, y: 3.2, w: 6.3, colW: [3.3, 1.5, 1.5], rowH: 0.3 });
+    text(s3, [{ text: 'We ask the board to: ', options: { bold: true } }, edit('accept these residual risks, release reserve for …, and note the conditions or triggers we will monitor')],
+      { x: MX, y: 5.55, w: 6.3, h: 1.35, size: 12, fill: C.pp });
+    var rx = MX + 6.6, rw = W - MX - rx;
+    s3.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: rx, y: 1.1, w: rw, h: 5.8, fill: { color: C.wh }, line: { color: C.bp, width: 1.25 }, rectRadius: 0.08, objectName: 'Reflection panel' });
+    text(s3, [
+      { text: 'Group reflective statement', options: { bold: true, fontSize: 18, breakLine: true } },
+      { text: 'What? ', options: { bold: true } }, { text: 'What happened in our group: our key decisions, turning points and how we disagreed well.', options: { color: C.grey, breakLine: true } },
+      edit('our reflection'), { text: ' ', options: { breakLine: true } },
+      { text: 'So what? ', options: { bold: true } }, { text: 'What we learned about risk, uncertainty and trade-offs, and about working as a team.', options: { color: C.grey, breakLine: true } },
+      edit('our reflection'), { text: ' ', options: { breakLine: true } },
+      { text: 'Now what? ', options: { bold: true } }, { text: 'What we would do differently on a real project, and one habit each of us will take into practice.', options: { color: C.grey, breakLine: true } },
+      edit('our reflection')
+    ], { x: rx + 0.15, y: 1.2, w: rw - 0.3, h: 5.6, size: 13, psa: 6 });
+
+    return pres;
+  }
+  root.buildHeatwiseDeck = buildHeatwiseDeck;
+  if (typeof module !== 'undefined') module.exports = buildHeatwiseDeck;
+})(typeof window !== 'undefined' ? window : globalThis);
+
 </script>
 <script>
 (function () {
@@ -646,6 +847,24 @@ if (typeof module !== 'undefined') module.exports = stationH;
 
   var state = load('state', null) || { sel: {}, basis: 'trend', round: 1, r2: { X1: 0, X2: false, X3: false, X4: false } };
   if (!state.station) state.station = P.heatStation || 'Heathrow';
+  function readShared() {
+    var m = /#s=([\w-]+)/.exec(location.hash || '');
+    if (!m) return false;
+    try {
+      var o = JSON.parse(decodeURIComponent(escape(atob(m[1].replace(/-/g, '+').replace(/_/g, '/')))));
+      var sel = {};
+      Object.keys(o.sel || {}).forEach(function (k) { var v = o.sel[k]; if (v && OPT[v] && v.indexOf(k) === 0) sel[k] = v; });
+      state.sel = sel;
+      if (['trend', 'recent', 'all'].indexOf(o.basis) >= 0) state.basis = o.basis;
+      state.round = o.round === 2 ? 2 : 1;
+      var r2 = o.r2 || {};
+      state.r2 = { X1: Math.max(0, Math.min(4, +r2.X1 || 0)), X2: !!r2.X2, X3: !!r2.X3, X4: !!r2.X4 };
+      if (typeof o.station === 'string' && S.stations[o.station]) state.station = o.station;
+      history.replaceState(null, '', location.href.split('#')[0]);
+      return true;
+    } catch (e) { return false; }
+  }
+  var sharedOpened = readShared();
   function stationList() { return Object.keys(S.stations).filter(function (k) { return S.stations[k].latestYear >= S.stations[P.heatStation || 'Heathrow'].latestYear - 1; }); }
   function setH() { if (!S.stations[state.station] || stationList().indexOf(state.station) < 0) state.station = P.heatStation || 'Heathrow'; H = stationH(S, state.station, P.heatThreshold); }
   setH();
@@ -657,7 +876,7 @@ if (typeof module !== 'undefined') module.exports = stationH;
   function $(id) { return document.getElementById(id); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function pct(x) { return Math.round(x * 100) + '%'; }
-  function km(x) { return '£' + Math.round(x).toLocaleString('en-GB') + 'k'; }
+  function km(x) { return (x < 0 ? '−' : '') + '£' + Math.abs(Math.round(x)).toLocaleString('en-GB') + 'k'; }
   function mm(xk) { return '£' + (xk / 1000).toFixed(2) + 'm'; }
   function wk(x) { return 'week ' + (Math.round(x * 10) / 10).toFixed(1); }
   var START = new Date(P.start + 'T12:00:00Z');
@@ -670,8 +889,9 @@ if (typeof module !== 'undefined') module.exports = stationH;
   function scoreOf(l) { var L = Engine.lScore(l.p), I = Engine.iScore(l.impact); return { L: L, I: I, S: L * I, pr: Engine.priority(L * I) }; }
 
   function sim(st) {
-    var k = JSON.stringify([st.sel, st.basis, st.round, st.round === 2 ? st.r2 : 0, state.station, S.generated_utc]);
-    if (!cache[k]) cache[k] = Engine.simulate(M, H, st, N);
+    var stn = st.station || state.station;
+    var k = JSON.stringify([st.sel, st.basis, st.round, st.round === 2 ? st.r2 : 0, stn, S.generated_utc]);
+    if (!cache[k]) cache[k] = Engine.simulate(M, stn === state.station ? H : stationH(S, stn, P.heatThreshold), st, N);
     return cache[k];
   }
 
@@ -1086,93 +1306,301 @@ if (typeof module !== 'undefined') module.exports = stationH;
     var k = kpiStatus(key, cur);
     return k.s ? '<b>' + k.v + '</b><div>' + ragBadge(k.s) + '</div>' : '<span class="meta">' + k.v + '</span>';
   }
+  // ---------- project tabs (overview, stakeholders, schedule, budget, success) ----------
+  var TABS = ['overview', 'stake', 'sched', 'budget', 'success', 'whatif'];
+  var NET = cpm(B.network);
+  var WBSI = {}; B.wbs.forEach(function (w) { w.children.forEach(function (c) { WBSI[c.id] = c; }); });
+  var BASE_TOT = 0; B.wbs.forEach(function (w) { w.children.forEach(function (c) { BASE_TOT += c.cost; }); });
+  function weekDate(w) { return dateOf(w); }
+
+  // Planned cumulative base spend at week t (time-phased CBS), optionally stretched by factor f.
+  function plannedCum(t, f) {
+    f = f || 1; var v = 0;
+    B.wbs.forEach(function (w) { w.children.forEach(function (c) { v += c.cost * Math.min(1, Math.max(0, (t - c.start * f) / Math.max(1e-9, (c.end - c.start) * f))); }); });
+    return v;
+  }
+
+  // Forecast cashflow for the current scenario (expected values).
+  function cashflow(cur) {
+    var planDur = cur.kpi.planDur, fDur = Math.max(planDur, cur.weeksMean), f = fDur / P.baseWeeks;
+    var horizon = Math.ceil(Math.max(fDur, P.deadlineWeeks, cur.weeksP80)) + 1;
+    var weeks = [], i;
+    for (i = 0; i <= horizon; i++) weeks.push(i);
+    var mit = cur.mitSpend, rec = cur.recoverySpend;
+    var riskAt = [];
+    var atOf = {};
+    M.risks.forEach(function (r) { atOf[r.id] = r.at; });
+    Object.keys(OPT).forEach(function (k) { var s = OPT[k].sec; if (s) atOf[s.id] = s.at; });
+    R2.recovery.forEach(function (x) { if (x.sec) atOf[x.sec.id] = x.sec.at; });
+    var direct = 0;
+    cur.lines.forEach(function (l) { if (l.meanCost > 0) { direct += l.meanCost; riskAt.push([(atOf[l.id] || 12) * f, l.meanCost]); } });
+    var extra = Math.max(0, cur.costMean - P.baseCost * 1000 - mit - rec - direct);
+    function fcCum(t) {
+      var v = plannedCum(t, f);
+      v += mit * Math.min(1, Math.max(0, t / 4));
+      if (rec) v += rec * Math.min(1, Math.max(0, (t - R2.week) / 4));
+      riskAt.forEach(function (r) { v += r[1] * Math.min(1, Math.max(0, (t - r[0]) / 2)); });
+      v += extra * Math.min(1, Math.max(0, t / fDur));
+      return v;
+    }
+    return { weeks: weeks, planned: weeks.map(function (t) { return plannedCum(t, 1); }), forecast: weeks.map(fcCum), fDur: fDur, horizon: horizon, f: f };
+  }
+
+  function renderGantt(cur) {
+    var Wd = 1100, lab = 280, rowH = 24, top = 44, maxW = Math.ceil(Math.max(P.deadlineWeeks + 1, cur.weeksP80 + 1));
+    var rows = [];
+    B.wbs.forEach(function (w) { rows.push({ head: true, id: w.id, name: w.name }); w.children.forEach(function (c) { rows.push(c); }); });
+    rows.push({ msRow: true });
+    var Hh = top + rows.length * rowH + 30, sc = (Wd - lab - 20) / maxW;
+    var X = function (wk) { return lab + wk * sc; };
+    var s = '<svg class="gantt" viewBox="0 0 ' + Wd + ' ' + Hh + '" width="' + Wd + '" height="' + Hh + '" role="img" aria-label="Gantt chart">';
+    for (var wk = 0; wk <= maxW; wk++) {
+      s += '<line x1="' + X(wk) + '" x2="' + X(wk) + '" y1="' + (top - 6) + '" y2="' + (Hh - 26) + '" stroke="var(--grid)"/>';
+      if (wk % 2 === 0) s += '<text x="' + X(wk) + '" y="' + (top - 10) + '" text-anchor="middle">' + wk + '</text>';
+      if (wk % 4 === 0) s += '<text x="' + X(wk) + '" y="' + (top - 26) + '" text-anchor="middle">' + weekDate(wk).replace(/ 20\d\d$/, '') + '</text>';
+    }
+    s += '<text x="0" y="' + (top - 10) + '" class="lbl" style="font-weight:600">Week (start date above)</text>';
+    rows.forEach(function (r, i) {
+      var y = top + i * rowH;
+      if (r.head) { s += '<rect x="0" y="' + y + '" width="' + Wd + '" height="' + rowH + '" fill="var(--surface-2)"/><text x="4" y="' + (y + 16) + '" class="lbl" style="font-weight:650">' + r.id + ' ' + esc(r.name) + '</text>'; return; }
+      if (r.msRow) {
+        s += '<text x="4" y="' + (y + 16) + '" class="lbl" style="font-weight:650">Milestones</text>';
+        P.milestones.forEach(function (m) {
+          var x = X(m.week), cy = y + 12;
+          s += '<g data-tip="' + esc('<b>' + m.id + '</b> ' + m.name + '<br>Week ' + m.week + ' (' + weekDate(m.week) + ')') + '"><path d="M' + x + ',' + (cy - 7) + 'l7,7l-7,7l-7,-7z" fill="var(--ink)"/><text x="' + (x + 9) + '" y="' + (cy + 4) + '" class="lbl">' + m.id + '</text></g>';
+        });
+        return;
+      }
+      var a = NET.acts[r.id], loe = !a, crit = a && a.critical;
+      var col = loe ? 'var(--base)' : crit ? 'var(--s2)' : 'var(--s1)';
+      var tip = '<b>' + r.id + ' ' + esc(r.name) + '</b><br>Weeks ' + r.start + '–' + r.end + ' (' + weekDate(r.start) + ' to ' + weekDate(r.end) + ')<br>Budget ' + km(r.cost) +
+        (loe ? '<br>Level of effort (runs throughout)' : '<br>Total float ' + a.float + ' wk' + (crit ? ' · <b>critical path</b>' : '')) + (r.risks ? '<br>Risks: ' + esc(r.risks) : '');
+      s += '<g data-tip="' + esc(tip) + '"><rect x="0" y="' + y + '" width="' + Wd + '" height="' + rowH + '" fill="transparent"/>';
+      s += '<text x="16" y="' + (y + 16) + '" class="lbl">' + r.id + ' ' + esc(r.short || r.name) + '</text>';
+      s += '<rect x="' + X(r.start) + '" y="' + (y + 5) + '" width="' + Math.max(2, X(r.end) - X(r.start)) + '" height="' + (rowH - 10) + '" rx="3" fill="' + col + '"' + (loe ? ' opacity="0.55"' : '') + '/>';
+      if (a && a.float > 0) s += '<line x1="' + X(r.end) + '" x2="' + X(r.end + a.float) + '" y1="' + (y + rowH / 2) + '" y2="' + (y + rowH / 2) + '" stroke="var(--ink-2)" stroke-width="1.5"/><line x1="' + X(r.end + a.float) + '" x2="' + X(r.end + a.float) + '" y1="' + (y + 7) + '" y2="' + (y + rowH - 7) + '" stroke="var(--ink-2)" stroke-width="1.5"/>';
+      s += '</g>';
+    });
+    var yb = Hh - 26;
+    function vline(wk, color, label, right) {
+      s += '<line x1="' + X(wk) + '" x2="' + X(wk) + '" y1="' + (top - 4) + '" y2="' + yb + '" stroke="' + color + '" stroke-width="2"/>' +
+        '<text x="' + (X(wk) + (right ? 4 : -4)) + '" y="' + (yb + 16) + '" text-anchor="' + (right ? 'start' : 'end') + '" style="fill:' + color + ';font-weight:600">' + label + '</text>';
+    }
+    var p50 = cur.weeksP50;
+    vline(P.deadlineWeeks, 'var(--ink)', 'Deadline wk ' + P.deadlineWeeks, p50 < P.deadlineWeeks);
+    vline(p50, 'var(--s1)', 'Your P50 finish wk ' + p50.toFixed(1), p50 >= P.deadlineWeeks);
+    if (state.round === 2) vline(R2.week, 'var(--s2)', 'Week ' + R2.week + ' status');
+    s += '</svg>';
+    return s;
+  }
+
+  function renderNetwork() {
+    var nodeW = 168, nodeH = 66, colGap = 52, rowGap = 16, pad = 20;
+    var levels = {}; NET.order.forEach(function (id) { var l = NET.acts[id].level + 1; (levels[l] = levels[l] || []).push(id); });
+    var maxL = Math.max.apply(null, Object.keys(levels).map(Number)) + 1;
+    levels[0] = ['Start']; levels[maxL] = ['Finish'];
+    var pos = {}, maxRows = 0;
+    Object.keys(levels).forEach(function (l) {
+      levels[l].sort(function (a, b) { var A = NET.acts[a] || { ES: 0 }, Bb = NET.acts[b] || { ES: 0 }; return A.ES - Bb.ES || (a < b ? -1 : 1); });
+      maxRows = Math.max(maxRows, levels[l].length);
+    });
+    var Hh = pad * 2 + maxRows * (nodeH + rowGap), Wd = pad * 2 + (maxL + 1) * (nodeW + colGap) - colGap;
+    Object.keys(levels).forEach(function (l) {
+      var n = levels[l].length, off = (maxRows - n) * (nodeH + rowGap) / 2;
+      levels[l].forEach(function (id, i) { pos[id] = { x: pad + l * (nodeW + colGap), y: pad + off + i * (nodeH + rowGap), w: (id === 'Start' || id === 'Finish') ? 90 : nodeW }; });
+    });
+    var edges = [];
+    NET.order.forEach(function (id) {
+      var a = NET.acts[id];
+      if (!a.preds.length) edges.push({ from: 'Start', to: id, crit: a.critical, lab: '' });
+      a.preds.forEach(function (p) {
+        var q = NET.acts[p.id];
+        var tight = p.type === 'SS' ? Math.abs(a.ES - (q.ES + p.lag)) < 1e-9 : Math.abs(a.ES - (q.EF + p.lag)) < 1e-9;
+        edges.push({ from: p.id, to: id, crit: a.critical && q.critical && tight, lab: (p.type === 'SS' || p.lag) ? p.type + (p.lag ? (p.lag > 0 ? '+' : '−') + Math.abs(p.lag) : '') : '' });
+      });
+      if (!a.succs.length) edges.push({ from: id, to: 'Finish', crit: a.critical, lab: '' });
+    });
+    var s = '<svg class="net" viewBox="0 0 ' + Wd + ' ' + Hh + '" width="' + Wd + '" height="' + Hh + '" role="img" aria-label="Network diagram"><defs>' +
+      '<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="var(--axis)"/></marker>' +
+      '<marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="var(--s2)"/></marker></defs>';
+    edges.forEach(function (e) {
+      var A = pos[e.from], Bp = pos[e.to];
+      var x1 = A.x + A.w, y1 = A.y + nodeH / 2, x2 = Bp.x, y2 = Bp.y + nodeH / 2, mx = (x1 + x2) / 2;
+      s += '<path d="M' + x1 + ',' + y1 + ' C' + mx + ',' + y1 + ' ' + mx + ',' + y2 + ' ' + (x2 - 2) + ',' + y2 + '" fill="none" stroke="' + (e.crit ? 'var(--s2)' : 'var(--axis)') + '" stroke-width="' + (e.crit ? 2.5 : 1.25) + '" marker-end="url(#' + (e.crit ? 'ahc' : 'ah') + ')"/>';
+      if (e.lab) s += '<text x="' + (x2 - 14) + '" y="' + (y2 - 6) + '" text-anchor="end" style="font-size:10px;paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round">' + e.lab + '</text>';
+    });
+    Object.keys(pos).forEach(function (id) {
+      var p = pos[id], a = NET.acts[id];
+      if (!a) {
+        s += '<rect x="' + p.x + '" y="' + p.y + '" width="' + p.w + '" height="' + nodeH + '" rx="33" fill="var(--surface)" stroke="var(--ink-2)"/><text x="' + (p.x + p.w / 2) + '" y="' + (p.y + nodeH / 2 + 4) + '" text-anchor="middle" class="lbl" style="font-weight:650">' + id + (id === 'Finish' ? ' wk ' + NET.end : '') + '</text>';
+        return;
+      }
+      var c = WBSI[id], crit = a.critical;
+      var tip = '<b>' + id + ' ' + esc(c.name) + '</b><br>Duration ' + a.dur + ' wk · ES ' + a.ES + ' · EF ' + a.EF + '<br>LS ' + a.LS + ' · LF ' + a.LF + ' · total float ' + a.float + ' wk' + (crit ? '<br><b>On the critical path</b>' : '') + (c.risks ? '<br>Risks: ' + esc(c.risks) : '');
+      s += '<g data-tip="' + esc(tip) + '"><rect x="' + p.x + '" y="' + p.y + '" width="' + p.w + '" height="' + nodeH + '" rx="6" fill="' + (crit ? 'color-mix(in srgb, var(--s2) 14%, var(--surface))' : 'var(--surface)') + '" stroke="' + (crit ? 'var(--s2)' : 'var(--axis)') + '" stroke-width="' + (crit ? 2 : 1) + '"/>' +
+        '<line x1="' + p.x + '" x2="' + (p.x + p.w) + '" y1="' + (p.y + 18) + '" y2="' + (p.y + 18) + '" stroke="var(--grid)"/><line x1="' + p.x + '" x2="' + (p.x + p.w) + '" y1="' + (p.y + nodeH - 18) + '" y2="' + (p.y + nodeH - 18) + '" stroke="var(--grid)"/>' +
+        '<text x="' + (p.x + 6) + '" y="' + (p.y + 13) + '">' + a.ES + '</text><text x="' + (p.x + p.w / 2) + '" y="' + (p.y + 13) + '" text-anchor="middle">' + a.dur + ' wk</text><text x="' + (p.x + p.w - 6) + '" y="' + (p.y + 13) + '" text-anchor="end">' + a.EF + '</text>' +
+        '<text x="' + (p.x + p.w / 2) + '" y="' + (p.y + 37) + '" text-anchor="middle" class="lbl" style="font-weight:650;font-size:' + ((id + ' ' + c.short).length > 24 ? 10 : 11) + 'px">' + id + ' ' + esc(c.short) + '</text>' +
+        '<text x="' + (p.x + 6) + '" y="' + (p.y + nodeH - 5) + '">' + a.LS + '</text><text x="' + (p.x + p.w / 2) + '" y="' + (p.y + nodeH - 5) + '" text-anchor="middle">float ' + a.float + '</text><text x="' + (p.x + p.w - 6) + '" y="' + (p.y + nodeH - 5) + '" text-anchor="end">' + a.LF + '</text></g>';
+    });
+    s += '</svg>';
+    return s;
+  }
+
+  function renderCashChart(cf, cur) {
+    var Wd = 1000, Hh = 300, m = { l: 56, r: 20, t: 16, b: 34 }, w = Wd - m.l - m.r, h = Hh - m.t - m.b;
+    var ymax = Math.max(cur.budget, cur.costP80) * 1.08, xmax = cf.horizon;
+    var X = function (t) { return m.l + t / xmax * w; }, Y = function (v) { return m.t + (1 - v / ymax) * h; };
+    var s = '<svg viewBox="0 0 ' + Wd + ' ' + Hh + '" width="' + Wd + '" height="' + Hh + '" role="img" aria-label="Cumulative cashflow">';
+    niceTicks(0, ymax / 1000, 5).forEach(function (t) { s += '<line x1="' + m.l + '" x2="' + (m.l + w) + '" y1="' + Y(t * 1000) + '" y2="' + Y(t * 1000) + '" stroke="var(--grid)"/><text x="' + (m.l - 6) + '" y="' + (Y(t * 1000) + 4) + '" text-anchor="end">£' + t + 'm</text>'; });
+    for (var t = 0; t <= xmax; t += 4) s += '<text x="' + X(t) + '" y="' + (Hh - 14) + '" text-anchor="middle">wk ' + t + '</text>';
+    s += '<line x1="' + m.l + '" x2="' + (m.l + w) + '" y1="' + Y(cur.budget) + '" y2="' + Y(cur.budget) + '" stroke="var(--ink-2)"/><text class="lbl" x="' + (m.l + 6) + '" y="' + (Y(cur.budget) - 6) + '">Authorised budget ' + mm(cur.budget) + '</text>';
+    s += '<line x1="' + X(P.deadlineWeeks) + '" x2="' + X(P.deadlineWeeks) + '" y1="' + m.t + '" y2="' + (m.t + h) + '" stroke="var(--ink-2)"/><text class="lbl" x="' + (X(P.deadlineWeeks) + 4) + '" y="' + (m.t + h - 6) + '">Deadline</text>';
+    function path(arr) { return arr.map(function (v, i) { return (i ? 'L' : 'M') + X(cf.weeks[i]).toFixed(1) + ',' + Y(v).toFixed(1); }).join(''); }
+    s += '<path d="' + path(cf.planned) + '" fill="none" stroke="var(--base)" stroke-width="2"/>';
+    s += '<path d="' + path(cf.forecast) + '" fill="none" stroke="var(--s1)" stroke-width="2"/>';
+    s += '<circle cx="' + X(cf.fDur) + '" cy="' + Y(cur.costMean) + '" r="5" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"/><text class="lbl" x="' + (X(cf.fDur) - 8) + '" y="' + (Y(cur.costMean) + 18) + '" text-anchor="end">Expected ' + mm(cur.costMean) + '</text>';
+    s += '<line x1="' + (X(cf.fDur) - 6) + '" x2="' + (X(cf.fDur) + 6) + '" y1="' + Y(cur.costP80) + '" y2="' + Y(cur.costP80) + '" stroke="var(--s1)" stroke-width="2"/><line x1="' + X(cf.fDur) + '" x2="' + X(cf.fDur) + '" y1="' + Y(cur.costMean) + '" y2="' + Y(cur.costP80) + '" stroke="var(--s1)" stroke-width="1.5"/><text class="lbl" x="' + (X(cf.fDur) + 8) + '" y="' + (Y(cur.costP80) + 4) + '">P80 ' + mm(cur.costP80) + '</text>';
+    s += '<line class="xh" x1="0" x2="0" y1="' + m.t + '" y2="' + (m.t + h) + '" stroke="var(--axis)" visibility="hidden"/><rect class="hit" x="' + m.l + '" y="' + m.t + '" width="' + w + '" height="' + h + '" fill="transparent"/></svg>';
+    return s;
+  }
+  function bindCash(el, cf) {
+    var svg = el.querySelector('svg'); if (!svg) return;
+    var hit = svg.querySelector('.hit'), xh = svg.querySelector('.xh'), Wd = 1000, ml = 56, w = 1000 - 56 - 20;
+    function move(e) {
+      var r = svg.getBoundingClientRect(), sx = (e.clientX - r.left) * Wd / r.width, t = Math.max(0, Math.min(cf.horizon, Math.round((sx - ml) / w * cf.horizon)));
+      var x = ml + t / cf.horizon * w; xh.setAttribute('x1', x); xh.setAttribute('x2', x); xh.setAttribute('visibility', 'visible');
+      showTip(e, '<b>Week ' + t + '</b> (' + dateOf(t) + ')<br>Planned (baseline) ' + mm(cf.planned[t]) + '<br>Forecast (your scenario) ' + mm(cf.forecast[t]));
+    }
+    hit.addEventListener('mousemove', move); hit.addEventListener('click', move);
+    hit.addEventListener('mouseleave', function () { xh.setAttribute('visibility', 'hidden'); hideTip(); });
+  }
+
   function renderBrief(cur) {
-    var h = '';
-    // 1. purpose and scope
-    h += '<section class="card"><h2>Purpose and scope</h2><p class="sub">' + esc(B.purpose) + '</p>' +
+    var out = {};
+    // ----- overview -----
+    var h = '<section class="card"><h2>Purpose and scope</h2><p class="sub">' + esc(B.purpose) + '</p>' +
       '<p class="scope"><b>Scope statement.</b> ' + esc(B.scope.statement) + '</p><div class="lists">' +
       [['In scope', B.scope.in], ['Out of scope', B.scope.out], ['Key deliverables (outputs)', B.scope.deliverables], ['Constraints', B.scope.constraints], ['Assumptions', B.scope.assumptions]].map(function (l) {
         return '<div><h3>' + l[0] + '</h3><ul>' + l[1].map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
       }).join('') + '</div></section>';
-    // 2. SMART
-    h += '<section class="card"><h2>SMART objectives</h2><p class="sub">Each objective is Specific, Measurable, Achievable, Relevant and Time-bound. The last column shows how your current scenario in the Risk what-if tab is forecast to perform against it.</p>' +
+    h += '<section class="card"><h2>SMART objectives</h2><p class="sub">Each objective is Specific, Measurable, Achievable, Relevant and Time-bound. The last column shows how your current scenario on the Risk what-if tab is forecast to perform against it.</p>' +
       '<div class="tablewrap"><table style="min-width:980px"><thead><tr><th>ID</th><th>Objective</th><th>Specific</th><th>Measurable</th><th>Achievable</th><th>Relevant</th><th>Time-bound</th><th>Your scenario</th></tr></thead><tbody>' +
       B.smart.map(function (o) {
         return '<tr><td class="rid">' + o.id + '</td><td><b>' + esc(o.title) + '</b></td><td>' + esc(o.S) + '</td><td>' + esc(o.M) + '</td><td>' + esc(o.A) + '</td><td>' + esc(o.R) + '</td><td>' + esc(o.T) + '</td><td>' + liveCell(o.kpi, cur) + '</td></tr>';
       }).join('') + '</tbody></table></div></section>';
-    // 3. VUCA
     h += '<section class="card"><h2>VUCA statement</h2><p class="sub">HEATWISE operates in a volatile, uncertain, complex and ambiguous environment. Each quadrant names the conditions, the risks in the register they drive, and the leadership response (Johansen\'s VUCA Prime: vision, understanding, clarity, agility).</p><div class="vuca">' +
       B.vuca.map(function (v) {
         return '<div><span class="l" aria-hidden="true">' + v.k[0] + '</span><h3>' + v.k + '</h3><p>' + esc(v.what) + '</p><p class="meta">Register links: ' + esc(v.risks) + '</p><p><b>' + esc(v.response) + '</b></p></div>';
       }).join('') + '</div></section>';
-    // 4. stakeholders
+    h += '<section class="card"><h2>Using the project tabs in your decisions</h2><div class="prompt"><ol>' +
+      '<li>Which SMART objective does your preferred scenario put most at risk, and is that consistent with the board\'s risk appetite?</li>' +
+      '<li>Which stakeholders carry the residual and secondary risks you are accepting? Are any of them in the "keep informed" quadrant with little power to object?</li>' +
+      '<li>Which risks hit work on the critical path (Schedule tab)? A delay there moves the finish date; a delay elsewhere may be absorbed by float.</li>' +
+      '<li>How does your scenario change the forecast cashflow, and how much of the reserve is left (Budget &amp; cashflow tab)?</li>' +
+      '<li>Does any choice improve outputs (on time, on budget) at the expense of outcomes (benefits, satisfaction)? Use the VUCA statement to explain why.</li>' +
+      '</ol></div></section>';
+    out.overview = h;
+    // ----- stakeholders -----
     var quad = { ks: [], mc: [], mo: [], ki: [] };
     B.stakeholders.slice().sort(function (x, y) { return (y.power * 10 + y.interest) - (x.power * 10 + x.interest); }).forEach(function (s) {
       var k = s.power >= 4 ? (s.interest >= 4 ? 'mc' : 'ks') : (s.interest >= 4 ? 'ki' : 'mo');
       quad[k].push('<span class="dotl" title="' + esc(s.name + ': ' + s.strategy) + '">' + esc(s.short) + ' <span class="meta">' + s.power + '/' + s.interest + '</span></span>');
     });
     function q(k, label, hot) { return '<div class="q' + (hot ? ' hot' : '') + '"><div>' + label + '</div><div class="pins">' + quad[k].join('') + '</div></div>'; }
-    h += '<section class="card"><h2>Stakeholder power/interest matrix</h2><p class="sub">Power: ability to influence or stop the project. Interest: how much the project affects them. Both are scored 1–5; 4–5 counts as high. Position sets the engagement strategy. The table links each stakeholder to the risks they shape or carry.</p>' +
+    h = '<section class="card"><h2>Stakeholder power/interest matrix</h2><p class="sub">Power: ability to influence or stop the project. Interest: how much the project affects them. Both are scored 1–5; 4–5 counts as high. Position sets the engagement strategy. The table links each stakeholder to the risks they shape or carry.</p>' +
       '<div class="grid2"><div><div class="pi" role="img" aria-label="Power and interest matrix">' + q('ks', 'Keep satisfied (high power, lower interest)') + q('mc', 'Manage closely (high power, high interest)', true) + q('mo', 'Monitor (lower power, lower interest)') + q('ki', 'Keep informed (lower power, high interest)') + '<span class="pi-y">Power / influence →</span></div><div class="pi-x">Interest →</div><p class="small">Labels show power/interest scores.</p></div>' +
       '<div class="tablewrap"><table><thead><tr><th>Stakeholder</th><th class="num">P</th><th class="num">I</th><th>Engagement</th><th>Risks</th></tr></thead><tbody>' +
       B.stakeholders.slice().sort(function (a, b) { return (b.power + b.interest) - (a.power + a.interest); }).map(function (s) {
         return '<tr><td>' + esc(s.name) + '</td><td class="num">' + s.power + '</td><td class="num">' + s.interest + '</td><td>' + esc(s.strategy) + '</td><td class="meta">' + esc(s.risks) + '</td></tr>';
       }).join('') + '</tbody></table></div></div></section>';
-    // 5. RACI
     var roles = B.roles;
     h += '<section class="card"><h2>RACI matrix</h2><p class="sub"><span class="rc R">R</span> Responsible (does the work) · <span class="rc A">A</span> Accountable (one per task; signs it off) · <span class="rc C">C</span> Consulted · <span class="rc I">I</span> Informed. Risk owners in the register should match the person responsible or accountable for the work the risk affects. Check that each secondary risk you create has an owner here.</p>' +
       '<div class="tablewrap"><table class="raci" style="min-width:900px"><thead><tr><th>WBS</th><th>Task</th>' + roles.map(function (r) { return '<th title="' + esc(r.name) + '">' + r.id + '</th>'; }).join('') + '</tr></thead><tbody>' +
       B.raci.map(function (row) {
         return '<tr><td class="rid">' + esc(row.wbs) + '</td><td>' + esc(row.task) + '</td>' + roles.map(function (r) { var v = row.r[r.id]; return '<td>' + (v ? '<span class="rc ' + v + '">' + v + '</span>' : '') + '</td>'; }).join('') + '</tr>';
       }).join('') + '</tbody></table></div><p class="small">' + roles.map(function (r) { return '<b>' + r.id + '</b> ' + esc(r.name); }).join(' · ') + '</p></section>';
-    // 6. WBS and CBS
-    var tot = 0, byType = {};
-    B.wbs.forEach(function (w) { w.children.forEach(function (c) { tot += c.cost; byType[c.type] = (byType[c.type] || 0) + c.cost; }); });
-    var cols = ['var(--s1)', 'var(--s2)', '#1baf7a', '#eda100', '#e87ba4', '#6250d6'];
-    var reserveUsed = Math.max(0, cur.costMean - P.baseCost * 1000);
-    h += '<section class="card"><h2>Work breakdown structure (WBS) and cost breakdown structure (CBS)</h2><p class="sub">The WBS breaks the scope into work packages. The CBS assigns the base estimate to each package and cost type. Milestones and register risks show where each package is exposed.</p><div class="grid2"><div class="wbs">' +
+    out.stake = h;
+    // ----- schedule -----
+    var crit = NET.order.filter(function (id) { return NET.acts[id].critical; });
+    var chain = (function () {
+      var best = [];
+      function walk(id, path) {
+        var a = NET.acts[id], next = a.succs.filter(function (sx) {
+          var b = NET.acts[sx.id]; if (!b.critical) return false;
+          return sx.type === 'SS' ? Math.abs(b.ES - (a.ES + sx.lag)) < 1e-9 : Math.abs(b.ES - (a.EF + sx.lag)) < 1e-9;
+        });
+        if (!next.length) { if (path.length > best.length) best = path.slice(); return; }
+        next.forEach(function (sx) { walk(sx.id, path.concat([sx.id])); });
+      }
+      crit.filter(function (id) { return !NET.acts[id].preds.length; }).forEach(function (id) { walk(id, [id]); });
+      return best;
+    })();
+    h = '<section class="card"><h2>Work breakdown structure</h2><p class="sub">The WBS breaks the scope into 17 work packages under six headings. Each package shows its planned weeks, milestone and the register risks that affect it.</p><div class="wbs lists">' +
       B.wbs.map(function (w) {
-        return '<div class="l1">' + w.id + ' ' + esc(w.name) + '</div>' + w.children.map(function (c) {
+        return '<div><div class="l1">' + w.id + ' ' + esc(w.name) + '</div>' + w.children.map(function (c) {
           return '<div class="l2"><span class="rid">' + c.id + '</span><span>' + esc(c.name) + '<div class="meta">Weeks ' + c.start + '–' + c.end + (c.ms ? ' · ' + c.ms : '') + (c.risks ? ' · risks: ' + esc(c.risks) : '') + '</div></span><span class="meta">' + km(c.cost) + '</span></div>';
-        }).join('');
-      }).join('') + '</div><div>' +
-      '<div class="cbsbar" role="img" aria-label="Base estimate by WBS level 1">' + B.wbs.map(function (w, i) {
+        }).join('') + '</div>';
+      }).join('') + '</div></section>';
+    h += '<section class="card"><h2>Gantt chart</h2><p class="sub">Planned baseline: ' + P.baseWeeks + ' weeks from ' + dateOf(0) + '. <span style="color:var(--s2);font-weight:600">Orange</span> bars are on the critical path; <span style="color:var(--s1);font-weight:600">blue</span> bars have float (the black whisker shows how far they can slip without moving the finish); grey bars run throughout. Vertical lines show the deadline and your scenario\'s likely (P50) finish, ' + wk(cur.weeksP50) + '.' +
+      (cur.optWeeks ? ' Your responses add ' + cur.optWeeks + ' week(s) before the roof works; the bars show the original baseline.' : '') + '</p>' +
+      '<div class="legend"><span><span class="key sw" style="background:var(--s2)"></span>Critical path</span><span><span class="key sw" style="background:var(--s1)"></span>Has float</span><span><span class="key sw" style="background:var(--base)"></span>Level of effort</span><span><span class="key" style="background:var(--ink-2)"></span>Float</span><span>◆ Milestone</span></div>' +
+      '<div class="tablewrap" style="border:0">' + renderGantt(cur) + '</div></section>';
+    h += '<section class="card"><h2>Network diagram and critical path</h2><p class="sub">Activity-on-node. Each box shows earliest start | duration | earliest finish (top) and latest start | total float | latest finish (bottom), in weeks. Links are finish-to-start unless labelled (SS = start-to-start; +/− = lag or lead). The critical path, in orange, is ' +
+      chain.map(function (id) { return id + ' ' + WBSI[id].short; }).join(' → ') + '. ' + crit.filter(function (id) { return chain.indexOf(id) < 0; }).map(function (id) { return id; }).join(', ') +
+      ' also have zero float. The path runs through procurement and materials, so a delay to the membrane (R2) moves the finish date week for week.</p>' +
+      '<div class="tablewrap" style="border:0">' + renderNetwork() + '</div><p class="small">' + esc(B.network.note) + ' The simulation on the Risk what-if tab is cautious: it treats every delay as if it fell on the critical path. Use the float shown here to argue which delays could be absorbed.</p></section>';
+    out.sched = h;
+    // ----- budget and cashflow -----
+    var byType = {};
+    B.wbs.forEach(function (w) { w.children.forEach(function (c) { byType[c.type] = (byType[c.type] || 0) + c.cost; }); });
+    h = '<section class="card"><h2>Project budget</h2><p class="sub">The authorised budget is the base estimate, built up from the work packages, plus the management reserve held by the sponsor. Risk responses and the cost of risks that occur are paid from the reserve.</p>' +
+      '<div class="tablewrap"><table style="min-width:720px"><thead><tr><th>WBS</th><th>Work package</th><th>Cost type</th><th class="num">Weeks</th><th class="num">£k</th><th class="num">Share</th></tr></thead><tbody>' +
+      B.wbs.map(function (w) {
         var s = w.children.reduce(function (a, c) { return a + c.cost; }, 0);
-        return '<span style="width:' + (s / tot * 100).toFixed(2) + '%;background:' + cols[i] + '" title="' + esc(w.id + ' ' + w.name + ': ' + km(s)) + '"></span>';
-      }).join('') + '</div><div class="legend">' + B.wbs.map(function (w, i) { return '<span><span class="key sw" style="background:' + cols[i] + '"></span>' + w.id + ' ' + esc(w.name) + '</span>'; }).join('') + '</div>' +
-      '<div class="tablewrap"><table><thead><tr><th>CBS line</th><th class="num">£k</th><th class="num">Share</th></tr></thead><tbody>' +
-      B.wbs.map(function (w) { var s = w.children.reduce(function (a, c) { return a + c.cost; }, 0); return '<tr><td>' + w.id + ' ' + esc(w.name) + '</td><td class="num">' + km(s) + '</td><td class="num">' + pct(s / tot) + '</td></tr>'; }).join('') +
-      '<tr class="tot"><td>Base estimate</td><td class="num">' + km(tot) + '</td><td class="num">100%</td></tr>' +
-      '<tr><td>Management reserve (sponsor)</td><td class="num">' + km(P.reserve * 1000) + '</td><td></td></tr>' +
-      '<tr class="tot"><td>Authorised budget</td><td class="num">' + km(tot + P.reserve * 1000) + '</td><td></td></tr></tbody></table></div>' +
-      '<h3 style="margin-top:14px">By cost type</h3><div class="statline">' + Object.keys(byType).map(function (k) { return '<span>' + esc(k) + ' <b>' + km(byType[k]) + '</b> (' + pct(byType[k] / tot) + ')</span>'; }).join('') + '</div>' +
-      '<h3 style="margin-top:14px">Planned spend profile</h3><p class="small">Each package is spread evenly between its start and end weeks. This time-phased budget is the planned value (PV) used in the Round 2 earned-value status.</p><div class="statline">' + [4, 7, 10, 13, 19, 22].map(function (wk) { var v = 0; B.wbs.forEach(function (w) { w.children.forEach(function (c) { v += c.cost * Math.min(1, Math.max(0, (wk - c.start) / (c.end - c.start))); }); }); return '<span>Week ' + wk + ' <b>' + km(v) + '</b> (' + pct(v / tot) + ')</span>'; }).join('') + '</div>' +
-      '<h3 style="margin-top:14px">Your scenario against the reserve</h3><div class="tablewrap"><table><tbody>' +
-      '<tr><td>Risk responses bought (mitigation' + (cur.recoverySpend ? ' and recovery' : '') + ')</td><td class="num">' + km(cur.mitSpend + cur.recoverySpend) + '</td></tr>' +
-      '<tr><td>Expected cost of risks and delay</td><td class="num">' + km(Math.max(0, reserveUsed - cur.mitSpend - cur.recoverySpend)) + '</td></tr>' +
-      '<tr class="tot"><td>Expected call on the reserve</td><td class="num">' + km(reserveUsed) + '</td></tr>' +
-      '<tr><td>Reserve left (expected)</td><td class="num">' + (cur.budget - cur.costMean >= 0 ? km(cur.budget - cur.costMean) : '−' + km(cur.costMean - cur.budget)) + '</td></tr>' +
-      '<tr><td>Reserve left at P80</td><td class="num">' + (cur.budget - cur.costP80 >= 0 ? km(cur.budget - cur.costP80) : '−' + km(cur.costP80 - cur.budget)) + '</td></tr>' +
-      '</tbody></table></div></div></div></section>';
-    // 7. success criteria
+        return '<tr class="tot"><td>' + w.id + '</td><td>' + esc(w.name) + '</td><td></td><td></td><td class="num">' + km(s) + '</td><td class="num">' + pct(s / BASE_TOT) + '</td></tr>' +
+          w.children.map(function (c) { return '<tr><td class="meta">' + c.id + '</td><td>' + esc(c.name) + '</td><td class="meta">' + esc(c.type) + '</td><td class="num">' + c.start + '–' + c.end + '</td><td class="num">' + km(c.cost) + '</td><td class="num">' + pct(c.cost / BASE_TOT) + '</td></tr>'; }).join('');
+      }).join('') +
+      '<tr class="tot"><td></td><td>Base estimate</td><td></td><td></td><td class="num">' + km(BASE_TOT) + '</td><td class="num">100%</td></tr>' +
+      '<tr><td></td><td>Management reserve (sponsor)</td><td></td><td></td><td class="num">' + km(P.reserve * 1000) + '</td><td></td></tr>' +
+      '<tr class="tot"><td></td><td>Authorised budget</td><td></td><td></td><td class="num">' + km(BASE_TOT + P.reserve * 1000) + '</td><td></td></tr></tbody></table></div>' +
+      '<div class="statline" style="margin-top:10px">' + Object.keys(byType).map(function (k) { return '<span>' + esc(k) + ' <b>' + km(byType[k]) + '</b> (' + pct(byType[k] / BASE_TOT) + ')</span>'; }).join('') + '</div></section>';
+    var reserveUsed = Math.max(0, cur.costMean - P.baseCost * 1000);
+    h += '<section class="card"><h2>Your scenario against the reserve</h2><div class="kpis" style="margin:0">' +
+      '<div class="tile"><div class="lab">Risk responses bought</div><div class="val">' + km(cur.mitSpend + cur.recoverySpend) + '</div><div class="note">certain spend, from the reserve</div></div>' +
+      '<div class="tile"><div class="lab">Expected cost of risks and delay</div><div class="val">' + km(Math.max(0, reserveUsed - cur.mitSpend - cur.recoverySpend)) + '</div><div class="note">expected value</div></div>' +
+      '<div class="tile"><div class="lab">Reserve left (expected)</div><div class="val">' + km(cur.budget - cur.costMean) + '</div><div class="note">of ' + km(cur.budget - P.baseCost * 1000) + '</div></div>' +
+      '<div class="tile"><div class="lab">Reserve left at P80</div><div class="val">' + km(cur.budget - cur.costP80) + '</div><div class="note">' + (cur.budget >= cur.costP80 ? 'reserve holds at P80' : 'reserve exhausted at P80') + '</div></div></div></section>';
+    h += '<section class="card"><h2>Forecasted cashflow</h2><p class="sub">Cumulative spend: the <b>planned baseline</b> (base estimate, time-phased by the CBS) against the <b>forecast</b> for your current scenario. The forecast adds your risk responses (spent in the first four weeks), the expected cost of each risk at the week it is likely to hit, and extra site overheads, and stretches the works over the expected duration. Hover for weekly values.</p>' +
+      '<div class="legend"><span><span class="key" style="background:var(--base)"></span>Planned baseline</span><span><span class="key" style="background:var(--s1)"></span>Forecast (your scenario)</span><span><span class="key" style="background:var(--ink-2)"></span>Budget and deadline</span></div>' +
+      '<div class="tablewrap" style="border:0" id="cashchart"></div><h3 style="margin-top:12px">By month</h3><div class="tablewrap" id="cashtable"></div></section>';
+    out.budget = h;
+    // ----- success -----
     function sc(list) {
       return '<div class="tablewrap"><table style="min-width:720px"><thead><tr><th>Criterion</th><th>Measure</th><th>Target</th><th>When</th><th>Your scenario</th></tr></thead><tbody>' +
         list.map(function (x) { return '<tr><td><b>' + esc(x.c) + '</b></td><td>' + esc(x.m) + '</td><td>' + esc(x.t) + '</td><td class="meta">' + esc(x.w) + '</td><td>' + liveCell(x.kpi, cur) + (x.proxy ? '<div class="meta">Proxy: benefits realisation</div>' : '') + '</td></tr>'; }).join('') + '</tbody></table></div>';
     }
-    h += '<section class="card"><h2>Success criteria: outputs and outcomes</h2><p class="sub"><b>Output success</b> (project success) asks whether we delivered what we said, on time, on budget and to quality. <b>Outcome success</b> (benefits) asks whether it made the difference it was for. A project can succeed on outputs and still fail on outcomes.</p>' +
+    out.success = '<section class="card"><h2>Success criteria: outputs and outcomes</h2><p class="sub"><b>Output success</b> (project success) asks whether we delivered what we said, on time, on budget and to quality. <b>Outcome success</b> (benefits) asks whether it made the difference it was for. A project can succeed on outputs and still fail on outcomes.</p>' +
       '<h3>Output success criteria</h3>' + sc(B.success.outputs) + '<h3 style="margin-top:16px">Outcome success criteria</h3>' + sc(B.success.outcomes) + '</section>';
-    // 8. prompts
-    h += '<section class="card"><h2>Using the brief in your decisions</h2><div class="prompt"><ol>' +
-      '<li>Which SMART objective does your preferred scenario put most at risk, and is that consistent with the board\'s risk appetite?</li>' +
-      '<li>Which stakeholders carry the residual and secondary risks you are accepting? Are any of them in the "keep informed" quadrant with little power to object?</li>' +
-      '<li>For each secondary risk you create, who is Responsible and who is Accountable in the RACI? Add them to the register.</li>' +
-      '<li>Which WBS packages and CBS lines absorb your mitigation spend? How much reserve is left, and what will you hold it for?</li>' +
-      '<li>Does any choice improve outputs (on time, on budget) at the expense of outcomes (benefits, satisfaction)? Use the VUCA statement to explain why.</li>' +
-      '</ol></div></section>';
-    $('tab-brief').innerHTML = h;
+    ['overview', 'stake', 'sched', 'budget', 'success'].forEach(function (k) { $('tab-' + k).innerHTML = out[k]; });
+    bindTips($('tab-sched'));
+    // cashflow chart and monthly table
+    var cf = cashflow(cur);
+    $('cashchart').innerHTML = renderCashChart(cf, cur); bindCash($('cashchart'), cf);
+    var months = {}, order = [];
+    for (var t = 1; t <= cf.horizon; t++) {
+      var d = new Date(START.getTime() + Math.round((t - 0.5) * 7) * 864e5), key = d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+      if (!months[key]) { months[key] = { p: 0, f: 0, pc: 0, fc: 0 }; order.push(key); }
+      months[key].p += cf.planned[t] - cf.planned[t - 1]; months[key].f += cf.forecast[t] - cf.forecast[t - 1];
+      months[key].pc = cf.planned[t]; months[key].fc = cf.forecast[t];
+    }
+    $('cashtable').innerHTML = '<table><thead><tr><th>Month</th><th class="num">Planned spend</th><th class="num">Forecast spend</th><th class="num">Cumulative planned</th><th class="num">Cumulative forecast</th><th class="num">Variance (cumulative)</th></tr></thead><tbody>' +
+      order.map(function (k) { var r = months[k]; return '<tr><td>' + k + '</td><td class="num">' + km(r.p) + '</td><td class="num">' + km(r.f) + '</td><td class="num">' + km(r.pc) + '</td><td class="num">' + km(r.fc) + '</td><td class="num">' + (r.fc - r.pc > 0 ? '+' : '') + km(r.fc - r.pc) + '</td></tr>'; }).join('') +
+      '<tr class="tot"><td>Total</td><td class="num">' + km(cf.planned[cf.horizon]) + '</td><td class="num">' + km(cf.forecast[cf.horizon]) + '</td><td></td><td></td><td class="num">+' + km(cf.forecast[cf.horizon] - cf.planned[cf.horizon]) + '</td></tr></tbody></table>';
   }
   function showTab(name) {
-    ['brief', 'whatif'].forEach(function (n) {
+    if (TABS.indexOf(name) < 0) name = 'overview';
+    TABS.forEach(function (n) {
       $('tab-' + n).classList.toggle('hidden', n !== name);
       $('tabbtn-' + n).setAttribute('aria-selected', String(n === name));
       $('tabbtn-' + n).tabIndex = n === name ? 0 : -1;
@@ -1206,6 +1634,7 @@ if (typeof module !== 'undefined') module.exports = stationH;
         '<td><button class="btn" data-load="' + i + '" style="padding:3px 8px;font-size:12.5px">Load</button></td></tr>';
     });
     $('sctable').innerHTML = h + '</tbody>';
+    deckChoices();
     $('sctable').querySelectorAll('[data-load]').forEach(function (b) {
       b.addEventListener('click', function () {
         var s = scenarios[+b.dataset.load];
@@ -1331,30 +1760,125 @@ if (typeof module !== 'undefined') module.exports = stationH;
     var s = snapshot(sim(state)); scenarios.push(s); store('scenarios', scenarios); $('scname').value = ''; renderScenarios(); toast('Saved ' + s.id);
   });
   $('clear').addEventListener('click', function () { if (!scenarios.length || !confirm('Delete all saved scenarios in this browser?')) return; scenarios = []; store('scenarios', scenarios); renderScenarios(); });
-  $('copy').addEventListener('click', function () {
-    if (!scenarios.length) return toast('Save a scenario first');
-    var txt = scenarios.map(function (s) { return rowOf(s).join('\t'); }).join('\n');
-    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () { toast('Copied ' + scenarios.length + ' rows'); }, function () {
-      var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); toast('Copied ' + scenarios.length + ' rows'); } catch (e) { toast('Copy failed: use Download CSV'); } ta.remove();
-    });
-  });
-  $('csv').addEventListener('click', function () {
-    if (!scenarios.length) return toast('Save a scenario first');
-    var q = function (v) { v = String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-    var csv = [COLS.map(q).join(',')].concat(scenarios.map(function (s) { return rowOf(s).map(q).join(','); })).join('\n');
-    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
-    a.download = 'heatwise-scenarios' + ($('group').value ? '-' + $('group').value.replace(/\W+/g, '-') : '') + '.csv'; a.click();
+  // ---------- share link ----------
+  function shareLink(st) {
+    var o = { sel: st.sel, basis: st.basis, round: st.round, r2: st.r2, station: st.station };
+    var b = btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    return location.href.split('#')[0] + '#s=' + b;
+  }
+  $('share').addEventListener('click', function () {
+    var link = shareLink(state);
+    (navigator.clipboard ? navigator.clipboard.writeText(link) : Promise.reject()).then(function () { toast('Share link copied'); }, function () { window.prompt('Copy this link:', link); });
   });
 
+  // ---------- 3-slide recommendation summary ----------
+  function deckChoices() {
+    var el = $('deckpick'), prev = el.value;
+    el.innerHTML = '<option value="current">Current settings on screen</option>' + scenarios.map(function (s, i) { return '<option value="' + i + '">' + esc(s.id + ' ' + s.name) + ' (Round ' + s.round + ')</option>'; }).join('');
+    el.value = prev && el.querySelector('option[value="' + prev + '"]') ? prev : (scenarios.length ? String(scenarios.length - 1) : 'current');
+  }
+  function ownerOf(id, parent) {
+    var r = riskById(id) || (parent && riskById(parent.slice(0, 2)));
+    if (r) return r.owner;
+    return { X2: 'Construction manager', X3: 'Project manager', X4: 'Construction manager' }[parent] || '';
+  }
+  function deckData(choice) {
+    var sv = choice === 'current' ? null : scenarios[+choice];
+    var st = sv ? { sel: Object.assign({}, sv.sel), basis: sv.basis, round: sv.round, r2: Object.assign({ X1: 0, X2: false, X3: false, X4: false }, sv.r2 || {}), station: sv.station || state.station }
+      : { sel: Object.assign({}, state.sel), basis: state.basis, round: state.round, r2: Object.assign({}, state.r2), station: state.station };
+    var cur = sim(st), inh = sim({ sel: {}, basis: st.basis, round: 1, r2: {}, station: st.station });
+    var byI = {}; inh.lines.forEach(function (l) { byI[l.id] = l; });
+    var byC = {}; cur.lines.forEach(function (l) { byC[l.id] = l; });
+    var register = M.risks.map(function (r) {
+      var il = byI[r.id], cl = byC[r.id], is = scoreOf(il), cs = scoreOf(cl), o = st.sel[r.id] ? OPT[st.sel[r.id]] : null;
+      return { id: r.id, short: r.short, inhS: is.S, inhPr: is.pr, emvIn: il.emv, resp: o ? { id: o.id, name: o.name, type: o.type, cost: o.cost, weeks: o.weeks } : null,
+        resS: cs.S, resPr: cs.pr, emvRes: cl.emv, status: cl.status };
+    });
+    var secs = cur.lines.filter(function (l) { return l.status === 'secondary'; }).map(function (l) {
+      var sc = scoreOf(l), def = OPT[l.parent] && OPT[l.parent].sec;
+      var sh = def ? def.short : (R2.recovery.filter(function (x) { return x.sec && x.sec.id === l.id; })[0] || { sec: {} }).sec.short;
+      return { id: l.id, short: sh || l.desc, parent: l.parent, p: l.p, emv: l.emv, S: sc.S, pr: sc.pr };
+    });
+    var shortOf = {}; M.risks.forEach(function (r) { shortOf[r.id] = r.short; }); secs.forEach(function (x) { shortOf[x.id] = x.short; });
+    var top = cur.lines.filter(function (l) { return l.status !== 'closed' && l.emv > 0.5; }).sort(function (a, b) { return b.emv - a.emv; }).slice(0, 6).map(function (l) {
+      return { id: l.id, short: shortOf[l.id] || l.desc, emv: l.emv, secondary: l.status === 'secondary', owner: ownerOf(l.id, l.parent) };
+    });
+    var K = cur.kpi;
+    var kpis = [
+      ['Cost performance index (CPI)', K.cpi.toFixed(2), rag(K.cpi, 0.95, 0.9, true)],
+      ['Schedule performance index, SPI(t)', K.spi.toFixed(2), rag(K.spi, 0.95, 0.9, true)],
+      ['First-time acceptance', pct(K.acceptance), rag(K.acceptance, 0.9, 0.8, true)],
+      ['Stakeholder satisfaction', K.satisfaction.toFixed(1) + ' / 10', rag(K.satisfaction, 7, 6, true)],
+      ['Return on investment', pct(K.roi), rag(K.roi, 0.35, 0.2, true)],
+      ['Benefits realisation', pct(K.benefitsRealised), rag(K.benefitsRealised, 0.97, 0.93, true)]
+    ].map(function (k) { return { name: k[0], value: k[1], status: { ok: 'On track', amber: 'Watch', no: 'Off track' }[k[2]] }; });
+    var hm = cur.heat, shift = st.round === 2 ? R2.heatShift : 1;
+    var pool = hm.pool.map(function (v) { return Math.max(0, Math.round(v * shift)); }).sort(function (a, b) { return a - b; });
+    var Hs = st.station === state.station ? H : stationH(S, st.station, P.heatThreshold);
+    var norm = []; Hs.years.forEach(function (y, i) { if (y >= 1991 && y <= 2020) norm.push(Hs.hot[i]); });
+    var basisLabel = { trend: 'trend since 1979', recent: 'last 10 summers', all: 'all summers since 1979' }[st.basis];
+    var recovery = [];
+    if (st.round === 2) {
+      if (st.r2.X1) recovery.push('weekend working for ' + st.r2.X1 + ' week(s) (' + km(st.r2.X1 * R2.recovery[0].costPerWeek) + ')');
+      if (st.r2.X2) recovery.push('overlap trades on site (fast-track)');
+      if (st.r2.X3) recovery.push('ask the sponsor for £0.4m client contingency');
+      if (st.r2.X4) recovery.push('start early and night shifts now (' + km(R2.recovery[3].cost) + ')');
+      if (!recovery.length) recovery.push('no recovery actions');
+    }
+    var savedList = scenarios.map(function (s) { return { id: s.id, name: s.name, pB: s.pB, pT: s.pT }; });
+    var chosen = sv ? { id: sv.id, name: sv.name } : { id: 'Now', name: $('scname').value.trim() || 'Current settings' };
+    if (!sv) savedList.push({ id: 'Now', name: chosen.name, pB: cur.pBudget, pT: cur.pTime });
+    return {
+      group: $('group').value.trim(), members: '', generated: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+      round: st.round, chosen: chosen,
+      project: { targetB: P.targetBudgetConf, targetT: P.targetTimeConf, deadlineWeek: P.deadlineWeeks },
+      summary: { pB: cur.pBudget, pT: cur.pTime, pBoth: cur.pBoth, costMean: cur.costMean, costP80: cur.costP80, weeksP50: cur.weeksP50, weeksP80: cur.weeksP80,
+        finishDate: dateOf(cur.weeksP50), budget: cur.budget, mit: cur.mitSpend + cur.recoverySpend, optWeeks: cur.optWeeks, emvBefore: inh.residualEmv, emvAfter: cur.residualEmv,
+        ref: { pB: inh.pBudget, pT: inh.pTime, pBoth: inh.pBoth } },
+      register: register, secondaries: secs, residualTop: top, kpis: kpis, scenarios: savedList, recovery: recovery,
+      heat: { station: st.station, basisLabel: basisLabel, f10: Math.round(Engine.quantile(pool, 0.1)), f50: Math.round(Engine.quantile(pool, 0.5)), f90: Math.round(Engine.quantile(pool, 0.9)),
+        allowance: P.heatAllowanceDays, latestYear: Hs.latestYear, latestHot: Hs.hot[Hs.years.indexOf(Hs.latestYear)], normal: norm.reduce(function (a, b) { return a + b; }, 0) / Math.max(1, norm.length) }
+    };
+  }
+  function loadScript(src) {
+    return new Promise(function (res, rej) { var s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = function () { rej(new Error('Could not load ' + src)); }; document.head.appendChild(s); });
+  }
+  function loadLogo() {
+    if (!window.fetch || location.protocol.indexOf('http') !== 0) return Promise.resolve(null);
+    return fetch('assets/ucl-logo.png').then(function (r) { return r.ok ? r.blob() : null; }).then(function (b) {
+      if (!b) return null;
+      return new Promise(function (res) {
+        var fr = new FileReader(); fr.onload = function () {
+          var img = new Image(); img.onload = function () { var h = 0.5; res({ data: fr.result, h: h, w: h * img.naturalWidth / img.naturalHeight }); }; img.onerror = function () { res(null); }; img.src = fr.result;
+        }; fr.readAsDataURL(b);
+      });
+    }).catch(function () { return null; });
+  }
+  $('deckbtn').addEventListener('click', function () {
+    var btn = this, msg = $('deckmsg');
+    btn.disabled = true; msg.textContent = 'Building your PowerPoint…';
+    var d = deckData($('deckpick').value);
+    (window.PptxGenJS ? Promise.resolve() : loadScript('vendor/pptxgen.bundle.js')).then(loadLogo).then(function (logo) {
+      d.logo = logo;
+      var pres = buildHeatwiseDeck(window.PptxGenJS, d);
+      var fn = 'HEATWISE-recommendation' + (d.group ? '-' + d.group.replace(/[^\w-]+/g, '-') : '') + '.pptx';
+      return pres.writeFile({ fileName: fn }).then(function () { msg.textContent = 'Downloaded ' + fn + '. Open it in PowerPoint and replace the purple [Edit: …] prompts.'; });
+    }).catch(function (e) { msg.textContent = 'Sorry, the PowerPoint could not be built: ' + e.message; }).then(function () { btn.disabled = false; });
+  });
   var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { update(true); }, 150); });
-  ['brief', 'whatif'].forEach(function (n) { $('tabbtn-' + n).addEventListener('click', function () { showTab(n); }); });
-  $('tabbtn-brief').addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { showTab('whatif'); $('tabbtn-whatif').focus(); } });
-  $('tabbtn-whatif').addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') { showTab('brief'); $('tabbtn-brief').focus(); } });
+  TABS.forEach(function (n, i) {
+    $('tabbtn-' + n).addEventListener('click', function () { showTab(n); });
+    $('tabbtn-' + n).addEventListener('keydown', function (e) {
+      var j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : -1;
+      if (j >= 0 && j < TABS.length) { showTab(TABS[j]); $('tabbtn-' + TABS[j]).focus(); }
+    });
+  });
   staticText();
   update();
-  showTab(load('tab', 'brief'));
+  showTab(sharedOpened ? 'whatif' : load('tab', 'overview'));
+  if (sharedOpened) toast('Opened a shared scenario');
 })();
+
 
 </script>
 </body>
