@@ -212,6 +212,82 @@ def midas_open():
     REPORT['sources']['midas_open'] = info
 
 
+# ---------------------------------------------------------------- ECA&D blended daily maximum temperature (Met Office-supplied UK series)
+def ecad():
+    import math, zipfile, tempfile
+    urls = ['https://knmi-ecad-assets-prd.s3.amazonaws.com/download/ECA_blend_tx.zip',
+            'https://www.ecad.eu/download/ECA_blend_tx.zip']
+    info = {'tried': []}
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix='.zip')
+    ok = False
+    for url in urls:
+        try:
+            with requests.get(url, headers=UA, timeout=600, stream=True) as r:
+                info['tried'].append([url, r.status_code])
+                if r.status_code != 200:
+                    continue
+                size = 0
+                for chunk in r.iter_content(1 << 20):
+                    tmp.write(chunk); size += len(chunk)
+                tmp.close()
+                info['bytes'] = size; info['url'] = url; ok = True
+                break
+        except Exception as e:
+            info['tried'].append([url, str(e)])
+    if not ok:
+        REPORT['sources']['ecad_blend_tx'] = info
+        return
+    z = zipfile.ZipFile(tmp.name)
+    names = z.namelist()
+    st_txt = z.read('stations.txt').decode('latin-1')
+    def dms(v):
+        sgn = -1 if v.strip().startswith('-') else 1
+        d, m, s_ = [abs(float(x)) for x in v.strip().lstrip('+-').split(':')]
+        return sgn * (d + m / 60 + s_ / 3600)
+    near = []
+    for line in st_txt.splitlines():
+        parts = [x.strip() for x in line.split(',')]
+        if len(parts) < 6 or not parts[0].isdigit():
+            continue
+        staid, name, cn, lat, lon, hght = parts[:6]
+        if cn != 'GB':
+            continue
+        la, lo = dms(lat), dms(lon)
+        dkm = 6371 * 2 * math.asin(math.sqrt(math.sin(math.radians(la - 51.5074) / 2) ** 2 + math.cos(math.radians(51.5074)) * math.cos(math.radians(la)) * math.sin(math.radians(lo + 0.1278) / 2) ** 2))
+        if dkm <= 40:
+            near.append({'staid': int(staid), 'name': name, 'lat': round(la, 4), 'lon': round(lo, 4), 'km': round(dkm, 1)})
+    rows = []
+    for st in near:
+        fn = 'TX_STAID%06d.txt' % st['staid']
+        if fn not in names:
+            st['file'] = 'missing'; continue
+        txt = z.read(fn).decode('latin-1')
+        n = 0; last = None
+        for line in txt.splitlines():
+            p = [x.strip() for x in line.split(',')]
+            if len(p) < 5 or not p[2].isdigit() or len(p[2]) != 8:
+                continue
+            date = p[2]
+            if int(date[:4]) < FIRST_YEAR or p[4] != '0':
+                continue
+            rows.append([st['staid'], st['name'], '%s-%s-%s' % (date[:4], date[4:6], date[6:]), int(p[3]) / 10])
+            n += 1; last = date
+        st['rows'] = n; st['last'] = last
+    with open(os.path.join(OUT, 'ecad_london_tx.csv'), 'w', newline='') as f:
+        w = csv.writer(f)
+        w.writerow(['staid', 'station', 'date', 'tx_c'])
+        w.writerows(rows)
+    try:
+        src = z.read('sources.txt').decode('latin-1')
+        keep = [l for l in src.splitlines() if any(('%d,' % st['staid']) in l[:12] for st in near)]
+        open(os.path.join(OUT, 'ecad_london_sources.txt'), 'w').write('\n'.join(keep))
+    except KeyError:
+        pass
+    info['stations'] = near
+    REPORT['sources']['ecad_blend_tx'] = info
+    os.unlink(tmp.name)
+
+
 # ---------------------------------------------------------------- Summaries used by the dashboard
 def summarise(rows):
     thr = (28, 30, 32)
@@ -254,7 +330,7 @@ def summarise(rows):
 
 
 if __name__ == '__main__':
-    for step in (metoffice_station, metoffice_region, midas_open):
+    for step in (metoffice_station, metoffice_region, midas_open, ecad):
         try:
             step()
         except Exception as e:
