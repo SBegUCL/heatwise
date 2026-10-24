@@ -12,6 +12,9 @@ processed files to data/. Sources:
    filled from forecast models are discarded.
 4. Optional: Met Office MIDAS Open daily temperature (CEDA, OGL) for Greater
    London stations, if CEDA_USERNAME and CEDA_PASSWORD secrets are set.
+
+It then writes london_summary.json (hot-day counts) and london_forecast.json
+(monthly time-series forecasts; see forecast.py).
 """
 import csv
 import datetime as dt
@@ -359,6 +362,14 @@ if __name__ == '__main__':
         summarise(rows)
     except Exception as e:
         REPORT['notes'].append('summary failed: %s' % e)
+    try:  # monthly time-series forecasts (standard library only; see pipeline/forecast.py)
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import forecast
+        fo = forecast.run(OUT)
+        REPORT['sources']['forecast'] = {'dataEnd': fo['dataEnd'], 'projectYear': fo['projectYear'],
+                                         'summerMean': {k: v['summer']['mean'] for k, v in fo['stations'].items()}}
+    except Exception as e:
+        REPORT['notes'].append('forecast failed: %s' % e)
     with open(os.path.join(OUT, 'fetch_report.json'), 'w') as f:
         json.dump(REPORT, f, indent=1)
     print(json.dumps(REPORT, indent=1)[:6000])
