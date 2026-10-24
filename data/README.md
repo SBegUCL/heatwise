@@ -11,6 +11,8 @@ This folder is refreshed every Monday by the GitHub Actions workflow `.github/wo
 | `metoffice_heathrow_monthly.csv` / `.txt` | Met Office monthly station data for Heathrow (mean maximum and minimum temperature, frost days, rain, sun), 1948 to the latest month. Recent months are provisional. | Met Office historic station data. © Crown copyright, Open Government Licence v3. |
 | `metoffice_region_SE_tmax_monthly.csv` / `.txt` | Met Office monthly mean maximum temperature for the England SE and Central S region, 1884 onwards. | Met Office UK and regional series. © Crown copyright, Open Government Licence v3. |
 
+| `london_forecast.json` | For Heathrow, Wisley, Rothamsted and their average: the last five years of monthly mean daily maximum temperature and hot days; twelve-month forecasts from seasonal naive, harmonic regression (trend + three seasonal harmonics), Holt-Winters exponential smoothing (additive damped trend and seasonality, parameters by grid search) and seasonal ARIMA (1,0,0)(0,1,0)12 with drift, plus their ensemble (mean of the three fitted models); each method's mean absolute error over the most recent twelve months (backtest); hot days per forecast month and the distribution for the project summer. | Built weekly from `ecad_london_tx.csv` by `pipeline/forecast.py`. Models are fitted on monthly data since 2008. Hot days come from a Poisson link between a month's mean maximum and its days ≥30°C (May–September months since 1991), simulated 20,000 times with forecast uncertainty. |
+
 ### Stations
 
 | Station | Where | Daily record used |
