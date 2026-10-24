@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-19T23:06:24+00:00",
+ "generated_utc": "2026-10-24T15:51:02+00:00",
  "sources": {
   "metoffice_station_heathrow": {
    "url": "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/heathrowdata.txt",
@@ -72,7 +72,7 @@
     "03772": {
      "name": "London Heathrow",
      "years": 48,
-     "rows": 17141,
+     "rows": 17152,
      "model_rows_dropped": 22,
      "sources": {
       "ghcnd": 11508,
@@ -80,10 +80,10 @@
       "isd_lite metar": 25,
       "isd_lite dwd_poi": 28,
       "dwd_poi isd_lite": 7,
-      "dwd_poi": 400,
+      "dwd_poi": 410,
       "isd_lite metar dwd_poi": 1,
       "dwd_poi isd_lite metar": 1,
-      "dwd_poi metar": 6,
+      "dwd_poi metar": 7,
       "metar dwd_poi": 4,
       "metar": 1
      },
@@ -118,18 +118,18 @@
       "200": 48
      },
      "first": "1979-01-01",
-     "last": "2026-10-12"
+     "last": "2026-10-23"
     },
     "03672": {
      "name": "Northolt",
      "years": 48,
-     "rows": 10604,
+     "rows": 10615,
      "model_rows_dropped": 42,
      "sources": {
       "isd_lite": 10038,
       "isd_lite metar": 155,
       "metar isd_lite": 9,
-      "metar": 402
+      "metar": 413
      },
      "columns": [
       "year",
@@ -160,15 +160,15 @@
       "200": 48
      },
      "first": "1979-05-23",
-     "last": "2026-10-12"
+     "last": "2026-10-23"
     },
     "03781": {
      "name": "Kenley",
      "years": 9,
-     "rows": 3005,
-     "model_rows_dropped": 177,
+     "rows": 3015,
+     "model_rows_dropped": 178,
      "sources": {
-      "dwd_poi": 3005
+      "dwd_poi": 3015
      },
      "columns": [
       "year",
@@ -200,18 +200,18 @@
       "200": 9
      },
      "first": "2018-01-28",
-     "last": "2026-10-12"
+     "last": "2026-10-22"
     },
     "EGLC0": {
      "name": "London City Airport",
      "years": 20,
-     "rows": 6026,
+     "rows": 6037,
      "model_rows_dropped": 30,
      "sources": {
       "isd_lite": 5421,
       "isd_lite metar": 198,
       "metar isd_lite": 8,
-      "metar": 399
+      "metar": 410
      },
      "columns": [
       "year",
@@ -239,17 +239,17 @@
       "200": 25
      },
      "first": "2007-09-26",
-     "last": "2026-10-09"
+     "last": "2026-10-20"
     },
     "EGKB0": {
      "name": "Biggin Hill",
      "years": 2,
-     "rows": 473,
+     "rows": 484,
      "model_rows_dropped": 1616,
      "sources": {
       "isd_lite": 81,
       "isd_lite metar": 15,
-      "metar": 377
+      "metar": 388
      },
      "columns": [
       "year",
@@ -277,8 +277,18 @@
       "200": 6
      },
      "first": "2025-05-20",
-     "last": "2026-10-09"
+     "last": "2026-10-20"
     }
+   }
+  },
+  "forecast": {
+   "dataEnd": "2026-09",
+   "projectYear": 2027,
+   "summerMean": {
+    "London average": 15.2,
+    "Heathrow": 21.05,
+    "Wisley": 17.31,
+    "Rothamsted": 8.72
    }
   }
  },
