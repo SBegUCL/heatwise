@@ -21,7 +21,7 @@ The Risk what-if tab opens with **Your task**: the learning outcome, the steps f
 
 The **MoE score** (out of 100) is shown live on the Risk what-if tab: outputs 35 points and outcomes 35 points, shared across the modelled criteria (full credit on track, half on watch), plus contingency efficiency 30 points (full at £0 used, zero at the cap). A scenario over the cap ranks below every scenario within it; ties go to lower contingency. The cap and weights are set in `project.moe` in the model.
 
-**Class leaderboard (offline).** Each group picks its final scenario and presses **Copy link for the class leaderboard**, then sends the link to the tutor. The tutor opens **Tutors: class leaderboard** (page footer), pastes all the links and presses **Rank groups**. The page recalculates every score from the groups' choices, so scores cannot be edited, and nothing is sent anywhere. **Show full screen** displays the table in class.
+**Class leaderboard (offline).** Each group picks its final scenario and presses **Copy link for the class leaderboard**, then sends the link to the tutor. The tutor opens **Tutors: class leaderboard** (page footer), pastes all the links and presses **Rank groups**. The page recalculates every score from the groups' choices, so scores cannot be edited, and nothing is sent anywhere. For a fair comparison, the tutor can score every group on the same weather station and heat basis. **Show full screen** displays the table in class.
 
 ## The only download: a 3- or 4-slide recommendation
 
@@ -44,6 +44,15 @@ The module runs in mid-July each year, so the project is always set in the comin
 
 Any number of students can open the page at once. It is a static page: each browser runs its own copy of the model, and nothing is sent to a server. Saved scenarios stay in that browser. **Copy share link** puts the current settings in a link, so a group member or tutor can open exactly the same scenario on another device. Real-time shared editing would need a server and is not part of this design.
 
+## Weather: the last five years and the next twelve months
+
+The Risk what-if tab shows, for the chosen station or the **London average** (Heathrow, Wisley and Rothamsted; its hot-day counts are the mean of the three stations' counts):
+
+- monthly mean daily maximum temperature for the last five years, with twelve-month forecasts from four time-series methods (seasonal naive, harmonic regression, Holt-Winters exponential smoothing, seasonal ARIMA) and their ensemble with an 80% range. Each method's average error when forecasting the most recent twelve months is shown beside it;
+- hot days (≥30°C) per month for the last five years, with the forecast expected number and a 10–90% range for the next twelve months.
+
+The forecasts are made weekly by `pipeline/forecast.py` (standard library only) and saved in `data/london_forecast.json`. Choosing **Time-series ensemble forecast** as the heat forecast basis makes the risk model use them; the default remains the trend since 1979. The long-term record since 1979 and the latest season day by day are in a collapsed section under the hot-days chart.
+
 ## Data
 
 The heat-stoppage risk is forecast from real daily maximum temperatures, 1979 to September 2026, at Heathrow, Wisley and Rothamsted: Met Office series published through ECA&D. They are refreshed weekly by the open-data pipeline in `pipeline/` and `.github/workflows/fetch-weather.yml`. See `data/README.md` for sources, licences and data-quality notes.
@@ -52,7 +61,7 @@ The heat-stoppage risk is forecast from real daily maximum temperatures, 1979 to
 
 - `index.html`: the dashboard. Self-contained apart from the slide library, which loads only when a group downloads its deck.
 - `vendor/pptxgen.bundle.js`: PptxGenJS 4.0.1 (MIT licence), used to build the slides in the browser.
-- `data/`: open weather data, refreshed weekly. `pipeline/`: the script that fetches it.
+- `data/`: open weather data and forecasts, refreshed weekly. `pipeline/`: the scripts that fetch the data (`fetch_weather.py`) and make the forecasts (`forecast.py`).
 - `archive/v1/`: the earlier monitoring-and-control version.
 
 Data: Met Office National Climate Information Centre daily series via ECA&D blended data (Klein Tank, A.M.G. et al. (2002), Int. J. Climatol., 22, 1441–1453, https://www.ecad.eu), and Met Office historic station data (Open Government Licence).
